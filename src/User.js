@@ -15,7 +15,7 @@ export default class User {
         }
 
         // If there is a token, verify it with the API
-        fetch('https://x8ki-letl-twmt.n7.xano.io/api:wGjIQByJ/auth/me', {
+        fetch('https://x8ki-letl-twmt.n7.xano.io/api:2vP05bpa/auth/me', {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${authToken}`,
@@ -130,11 +130,16 @@ export default class User {
         // Redirect to the login page
         window.location.href = '/login';
     }
-    getAllUsers() {
+    getAll(page = 1, perPage = 10, search = '') {
         const authToken =  localStorage.getItem('authToken');
 
+        let url = `https://x8ki-letl-twmt.n7.xano.io/api:wGjIQByJ/user?page=${page}&per_page=${perPage}`;
+        if (search !== '') {
+            url += `&search=${encodeURIComponent(search)}`
+        }
+
         // Call the Xano API
-        return fetch('https://x8ki-letl-twmt.n7.xano.io/api:wGjIQByJ/user', {
+        return fetch(url, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${authToken}`,
