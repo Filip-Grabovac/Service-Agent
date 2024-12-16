@@ -8,6 +8,12 @@ const documentFile = new Document();
 const shippingTariff = new ShippingTariff();
 const tableRow = new TableRow();
 
+let allData = [];
+
+let url = '';
+let method = '';
+let activeMenu;
+
 const adminMenu1 = document.getElementById('admin-menu1');
 const adminMenu2 = document.getElementById('admin-menu2');
 const adminMenu3 = document.getElementById('admin-menu3');
@@ -26,10 +32,14 @@ adminMenu1.addEventListener('click', function (event) {
     fillTable(1, 5, '5,6')
     fillTable(1, 6, '7,8')
 
+    activeMenu = adminMenu1
+
     resetSearchInput()
 })
 adminMenu2.addEventListener('click', function (event) {
     fillTable(2, 1)
+
+    activeMenu = adminMenu2
 
     resetSearchInput()
 })
@@ -37,10 +47,14 @@ adminMenu3.addEventListener('click', function (event) {
     fillTable(3, 1, '7')
     fillTable(3, 2, '8')
 
+    activeMenu = adminMenu3
+
     resetSearchInput()
 })
 adminMenu4.addEventListener('click', function (event) {
     fillTable(4, 1)
+
+    activeMenu = adminMenu4
 
     resetSearchInput()
 })
@@ -119,6 +133,11 @@ function fillTable(menu, tab, statusIds = null, page = 1) {
             text.innerHTML = getTabTitle(menu, tab) + ` (${data.itemsTotal})`
         }
 
+        if (!Array.isArray(allData[menu])) {
+            allData[menu] = [];
+        }
+        allData[menu][tab] = data.items;
+
         data.items.forEach((item) => {
             if (statusIds) {
                 status = item._document_status.status_label;
@@ -137,7 +156,7 @@ function fillTable(menu, tab, statusIds = null, page = 1) {
                 }
 
                 if (column === 'actions') {
-                    rowHTML[column].push(tableRow.getActionRow(menu, tab));
+                    rowHTML[column].push(tableRow.getActionRow(menu, tab, item));
                 } else {
                     rowHTML[column].push(tableRow.getTableRow(modelName, column, item, statusBadgeColor));
                 }
@@ -157,6 +176,8 @@ function fillTable(menu, tab, statusIds = null, page = 1) {
                 })
             }
         });
+
+        setModals(menu);
 
         createPagination(menu, tab, statusIds, pagination, data);
     })
@@ -278,11 +299,10 @@ function getColumns(menu, tab) {
     return columns[menu]?.[tab] || 'unknown';
 }
 
+setModals('initial');
 
-setModals();
-
-function setModals() {
-    const modals = getModals();
+function setModals(menu) {
+    const modals = getModals(menu);
 
     Object.entries(modals).forEach(([key, item]) => {
         const modal = document.getElementById(item.modal);
@@ -295,6 +315,58 @@ function setModals() {
         openButtons.forEach(button => {
             button.addEventListener("click", function (e) {
                 e.preventDefault()
+
+                let idAttribute = Array.from(button.attributes).find(attr => attr.name.startsWith('data-id-'));
+                if (idAttribute) {
+                    let idAttributeName = idAttribute.name
+                        .replace('data-id-', '')
+                        .replace(/-([a-z])/g, (_, char) => `_${char}`);
+
+                    if (item.action.includes(idAttributeName)) {
+                        url = item.action.replace(`{${idAttributeName}}`, idAttribute.value);
+                        method = item.method;
+                    } else {
+                        let parts = item.action.split("/");
+                        parts[parts.length - 1] = idAttribute.value;
+                        url = parts.join("/");
+                        method = item.method;
+                    }
+                }
+
+                let fillAttribute = Array.from(button.attributes).find(attr => attr.name.startsWith('data-fill-'));
+                if (fillAttribute) {
+                    let fillAttributeName = fillAttribute.name
+                        .replace('data-fill-', '')
+
+                    let tab = fillAttributeName.split('-');
+
+                    let fillData = Array.from(allData[tab[0]][tab[1]]).find(item => item.id.toString().match(fillAttribute.value))
+                    let elementsWithName = form.querySelectorAll('[name]');
+
+                    elementsWithName.forEach(element => {
+                        if (element.getAttribute('name').includes(".")) {
+                            let parts = element.getAttribute('name').split(".");
+                            element.value = fillData['_' + parts[0]][parts[1]] ?? "";
+                        } else {
+                            element.value = fillData[element.getAttribute('name')] ?? "";
+                        }
+
+                        if (element.getAttribute('name').includes("document_user_address")) {
+                            let address = fillData?._user?._user_addresses_of_user;
+
+                            if (address) {
+                                element.value = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country
+                            }
+                        }
+
+                        if (element.hasAttribute('data-readonly')) {
+                            element.setAttribute("readonly", true);
+                        }
+                        if (element.hasAttribute('data-disabled')) {
+                            element.setAttribute("disabled", true);
+                        }
+                    });
+                }
 
                 modal.classList.remove('hide');
             });
@@ -316,37 +388,70 @@ function setModals() {
             createDropZone(dropZone, item, fileName);
         });
 
-        submitButton.addEventListener("click", function (event) {
+        const handleClick = () => {
             const formData = new FormData(form);
 
-            const checkboxes = form.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach(checkbox => {
-                if (!checkbox.checked) {
-                    formData.append(checkbox.name, 0);
-                } else {
-                    formData.delete(checkbox.name);
-                    formData.append(checkbox.name, 1);
-                }
-            });
+            const authToken =  localStorage.getItem('authToken');
+            let requestData = {
+                method: method
+            }
 
-            for (const [key, value] of formData.entries()) {
-                if (!value.trim()) {
-                    console.error(`Fields empty.`);
-                    return;
+            if (typeof form !== 'undefined') {
+                const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    if (!checkbox.checked) {
+                        formData.append(checkbox.name, 0);
+                    } else {
+                        formData.delete(checkbox.name);
+                        formData.append(checkbox.name, 1);
+                    }
+                });
+
+                Array.from(form.elements).forEach(element => {
+                    if (element.hasAttribute('disabled')) {
+                        formData.delete(element.name);
+                    }
+                });
+
+                for (const [key, value] of formData.entries()) {
+                    if (!value.trim()) {
+                        console.log(key)
+                        console.error(`Fields empty.`);
+
+                        return;
+                    }
+                }
+
+                if (Object.keys(item.files).length !== 0) {
+                    Object.keys(item.files).forEach((fileName) => {
+                        const fileArray = item.files[fileName];
+                        fileArray.forEach((file, key) => {
+                            formData.append(fileName, file[0]);
+                        });
+                    });
+
+                    requestData.body = formData;
+
+                    requestData.headers = {
+                        'Authorization': `Bearer ${authToken}`,
+                    }
+                } else {
+                    let jsonObject = {};
+
+                    formData.forEach((value, key) => {
+                        jsonObject[key] = value;
+                    });
+
+                    requestData.body = JSON.stringify(jsonObject);
+
+                    requestData.headers = {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json',
+                    }
                 }
             }
 
-            Object.keys(item.files).forEach((fileName) => {
-                const fileArray = item.files[fileName];
-                fileArray.forEach((file, key) => {
-                    formData.append(fileName, file[0]);
-                });
-            });
-
-            fetch(item.action, {
-                method: item.method,
-                body: formData,
-            })
+            fetch(url, requestData)
                 .then((response) => {
                     if (!response.ok) {
                         console.error("Error:", error);
@@ -356,36 +461,125 @@ function setModals() {
                 .then((data) => {
                     modal.classList.add('hide');
 
-                    form.reset();
+                    activeMenu.click()
 
-                    dropZones.forEach(dropZone => {
-                        const outputDivs = dropZone.querySelectorAll(".output");
-                        outputDivs.forEach(div => div.remove());
-                        dropZone.firstElementChild.style.display = 'flex';
-                    });
+                    if (form) {
+                        form.reset();
+
+                        dropZones.forEach(dropZone => {
+                            const outputDivs = dropZone.querySelectorAll(".output");
+                            outputDivs.forEach(div => div.remove());
+                            dropZone.firstElementChild.style.display = 'flex';
+                        });
+                    }
                 })
                 .catch((error) => {
                     console.error("Error:", error);
                 });
-        })
+        }
+
+        if (!submitButton.hasAttribute('data-clicked')) {
+            submitButton.addEventListener("click", function() {
+                handleClick(key);
+            });
+            submitButton.setAttribute('data-clicked', key)
+        }
     })
 }
 
-function getModals() {
-    return {
+function getModals(menu) {
+    const modals = {
+        'initial': {
+            1: {
+                modal: 'add-document-popup',
+                action: 'https://x8ki-letl-twmt.n7.xano.io/api:jeVaMFJ2/documents',
+                method: 'POST',
+                files: []
+            },
+            2: {
+                modal: 'add-tariff-popup',
+                action: 'https://x8ki-letl-twmt.n7.xano.io/api:SB0L29DX/shipping_tariffs',
+                method: 'POST',
+                files: []
+            },
+        },
         1: {
-            modal: 'add-tariff-popup',
-            action: 'https://x8ki-letl-twmt.n7.xano.io/api:SB0L29DX/shipping_tariffs',
-            method: 'POST',
-            files: []
+            1: {
+                modal: 'shred-document-popup',
+                action: '',
+                method: 'DELETE',
+                files: []
+            },
+            2: {
+                modal: 'delete-document-popup',
+                action: 'https://x8ki-letl-twmt.n7.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                method: 'DELETE',
+                files: []
+            },
+            3: {
+                modal: 'edit-document-popup',
+                action: 'https://x8ki-letl-twmt.n7.xano.io/api:JGAigVjM/documents/{documents_id}',
+                method: 'PATCH',
+                files: []
+            },
+            4: {
+                modal: 'forward-document-popup',
+                action: 'https://x8ki-letl-twmt.n7.xano.io/api:JGAigVjM/documents/{documents_id}',
+                method: 'PATCH',
+                files: []
+            },
+            5: {
+                modal: 'payment-document-popup',
+                action: 'https://x8ki-letl-twmt.n7.xano.io/api:JGAigVjM/documents/{documents_id}',
+                method: 'PATCH',
+                files: []
+            }
         },
         2: {
-            modal: 'add-document-popup',
-            action: 'https://x8ki-letl-twmt.n7.xano.io/api:jeVaMFJ2/documents',
-            method: 'POST',
-            files: []
+            1: {
+                modal: 'edit-user-popup',
+                action: '',
+                method: 'PATCH',
+                files: []
+            },
+            2: {
+                modal: 'delete-user-popup',
+                action: 'https://x8ki-letl-twmt.n7.xano.io/api:wGjIQByJ/user/{user_id}',
+                method: 'DELETE',
+                files: []
+            }
+        },
+        3: {
+            1: {
+                modal: 'shred-document-popup',
+                action: '',
+                method: 'DELETE',
+                files: []
+            },
+            2: {
+                modal: 'delete-document-popup',
+                action: 'https://x8ki-letl-twmt.n7.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                method: 'DELETE',
+                files: []
+            }
+        },
+        4: {
+            1: {
+                modal: 'edit-tariff-popup',
+                action: 'https://x8ki-letl-twmt.n7.xano.io/api:SB0L29DX/shipping_tariffs/{shipping_tariffs_id}',
+                method: 'PATCH',
+                files: []
+            },
+            2: {
+                modal: 'delete-tariff-popup',
+                action: 'https://x8ki-letl-twmt.n7.xano.io/api:SB0L29DX/shipping_tariffs/{shipping_tariffs_id}',
+                method: 'DELETE',
+                files: []
+            },
         },
     }
+
+    return modals[menu] || 'unknown';
 }
 
 function createDropZone(dropZone, item, fileName) {
@@ -430,7 +624,10 @@ function createDropZone(dropZone, item, fileName) {
     }
 }
 
-const createUser = document.getElementById('create-document-user');
+const createDocumentUser = document.getElementById('create-document-user');
+const editDocumentUser = document.getElementById('edit-document-user');
+const forwardDocumentUser = document.getElementById('forward-document-user');
+const paymentDocumentUser = document.getElementById('payment-document-user');
 
 populateSelectWithUsers()
 
@@ -442,7 +639,31 @@ function populateSelectWithUsers() {
                 userOptions += `<option value="${user.id}">${user.first_name} ${user.last_name}</option>`
             })
 
-            createUser.innerHTML += userOptions;
+            createDocumentUser.innerHTML += userOptions;
+            editDocumentUser.innerHTML += userOptions;
+            forwardDocumentUser.innerHTML += userOptions;
+            paymentDocumentUser.innerHTML += userOptions;
+        }
+    })
+}
+
+const editDocumentShippingTariff = document.getElementById('edit-document-shipping-tariff');
+const forwardDocumentShippingTariff = document.getElementById('forward-document-shipping-tariff');
+const paymentDocumentShippingTariff = document.getElementById('payment-document-shipping-tariff');
+
+populateSelectWithShippingTariffs()
+
+function populateSelectWithShippingTariffs() {
+    shippingTariff.getAll(1, 999999).then((shippingTariffs) => {
+        if (shippingTariffs.items.length) {
+            let shippingTariffsOptions = '';
+            shippingTariffs.items.forEach((shippingTariff) => {
+                shippingTariffsOptions += `<option value="${shippingTariff.id}">${shippingTariff.region} ${shippingTariff.label.charAt(0).toUpperCase() + shippingTariff.label.slice(1)}</option>`
+            })
+
+            editDocumentShippingTariff.innerHTML += shippingTariffsOptions;
+            forwardDocumentShippingTariff.innerHTML += shippingTariffsOptions;
+            paymentDocumentShippingTariff.innerHTML += shippingTariffsOptions;
         }
     })
 }
