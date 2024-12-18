@@ -1,4 +1,4 @@
-class ShippingTariff {
+export default class ShippingTariff {
     getAll(page = 1, perPage = 10, search = '') {
         const authToken =  localStorage.getItem('authToken');
 
@@ -31,5 +31,3 @@ class ShippingTariff {
         }
     }
 }
-
-module.exports = ShippingTariff;

@@ -1,4 +1,4 @@
-class Document {
+export default class Document {
     getAll( page = 1, perPage = 10, search = '', statusIds = '1,2,3,4,5,6,7,8') {
         const authToken =  localStorage.getItem('authToken');
 
@@ -55,5 +55,3 @@ class Document {
         }
     }
 }
-
-module.exports = Document;

@@ -1,4 +1,4 @@
-class User {
+export default class User {
     authenticate() {
         const failureRedirect = '/log-in';
         const authToken = localStorage.getItem('authToken');
@@ -162,5 +162,3 @@ class User {
         }
     }
 }
-
-module.exports = User;

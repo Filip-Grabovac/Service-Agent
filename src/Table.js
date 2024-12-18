@@ -1,11 +1,7 @@
-// import User from './User';
-// import Document from './Document';
-// import ShippingTariff from './ShippingTariff';
-// import TableRow from './TableRow';
-const User = require('./User.js');
-const Document = require('./Document.js');
-const ShippingTariff = require('./ShippingTariff.js');
-const TableRow = require('./TableRow.js');
+import User from './User';
+import Document from './Document';
+import ShippingTariff from './ShippingTariff';
+import TableRow from './TableRow';
 
 const user = new User();
 const documentFile = new Document();
@@ -22,11 +18,11 @@ let activeRole;
 const searchInputs = document.getElementsByClassName('search-input');
 let lastSearchInput = '';
 
-function updateActiveElement(element) {
+export function updateActiveElement(element) {
     activeElement = element
 }
 
-function updateActiveRole(role) {
+export function updateActiveRole(role) {
     activeRole = role
 }
 
@@ -56,7 +52,7 @@ function resetSearchInput() {
     });
 }
 
-function fillTable(menu, tab, statusIds = null, page = 1) {
+export function fillTable(menu, tab, statusIds = null, page = 1) {
     resetSearchInput()
 
     if (statusIds === 'null') {
@@ -663,7 +659,7 @@ function createDropZone(dropZone, item, fileName) {
     }
 }
 
-function populateSelectWithUsers() {
+export function populateSelectWithUsers() {
     const createDocumentUser = document.getElementById('create-document-user');
     const editDocumentUser = document.getElementById('edit-document-user');
     const forwardDocumentUser = document.getElementById('forward-document-user');
@@ -684,7 +680,7 @@ function populateSelectWithUsers() {
     })
 }
 
-function populateSelectWithShippingTariffs() {
+export function populateSelectWithShippingTariffs() {
     const editDocumentShippingTariff = document.getElementById('edit-document-shipping-tariff');
     const forwardDocumentShippingTariff = document.getElementById('forward-document-shipping-tariff');
     const paymentDocumentShippingTariff = document.getElementById('payment-document-shipping-tariff');
@@ -702,11 +698,3 @@ function populateSelectWithShippingTariffs() {
         }
     })
 }
-
-module.exports = {
-    fillTable,
-    updateActiveElement,
-    updateActiveRole,
-    populateSelectWithUsers,
-    populateSelectWithShippingTariffs
-};

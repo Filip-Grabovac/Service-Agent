@@ -1,7 +1,5 @@
-// import User from '../User';
-// import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs} from '../Table.js';
-const User = require('../User.js');
-const { fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs } = require('../Table.js');
+import User from '../User';
+import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs} from '../Table.js';
 
 const user = new User();
 

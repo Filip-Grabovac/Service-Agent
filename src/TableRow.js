@@ -1,4 +1,4 @@
-class TableRow {
+export default class TableRow {
     getTableRow(menuName, column, item, statusBadgeColor = null) {
         const generators = {
             document: {
@@ -296,5 +296,3 @@ class TableRow {
         return actionRows[menu]?.[tab] || 'Unknown Option';
     }
 }
-
-module.exports = TableRow;
