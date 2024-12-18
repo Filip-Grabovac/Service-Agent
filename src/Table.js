@@ -2,10 +2,10 @@
 // import Document from './Document';
 // import ShippingTariff from './ShippingTariff';
 // import TableRow from './TableRow';
-import User from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@c965cbcc5c8e92901f58a18d6a2114978a7361cb/src/User.js';
-import Document from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@c965cbcc5c8e92901f58a18d6a2114978a7361cb/src/Document.js';
-import ShippingTariff from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@c965cbcc5c8e92901f58a18d6a2114978a7361cb/src/ShippingTariff.js';
-import TableRow from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@c965cbcc5c8e92901f58a18d6a2114978a7361cb/src/TableRow.js';
+import User from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/User.js';
+import Document from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/Document.js';
+import ShippingTariff from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/ShippingTariff.js';
+import TableRow from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/TableRow.js';
 
 const user = new User();
 const documentFile = new Document();
