@@ -1,14 +1,20 @@
 // import User from '../User';
 // import { fillTable, updateActiveElement, updateActiveRole } from '../Table.js';
-import User from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/User.js';
-import {fillTable, updateActiveElement, updateActiveRole} from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@32bd5fb967484c9d983194f814210b8629ac80ee/src/Table.js';
+import User from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@217dddf285809ecb248c46ef87f83c5090fc54ba/src/User.js';
+import {fillTable, updateActiveElement, updateActiveRole} from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8f0e6cab12a1382e600a70950b41923b82498976/src/Table.js';
 
 const user = new User();
+
+const logout = document.getElementById('logout');
 
 const userMenu1 = document.getElementById('user-menu1');
 const userMenu2 = document.getElementById('user-menu2');
 
-user.authenticate();
+// user.authenticate();
+
+logout.addEventListener('click', function (event) {
+    user.logOut()
+})
 
 userMenu1.addEventListener('click', function (event) {
     updateActiveElement(userMenu1)

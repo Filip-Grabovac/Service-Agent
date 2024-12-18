@@ -1,9 +1,14 @@
 // import User from '../User';
-// import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs, setModals} from '../Table.js';
-import User from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/User.js';
-import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs, setModals} from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@32bd5fb967484c9d983194f814210b8629ac80ee/src/Table.js';
+// import Document from '../Document';
+// import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs, setModals, resetSearchInput, getTabTitle} from '../Table.js';
+import User from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@217dddf285809ecb248c46ef87f83c5090fc54ba/src/User.js';
+import Document from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@217dddf285809ecb248c46ef87f83c5090fc54ba/src/Document.js';
+import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs, setModals, resetSearchInput, getTabTitle} from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8f0e6cab12a1382e600a70950b41923b82498976/src/Table.js';
 
 const user = new User();
+const documentFile = new Document();
+
+const logout = document.getElementById('logout');
 
 const adminMenu1 = document.getElementById('admin-menu1');
 const adminMenu1Tab1 = document.getElementById('admin-menu1-tab1');
@@ -22,78 +27,96 @@ const adminMenu4Tab1 = document.getElementById('admin-menu4-tab1');
 
 user.authenticate();
 
+logout.addEventListener('click', function (event) {
+    user.logOut()
+})
+
 updateActiveRole('admin')
 
 adminMenu1.addEventListener('click', function (event) {
     updateActiveElement(adminMenu1)
+    resetSearchInput()
 
     fillTable(1, 1, '1,2,3,4,5,6,7,8')
 })
 adminMenu1Tab1.addEventListener('click', function (event) {
     updateActiveElement(adminMenu1Tab1)
+    resetSearchInput()
 
     fillTable(1, 1, '1,2,3,4,5,6,7,8')
 })
 adminMenu1Tab2.addEventListener('click', function (event) {
     updateActiveElement(adminMenu1Tab2)
+    resetSearchInput()
 
     fillTable(1, 2, '2')
 })
 adminMenu1Tab3.addEventListener('click', function (event) {
     updateActiveElement(adminMenu1Tab3)
+    resetSearchInput()
 
     fillTable(1, 3, '3')
 })
 adminMenu1Tab4.addEventListener('click', function (event) {
     updateActiveElement(adminMenu1Tab4)
+    resetSearchInput()
 
     fillTable(1, 4, '4')
 })
 adminMenu1Tab5.addEventListener('click', function (event) {
     updateActiveElement(adminMenu1Tab5)
+    resetSearchInput()
 
     fillTable(1, 5, '5,6')
 })
 adminMenu1Tab6.addEventListener('click', function (event) {
     updateActiveElement(adminMenu1Tab6)
+    resetSearchInput()
 
-    fillTable(1, 6, '7,8')
+    fillTable(1, 6, '7')
 })
 
 adminMenu2.addEventListener('click', function (event) {
     updateActiveElement(adminMenu2)
+    resetSearchInput()
 
     fillTable(2, 1)
 })
 adminMenu2Tab1.addEventListener('click', function (event) {
     updateActiveElement(adminMenu2Tab1)
+    resetSearchInput()
 
     fillTable(2, 1)
 })
 
 adminMenu3.addEventListener('click', function (event) {
     updateActiveElement(adminMenu3)
+    resetSearchInput()
 
     fillTable(3, 1, '7')
 })
 adminMenu3Tab1.addEventListener('click', function (event) {
     updateActiveElement(adminMenu3Tab1)
+    resetSearchInput()
 
     fillTable(3, 1, '7')
 })
 adminMenu3Tab2.addEventListener('click', function (event) {
     updateActiveElement(adminMenu3Tab2)
+    resetSearchInput()
 
     fillTable(3, 2, '8')
 })
 
 adminMenu4.addEventListener('click', function (event) {
     updateActiveElement(adminMenu4)
+    resetSearchInput()
 
     fillTable(4, 1)
 })
 adminMenu4Tab1.addEventListener('click', function (event) {
     updateActiveElement(adminMenu4Tab1)
+    resetSearchInput()
 
     fillTable(4, 1)
 })
@@ -102,3 +125,37 @@ adminMenu1.click()
 populateSelectWithUsers()
 populateSelectWithShippingTariffs()
 setModals('initial');
+getTabCount()
+
+function getTabCount() {
+    const menu1tab2 = document.getElementById('admin-menu1-tab2-text');
+    const menu1tab3 = document.getElementById('admin-menu1-tab3-text');
+    const menu1tab4 = document.getElementById('admin-menu1-tab4-text');
+    const menu1tab5 = document.getElementById('admin-menu1-tab5-text');
+    const menu1tab6 = document.getElementById('admin-menu1-tab6-text');
+    const menu3tab1 = document.getElementById('admin-menu3-tab1-text');
+    const menu3tab2 = document.getElementById('admin-menu3-tab2-text');
+
+    documentFile.getCountByStatus().then(data => {
+        menu1tab2.innerHTML = getTabTitle(1, 2) + ' (' + getCount(data, [2]) + ')'
+        menu1tab3.innerHTML = getTabTitle(1, 3) + ' (' + getCount(data, [3]) + ')'
+        menu1tab4.innerHTML = getTabTitle(1, 4) + ' (' + getCount(data, [4]) + ')'
+        menu1tab5.innerHTML = getTabTitle(1, 5) + ' (' + getCount(data, [5, 6]) + ')'
+        menu1tab6.innerHTML = getTabTitle(1, 6) + ' (' + getCount(data, [7]) + ')'
+        menu3tab1.innerHTML = getTabTitle(3, 1) + ' (' + getCount(data, [7]) + ')'
+        menu3tab2.innerHTML = getTabTitle(3, 2) + ' (' + getCount(data, [8]) + ')'
+    })
+
+    function getCount(data, tabs) {
+        let sum = 0;
+
+        tabs.forEach(id => {
+            const item = data.find(entry => entry.documents_document_status_id === id);
+            if (item) {
+                sum += item._documents_of_document_status;
+            }
+        });
+
+        return sum;
+    }
+}
