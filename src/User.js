@@ -128,7 +128,7 @@ export default class User {
         localStorage.removeItem('authToken');
 
         // Redirect to the login page
-        window.location.href = '/login';
+        window.location.href = '/log-in';
     }
     getAll(page = 1, perPage = 10, search = '') {
         const authToken =  localStorage.getItem('authToken');

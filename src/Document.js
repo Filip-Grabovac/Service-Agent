@@ -47,6 +47,25 @@ export default class Document {
                 console.error('Error:', error);
             });
     }
+    getCountByStatus() {
+        const authToken =  localStorage.getItem('authToken');
+
+        // Call the Xano API
+        return fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/count/by-status', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                return result
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
     callMethod(methodName, ...args) {
         if (typeof this[methodName] === 'function') {
             return this[methodName](...args);
