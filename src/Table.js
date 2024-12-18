@@ -3,7 +3,7 @@
 // import ShippingTariff from './ShippingTariff';
 // import TableRow from './TableRow';
 import User from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/User.js';
-import Document from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/Document.js';
+import Document from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@d450ea61d3134210eea4fc59b97b97040ff6dad7/src/Document.js';
 import ShippingTariff from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/ShippingTariff.js';
 import TableRow from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/TableRow.js';
 
@@ -16,6 +16,7 @@ let allData = [];
 
 let url = '';
 let method = '';
+let modalName = '';
 let activeElement;
 let activeRole;
 
@@ -298,6 +299,8 @@ export function setModals(menu) {
             button.addEventListener("click", function (e) {
                 e.preventDefault()
 
+                method = item.method;
+                modalName = item.modal
                 let idAttribute = Array.from(button.attributes).find(attr => attr.name.startsWith('data-id-'));
                 if (idAttribute) {
                     let idAttributeName = idAttribute.name
@@ -306,13 +309,13 @@ export function setModals(menu) {
 
                     if (item.action.includes(idAttributeName)) {
                         url = item.action.replace(`{${idAttributeName}}`, idAttribute.value);
-                        method = item.method;
                     } else {
                         let parts = item.action.split("/");
                         parts[parts.length - 1] = idAttribute.value;
                         url = parts.join("/");
-                        method = item.method;
                     }
+                } else {
+                    url = item.action
                 }
 
                 let fillAttribute = Array.from(button.attributes).find(attr => attr.name.startsWith('data-fill-'));
@@ -378,6 +381,18 @@ export function setModals(menu) {
                 method: method
             }
 
+            if (modalName === 'request-forward-document-popup') {
+                formData.append('document_status_id', 2)
+            } else if (modalName === 'request-shred-document-popup') {
+                formData.append('document_status_id', 7)
+            }  else if (modalName === 'shred-document-popup') {
+                formData.append('document_status_id', 8)
+            }  else if (modalName === 'payment-document-popup') {
+                formData.append('document_status_id', 3)
+            }  else if (modalName === 'forward-document-popup') {
+                formData.append('document_status_id', 5)
+            }
+
             if (typeof form !== 'undefined') {
                 const checkboxes = form.querySelectorAll('input[type="checkbox"]');
                 checkboxes.forEach(checkbox => {
@@ -395,7 +410,7 @@ export function setModals(menu) {
                     }
                 });
 
-                if (item.modal === 'request-forward-document-popup') {
+                if (modalName === 'request-forward-document-popup') {
                     formData.delete('shipping_type');
                     const selectedShippingType = document.querySelector('input[name="shipping_type"]:checked');
                     if (selectedShippingType) {
@@ -415,48 +430,35 @@ export function setModals(menu) {
                         return;
                     }
                 }
+            }
 
-                if (item.modal === 'request-forward-document-popup') {
-                    formData.append('document_status_id', 2)
-                } else if (item.modal === 'request-shred-document-popup') {
-                    formData.append('document_status_id', 7)
-                }  else if (item.modal === 'shred-document-popup') {
-                    formData.append('document_status_id', 8)
-                }  else if (item.modal === 'payment-document-popup') {
-                    formData.append('document_status_id', 3)
-                }  else if (item.modal === 'forward-document-popup') {
-                    formData.append('document_status_id', 5)
+            if (Object.keys(item.files).length !== 0) {
+                Object.keys(item.files).forEach((fileName) => {
+                    const fileArray = item.files[fileName];
+                    fileArray.forEach((file, key) => {
+                        formData.append(fileName, file[0]);
+                    });
+                });
+
+                requestData.body = formData;
+
+                requestData.headers = {
+                    'Authorization': `Bearer ${authToken}`,
                 }
+            } else {
+                let jsonObject = {};
 
-                if (Object.keys(item.files).length !== 0) {
-                    Object.keys(item.files).forEach((fileName) => {
-                        const fileArray = item.files[fileName];
-                        fileArray.forEach((file, key) => {
-                            formData.append(fileName, file[0]);
-                        });
-                    });
+                formData.forEach((value, key) => {
+                    jsonObject[key] = value;
+                });
 
-                    requestData.body = formData;
+                requestData.body = JSON.stringify(jsonObject);
 
-                    requestData.headers = {
-                        'Authorization': `Bearer ${authToken}`,
-                    }
-                } else {
-                    let jsonObject = {};
-
-                    formData.forEach((value, key) => {
-                        jsonObject[key] = value;
-                    });
-
-                    requestData.body = JSON.stringify(jsonObject);
-
-                    requestData.headers = {
-                        'Authorization': `Bearer ${authToken}`,
-                        'Content-Type': 'application/json',
-                    }
+                requestData.headers = {
+                    'Authorization': `Bearer ${authToken}`,
+                    'Content-Type': 'application/json',
                 }
             }
-            console.log(requestData.body)
 
             fetch(url, requestData)
                 .then((response) => {
