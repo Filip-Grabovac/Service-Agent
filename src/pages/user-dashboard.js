@@ -1,5 +1,7 @@
-import User from '../User';
-import { fillTable, updateActiveElement, updateActiveRole } from '../Table.js';
+// import User from '../User';
+// import { fillTable, updateActiveElement, updateActiveRole } from '../Table.js';
+import User from 'https://github.com/Filip-Grabovac/Service-Agent/raw/refs/heads/main/src/User.js';
+import {fillTable, updateActiveElement, updateActiveRole} from 'https://github.com/Filip-Grabovac/Service-Agent/raw/refs/heads/main/src/Table.js';
 
 const user = new User();
 

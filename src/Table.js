@@ -1,7 +1,11 @@
-import User from './User';
-import Document from './Document';
-import ShippingTariff from './ShippingTariff';
-import TableRow from './TableRow';
+// import User from './User';
+// import Document from './Document';
+// import ShippingTariff from './ShippingTariff';
+// import TableRow from './TableRow';
+import User from 'https://github.com/Filip-Grabovac/Service-Agent/raw/refs/heads/main/src/User.js';
+import Document from 'https://github.com/Filip-Grabovac/Service-Agent/raw/refs/heads/main/src/Document.js';
+import ShippingTariff from 'https://github.com/Filip-Grabovac/Service-Agent/raw/refs/heads/main/src/ShippingTariff.js';
+import TableRow from 'https://github.com/Filip-Grabovac/Service-Agent/raw/refs/heads/main/src/TableRow.js';
 
 const user = new User();
 const documentFile = new Document();

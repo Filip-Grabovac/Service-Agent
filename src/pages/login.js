@@ -1,4 +1,5 @@
-import User from '../User';
+// import User from '../User';
+import User from 'https://github.com/Filip-Grabovac/Service-Agent/raw/refs/heads/main/src/User.js';
 
 const user = new User();
 
