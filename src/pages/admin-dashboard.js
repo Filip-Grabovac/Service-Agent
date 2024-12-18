@@ -1,7 +1,7 @@
 // import User from '../User';
 // import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs} from '../Table.js';
-import User from 'https://github.com/Filip-Grabovac/Service-Agent/raw/refs/heads/main/src/User.js';
-import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs} from 'https://github.com/Filip-Grabovac/Service-Agent/raw/refs/heads/main/src/Table.js';
+import User from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@main/src/User.js';
+import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs} from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@main/src/Table.js';
 
 const user = new User();
 
