@@ -1,7 +1,9 @@
 // import User from '../User';
 // import { fillTable, updateActiveElement, updateActiveRole } from '../Table.js';
-import User from 'https://github.com/Filip-Grabovac/Service-Agent/raw/refs/heads/main/src/User.js';
-import {fillTable, updateActiveElement, updateActiveRole} from 'https://github.com/Filip-Grabovac/Service-Agent/raw/refs/heads/main/src/Table.js';
+// import User from 'https://github.com/Filip-Grabovac/Service-Agent/raw/refs/heads/main/src/User.js';
+import User from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@c965cbcc5c8e92901f58a18d6a2114978a7361cb/src/User.js';
+// import {fillTable, updateActiveElement, updateActiveRole} from 'https://github.com/Filip-Grabovac/Service-Agent/raw/refs/heads/main/src/Table.js';
+import {fillTable, updateActiveElement, updateActiveRole} from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@main/src/Table.js';
 
 const user = new User();
 
