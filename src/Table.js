@@ -2,8 +2,8 @@
 // import Document from './Document';
 // import ShippingTariff from './ShippingTariff';
 // import TableRow from './TableRow';
-import User from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@217dddf285809ecb248c46ef87f83c5090fc54ba/src/User.js';
-import Document from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@217dddf285809ecb248c46ef87f83c5090fc54ba/src/Document.js';
+import User from 'https://service-agent.pages.dev/src/User.js';
+import Document from 'https://service-agent.pages.dev/src/Document.js';
 import ShippingTariff from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/ShippingTariff.js';
 import TableRow from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/TableRow.js';
 

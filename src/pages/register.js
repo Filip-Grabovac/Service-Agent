@@ -1,5 +1,5 @@
 // import User from '../User';
-import User from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@217dddf285809ecb248c46ef87f83c5090fc54ba/src/User.js';
+import User from 'https://service-agent.pages.dev/src/User.js';
 
 const user = new User();
 
