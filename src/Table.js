@@ -2,8 +2,8 @@
 // import Document from './Document';
 // import ShippingTariff from './ShippingTariff';
 // import TableRow from './TableRow';
-import User from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/User.js';
-import Document from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@d450ea61d3134210eea4fc59b97b97040ff6dad7/src/Document.js';
+import User from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@217dddf285809ecb248c46ef87f83c5090fc54ba/src/User.js';
+import Document from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@217dddf285809ecb248c46ef87f83c5090fc54ba/src/Document.js';
 import ShippingTariff from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/ShippingTariff.js';
 import TableRow from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/TableRow.js';
 
@@ -19,6 +19,8 @@ let method = '';
 let modalName = '';
 let activeElement;
 let activeRole;
+
+const loader = document.getElementById('loader');
 
 const searchInputs = document.getElementsByClassName('search-input');
 let lastSearchInput = '';
@@ -50,7 +52,7 @@ Array.from(searchInputs).forEach(input => {
     });
 });
 
-function resetSearchInput() {
+export function resetSearchInput() {
     Array.from(searchInputs).forEach(input => {
         input.value = '';
         lastSearchInput = ''
@@ -58,8 +60,6 @@ function resetSearchInput() {
 }
 
 export function fillTable(menu, tab, statusIds = null, page = 1) {
-    resetSearchInput()
-
     if (statusIds === 'null') {
         statusIds = null
     }
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-function getTabTitle(menu, tab) {
+export function getTabTitle(menu, tab) {
     const tabTitles = {
         1: {
             1: 'All Requests',
@@ -460,6 +460,10 @@ export function setModals(menu) {
                 }
             }
 
+            if (modalName === 'add-document-popup') {
+                loader.style.display = 'flex'
+            }
+
             fetch(url, requestData)
                 .then((response) => {
                     if (!response.ok) {
@@ -480,6 +484,10 @@ export function setModals(menu) {
                             outputDivs.forEach(div => div.remove());
                             dropZone.firstElementChild.style.display = 'flex';
                         });
+                    }
+
+                    if (modalName === 'add-document-popup') {
+                        loader.style.display = 'none'
                     }
                 })
                 .catch((error) => {
@@ -620,6 +628,18 @@ function getModals(menu) {
 }
 
 function createDropZone(dropZone, item, fileName) {
+    const fileInput = document.getElementById('file-input');
+
+    fileInput.addEventListener('change', function () {
+        if (fileInput.files.length > 0) {
+            const files = fileInput.files;
+            item.files[fileName].length = 0
+            item.files[fileName].push(files)
+
+            handleFiles(item.files[fileName]);
+        }
+    });
+
     const dropzoneDisplay = dropZone.firstElementChild;
 
     ["dragenter", "dragover", "dragleave", "drop"].forEach(event => {
