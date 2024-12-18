@@ -1,7 +1,7 @@
 // import User from '../User';
 // import { fillTable, updateActiveElement, updateActiveRole } from '../Table.js';
 import User from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/User.js';
-import {fillTable, updateActiveElement, updateActiveRole} from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@5eda811f0cb77a4bee6024e4c658c8fc1b1254cc/src/Table.js';
+import {fillTable, updateActiveElement, updateActiveRole} from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@32bd5fb967484c9d983194f814210b8629ac80ee/src/Table.js';
 
 const user = new User();
 
