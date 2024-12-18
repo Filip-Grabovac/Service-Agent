@@ -10,7 +10,7 @@ const logout = document.getElementById('logout');
 const userMenu1 = document.getElementById('user-menu1');
 const userMenu2 = document.getElementById('user-menu2');
 
-// user.authenticate();
+user.authenticate();
 
 logout.addEventListener('click', function (event) {
     user.logOut()
