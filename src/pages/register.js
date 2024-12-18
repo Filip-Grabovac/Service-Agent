@@ -1,4 +1,5 @@
-import User from '../User';
+// import User from '../User';
+const User = require('../User.js');
 
 const user = new User();
 

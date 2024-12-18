@@ -1,4 +1,4 @@
-export default class ShippingTariff {
+class ShippingTariff {
     getAll(page = 1, perPage = 10, search = '') {
         const authToken =  localStorage.getItem('authToken');
 
@@ -23,4 +23,13 @@ export default class ShippingTariff {
                 console.error('Error:', error);
             });
     }
+    callMethod(methodName, ...args) {
+        if (typeof this[methodName] === 'function') {
+            return this[methodName](...args);
+        } else {
+            throw new Error(`Method "${methodName}" not exists.`);
+        }
+    }
 }
+
+module.exports = ShippingTariff;

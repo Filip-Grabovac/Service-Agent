@@ -1,4 +1,4 @@
-export default class User {
+class User {
     authenticate() {
         const failureRedirect = '/log-in';
         const authToken = localStorage.getItem('authToken');
@@ -154,4 +154,13 @@ export default class User {
                 console.error('Error:', error);
             });
     }
+    callMethod(methodName, ...args) {
+        if (typeof this[methodName] === 'function') {
+            return this[methodName](...args);
+        } else {
+            throw new Error(`Method "${methodName}" not exists.`);
+        }
+    }
 }
+
+module.exports = User;

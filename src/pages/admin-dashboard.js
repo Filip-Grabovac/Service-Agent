@@ -1,669 +1,103 @@
-import User from '../User';
-import Document from '../Document';
-import ShippingTariff from '../ShippingTariff';
-import TableRow from '../TableRow';
+// import User from '../User';
+// import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs} from '../Table.js';
+const User = require('../User.js');
+const { fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs } = require('../Table.js');
 
 const user = new User();
-const documentFile = new Document();
-const shippingTariff = new ShippingTariff();
-const tableRow = new TableRow();
-
-let allData = [];
-
-let url = '';
-let method = '';
-let activeMenu;
 
 const adminMenu1 = document.getElementById('admin-menu1');
+const adminMenu1Tab1 = document.getElementById('admin-menu1-tab1');
+const adminMenu1Tab2 = document.getElementById('admin-menu1-tab2');
+const adminMenu1Tab3 = document.getElementById('admin-menu1-tab3');
+const adminMenu1Tab4 = document.getElementById('admin-menu1-tab4');
+const adminMenu1Tab5 = document.getElementById('admin-menu1-tab5');
+const adminMenu1Tab6 = document.getElementById('admin-menu1-tab6');
 const adminMenu2 = document.getElementById('admin-menu2');
+const adminMenu2Tab1 = document.getElementById('admin-menu2-tab1');
 const adminMenu3 = document.getElementById('admin-menu3');
+const adminMenu3Tab1 = document.getElementById('admin-menu3-tab1');
+const adminMenu3Tab2 = document.getElementById('admin-menu3-tab2');
 const adminMenu4 = document.getElementById('admin-menu4');
-
-const searchInputs = document.getElementsByClassName('search-input');
-let lastSearchInput = '';
+const adminMenu4Tab1 = document.getElementById('admin-menu4-tab1');
 
 user.authenticate();
 
+updateActiveRole('admin')
+
 adminMenu1.addEventListener('click', function (event) {
-    fillTable(1, 1)
+    updateActiveElement(adminMenu1)
+
+    fillTable(1, 1, '1,2,3,4,5,6,7,8')
+})
+adminMenu1Tab1.addEventListener('click', function (event) {
+    updateActiveElement(adminMenu1Tab1)
+
+    fillTable(1, 1, '1,2,3,4,5,6,7,8')
+})
+adminMenu1Tab2.addEventListener('click', function (event) {
+    updateActiveElement(adminMenu1Tab2)
+
     fillTable(1, 2, '2')
+})
+adminMenu1Tab3.addEventListener('click', function (event) {
+    updateActiveElement(adminMenu1Tab3)
+
     fillTable(1, 3, '3')
+})
+adminMenu1Tab4.addEventListener('click', function (event) {
+    updateActiveElement(adminMenu1Tab4)
+
     fillTable(1, 4, '4')
+})
+adminMenu1Tab5.addEventListener('click', function (event) {
+    updateActiveElement(adminMenu1Tab5)
+
     fillTable(1, 5, '5,6')
+})
+adminMenu1Tab6.addEventListener('click', function (event) {
+    updateActiveElement(adminMenu1Tab6)
+
     fillTable(1, 6, '7,8')
-
-    activeMenu = adminMenu1
-
-    resetSearchInput()
 })
+
 adminMenu2.addEventListener('click', function (event) {
+    updateActiveElement(adminMenu2)
+
     fillTable(2, 1)
-
-    activeMenu = adminMenu2
-
-    resetSearchInput()
 })
+adminMenu2Tab1.addEventListener('click', function (event) {
+    updateActiveElement(adminMenu2Tab1)
+
+    fillTable(2, 1)
+})
+
 adminMenu3.addEventListener('click', function (event) {
+    updateActiveElement(adminMenu3)
+
     fillTable(3, 1, '7')
+})
+adminMenu3Tab1.addEventListener('click', function (event) {
+    updateActiveElement(adminMenu3Tab1)
+
+    fillTable(3, 1, '7')
+})
+adminMenu3Tab2.addEventListener('click', function (event) {
+    updateActiveElement(adminMenu3Tab2)
+
     fillTable(3, 2, '8')
-
-    activeMenu = adminMenu3
-
-    resetSearchInput()
 })
+
 adminMenu4.addEventListener('click', function (event) {
+    updateActiveElement(adminMenu4)
+
     fillTable(4, 1)
+})
+adminMenu4Tab1.addEventListener('click', function (event) {
+    updateActiveElement(adminMenu4Tab1)
 
-    activeMenu = adminMenu4
-
-    resetSearchInput()
+    fillTable(4, 1)
 })
 
-adminMenu2.click()
-
-Array.from(searchInputs).forEach(input => {
-    let typingTimer;
-    const typingDelay = 2000;
-
-    const handleTypingFinished = () => {
-        fillTable(
-            Number(input.getAttribute('data-menu')),
-            Number(input.getAttribute('data-tab')),
-            input.getAttribute('data-status-ids'),
-            Number(input.getAttribute('data-page'))
-        );
-    };
-
-    input.addEventListener('input', () => {
-        clearTimeout(typingTimer);
-        typingTimer = setTimeout(handleTypingFinished, typingDelay);
-    });
-});
-
-function resetSearchInput() {
-    Array.from(searchInputs).forEach(input => {
-        input.value = '';
-        lastSearchInput = ''
-    });
-}
-
-
-function fillTable(menu, tab, statusIds = null, page = 1) {
-    if (statusIds === 'null') {
-        statusIds = null
-    }
-    const columns = getColumns(menu, tab);
-    const columnElements = [];
-    const rowHTML = [];
-
-    columns.forEach(column => {
-        columnElements[column] = document.getElementById('admin-menu' + menu + '-tab' + tab + '-' + column);
-    })
-
-    const text = document.getElementById('admin-menu' + menu + '-tab' + tab + '-text');
-    const number = document.getElementById('admin-menu' + menu + '-tab' + tab + '-number');
-    const pagination = document.getElementById('admin-menu' + menu + '-tab' + tab + '-table').getElementsByClassName('pagination-buttons')[0];
-    const search = document.getElementById('admin-menu' + menu + '-tab' + tab + '-search');
-
-    search.setAttribute('data-menu', menu)
-    search.setAttribute('data-tab', tab)
-    search.setAttribute('data-status-ids', statusIds)
-    search.setAttribute('data-page', page)
-
-    if (search.value !== lastSearchInput) {
-        page = 1;
-    }
-    lastSearchInput = search.value
-
-    let status, statusBadgeColor;
-
-    let model = documentFile;
-    let modelName = 'document';
-    if (menu === 2) {
-        model = user;
-        modelName = 'user'
-    } else if (menu === 4) {
-        model = shippingTariff;
-        modelName = 'shippingTariff'
-    }
-
-    model.getAll(page, 10, search.value, statusIds !== null ? statusIds : undefined).then((data) => {
-        number.innerHTML = data.itemsTotal
-        if (search.value === '') {
-            text.innerHTML = getTabTitle(menu, tab) + ` (${data.itemsTotal})`
-        }
-
-        if (!Array.isArray(allData[menu])) {
-            allData[menu] = [];
-        }
-        allData[menu][tab] = data.items;
-
-        data.items.forEach((item) => {
-            if (statusIds) {
-                status = item._document_status.status_label;
-                if (status === 'payed' || status === 'delivered') {
-                    statusBadgeColor = 'green'
-                } else if (status === 'shipped') {
-                    statusBadgeColor = 'blue'
-                } else {
-                    statusBadgeColor = 'orange'
-                }
-            }
-
-            columns.forEach(column => {
-                if (!rowHTML[column]) {
-                    rowHTML[column] = [];
-                }
-
-                if (column === 'actions') {
-                    rowHTML[column].push(tableRow.getActionRow(menu, tab, item));
-                } else {
-                    rowHTML[column].push(tableRow.getTableRow(modelName, column, item, statusBadgeColor));
-                }
-            })
-        })
-
-        Object.entries(columnElements).forEach(([key, columnElement]) => {
-            let children = columnElement.children;
-
-            for (let i = children.length - 1; i > 0; i--) {
-                columnElement.removeChild(children[i]);
-            }
-
-            if (rowHTML[key] && rowHTML[key].length) {
-                rowHTML[key].forEach(item => {
-                    columnElement.innerHTML += item;
-                })
-            }
-        });
-
-        setModals(menu);
-
-        createPagination(menu, tab, statusIds, pagination, data);
-    })
-}
-
-function createPagination(menu, tab, statusIds, pagination, data) {
-    let paginationHTML = '';
-
-    if (data.prevPage) {
-        paginationHTML += createPaginationButton(menu, tab, statusIds, 'Prev', data.prevPage);
-    }
-
-    if (data.curPage > 2) {
-        paginationHTML += createPaginationButton(menu, tab, statusIds, '...', null, true);
-    }
-
-    if (data.curPage !== 1) {
-        paginationHTML += createPaginationButton(menu, tab, statusIds, data.curPage - 1, data.curPage - 1, true);
-    }
-
-    paginationHTML += createPaginationButton(menu, tab, statusIds, data.curPage, data.curPage, true);
-
-    if (data.curPage !== data.pageTotal) {
-        paginationHTML += createPaginationButton(menu, tab, statusIds, data.curPage + 1, data.curPage + 1, true);
-    }
-
-    if ((data.pageTotal - data.curPage) > 1) {
-        paginationHTML += createPaginationButton(menu, tab, statusIds, '...', null, true);
-    }
-
-    if (data.nextPage) {
-        paginationHTML += createPaginationButton(menu, tab, statusIds, 'Next', data.nextPage);
-    }
-
-    pagination.innerHTML = paginationHTML
-}
-
-function createPaginationButton(menu, tab, statusIds, label, page = null, isNumber = false) {
-    const pageData = page !== null ? ` data-menu="${menu}" data-tab="${tab}" data-status-ids="${statusIds}" data-page="${page}"` : '';
-    const numberClass = isNumber ? ' number' : '';
-    return `
-        <div class="pagination-btn${numberClass}" ${pageData}>
-            <div class="pagination-btn-txt">${label}</div>
-        </div>
-    `;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    document.body.addEventListener('click', function(event) {
-        let button;
-        if (event.target.classList.contains('pagination-btn')) {
-            button = event.target;
-        } else if (event.target.closest('.pagination-btn')) {
-            button = event.target.closest('.pagination-btn');
-        } else {
-            return;
-        }
-
-        if (!button.hasAttribute('data-menu')) {
-            return;
-        }
-
-        fillTable(
-            Number(button.getAttribute('data-menu')),
-            Number(button.getAttribute('data-tab')),
-            button.getAttribute('data-status-ids'),
-            Number(button.getAttribute('data-page'))
-        );
-    });
-});
-
-function getTabTitle(menu, tab) {
-    const tabTitles = {
-        1: {
-            1: 'All Requests',
-            2: 'Forwarding Requests',
-            3: 'Forwarding Pending',
-            4: 'Payment Received',
-            5: 'All Sent',
-            6: 'Shred Requests',
-        },
-        2: {
-            1: 'All Users',
-        },
-        3: {
-            1: 'All Requests',
-            2: 'Shred Requests',
-        },
-        4: {
-            1: 'All Tariffs',
-        },
-    };
-
-    return tabTitles[menu]?.[tab] || 'Unknown Option';
-}
-
-function getColumns(menu, tab) {
-    const columns = {
-        1: {
-            1: ['id', 'name', 'user', 'price', 'status', 'blank', 'actions'],
-            2: ['id', 'name', 'user', 'status', 'blank', 'actions'],
-            3: ['id', 'name', 'user', 'price', 'status', 'blank', 'actions'],
-            4: ['id', 'name', 'user', 'price', 'status', 'blank', 'actions'],
-            5: ['id', 'name', 'user', 'price', 'status', 'blank', 'actions'],
-            6: ['id', 'name', 'user', 'price', 'status', 'blank', 'actions'],
-        },
-        2: {
-            1: ['id', 'name', 'address', 'email', 'blank', 'actions'],
-        },
-        3: {
-            1: ['id', 'name', 'user', 'status', 'blank', 'actions'],
-            2: ['id', 'name', 'user', 'status', 'blank', 'actions'],
-        },
-        4: {
-            1: ['id', 'name', 'price', 'region', 'blank', 'actions'],
-        },
-    };
-
-    return columns[menu]?.[tab] || 'unknown';
-}
-
-setModals('initial');
-
-function setModals(menu) {
-    const modals = getModals(menu);
-
-    Object.entries(modals).forEach(([key, item]) => {
-        const modal = document.getElementById(item.modal);
-        const openButtons = document.querySelectorAll(`[data-modal-open="${item.modal}"]`);
-        const closeButtons = modal.querySelectorAll('[data-modal-action="close"]');
-        const submitButton = modal.querySelectorAll('[data-modal-action="submit"]')[0];
-        const dropZones = modal.querySelectorAll('[data-modal-action="dropzone"]');
-        const form = modal.getElementsByTagName("form")[0];
-
-        openButtons.forEach(button => {
-            button.addEventListener("click", function (e) {
-                e.preventDefault()
-
-                let idAttribute = Array.from(button.attributes).find(attr => attr.name.startsWith('data-id-'));
-                if (idAttribute) {
-                    let idAttributeName = idAttribute.name
-                        .replace('data-id-', '')
-                        .replace(/-([a-z])/g, (_, char) => `_${char}`);
-
-                    if (item.action.includes(idAttributeName)) {
-                        url = item.action.replace(`{${idAttributeName}}`, idAttribute.value);
-                        method = item.method;
-                    } else {
-                        let parts = item.action.split("/");
-                        parts[parts.length - 1] = idAttribute.value;
-                        url = parts.join("/");
-                        method = item.method;
-                    }
-                }
-
-                let fillAttribute = Array.from(button.attributes).find(attr => attr.name.startsWith('data-fill-'));
-                if (fillAttribute) {
-                    let fillAttributeName = fillAttribute.name
-                        .replace('data-fill-', '')
-
-                    let tab = fillAttributeName.split('-');
-
-                    let fillData = Array.from(allData[tab[0]][tab[1]]).find(item => item.id.toString().match(fillAttribute.value))
-                    let elementsWithName = form.querySelectorAll('[name]');
-
-                    elementsWithName.forEach(element => {
-                        if (element.getAttribute('name').includes(".")) {
-                            let parts = element.getAttribute('name').split(".");
-                            element.value = fillData['_' + parts[0]][parts[1]] ?? "";
-                        } else {
-                            element.value = fillData[element.getAttribute('name')] ?? "";
-                        }
-
-                        if (element.getAttribute('name').includes("document_user_address")) {
-                            let address = fillData?._user?._user_addresses_of_user;
-
-                            if (address) {
-                                element.value = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country
-                            }
-                        }
-
-                        if (element.hasAttribute('data-readonly')) {
-                            element.setAttribute("readonly", true);
-                        }
-                        if (element.hasAttribute('data-disabled')) {
-                            element.setAttribute("disabled", true);
-                        }
-                    });
-                }
-
-                modal.classList.remove('hide');
-            });
-        });
-
-        closeButtons.forEach(button => {
-            button.addEventListener("click", function (e) {
-                e.preventDefault()
-
-                modal.classList.add('hide');
-            });
-        });
-
-        dropZones.forEach(dropZone => {
-            const fileName = dropZone.getAttribute('data-dropzone-name')
-
-            item.files[fileName] = [];
-
-            createDropZone(dropZone, item, fileName);
-        });
-
-        const handleClick = () => {
-            const formData = new FormData(form);
-
-            const authToken =  localStorage.getItem('authToken');
-            let requestData = {
-                method: method
-            }
-
-            if (typeof form !== 'undefined') {
-                const checkboxes = form.querySelectorAll('input[type="checkbox"]');
-                checkboxes.forEach(checkbox => {
-                    if (!checkbox.checked) {
-                        formData.append(checkbox.name, 0);
-                    } else {
-                        formData.delete(checkbox.name);
-                        formData.append(checkbox.name, 1);
-                    }
-                });
-
-                Array.from(form.elements).forEach(element => {
-                    if (element.hasAttribute('disabled')) {
-                        formData.delete(element.name);
-                    }
-                });
-
-                for (const [key, value] of formData.entries()) {
-                    if (!value.trim()) {
-                        console.log(key)
-                        console.error(`Fields empty.`);
-
-                        return;
-                    }
-                }
-
-                if (Object.keys(item.files).length !== 0) {
-                    Object.keys(item.files).forEach((fileName) => {
-                        const fileArray = item.files[fileName];
-                        fileArray.forEach((file, key) => {
-                            formData.append(fileName, file[0]);
-                        });
-                    });
-
-                    requestData.body = formData;
-
-                    requestData.headers = {
-                        'Authorization': `Bearer ${authToken}`,
-                    }
-                } else {
-                    let jsonObject = {};
-
-                    formData.forEach((value, key) => {
-                        jsonObject[key] = value;
-                    });
-
-                    requestData.body = JSON.stringify(jsonObject);
-
-                    requestData.headers = {
-                        'Authorization': `Bearer ${authToken}`,
-                        'Content-Type': 'application/json',
-                    }
-                }
-            }
-
-            fetch(url, requestData)
-                .then((response) => {
-                    if (!response.ok) {
-                        console.error("Error:", error);
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    modal.classList.add('hide');
-
-                    activeMenu.click()
-
-                    if (form) {
-                        form.reset();
-
-                        dropZones.forEach(dropZone => {
-                            const outputDivs = dropZone.querySelectorAll(".output");
-                            outputDivs.forEach(div => div.remove());
-                            dropZone.firstElementChild.style.display = 'flex';
-                        });
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                });
-        }
-
-        if (!submitButton.hasAttribute('data-clicked')) {
-            submitButton.addEventListener("click", function() {
-                handleClick(key);
-            });
-            submitButton.setAttribute('data-clicked', key)
-        }
-    })
-}
-
-function getModals(menu) {
-    const modals = {
-        'initial': {
-            1: {
-                modal: 'add-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:jeVaMFJ2/documents',
-                method: 'POST',
-                files: []
-            },
-            2: {
-                modal: 'add-tariff-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:SB0L29DX/shipping_tariffs',
-                method: 'POST',
-                files: []
-            },
-        },
-        1: {
-            1: {
-                modal: 'shred-document-popup',
-                action: '',
-                method: 'DELETE',
-                files: []
-            },
-            2: {
-                modal: 'delete-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:jeVaMFJ2/documents/{documents_id}',
-                method: 'DELETE',
-                files: []
-            },
-            3: {
-                modal: 'edit-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:JGAigVjM/documents/{documents_id}',
-                method: 'PATCH',
-                files: []
-            },
-            4: {
-                modal: 'forward-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:JGAigVjM/documents/{documents_id}',
-                method: 'PATCH',
-                files: []
-            },
-            5: {
-                modal: 'payment-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:JGAigVjM/documents/{documents_id}',
-                method: 'PATCH',
-                files: []
-            }
-        },
-        2: {
-            1: {
-                modal: 'edit-user-popup',
-                action: '',
-                method: 'PATCH',
-                files: []
-            },
-            2: {
-                modal: 'delete-user-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:wGjIQByJ/user/{user_id}',
-                method: 'DELETE',
-                files: []
-            }
-        },
-        3: {
-            1: {
-                modal: 'shred-document-popup',
-                action: '',
-                method: 'DELETE',
-                files: []
-            },
-            2: {
-                modal: 'delete-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:jeVaMFJ2/documents/{documents_id}',
-                method: 'DELETE',
-                files: []
-            }
-        },
-        4: {
-            1: {
-                modal: 'edit-tariff-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:SB0L29DX/shipping_tariffs/{shipping_tariffs_id}',
-                method: 'PATCH',
-                files: []
-            },
-            2: {
-                modal: 'delete-tariff-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:SB0L29DX/shipping_tariffs/{shipping_tariffs_id}',
-                method: 'DELETE',
-                files: []
-            },
-        },
-    }
-
-    return modals[menu] || 'unknown';
-}
-
-function createDropZone(dropZone, item, fileName) {
-    const dropzoneDisplay = dropZone.firstElementChild;
-
-    ["dragenter", "dragover", "dragleave", "drop"].forEach(event => {
-        dropZone.addEventListener(event, e => e.preventDefault());
-        dropZone.addEventListener(event, e => e.stopPropagation());
-    });
-
-    ["dragenter", "dragover"].forEach(event => {
-        dropZone.addEventListener(event, () => dropZone.classList.add("dragover"));
-    });
-
-    ["dragleave", "drop"].forEach(event => {
-        dropZone.addEventListener(event, () => dropZone.classList.remove("dragover"));
-    });
-
-    dropZone.addEventListener("drop", e => {
-        item.files[fileName].length = 0
-        item.files[fileName].push(e.dataTransfer.files)
-
-        handleFiles(item.files[fileName]);
-    });
-
-    function handleFiles(allFiles) {
-        const output = document.createElement("div");
-        output.classList.add("output");
-        allFiles = Array.from(allFiles);
-        allFiles.forEach(file => {
-            const fileInfo = document.createElement("p");
-            fileInfo.textContent = `Name: ${file[0].name}, Size: ${file[0].size} bytes`;
-            output.appendChild(fileInfo);
-        });
-
-        dropzoneDisplay.style.display = 'none';
-
-        const outputDivs = dropZone.querySelectorAll(".output");
-        outputDivs.forEach(div => div.remove());
-
-        dropZone.appendChild(output);
-    }
-}
-
-const createDocumentUser = document.getElementById('create-document-user');
-const editDocumentUser = document.getElementById('edit-document-user');
-const forwardDocumentUser = document.getElementById('forward-document-user');
-const paymentDocumentUser = document.getElementById('payment-document-user');
-
+adminMenu1.click()
 populateSelectWithUsers()
-
-function populateSelectWithUsers() {
-    user.getAll(1, 999999).then((users) => {
-        if (users.items.length) {
-            let userOptions = '';
-            users.items.forEach((user) => {
-                userOptions += `<option value="${user.id}">${user.first_name} ${user.last_name}</option>`
-            })
-
-            createDocumentUser.innerHTML += userOptions;
-            editDocumentUser.innerHTML += userOptions;
-            forwardDocumentUser.innerHTML += userOptions;
-            paymentDocumentUser.innerHTML += userOptions;
-        }
-    })
-}
-
-const editDocumentShippingTariff = document.getElementById('edit-document-shipping-tariff');
-const forwardDocumentShippingTariff = document.getElementById('forward-document-shipping-tariff');
-const paymentDocumentShippingTariff = document.getElementById('payment-document-shipping-tariff');
-
 populateSelectWithShippingTariffs()
-
-function populateSelectWithShippingTariffs() {
-    shippingTariff.getAll(1, 999999).then((shippingTariffs) => {
-        if (shippingTariffs.items.length) {
-            let shippingTariffsOptions = '';
-            shippingTariffs.items.forEach((shippingTariff) => {
-                shippingTariffsOptions += `<option value="${shippingTariff.id}">${shippingTariff.region} ${shippingTariff.label.charAt(0).toUpperCase() + shippingTariff.label.slice(1)}</option>`
-            })
-
-            editDocumentShippingTariff.innerHTML += shippingTariffsOptions;
-            forwardDocumentShippingTariff.innerHTML += shippingTariffsOptions;
-            paymentDocumentShippingTariff.innerHTML += shippingTariffsOptions;
-        }
-    })
-}

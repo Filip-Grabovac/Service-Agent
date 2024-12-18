@@ -8,6 +8,7 @@ module.exports = {
         ['register3']: './src/pages/register3.js',
         ['login']: './src/pages/login.js',
         ['admin-dashboard']: './src/pages/admin-dashboard.js',
+        ['user-dashboard']: './src/pages/user-dashboard.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
