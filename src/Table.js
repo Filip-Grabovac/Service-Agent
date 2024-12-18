@@ -283,11 +283,7 @@ function getColumns(menu, tab) {
     return columns[menu]?.[tab] || 'unknown';
 }
 
-if (activeRole === 'admin') {
-    setModals('initial');
-}
-
-function setModals(menu) {
+export function setModals(menu) {
     const modals = getModals(menu);
 
     Object.entries(modals).forEach(([key, item]) => {
@@ -503,13 +499,13 @@ function getModals(menu) {
         'initial': {
             1: {
                 modal: 'add-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:jeVaMFJ2/documents',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents',
                 method: 'POST',
                 files: []
             },
             2: {
                 modal: 'add-tariff-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:SB0L29DX/shipping_tariffs',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX/shipping_tariffs',
                 method: 'POST',
                 files: []
             },
@@ -517,31 +513,31 @@ function getModals(menu) {
         1: {
             1: {
                 modal: 'shred-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:JGAigVjM/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             },
             2: {
                 modal: 'delete-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'DELETE',
                 files: []
             },
             3: {
                 modal: 'edit-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:JGAigVjM/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             },
             4: {
                 modal: 'forward-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:JGAigVjM/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             },
             5: {
                 modal: 'payment-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:JGAigVjM/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             }
@@ -555,7 +551,7 @@ function getModals(menu) {
             },
             2: {
                 modal: 'delete-user-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:wGjIQByJ/user/{user_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/{user_id}',
                 method: 'DELETE',
                 files: []
             }
@@ -563,13 +559,13 @@ function getModals(menu) {
         3: {
             1: {
                 modal: 'shred-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:JGAigVjM/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             },
             2: {
                 modal: 'delete-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'DELETE',
                 files: []
             }
@@ -577,13 +573,13 @@ function getModals(menu) {
         4: {
             1: {
                 modal: 'edit-tariff-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:SB0L29DX/shipping_tariffs/{shipping_tariffs_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX/shipping_tariffs/{shipping_tariffs_id}',
                 method: 'PATCH',
                 files: []
             },
             2: {
                 modal: 'delete-tariff-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:SB0L29DX/shipping_tariffs/{shipping_tariffs_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX/shipping_tariffs/{shipping_tariffs_id}',
                 method: 'DELETE',
                 files: []
             },
@@ -591,19 +587,19 @@ function getModals(menu) {
         5: {
             1: {
                 modal: 'request-forward-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:JGAigVjM/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             },
             2: {
                 modal: 'request-shred-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:JGAigVjM/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             },
             3: {
                 modal: 'delete-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'DELETE',
                 files: []
             }
@@ -611,7 +607,7 @@ function getModals(menu) {
         6: {
             1: {
                 modal: 'delete-document-popup',
-                action: 'https://x8ki-letl-twmt.n7.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'DELETE',
                 files: []
             }

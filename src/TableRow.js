@@ -263,12 +263,12 @@ export default class TableRow {
             5: {
                 1:`
                     <div class="row-inside right">
-                        ${item._document_status.status_label === 'waiting_for_payment' ? `
+                        ${item._document_status?.status_label === 'waiting_for_payment' ? `
                             <div onclick="window.open('${item.payment_link}', '_blank');" class="actions-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 12 18" fill="none" class="action-svg smaller">
                                 <path d="M1.5 12C1.5 13.6569 2.84315 15 4.5 15H7.5C9.15685 15 10.5 13.6569 10.5 12C10.5 10.3431 9.15685 9 7.5 9H4.5C2.84315 9 1.5 7.65685 1.5 6C1.5 4.34315 2.84315 3 4.5 3H7.5C9.15685 3 10.5 4.34315 10.5 6M6 1.5V16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                               </svg></div>
                         ` : ''}
-                        ${item._document_status.status_label === 'new' ? `
+                        ${item._document_status?.status_label === 'new' ? `
                             <div data-modal-open="request-forward-document-popup" data-id-documents-id="${item.id}" data-fill-5-1=${item.id} class="forvard-doc-scg-wrap no-padd"><img loading="lazy" src="https://cdn.prod.website-files.com/673cc2bec8c34d28fd73175f/67519f8578799b349334867f_Forwarding%20Mail.svg" alt="" class="action-svg bigger"></div>
                             <div data-modal-open="request-shred-document-popup" data-id-documents-id="${item.id}" data-fill-5-1=${item.id} class="shred-doc-svg-wrap no-padd"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 20 19" fill="none" class="action-svg bigger">
                             <path d="M11.5 1.20215V4.30005C11.5 4.72009 11.5 4.93011 11.5817 5.09055C11.6537 5.23167 11.7684 5.3464 11.9095 5.41831C12.0699 5.50005 12.28 5.50005 12.7 5.50005H15.7979M4 10.15V4.6C4 3.33988 4 2.70982 4.24524 2.22852C4.46095 1.80516 4.80516 1.46095 5.22852 1.24524C5.70982 1 6.33988 1 7.6 1H11.5L16 5.5V10.15M13 9.25H7M8.5 6.25H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>

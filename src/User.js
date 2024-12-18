@@ -15,7 +15,7 @@ export default class User {
         }
 
         // If there is a token, verify it with the API
-        fetch('https://x8ki-letl-twmt.n7.xano.io/api:2vP05bpa/auth/me', {
+        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/me', {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${authToken}`,
@@ -53,7 +53,7 @@ export default class User {
     }
     register(data) {
         // Call the Xano API
-        fetch('https://x8ki-letl-twmt.n7.xano.io/api:2vP05bpa/auth/signup', {
+        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ export default class User {
     }
     confirmCode(data) {
         // Call the Xano API
-        fetch('https://x8ki-letl-twmt.n7.xano.io/api:wGjIQByJ/register/confirm-email', {
+        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/register/confirm-email', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ export default class User {
     }
     login(data) {
         // Call the Xano API
-        fetch('https://x8ki-letl-twmt.n7.xano.io/api:2vP05bpa/auth/login', {
+        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ export default class User {
     getAll(page = 1, perPage = 10, search = '') {
         const authToken =  localStorage.getItem('authToken');
 
-        let url = `https://x8ki-letl-twmt.n7.xano.io/api:wGjIQByJ/user?page=${page}&per_page=${perPage}`;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user?page=${page}&per_page=${perPage}`;
         if (search !== '') {
             url += `&search=${encodeURIComponent(search)}`
         }
