@@ -750,11 +750,10 @@ function setPdf(pdfUrl) {
                 const context = canvas.getContext('2d');
 
                 const viewport = page.getViewport({ scale: 1.5 });
-                canvas.style.width = '100%';
-                canvas.style.height = viewport.height;
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
 
                 pageContainer.appendChild(canvas);
-                pageContainer.style.width = '100%'
                 pdfContainer.appendChild(pageContainer);
 
                 const renderContext = {
