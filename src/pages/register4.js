@@ -21,7 +21,7 @@ payBtn.addEventListener('click', function (event) {
         ]
     };
 
-    let result = user.initialPayment(data);
-
-    window.location.href = result.url
+    user.initialPayment(data). then(result => {
+        window.location.href = result.url
+    });
 });
