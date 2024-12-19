@@ -12,7 +12,7 @@ payBtn.addEventListener('click', function (event) {
 
     let data = {
         success_url: "https://example.com/success",
-        cancel_url: "https://example.com/success",
+        cancel_url: "https://example.com/cancel",
         line_items: [
             {
                 price: "price_1QXMupCA20rcDWGhemNihUF8",
@@ -23,5 +23,5 @@ payBtn.addEventListener('click', function (event) {
 
     let result = user.initialPayment(data);
 
-    console.log(result)
+    window.location.href = result.url
 });
