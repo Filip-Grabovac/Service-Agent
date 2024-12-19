@@ -3,7 +3,7 @@
 // import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs, setModals, resetSearchInput, getTabTitle} from '../Table.js';
 import User from 'https://service-agent.pages.dev/src/User.js';
 import Document from 'https://service-agent.pages.dev/src/Document.js';
-import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs, setModals, resetSearchInput, getTabTitle} from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8f0e6cab12a1382e600a70950b41923b82498976/src/Table.js';
+import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs, setModals, resetSearchInput, getTabTitle} from 'https://service-agent.pages.dev/src/Table.js';
 
 
 const user = new User();

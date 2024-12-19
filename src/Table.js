@@ -4,8 +4,8 @@
 // import TableRow from './TableRow';
 import User from 'https://service-agent.pages.dev/src/User.js';
 import Document from 'https://service-agent.pages.dev/src/Document.js';
-import ShippingTariff from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/ShippingTariff.js';
-import TableRow from 'https://cdn.jsdelivr.net/gh/Filip-Grabovac/Service-Agent@8722c25d082e952afa1d6ed16fad79151e984150/src/TableRow.js';
+import ShippingTariff from 'https://service-agent.pages.dev/src/ShippingTariff.js';
+import TableRow from 'https://service-agent.pages.dev/src/TableRow.js';
 
 const user = new User();
 const documentFile = new Document();
