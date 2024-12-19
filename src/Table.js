@@ -351,6 +351,10 @@ export function setModals(menu) {
                             element.setAttribute("disabled", true);
                         }
                     });
+
+                    if (modalName === 'details-document-popup') {
+                        setPdf(fillData._files_of_documents.file.url)
+                    }
                 }
 
                 modal.classList.remove('hide');
@@ -596,18 +600,24 @@ function getModals(menu) {
         },
         5: {
             1: {
+                modal: 'details-document-popup',
+                action: '',
+                method: 'GET',
+                files: []
+            },
+            2: {
                 modal: 'request-forward-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             },
-            2: {
+            3: {
                 modal: 'request-shred-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             },
-            3: {
+            4: {
                 modal: 'delete-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'DELETE',
@@ -719,4 +729,41 @@ export function populateSelectWithShippingTariffs() {
             paymentDocumentShippingTariff.innerHTML += shippingTariffsOptions;
         }
     })
+}
+
+function setPdf(pdfUrl) {
+    const pdfContainer = document.getElementById('pdf-container');
+
+    const loadingTask = pdfjsLib.getDocument(pdfUrl);
+
+    loadingTask.promise.then((pdf) => {
+        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+            pdf.getPage(pageNum).then((page) => {
+                const pageContainer = document.createElement('div');
+                pageContainer.classList.add('page-container');
+
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+
+                const viewport = page.getViewport({ scale: 1.5 });
+                canvas.style.width = '100%';
+                canvas.style.height = viewport.height;
+
+                pageContainer.appendChild(canvas);
+                pdfContainer.appendChild(pageContainer);
+
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport,
+                };
+                page.render(renderContext).promise.then(() => {
+                    console.log(`Page ${pageNum} loaded.`);
+                });
+            }).catch((error) => {
+                console.error(`Error while loading page ${pageNum}:`, error);
+            });
+        }
+    }).catch((error) => {
+        console.error('Error while loading PDF:', error);
+    });
 }
