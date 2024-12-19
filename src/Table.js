@@ -499,11 +499,13 @@ export function setModals(menu) {
                 });
         }
 
-        if (!submitButton.hasAttribute('data-clicked')) {
-            submitButton.addEventListener("click", function() {
-                handleClick(key);
-            });
-            submitButton.setAttribute('data-clicked', key)
+        if (submitButton) {
+            if (!submitButton.hasAttribute('data-clicked')) {
+                submitButton.addEventListener("click", function () {
+                    handleClick(key);
+                });
+                submitButton.setAttribute('data-clicked', key)
+            }
         }
     })
 }
