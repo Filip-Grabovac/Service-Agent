@@ -326,9 +326,9 @@ export function setModals(menu) {
                     let tab = fillAttributeName.split('-');
 
                     let fillData = Array.from(allData[tab[0]][tab[1]]).find(item => item.id.toString().match(fillAttribute.value))
-                    let elementsWithName = form.querySelectorAll('[name]');
+                    if (form) {
+                        let elementsWithName = form.querySelectorAll('[name]');
 
-                    if (elementsWithName) {
                         elementsWithName.forEach(element => {
                             if (element.getAttribute('name').includes(".")) {
                                 let parts = element.getAttribute('name').split(".");
