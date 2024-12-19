@@ -21,6 +21,8 @@ payBtn.addEventListener('click', function (event) {
         ]
     };
 
+    localStorage.removeItem('registerData');
+
     user.initialPayment(data).then(result => {
         window.location.href = result.url
     });

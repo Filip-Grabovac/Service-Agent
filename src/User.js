@@ -85,11 +85,8 @@ export default class User {
         })
             .then((response) => response.json())
             .then((result) => {
-                console.log(result)
                 if (result.is_verified) {
-                    localStorage.removeItem('registerData');
-
-                    window.location.href = '/user-dashboard';
+                    window.location.href = '/register-4-4';
                 } else {
                     console.error('Error:', 'Not verified');
                 }
