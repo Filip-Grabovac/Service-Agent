@@ -3,7 +3,7 @@ import User from 'https://service-agent.pages.dev/src/User.js';
 
 const user = new User();
 
-const payBtn = document.getElementById('pay-btn');
+const payBtn = document.getElementById('pay-button');
 
 payBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
