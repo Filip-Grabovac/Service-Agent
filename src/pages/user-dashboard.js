@@ -32,7 +32,7 @@ userMenu2.addEventListener('click', function (event) {
 userMenu1.click()
 
 
-const pdfUrl = 'https://xjwh-2u0a-wlxo.n7d.xano.io/vault/V6ZqH-Ao/aglusEDHreNj7x8x_JiZswm1Yxs/-25oQQ../pdf-sample_0.pdf';
+const pdfUrl = 'https://xjwh-2u0a-wlxo.n7d.xano.io/vault/V6ZqH-Ao/u7HXcgXwftuJt9bJFedNJpud-TQ/fYskBg../603d0e327eb2748c8ab1053f_loremipsum.pdf';
 
 const canvas = document.getElementById('pdf-canvas');
 const context = canvas.getContext('2d');
