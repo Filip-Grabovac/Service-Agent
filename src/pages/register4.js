@@ -11,8 +11,8 @@ payBtn.addEventListener('click', function (event) {
     // let registerData = JSON.parse(localStorage.getItem('registerData'));
 
     let data = {
-        success_url: "https://example.com/success",
-        cancel_url: "https://example.com/cancel",
+        success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
+        cancel_url: "https://agent-for-service-cbd62c.webflow.io/registration-4-4",
         line_items: [
             {
                 price: "price_1QXMupCA20rcDWGhemNihUF8",
@@ -21,7 +21,7 @@ payBtn.addEventListener('click', function (event) {
         ]
     };
 
-    user.initialPayment(data). then(result => {
+    user.initialPayment(data).then(result => {
         window.location.href = result.url
     });
 });
