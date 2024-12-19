@@ -34,34 +34,46 @@ userMenu1.click()
 
 const pdfUrl = 'https://xjwh-2u0a-wlxo.n7d.xano.io/vault/V6ZqH-Ao/u7HXcgXwftuJt9bJFedNJpud-TQ/fYskBg../603d0e327eb2748c8ab1053f_loremipsum.pdf';
 
-const canvas = document.getElementById('pdf-canvas');
-const context = canvas.getContext('2d');
+// Kontejner za sve stranice
+const pdfContainer = document.getElementById('pdf-container');
 
+// Učitaj PDF koristeći PDF.js
 const loadingTask = pdfjsLib.getDocument(pdfUrl);
-
 loadingTask.promise.then((pdf) => {
-    console.log('PDF učitan:', pdf);
+    console.log(`PDF učitan. Broj stranica: ${pdf.numPages}`);
 
-    pdf.getPage(1).then((page) => {
-        console.log('Stranica učitana:', page);
+    // Iteriraj kroz sve stranice i prikaži ih
+    for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+        pdf.getPage(pageNum).then((page) => {
+            // Kreiraj container za svaku stranicu
+            const pageContainer = document.createElement('div');
+            pageContainer.classList.add('page-container');
 
-        const viewport = page.getViewport({ scale: 1.5 });
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
+            // Kreiraj canvas za trenutnu stranicu
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
 
-        const renderContext = {
-            canvasContext: context,
-            viewport: viewport,
-        };
+            // Postavi viewport
+            const viewport = page.getViewport({ scale: 1.5 });
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
 
-        page.render(renderContext).promise.then(() => {
-            console.log('Renderovanje završeno');
+            // Dodaj canvas u container
+            pageContainer.appendChild(canvas);
+            pdfContainer.appendChild(pageContainer);
+
+            // Renderuj stranicu na canvas
+            const renderContext = {
+                canvasContext: context,
+                viewport: viewport,
+            };
+            page.render(renderContext).promise.then(() => {
+                console.log(`Stranica ${pageNum} renderovana.`);
+            });
         }).catch((error) => {
-            console.error('Greška pri renderovanju stranice:', error);
+            console.error(`Greška pri učitavanju stranice ${pageNum}:`, error);
         });
-    }).catch((error) => {
-        console.error('Greška pri učitavanju stranice:', error);
-    });
+    }
 }).catch((error) => {
     console.error('Greška pri učitavanju PDF-a:', error);
 });
