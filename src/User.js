@@ -154,6 +154,23 @@ export default class User {
                 console.error('Error:', error);
             });
     }
+    initialPayment(data) {
+        // Call the Xano API
+        return fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx/sessions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                return result
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
     callMethod(methodName, ...args) {
         if (typeof this[methodName] === 'function') {
             return this[methodName](...args);
