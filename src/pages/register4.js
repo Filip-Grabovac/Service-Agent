@@ -11,8 +11,8 @@ payBtn.addEventListener('click', function (event) {
     // let registerData = JSON.parse(localStorage.getItem('registerData'));
 
     let data = {
-        success_url: "",
-        cancel_url: "",
+        success_url: "https://example.com/success",
+        cancel_url: "https://example.com/success",
         line_items: [
             {
                 price: "price_1QXMupCA20rcDWGhemNihUF8",
