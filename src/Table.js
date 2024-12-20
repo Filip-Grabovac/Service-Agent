@@ -563,8 +563,8 @@ function getModals(menu) {
         2: {
             1: {
                 modal: 'edit-user-popup',
-                action: '',
-                method: 'PATCH',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/{user_id}',
+                method: 'PUT',
                 files: []
             },
             2: {
@@ -738,9 +738,9 @@ export function populateSelectWithShippingTariffs() {
 function setPdf(pdfUrl) {
     const pdfContainer = document.getElementById('pdf-container');
 
-    const loadingTask = pdfjsLib.getDocument(pdfUrl);
+    pdfjsLib.getDocument(pdfUrl).promise.then((pdf) => {
+        console.log(`PDF učitan. Broj stranica: ${pdf.numPages}`);
 
-    loadingTask.promise.then((pdf) => {
         for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
             pdf.getPage(pageNum).then((page) => {
                 const pageContainer = document.createElement('div');
@@ -748,26 +748,27 @@ function setPdf(pdfUrl) {
 
                 const canvas = document.createElement('canvas');
                 const context = canvas.getContext('2d');
-
-                const viewport = page.getViewport({ scale: 1.5 });
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
-
                 pageContainer.appendChild(canvas);
                 pdfContainer.appendChild(pageContainer);
+
+                // Dinamičko skaliranje prema širini kontejnera
+                const containerWidth = pdfContainer.clientWidth; // Širina kontejnera
+                const viewport = page.getViewport({ scale: containerWidth / page.getViewport({ scale: 1 }).width });
+
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
 
                 const renderContext = {
                     canvasContext: context,
                     viewport: viewport,
                 };
-                page.render(renderContext).promise.then(() => {
-                    console.log(`Page ${pageNum} loaded.`);
-                });
+
+                page.render(renderContext);
             }).catch((error) => {
-                console.error(`Error while loading page ${pageNum}:`, error);
+                console.error(`Greška pri renderovanju stranice ${pageNum}:`, error);
             });
         }
     }).catch((error) => {
-        console.error('Error while loading PDF:', error);
+        console.error('Greška pri učitavanju PDF-a:', error);
     });
 }
