@@ -380,7 +380,7 @@ export function setModals(menu) {
         });
 
         const handleClick = () => {
-            const formData = new FormData(form);
+            const formData = new FormData();
 
             const authToken =  localStorage.getItem('authToken');
             let requestData = {
@@ -429,7 +429,7 @@ export function setModals(menu) {
                 }
 
                 form.querySelectorAll('input').forEach(input => {
-                        formData.append(input.name, input.value);
+                    formData.append(input.name, input.value);
                 });
 
                 formData.forEach((value, key) => {
