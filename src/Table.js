@@ -380,7 +380,7 @@ export function setModals(menu) {
         });
 
         const handleClick = () => {
-            const formData = new FormData();
+            const formData = new FormData(form);
 
             const authToken =  localStorage.getItem('authToken');
             let requestData = {
@@ -428,15 +428,9 @@ export function setModals(menu) {
                     }
                 }
 
-                form.querySelectorAll('input').forEach(input => {
-                    formData.append(input.name, input.value);
-                });
-
-                formData.forEach((value, key) => {
-                    console.log(key)
+                for (const [key, value] of formData.entries()) {
                     if (key.includes('.')) {
                         let modifiedKey = key.split('.').pop();
-                        console.log(modifiedKey)
 
                         formData.delete(key);
                         formData.append(modifiedKey, value);
@@ -445,25 +439,10 @@ export function setModals(menu) {
                     if (!value.trim()) {
                         console.log(key)
                         console.error(`Fields empty.`);
+
+                        return;
                     }
-                });
-                // for (const [key, value] of formData.entries()) {
-                //     console.log(key)
-                //     if (key.includes('.')) {
-                //         let modifiedKey = key.split('.').pop();
-                //         console.log(modifiedKey)
-                //
-                //         formData.delete(key);
-                //         formData.append(modifiedKey, value);
-                //     }
-                //
-                //     if (!value.trim()) {
-                //         console.log(key)
-                //         console.error(`Fields empty.`);
-                //
-                //         return;
-                //     }
-                // }
+                }
             }
 
             if (Object.keys(item.files).length !== 0) {
@@ -497,8 +476,6 @@ export function setModals(menu) {
             if (modalName === 'add-document-popup') {
                 loader.style.display = 'flex'
             }
-
-            console.log(requestData.body)
 
             fetch(url, requestData)
                 .then((response) => {
