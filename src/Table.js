@@ -428,7 +428,7 @@ export function setModals(menu) {
                     }
                 }
 
-                for (const [key, value] of formData.entries()) {
+                formData.forEach((value, key) => {
                     console.log(key)
                     if (key.includes('.')) {
                         let modifiedKey = key.split('.').pop();
@@ -441,10 +441,25 @@ export function setModals(menu) {
                     if (!value.trim()) {
                         console.log(key)
                         console.error(`Fields empty.`);
-
-                        return;
                     }
-                }
+                });
+                // for (const [key, value] of formData.entries()) {
+                //     console.log(key)
+                //     if (key.includes('.')) {
+                //         let modifiedKey = key.split('.').pop();
+                //         console.log(modifiedKey)
+                //
+                //         formData.delete(key);
+                //         formData.append(modifiedKey, value);
+                //     }
+                //
+                //     if (!value.trim()) {
+                //         console.log(key)
+                //         console.error(`Fields empty.`);
+                //
+                //         return;
+                //     }
+                // }
             }
 
             if (Object.keys(item.files).length !== 0) {
