@@ -429,6 +429,13 @@ export function setModals(menu) {
                 }
 
                 for (const [key, value] of formData.entries()) {
+                    if (key.includes('.')) {
+                        let modifiedKey = key.split('.').pop();
+
+                        formData.delete(key);
+                        formData.append(modifiedKey, value);
+                    }
+
                     if (!value.trim()) {
                         console.log(key)
                         console.error(`Fields empty.`);
