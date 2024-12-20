@@ -477,6 +477,8 @@ export function setModals(menu) {
                 loader.style.display = 'flex'
             }
 
+            console.log(requestData.body)
+
             fetch(url, requestData)
                 .then((response) => {
                     if (!response.ok) {
