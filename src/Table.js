@@ -355,7 +355,7 @@ export function setModals(menu) {
                     }
 
                     if (modalName === 'details-document-popup') {
-                        setPdf(fillData._files_of_documents.file.url)
+                        fillDocumentDetails(fillData);
                     }
                 }
 
@@ -465,7 +465,9 @@ export function setModals(menu) {
                     jsonObject[key] = value;
                 });
 
+                console.log(jsonObject)
                 requestData.body = JSON.stringify(jsonObject);
+                console.log(requestData.body)
 
                 requestData.headers = {
                     'Authorization': `Bearer ${authToken}`,
@@ -562,7 +564,7 @@ function getModals(menu) {
             },
             5: {
                 modal: 'payment-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             }
@@ -637,6 +639,12 @@ function getModals(menu) {
         },
         6: {
             1: {
+                modal: 'details-document-popup',
+                action: '',
+                method: 'GET',
+                files: []
+            },
+            2: {
                 modal: 'delete-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'DELETE',
@@ -742,40 +750,108 @@ export function populateSelectWithShippingTariffs() {
     })
 }
 
+function fillDocumentDetails(data) {
+    console.log(data)
+    setPdf(data._files_of_documents.file.url)
+
+    const id = document.getElementById('document-id');
+    const title = document.getElementById('document-title');
+
+    const status = document.getElementById('document-status');
+
+    const shippingName = document.getElementById('document-shipping-name');
+    const shippingAddress = document.getElementById('document-shipping-address');
+    const shippingCity = document.getElementById('document-shipping-city');
+
+    const assignedAt = document.getElementById('document-assigned-at');
+    const deliveryRequestedAt = document.getElementById('document-delivery-requested-at');
+    const paidAt = document.getElementById('document-paid-at');
+    const shippedAt = document.getElementById('document-shipped-at');
+    const shredRequestedAt = document.getElementById('document-shred-requested-at');
+    const shreddedAt = document.getElementById('document-shredded-at');
+
+    const shippingType = document.getElementById('document-shipping-type');
+    const price = document.getElementById('document-price');
+    const trackingNumber = document.getElementById('document-tracking-number');
+
+    id.innerHTML = 'ID';
+    title.innerHTML = data.title;
+
+    let statusBadgeColor = ''
+    const documentStatus = data._document_status.status_label;
+    if (documentStatus === 'paid' || documentStatus === 'delivered') {
+        statusBadgeColor = 'green'
+    } else if (documentStatus === 'shipped') {
+        statusBadgeColor = 'blue'
+    } else {
+        statusBadgeColor = 'orange'
+    }
+    status.classList.add(statusBadgeColor)
+    Array.from(status.children).forEach(child => {
+        child.classList.add(statusBadgeColor)
+        if (child.id === 'status-badge-text') {
+            child.innerHTML = documentStatus
+        }
+    });
+
+    shippingName.innerHTML = data._user.first_name + ' ' + data._user.last_name;
+    if (data._document_addresses_of_documents) {
+        shippingAddress.innerHTML = data._document_addresses_of_documents.street + ' ' + data._document_addresses_of_documents.number;
+    }
+    if (data._document_addresses_of_documents) {
+        shippingCity.innerHTML = data._document_addresses_of_documents.zip + ' ' + data._document_addresses_of_documents.country;
+    }
+
+    if (data.shipping_type) {
+        shippingType.innerHTML = data.shipping_type;
+    }
+    if (data._choosed_shipping_tariffs) {
+        price.innerHTML = data._choosed_shipping_tariffs.price + ' $';
+    }
+    if (data.tracking_code) {
+        trackingNumber.innerHTML = data.tracking_code;
+    }
+}
+
 function setPdf(pdfUrl) {
     const pdfContainer = document.getElementById('pdf-container');
 
     pdfjsLib.getDocument(pdfUrl).promise.then((pdf) => {
-        console.log(`PDF učitan. Broj stranica: ${pdf.numPages}`);
+        pdf.getPage(1).then((firstPage) => {
+            const containerWidth = pdfContainer.clientWidth;
+            const initialViewport = firstPage.getViewport({ scale: 1 });
+            const scale = containerWidth / initialViewport.width;
 
-        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-            pdf.getPage(pageNum).then((page) => {
-                const pageContainer = document.createElement('div');
-                pageContainer.classList.add('page-container');
+            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                pdf.getPage(pageNum).then((page) => {
+                    const pageContainer = document.createElement('div');
+                    pageContainer.classList.add('page-container');
 
-                const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d');
-                pageContainer.appendChild(canvas);
-                pdfContainer.appendChild(pageContainer);
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    pageContainer.appendChild(canvas);
+                    pdfContainer.appendChild(pageContainer);
 
-                // Dinamičko skaliranje prema širini kontejnera
-                const containerWidth = pdfContainer.clientWidth; // Širina kontejnera
-                const viewport = page.getViewport({ scale: containerWidth / page.getViewport({ scale: 1 }).width });
+                    const viewport = page.getViewport({ scale: scale });
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
 
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
+                    const renderContext = {
+                        canvasContext: context,
+                        viewport: viewport,
+                    };
 
-                const renderContext = {
-                    canvasContext: context,
-                    viewport: viewport,
-                };
-
-                page.render(renderContext);
-            }).catch((error) => {
-                console.error(`Greška pri renderovanju stranice ${pageNum}:`, error);
-            });
-        }
+                    page.render(renderContext).promise.then(() => {
+                        console.log(`Page ${pageNum} not rendered.`);
+                    });
+                }).catch((error) => {
+                    console.error(`Error while rendering page ${pageNum}:`, error);
+                });
+            }
+        }).catch((error) => {
+            console.error('Error while loading first page:', error);
+        });
     }).catch((error) => {
-        console.error('Greška pri učitavanju PDF-a:', error);
+        console.error('Error while loading PDF:', error);
     });
 }
