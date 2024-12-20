@@ -428,6 +428,12 @@ export function setModals(menu) {
                     }
                 }
 
+                form.querySelectorAll('input').forEach(input => {
+                    if (!formData.has(input.name)) {
+                        formData.append(input.name, input.value);
+                    }
+                });
+
                 formData.forEach((value, key) => {
                     console.log(key)
                     if (key.includes('.')) {
