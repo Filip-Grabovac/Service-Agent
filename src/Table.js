@@ -429,6 +429,7 @@ export function setModals(menu) {
                 }
 
                 form.querySelectorAll('input').forEach(input => {
+                    console.log(input)
                     if (!formData.has(input.name)) {
                         formData.append(input.name, input.value);
                     }
