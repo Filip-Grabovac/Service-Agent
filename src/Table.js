@@ -429,8 +429,10 @@ export function setModals(menu) {
                 }
 
                 for (const [key, value] of formData.entries()) {
+                    console.log(key)
                     if (key.includes('.')) {
                         let modifiedKey = key.split('.').pop();
+                        console.log(modifiedKey)
 
                         formData.delete(key);
                         formData.append(modifiedKey, value);
