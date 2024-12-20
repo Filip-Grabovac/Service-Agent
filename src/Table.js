@@ -429,14 +429,7 @@ export function setModals(menu) {
                 }
 
                 form.querySelectorAll('input').forEach(input => {
-                    console.log(input.name)
-                    console.log(input.value)
-                    console.log(formData.has(input.name))
-                    console.log(formData.get(input.name))
-                    if (!formData.has(input.name)) {
-                        console.log(input.name)
                         formData.append(input.name, input.value);
-                    }
                 });
 
                 formData.forEach((value, key) => {
