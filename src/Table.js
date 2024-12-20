@@ -429,8 +429,10 @@ export function setModals(menu) {
                 }
 
                 form.querySelectorAll('input').forEach(input => {
-                    console.log(input)
+                    console.log(input.name)
+                    console.log(input.value)
                     if (!formData.has(input.name)) {
+                        console.log(input.name)
                         formData.append(input.name, input.value);
                     }
                 });
