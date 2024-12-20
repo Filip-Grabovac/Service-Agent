@@ -152,10 +152,13 @@ export default class User {
             });
     }
     initialPayment(data) {
+        const authToken =  localStorage.getItem('authToken');
+
         // Call the Xano API
         return fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx/sessions', {
             method: 'POST',
             headers: {
+                'Authorization': `Bearer ${authToken}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),

@@ -22,6 +22,8 @@ nextBtn.addEventListener('click', function (event) {
         confirmation_code: code.value
     };
 
+    localStorage.removeItem('registerData');
+
     user.confirmCode(data);
 });
 
