@@ -794,6 +794,17 @@ function fillDocumentDetails(data) {
         }
     });
 
+    if (data._document_status_changes_of_documents.assigned_at) {
+        const timestamp = new Date(data._document_status_changes_of_documents.assigned_at);
+
+        assignedAt.innerHTML = timestamp.toLocaleString()
+    }
+    if (data._document_status_changes_of_documents.assigned_at) {
+        const timestamp = new Date(data._document_status_changes_of_documents.delivery_requested_at);
+
+        assignedAt.innerHTML = timestamp.toLocaleString()
+    }
+
     shippingName.innerHTML = data._user.first_name + ' ' + data._user.last_name;
     if (data._document_addresses_of_documents) {
         shippingAddress.innerHTML = data._document_addresses_of_documents.street + ' ' + data._document_addresses_of_documents.number;
