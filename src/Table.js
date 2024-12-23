@@ -795,12 +795,12 @@ function fillDocumentDetails(data) {
     });
 
     if (data._document_status_changes_of_documents.assigned_at) {
-        const timestamp = new Date(data._document_status_changes_of_documents.assigned_at);
+        const timestamp = new Date(data._document_status_changes_of_documents.assigned_at * 1000);
 
         assignedAt.innerHTML = timestamp.toLocaleString()
     }
     if (data._document_status_changes_of_documents.assigned_at) {
-        const timestamp = new Date(data._document_status_changes_of_documents.delivery_requested_at);
+        const timestamp = new Date(data._document_status_changes_of_documents.delivery_requested_at * 1000);
 
         assignedAt.innerHTML = timestamp.toLocaleString()
     }
