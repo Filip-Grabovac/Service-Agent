@@ -30,9 +30,7 @@ export default class Document {
         if (search !== '') {
             url += `&search=${encodeURIComponent(search)}`
         }
-        if (archived) {
-            url += `&archived=1`
-        }
+        url += `&archived=${archived}`
 
         // Call the Xano API
         return fetch(url, {
