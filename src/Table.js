@@ -400,6 +400,8 @@ export function setModals(menu) {
                 formData.append('document_status_id', 3)
             }  else if (modalName === 'forward-document-popup') {
                 formData.append('document_status_id', 5)
+            }  else if (modalName === 'archive-document-popup') {
+                formData.append('archived', 5)
             }
 
             if (typeof form !== 'undefined') {
@@ -635,6 +637,12 @@ function getModals(menu) {
             },
             4: {
                 modal: 'delete-document-popup',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                method: 'DELETE',
+                files: []
+            },
+            5: {
+                modal: 'archive-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'DELETE',
                 files: []

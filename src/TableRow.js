@@ -306,6 +306,11 @@ export default class TableRow {
                             <path d="M14.5 14.5V16.375V18.25M5.5 14.5V18.25M11.5 14.5V18.25M8.5 14.5V18.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg></div>
                         ` : ''}
+                        ${item._document_status?.status_label === 'shredded' || item._document_status?.status_label === 'delivered' ? `
+                            <div data-modal-open="archive-document-popup" data-id-documents-id="${item.id}" data-fill-5-1=${item.id}  class="archive-doc-user-d"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 18 16" fill="none" class="action-svg">
+                              <path d="M3 4.99745C2.87699 4.99427 2.78767 4.98715 2.70736 4.97118C2.11233 4.85282 1.64718 4.38767 1.52882 3.79264C1.5 3.64774 1.5 3.47349 1.5 3.125C1.5 2.77651 1.5 2.60226 1.52882 2.45736C1.64718 1.86233 2.11233 1.39718 2.70736 1.27882C2.85226 1.25 3.02651 1.25 3.375 1.25H14.625C14.9735 1.25 15.1477 1.25 15.2926 1.27882C15.8877 1.39718 16.3528 1.86233 16.4712 2.45736C16.5 2.60226 16.5 2.77651 16.5 3.125C16.5 3.47349 16.5 3.64774 16.4712 3.79264C16.3528 4.38767 15.8877 4.85282 15.2926 4.97118C15.2123 4.98715 15.123 4.99427 15 4.99745M7.5 8.75H10.5M3 5H15V11.15C15 12.4101 15 13.0402 14.7548 13.5215C14.539 13.9448 14.1948 14.289 13.7715 14.5048C13.2902 14.75 12.6601 14.75 11.4 14.75H6.6C5.33988 14.75 4.70982 14.75 4.22852 14.5048C3.80516 14.289 3.46095 13.9448 3.24524 13.5215C3 13.0402 3 12.4101 3 11.15V5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg></div>
+                        ` : ''}
                     </div>
                 `,
             },
