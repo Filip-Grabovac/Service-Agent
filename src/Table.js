@@ -59,7 +59,7 @@ export function resetSearchInput() {
     });
 }
 
-export function fillTable(menu, tab, statusIds = null, page = 1) {
+export function fillTable(menu, tab, statusIds = null, page = 1, archived = null) {
     if (statusIds === 'null') {
         statusIds = null
     }
@@ -105,7 +105,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         methodName = 'getAllByUser'
     }
 
-    model.callMethod(methodName, page, 10, search.value, statusIds !== null ? statusIds : undefined).then((data) => {
+    model.callMethod(methodName, page, 10, search.value, statusIds !== null ? statusIds : undefined, archived !== null ? archived : undefined).then((data) => {
         number.innerHTML = data.itemsTotal
 
         if (search.value === '' && activeRole === 'admin') {

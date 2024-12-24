@@ -23,12 +23,15 @@ export default class Document {
                 console.error('Error:', error);
             });
     }
-    getAllByUser( page = 1, perPage = 10, search = '', statusIds = '1,2,3,4,5,6,7,8') {
+    getAllByUser( page = 1, perPage = 10, search = '', statusIds = '1,2,3,4,5,6,7,8', archived) {
         const authToken =  localStorage.getItem('authToken');
 
         let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents-user?page=${page}&per_page=${perPage}&document_status_ids=${statusIds}`;
         if (search !== '') {
             url += `&search=${encodeURIComponent(search)}`
+        }
+        if (archived) {
+            url += `&archived=1`
         }
 
         // Call the Xano API
