@@ -358,7 +358,7 @@ export function setModals(menu) {
                     }
 
                     if (modalName === 'details-document-popup') {
-                        fillDocumentDetails(fillData);
+                        fillDocumentDetails(fillData, menu, tab);
                     }
                 }
 
@@ -753,8 +753,7 @@ export function populateSelectWithShippingTariffs() {
     })
 }
 
-function fillDocumentDetails(data) {
-    console.log(data)
+function fillDocumentDetails(data, menu, tab) {
     setPdf(data._files_of_documents.file.url)
 
     const id = document.getElementById('document-id');
@@ -776,6 +775,12 @@ function fillDocumentDetails(data) {
     const shippingType = document.getElementById('document-shipping-type');
     const price = document.getElementById('document-price');
     const trackingNumber = document.getElementById('document-tracking-number');
+
+    const requestShreddingBox = document.getElementById('document-request-shredding-box');
+    const requestShredding = document.getElementById('document-request-shredding');
+    const deleteDocument = document.getElementById('document-delete-document');
+    const archiveDocument = document.getElementById('document-archive-document');
+    const payment = document.getElementById('document-payment');
 
     id.innerHTML = 'ID';
     title.innerHTML = data.title;
@@ -845,6 +850,16 @@ function fillDocumentDetails(data) {
     if (data.tracking_code) {
         trackingNumber.innerHTML = data.tracking_code;
     }
+
+    if (documentStatus !== 'new' || documentStatus !== 'waiting_for_payment') {
+        requestShreddingBox.style.display = 'none';
+    }
+    requestShredding.setAttribute('data-modal-open', 'request-shred-document-popup')
+    requestShredding.setAttribute('data-id-documents-id', data.id)
+    requestShredding.setAttribute(`data-fill-${menu}-${tab}`, data.id)
+    payment.addEventListener('click', function () {
+        window.open(data.payment_link, '_blank');
+    })
 }
 
 function setPdf(pdfUrl) {
