@@ -851,12 +851,16 @@ function fillDocumentDetails(data, menu) {
         trackingNumber.innerHTML = data.tracking_code;
     }
 
-    if (documentStatus !== 'new' || documentStatus !== 'waiting_for_payment') {
+    if (documentStatus !== 'new' && documentStatus !== 'waiting_for_payment') {
         requestShreddingBox.style.display = 'none';
+    } else {
+        requestShredding.setAttribute('data-modal-open', 'request-shred-document-popup')
+        requestShredding.setAttribute('data-id-documents-id', data.id)
+        requestShredding.setAttribute('data-fill-' + menu + '-1', data.id)
     }
-    requestShredding.setAttribute('data-modal-open', 'request-shred-document-popup')
-    requestShredding.setAttribute('data-id-documents-id', data.id)
-    requestShredding.setAttribute('data-fill-' + menu + '-1', data.id)
+    deleteDocument.setAttribute('data-modal-open', 'request-shred-document-popup')
+    deleteDocument.setAttribute('data-id-documents-id', data.id)
+    deleteDocument.setAttribute('data-fill-' + menu + '-1', data.id)
     payment.addEventListener('click', function () {
         window.open(data.payment_link, '_blank');
     })
