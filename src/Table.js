@@ -871,11 +871,11 @@ function fillDocumentDetails(data, menu, modal) {
         requestShredding.addEventListener('click', function () {
             modal.classList.add('hide');
 
-            const closestShreddingElement = document.querySelector(
+            const closestElement = document.querySelector(
                 `[data-modal-open="request-shred-document-popup"][data-id-documents-id="${data.id}"]`
             );
 
-            closestShreddingElement.click()
+            closestElement.click()
         })
     }
     if (menu !== 6) {
@@ -884,14 +884,27 @@ function fillDocumentDetails(data, menu, modal) {
         deleteDocument.addEventListener('click', function () {
             modal.classList.add('hide');
 
-            const closestDeletingElement = document.querySelector(
+            const closestElement = document.querySelector(
                 `[data-modal-open="delete-document-popup"][data-id-documents-id="${data.id}"]`
             );
 
-            closestDeletingElement.click()
+            closestElement.click()
         })
         payment.addEventListener('click', function () {
             window.open(data.payment_link, '_blank');
+        })
+    }
+    if (documentStatus !== 'delivered' && documentStatus !== 'shredded') {
+        archiveDocumentBox.style.display = 'none';
+    } else {
+        archiveDocument.addEventListener('click', function () {
+            modal.classList.add('hide');
+
+            const closestElement = document.querySelector(
+                `[data-modal-open="archive-document-popup"][data-id-documents-id="${data.id}"]`
+            );
+
+            closestElement.click()
         })
     }
 }
