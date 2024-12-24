@@ -858,7 +858,7 @@ function fillDocumentDetails(data, menu) {
         requestShredding.setAttribute('data-id-documents-id', data.id)
         requestShredding.setAttribute('data-fill-' + menu + '-1', data.id)
     }
-    deleteDocument.setAttribute('data-modal-open', 'request-shred-document-popup')
+    deleteDocument.setAttribute('data-modal-open', 'delete-document-popup')
     deleteDocument.setAttribute('data-id-documents-id', data.id)
     deleteDocument.setAttribute('data-fill-' + menu + '-1', data.id)
     payment.addEventListener('click', function () {
