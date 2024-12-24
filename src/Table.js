@@ -778,7 +778,9 @@ function fillDocumentDetails(data, menu, modal) {
 
     const requestShreddingBox = document.getElementById('document-request-shredding-box');
     const requestShredding = document.getElementById('document-request-shredding');
+    const deleteDocumentBox = document.getElementById('document-delete-document-box');
     const deleteDocument = document.getElementById('document-delete-document');
+    const archiveDocumentBox = document.getElementById('document-archive-document-box');
     const archiveDocument = document.getElementById('document-archive-document');
     const payment = document.getElementById('document-payment');
 
@@ -864,18 +866,22 @@ function fillDocumentDetails(data, menu, modal) {
             closestShreddingElement.click()
         })
     }
-    deleteDocument.addEventListener('click', function () {
-        modal.classList.add('hide');
+    if (menu !== 6) {
+        deleteDocumentBox.style.display = 'none';
+    } else {
+        deleteDocument.addEventListener('click', function () {
+            modal.classList.add('hide');
 
-        const closestDeletingElement = document.querySelector(
-            `[data-modal-open="delete-document-popup"][data-id-documents-id="${data.id}"]`
-        );
+            const closestDeletingElement = document.querySelector(
+                `[data-modal-open="delete-document-popup"][data-id-documents-id="${data.id}"]`
+            );
 
-        closestDeletingElement.click()
-    })
-    payment.addEventListener('click', function () {
-        window.open(data.payment_link, '_blank');
-    })
+            closestDeletingElement.click()
+        })
+        payment.addEventListener('click', function () {
+            window.open(data.payment_link, '_blank');
+        })
+    }
 }
 
 function setPdf(pdfUrl) {
