@@ -643,8 +643,8 @@ function getModals(menu) {
             },
             5: {
                 modal: 'archive-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
-                method: 'DELETE',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
+                method: 'PATCH',
                 files: []
             }
         },
