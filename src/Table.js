@@ -804,6 +804,26 @@ function fillDocumentDetails(data) {
 
         deliveryRequestedAt.innerHTML = timestamp.toLocaleString()
     }
+    if (data._document_status_changes_of_documents.paid_at) {
+        const timestamp = new Date(data._document_status_changes_of_documents.paid_at);
+
+        paidAt.innerHTML = timestamp.toLocaleString()
+    }
+    if (data._document_status_changes_of_documents.shipped_at) {
+        const timestamp = new Date(data._document_status_changes_of_documents.shipped_at);
+
+        shippedAt.innerHTML = timestamp.toLocaleString()
+    }
+    if (data._document_status_changes_of_documents.shred_requested_at) {
+        const timestamp = new Date(data._document_status_changes_of_documents.shred_requested_at);
+
+        shredRequestedAt.innerHTML = timestamp.toLocaleString()
+    }
+    if (data._document_status_changes_of_documents.shredded_at) {
+        const timestamp = new Date(data._document_status_changes_of_documents.shredded_at);
+
+        shreddedAt.innerHTML = timestamp.toLocaleString()
+    }
 
     shippingName.innerHTML = data._user.first_name + ' ' + data._user.last_name;
     if (data._document_addresses_of_documents) {
