@@ -856,7 +856,7 @@ function fillDocumentDetails(data, menu, tab) {
     }
     requestShredding.setAttribute('data-modal-open', 'request-shred-document-popup')
     requestShredding.setAttribute('data-id-documents-id', data.id)
-    requestShredding.setAttribute(`data-fill-${menu}-${tab}`, data.id)
+    requestShredding.setAttribute('data-fill-' + menu + '-' + tab, data.id)
     payment.addEventListener('click', function () {
         window.open(data.payment_link, '_blank');
     })
