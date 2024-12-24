@@ -358,7 +358,7 @@ export function setModals(menu) {
                     }
 
                     if (modalName === 'details-document-popup') {
-                        fillDocumentDetails(fillData, menu);
+                        fillDocumentDetails(fillData, menu, modal);
                     }
                 }
 
@@ -753,7 +753,7 @@ export function populateSelectWithShippingTariffs() {
     })
 }
 
-function fillDocumentDetails(data, menu) {
+function fillDocumentDetails(data, menu, modal) {
     setPdf(data._files_of_documents.file.url)
 
     const id = document.getElementById('document-id');
@@ -854,13 +854,25 @@ function fillDocumentDetails(data, menu) {
     if (documentStatus !== 'new' && documentStatus !== 'waiting_for_payment') {
         requestShreddingBox.style.display = 'none';
     } else {
-        requestShredding.setAttribute('data-modal-open', 'request-shred-document-popup')
-        requestShredding.setAttribute('data-id-documents-id', data.id)
-        requestShredding.setAttribute('data-fill-' + menu + '-1', data.id)
+        requestShredding.addEventListener('click', function () {
+            modal.classList.add('hide');
+
+            const closestShreddingElement = document.querySelector(
+                `[data-modal-open="request-shred-document-popup"][data-id-documents-id="${data.id}"]`
+            );
+
+            closestShreddingElement.click()
+        })
     }
-    deleteDocument.setAttribute('data-modal-open', 'delete-document-popup')
-    deleteDocument.setAttribute('data-id-documents-id', data.id)
-    deleteDocument.setAttribute('data-fill-' + menu + '-1', data.id)
+    deleteDocument.addEventListener('click', function () {
+        modal.classList.add('hide');
+
+        const closestDeletingElement = document.querySelector(
+            `[data-modal-open="delete-document-popup"][data-id-documents-id="${data.id}"]`
+        );
+
+        closestDeletingElement.click()
+    })
     payment.addEventListener('click', function () {
         window.open(data.payment_link, '_blank');
     })
