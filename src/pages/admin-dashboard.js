@@ -9,7 +9,7 @@ import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUser
 const user = new User();
 const documentFile = new Document();
 
-const logout = document.getElementById('logout');
+const logout = document.getElementsByClassName('logout');
 
 const adminMenu1 = document.getElementById('admin-menu1');
 const adminMenu1Tab1 = document.getElementById('admin-menu1-tab1');
@@ -28,9 +28,11 @@ const adminMenu4Tab1 = document.getElementById('admin-menu4-tab1');
 
 user.authenticate();
 
-logout.addEventListener('click', function (event) {
-    user.logOut()
-})
+Array.from(logout).forEach((element) => {
+    element.addEventListener('click', function (event) {
+        user.logOut()
+    })
+});
 
 updateActiveRole('admin')
 

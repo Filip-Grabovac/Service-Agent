@@ -784,6 +784,10 @@ function fillDocumentDetails(data, menu, modal) {
     const archiveDocument = document.getElementById('document-archive-document');
     const payment = document.getElementById('document-payment');
 
+    requestShreddingBox.style.display = 'flex';
+    deleteDocumentBox.style.display = 'flex';
+    archiveDocumentBox.style.display = 'flex';
+
     id.innerHTML = 'ID';
     title.innerHTML = data.title;
 

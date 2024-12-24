@@ -5,16 +5,19 @@ import {fillTable, updateActiveElement, updateActiveRole} from 'https://service-
 
 const user = new User();
 
-const logout = document.getElementById('logout');
+const logout = document.getElementsByClassName('logout');
 
 const userMenu1 = document.getElementById('user-menu1');
 const userMenu2 = document.getElementById('user-menu2');
 
 user.authenticate();
 
-logout.addEventListener('click', function (event) {
-    user.logOut()
-})
+Array.from(logout).forEach((element) => {
+    element.addEventListener('click', function (event) {
+        user.logOut()
+    })
+});
+
 
 userMenu1.addEventListener('click', function (event) {
     updateActiveElement(userMenu1)
