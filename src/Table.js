@@ -401,7 +401,7 @@ export function setModals(menu) {
             }  else if (modalName === 'forward-document-popup') {
                 formData.append('document_status_id', 5)
             }  else if (modalName === 'archive-document-popup') {
-                formData.append('archived', 5)
+                formData.append('archived', 1)
             }
 
             if (typeof form !== 'undefined') {
