@@ -59,7 +59,7 @@ export function resetSearchInput() {
     });
 }
 
-export function fillTable(menu, tab, statusIds = null, page = 1, archived = null) {
+export function fillTable(menu, tab, statusIds = null, page = 1) {
     if (statusIds === 'null') {
         statusIds = null
     }
@@ -101,7 +101,10 @@ export function fillTable(menu, tab, statusIds = null, page = 1, archived = null
     }
 
     let methodName = 'getAll';
+    let archived = null
     if (activeRole === 'user') {
+        archived = statusIds
+        statusIds = null
         methodName = 'getAllByUser'
     }
 
