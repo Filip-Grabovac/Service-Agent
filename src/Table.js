@@ -906,7 +906,7 @@ function fillDocumentDetails(data, menu, modal) {
             closestElement.click()
         })
     }
-    if (data.payment_link === '') {
+    if (data.payment_link === '' || documentStatus === 'paid' || documentStatus === 'shipped' || documentStatus === 'delivered') {
         payment.style.display = 'none';
     } else {
         payment.addEventListener('click', function () {
