@@ -400,7 +400,7 @@ export function setModals(menu) {
                 formData.append('document_status_id', 7)
             }  else if (modalName === 'shred-document-popup') {
                 formData.append('document_status_id', 8)
-            }  else if (modalName === 'payment-document-popup') {
+            }  else if (modalName === 'payment-document-popup' || modalName === 'edit-document-popup') {
                 formData.append('document_status_id', 3)
             }  else if (modalName === 'forward-document-popup') {
                 formData.append('document_status_id', 5)
@@ -732,14 +732,11 @@ export function populateSelectWithUsers() {
     const paymentDocumentUser = document.getElementById('payment-document-user');
 
     user.getAll(1, 999999).then((users) => {
-        console.log(users)
         if (users.items.length) {
-            console.log(users)
             let userOptions = '';
             users.items.forEach((user) => {
                 userOptions += `<option value="${user.id}">${user.first_name} ${user.last_name}</option>`
             })
-            console.log(userOptions)
 
             createDocumentUser.innerHTML += userOptions;
             editDocumentUser.innerHTML += userOptions;
