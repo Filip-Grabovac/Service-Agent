@@ -42,5 +42,5 @@ user.me().then((data) => {
     Array.from(profileImages).forEach((element) => {
         element.setAttribute('data-id-user-id', data.id);
     })
+    setModals('initial-user');
 });
-setModals('initial-user');
