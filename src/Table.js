@@ -245,8 +245,8 @@ export function getTabTitle(menu, tab) {
             1: 'All Users',
         },
         3: {
-            1: 'All Requests',
-            2: 'Shred Requests',
+            1: 'Requests',
+            2: 'Shredded',
         },
         4: {
             1: 'All Tariffs',
