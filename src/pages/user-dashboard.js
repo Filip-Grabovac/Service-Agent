@@ -1,7 +1,12 @@
 // import User from '../User';
 // import { fillTable, updateActiveElement, updateActiveRole } from '../Table.js';
 import User from 'https://service-agent.pages.dev/src/User.js';
-import {fillTable, updateActiveElement, updateActiveRole, setModals} from 'https://service-agent.pages.dev/src/Table.js';
+import {
+    fillTable,
+    updateActiveElement,
+    updateActiveRole,
+    setModals
+} from 'https://service-agent.pages.dev/src/Table.js';
 
 const user = new User();
 
@@ -33,8 +38,9 @@ userMenu2.addEventListener('click', function (event) {
 })
 
 userMenu1.click()
-
-Array.from(profileImages).forEach((element) => {
-    element.setAttribute('data-id-user-id', user.me().id);
+user.me().then((data) => {
+    Array.from(profileImages).forEach((element) => {
+        element.setAttribute('data-id-user-id', data.id);
+    })
 });
 setModals('initial-user');
