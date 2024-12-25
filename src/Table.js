@@ -909,7 +909,7 @@ function fillDocumentDetails(data, menu, modal) {
         })
     }
     if (data.payment_line === '') {
-        payment.styl.display = 'none';
+        payment.style.display = 'none';
     } else {
         payment.addEventListener('click', function () {
             window.open(data.payment_link, '_blank');
