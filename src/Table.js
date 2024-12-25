@@ -337,8 +337,6 @@ export function setModals(menu) {
                         fillData = Array.from(allData[tab[0]][tab[1]]).find(item => item.id.toString().match(fillAttribute.value))
                     }
 
-                    console.log(fillData);
-
                     if (form) {
                         let elementsWithName = form.querySelectorAll('[name]');
 

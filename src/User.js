@@ -38,6 +38,7 @@ export default class User {
                         window.location.href = failureRedirect;
                     }
                 } else {
+                    this.userData = result;
                     if (result.is_admin) {
                         if (window.location.pathname !== '/admin-dashboard') {
                             window.location.href = '/admin-dashboard';
@@ -59,6 +60,7 @@ export default class User {
             });
     }
     me () {
+        console.log(this.userData);
         if (this.userData) {
             return Promise.resolve(this.userData);
         }
