@@ -74,10 +74,10 @@ export default class User {
             },
         })
             .then((response) => response.json())
-            .then((result) => {
+            .then(function (result) {
                 this.userData = result;
                 return result;
-            })
+            }.bind(this))
             .catch((error) => {
                 console.error('Error:', error);
                 // Optionally handle errors, such as displaying a message to the user
