@@ -352,6 +352,14 @@ export function setModals(menu) {
                                 }
                             }
 
+                            if (element.getAttribute('name').includes("choosed_shipping_tariff")) {
+                                let tariff = fillData?._choosed_shipping_tariffs;
+
+                                if (tariff) {
+                                    element.value = tariff.region + ' ' + tariff.label.charAt(0).toUpperCase()
+                                }
+                            }
+
                             if (element.hasAttribute('data-readonly')) {
                                 element.setAttribute("readonly", true);
                             }
