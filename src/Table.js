@@ -895,7 +895,7 @@ function fillDocumentDetails(data, menu, modal) {
             closestElement.click()
         })
     }
-    if (documentStatus !== 'delivered' && documentStatus !== 'shredded') {
+    if ((documentStatus !== 'delivered' && documentStatus !== 'shredded') || data.archived === 1) {
         archiveDocumentBox.style.display = 'none';
     } else {
         archiveDocument.addEventListener('click', function () {
