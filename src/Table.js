@@ -358,12 +358,11 @@ export function setModals(menu) {
                                 if (tariff) {
                                     const newOption = document.createElement("option");
                                     newOption.value = "1";
-                                    newOption.text = tariff.region + ' ' + tariff.label.charAt(0).toUpperCase();
+                                    newOption.text = tariff.region + ' ' + tariff.label.charAt(0).toUpperCase() + shippingTariff.label.slice(1);
 
                                     element.appendChild(newOption);
                                     newOption.selected = true;
                                 }
-                                console.log(element)
                             }
 
                             if (element.hasAttribute('data-readonly')) {
