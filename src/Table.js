@@ -307,6 +307,20 @@ export function setModals(menu) {
             button.addEventListener("click", function (e) {
                 e.preventDefault()
 
+                const changeDocumentAddress = modal.querySelector('#change-document-address');
+
+                if (changeDocumentAddress) {
+                    changeDocumentAddress.addEventListener('click', function () {
+                        modal.classList.add('hide');
+
+                        const closestElement = document.querySelector(
+                            `[data-modal-open="edit-document-address-popup"][data-id-document-address-id="${data._document_addresses_of_documents.id}"]`
+                        );
+
+                        closestElement.click()
+                    })
+                }
+
                 method = item.method;
                 modalName = item.modal
                 let idAttribute = Array.from(button.attributes).find(attr => attr.name.startsWith('data-id-'));
