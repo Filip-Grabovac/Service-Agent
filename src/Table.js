@@ -313,6 +313,7 @@ export function setModals(menu) {
                     changeDocumentAddress.addEventListener('click', function () {
                         modal.classList.add('hide');
 
+                        console.log(button)
                         const closestElement = button.closest(
                             `[data-modal-open="edit-document-address-popup"]`
                         );
