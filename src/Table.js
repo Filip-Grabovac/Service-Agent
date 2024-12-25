@@ -545,7 +545,7 @@ function getModals(menu) {
         1: {
             1: {
                 modal: 'shred-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             },
