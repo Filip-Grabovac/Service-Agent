@@ -449,19 +449,16 @@ export function setModals(menu) {
                         formData.append('shipping_type', '');
                     }
                 }
-                for (const [key, value] of formData.entries()) {
-                    console.log(key, value);
-                }
 
-                for (const [key, value] of formData.entries()) {
-                    console.log(key, value);
-                    // if (key.includes('.')) {
-                    //     let modifiedKey = key.split('.').pop();
-                    //
-                    //     console.log(modifiedKey);
-                    //     formData.delete(key);
-                    //     formData.append(modifiedKey, value);
-                    // }
+                const entries = Array.from(formData.entries());
+                for (const [key, value] of entries) {
+                    if (key.includes('.')) {
+                        let modifiedKey = key.split('.').pop();
+
+                        console.log(modifiedKey);
+                        formData.delete(key);
+                        formData.append(modifiedKey, value);
+                    }
 
                     if (!value.trim()) {
                         console.log(key)
@@ -470,12 +467,6 @@ export function setModals(menu) {
                         return;
                     }
                 }
-                for (const [key, value] of formData.entries()) {
-                    console.log(key, value);
-                }
-            }
-            for (const [key, value] of formData.entries()) {
-                console.log(key, value);
             }
 
             if (Object.keys(item.files).length !== 0) {
@@ -498,17 +489,12 @@ export function setModals(menu) {
                     jsonObject[key] = value;
                 });
 
-                console.log(jsonObject)
                 requestData.body = JSON.stringify(jsonObject);
-                console.log(requestData.body)
 
                 requestData.headers = {
                     'Authorization': `Bearer ${authToken}`,
                     'Content-Type': 'application/json',
                 }
-            }
-            for (const [key, value] of formData.entries()) {
-                console.log(key, value);
             }
 
             if (modalName === 'add-document-popup') {
