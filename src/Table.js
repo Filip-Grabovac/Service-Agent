@@ -691,7 +691,13 @@ function getModals(menu) {
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
-            }
+            },
+            6: {
+                modal: 'edit-document-address-popup',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                method: 'PATCH',
+                files: []
+            },
         },
         6: {
             1: {
