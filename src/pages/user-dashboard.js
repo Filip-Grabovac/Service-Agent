@@ -40,6 +40,8 @@ userMenu2.addEventListener('click', function (event) {
 userMenu1.click()
 user.me().then((data) => {
     Array.from(profileImages).forEach((element) => {
+        element.setAttribute('data-modal-open', 'edit-user-popup');
+        element.setAttribute('data-fill-auth-id', '1');
         element.setAttribute('data-id-user-id', data.id);
     })
     setModals('initial-user');
