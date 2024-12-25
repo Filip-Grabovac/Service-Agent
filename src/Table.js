@@ -121,8 +121,8 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         allData[menu][tab] = data.items;
 
         data.items.forEach((item) => {
-            if (statusIds) {
-                status = item._document_status.status_label;
+            status = item._document_status?.status_label;
+            if (status) {
                 if (status === 'paid' || status === 'delivered') {
                     statusBadgeColor = 'green'
                 } else if (status === 'shipped') {
