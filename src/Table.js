@@ -353,13 +353,15 @@ export function setModals(menu) {
                             }
 
                             if (element.getAttribute('name').includes("choosed_shipping_tariff")) {
-                                console.log(fillData)
                                 let tariff = fillData?._choosed_shipping_tariffs;
 
-                                console.log(element)
                                 if (tariff) {
-                                    console.log(tariff)
-                                    element.value = tariff.region + ' ' + tariff.label.charAt(0).toUpperCase()
+                                    const newOption = document.createElement("option");
+                                    newOption.value = "1";
+                                    newOption.text = tariff.region + ' ' + tariff.label.charAt(0).toUpperCase();
+
+                                    tariff.appendChild(newOption);
+                                    newOption.selected = true;
                                 }
                                 console.log(element)
                             }
