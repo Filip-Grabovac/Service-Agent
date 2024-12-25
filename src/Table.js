@@ -545,7 +545,7 @@ function getModals(menu) {
         1: {
             1: {
                 modal: 'shred-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             },
@@ -557,7 +557,7 @@ function getModals(menu) {
             },
             3: {
                 modal: 'edit-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             },
@@ -569,7 +569,7 @@ function getModals(menu) {
             },
             5: {
                 modal: 'payment-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             }
@@ -591,7 +591,7 @@ function getModals(menu) {
         3: {
             1: {
                 modal: 'shred-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             },
@@ -625,13 +625,13 @@ function getModals(menu) {
             },
             2: {
                 modal: 'request-forward-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             },
             3: {
                 modal: 'request-shred-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             },
@@ -643,7 +643,7 @@ function getModals(menu) {
             },
             5: {
                 modal: 'archive-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:JGAigVjM/documents/{documents_id}',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
                 files: []
             }
