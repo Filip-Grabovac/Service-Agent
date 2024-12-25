@@ -326,9 +326,15 @@ export function setModals(menu) {
                     let fillAttributeName = fillAttribute.name
                         .replace('data-fill-', '')
 
-                    let tab = fillAttributeName.split('-');
+                    let fillData
+                    if (fillAttributeName === 'auth-id') {
+                        fillData = user.authenticate();
+                    } else {
+                        let tab = fillAttributeName.split('-');
 
-                    let fillData = Array.from(allData[tab[0]][tab[1]]).find(item => item.id.toString().match(fillAttribute.value))
+                        fillData = Array.from(allData[tab[0]][tab[1]]).find(item => item.id.toString().match(fillAttribute.value))
+                    }
+
                     if (form) {
                         let elementsWithName = form.querySelectorAll('[name]');
 
@@ -455,7 +461,6 @@ export function setModals(menu) {
                     if (key.includes('.')) {
                         let modifiedKey = key.split('.').pop();
 
-                        console.log(modifiedKey);
                         formData.delete(key);
                         formData.append(modifiedKey, value);
                     }
@@ -545,7 +550,7 @@ export function setModals(menu) {
 
 function getModals(menu) {
     const modals = {
-        'initial': {
+        'initial-admin': {
             1: {
                 modal: 'add-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents',
@@ -556,6 +561,14 @@ function getModals(menu) {
                 modal: 'add-tariff-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX/shipping_tariffs',
                 method: 'POST',
+                files: []
+            },
+        },
+        'initial-user': {
+            1: {
+                modal: 'edit-user-popup',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/{user_id}',
+                method: 'PUT',
                 files: []
             },
         },

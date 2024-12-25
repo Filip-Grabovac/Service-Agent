@@ -15,7 +15,7 @@ export default class User {
         }
 
         // If there is a token, verify it with the API
-        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/me', {
+        return fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/me', {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${authToken}`,
@@ -48,6 +48,8 @@ export default class User {
                             window.location.href = '/registration-4-4';
                         }
                     }
+
+                    return result;
                 }
             })
             .catch((error) => {

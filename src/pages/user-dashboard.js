@@ -1,7 +1,7 @@
 // import User from '../User';
 // import { fillTable, updateActiveElement, updateActiveRole } from '../Table.js';
 import User from 'https://service-agent.pages.dev/src/User.js';
-import {fillTable, updateActiveElement, updateActiveRole} from 'https://service-agent.pages.dev/src/Table.js';
+import {fillTable, updateActiveElement, updateActiveRole, setModals} from 'https://service-agent.pages.dev/src/Table.js';
 
 const user = new User();
 
@@ -9,15 +9,15 @@ const logout = document.getElementsByClassName('logout');
 
 const userMenu1 = document.getElementById('user-menu1');
 const userMenu2 = document.getElementById('user-menu2');
+const profileImages = document.getElementsByClassName('profile-image');
 
-user.authenticate();
+const userData = user.authenticate();
 
 Array.from(logout).forEach((element) => {
     element.addEventListener('click', function (event) {
         user.logOut()
     })
 });
-
 
 userMenu1.addEventListener('click', function (event) {
     updateActiveElement(userMenu1)
@@ -33,3 +33,8 @@ userMenu2.addEventListener('click', function (event) {
 })
 
 userMenu1.click()
+
+Array.from(profileImages).forEach((element) => {
+    element.setAttribute('data-id-user-id', userData.id);
+});
+setModals('initial-user');

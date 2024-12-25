@@ -127,7 +127,7 @@ adminMenu4Tab1.addEventListener('click', function (event) {
 adminMenu1.click()
 populateSelectWithUsers()
 populateSelectWithShippingTariffs()
-setModals('initial');
+setModals('initial-admin');
 getTabCount()
 
 function getTabCount() {
