@@ -355,11 +355,13 @@ export function setModals(menu) {
                             if (element.getAttribute('name').includes("choosed_shipping_tariff")) {
                                 console.log(fillData)
                                 let tariff = fillData?._choosed_shipping_tariffs;
-                                console.log(tariff)
 
+                                console.log(element)
                                 if (tariff) {
+                                    console.log(tariff)
                                     element.value = tariff.region + ' ' + tariff.label.charAt(0).toUpperCase()
                                 }
+                                console.log(element)
                             }
 
                             if (element.hasAttribute('data-readonly')) {
