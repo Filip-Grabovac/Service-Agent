@@ -908,7 +908,7 @@ function fillDocumentDetails(data, menu, modal) {
             closestElement.click()
         })
     }
-    if (data.payment_line === '') {
+    if (data.payment_link === '') {
         payment.style.display = 'none';
     } else {
         payment.addEventListener('click', function () {
