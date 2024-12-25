@@ -283,7 +283,7 @@ export default class TableRow {
             5: {
                 1:`
                     <div class="row-inside right">
-                        <div data-modal-open="edit-document-address-popup" data-id-document-address-id="${item._document_addresses_of_documents?.id}" data-fill-5-1=${item._document_addresses_of_documents?.id} style="display: none"></div>
+                        <div data-modal-open="edit-document-address-popup" data-id-document-addresses-id="${item._document_addresses_of_documents?.id}" data-fill-5-1=${item.id} style="display: none"></div>
                         <div data-modal-open="details-document-popup" data-fill-5-1=${item.id} class="actions-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 18 12" fill="none" class="action-svg">
                             <path d="M1.81509 6.53488C1.71295 6.37315 1.66188 6.29229 1.63329 6.16756C1.61182 6.07387 1.61182 5.92613 1.63329 5.83244C1.66188 5.70771 1.71295 5.62685 1.81509 5.46512C2.65915 4.12863 5.17155 0.75 9.0003 0.75C12.8291 0.75 15.3415 4.12863 16.1855 5.46512C16.2877 5.62685 16.3387 5.70771 16.3673 5.83244C16.3888 5.92613 16.3888 6.07387 16.3673 6.16756C16.3387 6.29229 16.2877 6.37315 16.1855 6.53488C15.3415 7.87137 12.8291 11.25 9.0003 11.25C5.17155 11.25 2.65915 7.87137 1.81509 6.53488Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path d="M9.0003 8.25C10.2429 8.25 11.2503 7.24264 11.2503 6C11.2503 4.75736 10.2429 3.75 9.0003 3.75C7.75766 3.75 6.7503 4.75736 6.7503 6C6.7503 7.24264 7.75766 8.25 9.0003 8.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
