@@ -894,9 +894,6 @@ function fillDocumentDetails(data, menu, modal) {
 
             closestElement.click()
         })
-        payment.addEventListener('click', function () {
-            window.open(data.payment_link, '_blank');
-        })
     }
     if (documentStatus !== 'delivered' && documentStatus !== 'shredded') {
         archiveDocumentBox.style.display = 'none';
@@ -909,6 +906,13 @@ function fillDocumentDetails(data, menu, modal) {
             );
 
             closestElement.click()
+        })
+    }
+    if (data.payment_line === '') {
+        payment.styl.display = 'none';
+    } else {
+        payment.addEventListener('click', function () {
+            window.open(data.payment_link, '_blank');
         })
     }
 }
