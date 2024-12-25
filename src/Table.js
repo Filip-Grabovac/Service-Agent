@@ -572,6 +572,12 @@ function getModals(menu) {
                 method: 'POST',
                 files: []
             },
+            3: {
+                modal: 'edit-user-popup',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/{user_id}',
+                method: 'PUT',
+                files: []
+            },
         },
         'initial-user': {
             1: {
