@@ -341,7 +341,11 @@ export function setModals(menu) {
                             }
 
                             if (element.getAttribute('name').includes("document_user_address")) {
-                                let address = fillData?._user?._user_addresses_of_user;
+                                let address = fillData?._document_addresses_of_documents;
+
+                                if (!address) {
+                                    address = fillData?.user?._user_addresses_of_user;
+                                }
 
                                 if (address) {
                                     element.value = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country

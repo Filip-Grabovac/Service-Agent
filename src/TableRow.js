@@ -25,7 +25,7 @@ export default class TableRow {
                 <div class="row-inside">
                     <div class="grey-box">
                         <div class="dot"></div>
-                        <div>${item._shipping_tariffs?.price ? item._shipping_tariffs.price + '$' : 'TBA'}</div>
+                        <div>${item._choosed_shipping_tariffs?.price ? item._choosed_shipping_tariffs.price + '$' : 'TBA'}</div>
                     </div>
                 </div>
             `,
@@ -130,7 +130,7 @@ export default class TableRow {
                 <div class="row-inside">
                     <div class="grey-box">
                         <div class="dot"></div>
-                        <div>${item._shipping_tariffs?.price ? item._shipping_tariffs.price + '$' : 'TBA'}</div>
+                        <div>${item._choosed_shipping_tariffs?.price ? item._choosed_shipping_tariffs.price + '$' : 'TBA'}</div>
                     </div>
                 </div>
             `,
