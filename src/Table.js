@@ -756,7 +756,6 @@ export function populateSelectWithUsers() {
 
 export function populateSelectWithShippingTariffs() {
     const editDocumentShippingTariff = document.getElementById('edit-document-shipping-tariff');
-    const forwardDocumentShippingTariff = document.getElementById('forward-document-shipping-tariff');
     const paymentDocumentShippingTariff = document.getElementById('payment-document-shipping-tariff');
 
     shippingTariff.getAll(1, 999999).then((shippingTariffs) => {
@@ -767,7 +766,6 @@ export function populateSelectWithShippingTariffs() {
             })
 
             editDocumentShippingTariff.innerHTML += shippingTariffsOptions;
-            forwardDocumentShippingTariff.innerHTML += shippingTariffsOptions;
             paymentDocumentShippingTariff.innerHTML += shippingTariffsOptions;
         }
     })
