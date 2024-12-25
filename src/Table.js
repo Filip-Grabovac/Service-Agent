@@ -732,11 +732,14 @@ export function populateSelectWithUsers() {
     const paymentDocumentUser = document.getElementById('payment-document-user');
 
     user.getAll(1, 999999).then((users) => {
+        console.log(users)
         if (users.items.length) {
+            console.log(users)
             let userOptions = '';
             users.items.forEach((user) => {
                 userOptions += `<option value="${user.id}">${user.first_name} ${user.last_name}</option>`
             })
+            console.log(userOptions)
 
             createDocumentUser.innerHTML += userOptions;
             editDocumentUser.innerHTML += userOptions;
