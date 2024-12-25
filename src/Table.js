@@ -766,8 +766,6 @@ export function populateSelectWithShippingTariffs() {
 }
 
 function fillDocumentDetails(data, menu, modal) {
-    setPdf(data._files_of_documents.file.url)
-
     const id = document.getElementById('document-id');
     const title = document.getElementById('document-title');
 
@@ -895,7 +893,7 @@ function fillDocumentDetails(data, menu, modal) {
             closestElement.click()
         })
     }
-    if ((documentStatus !== 'delivered' && documentStatus !== 'shredded') || data.archived === 1) {
+    if ((documentStatus !== 'delivered' && documentStatus !== 'shredded') || data.archived === true) {
         archiveDocumentBox.style.display = 'none';
     } else {
         archiveDocument.addEventListener('click', function () {
@@ -915,6 +913,8 @@ function fillDocumentDetails(data, menu, modal) {
             window.open(data.payment_link, '_blank');
         })
     }
+
+    setPdf(data._files_of_documents.file.url)
 }
 
 function setPdf(pdfUrl) {
