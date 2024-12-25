@@ -355,7 +355,7 @@ export function setModals(menu) {
                                 let address = fillData?._document_addresses_of_documents;
 
                                 if (!address) {
-                                    address = fillData?.user?._user_addresses_of_user;
+                                    address = fillData?._user?._user_addresses_of_user;
                                 }
 
                                 if (address) {
