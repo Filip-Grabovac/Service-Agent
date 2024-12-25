@@ -329,6 +329,7 @@ export function setModals(menu) {
                     let fillData
                     if (fillAttributeName === 'auth-id') {
                         fillData = user.authenticate();
+                        console.log(fillData);
                     } else {
                         let tab = fillAttributeName.split('-');
 
