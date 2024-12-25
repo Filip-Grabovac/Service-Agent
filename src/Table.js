@@ -354,6 +354,14 @@ export function setModals(menu) {
                         fillData = Array.from(allData[tab[0]][tab[1]]).find(item => item.id.toString().match(fillAttribute.value))
                     }
 
+                    let changeDocumentAddress = modal.querySelector('#change-document-address');
+                    if (changeDocumentAddress) {
+                        changeDocumentAddress.style.display = 'flex';
+                        if (!fillData._document_addresses_of_documents) {
+                            changeDocumentAddress.style.display = 'none';
+                        }
+                    }
+
                     if (form) {
                         let elementsWithName = form.querySelectorAll('[name]');
 
@@ -856,6 +864,7 @@ function fillDocumentDetails(data, menu, modal) {
     requestShreddingBox.style.display = 'flex';
     deleteDocumentBox.style.display = 'flex';
     archiveDocumentBox.style.display = 'flex';
+    payment.style.display = 'flex';
 
     id.innerHTML = 'ID';
     title.innerHTML = data.title;
