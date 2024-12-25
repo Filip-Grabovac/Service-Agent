@@ -15,7 +15,7 @@ export default class User {
         }
 
         // If there is a token, verify it with the API
-        return fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/me', {
+        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/me', {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${authToken}`,
@@ -48,9 +48,25 @@ export default class User {
                             window.location.href = '/registration-4-4';
                         }
                     }
-
-                    return result;
                 }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Optionally handle errors, such as displaying a message to the user
+            });
+    }
+    me () {
+        const authToken = localStorage.getItem('authToken');
+        return fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/me', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                return result;
             })
             .catch((error) => {
                 console.error('Error:', error);

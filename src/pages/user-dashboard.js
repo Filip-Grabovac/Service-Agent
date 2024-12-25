@@ -11,7 +11,7 @@ const userMenu1 = document.getElementById('user-menu1');
 const userMenu2 = document.getElementById('user-menu2');
 const profileImages = document.getElementsByClassName('profile-image');
 
-const userData = user.authenticate();
+user.authenticate();
 
 Array.from(logout).forEach((element) => {
     element.addEventListener('click', function (event) {
@@ -35,6 +35,6 @@ userMenu2.addEventListener('click', function (event) {
 userMenu1.click()
 
 Array.from(profileImages).forEach((element) => {
-    element.setAttribute('data-id-user-id', userData.id);
+    element.setAttribute('data-id-user-id', user.me().id);
 });
 setModals('initial-user');
