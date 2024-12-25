@@ -523,6 +523,10 @@ export function setModals(menu) {
 
                     activeElement.click()
 
+                    user.me().then((data) => {
+                        authUserData = data;
+                    });
+
                     if (form) {
                         form.reset();
 
