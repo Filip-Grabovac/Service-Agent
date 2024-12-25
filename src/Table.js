@@ -25,6 +25,11 @@ const loader = document.getElementById('loader');
 const searchInputs = document.getElementsByClassName('search-input');
 let lastSearchInput = '';
 
+let authUserData;
+user.me().then((data) => {
+    authUserData = data;
+});
+
 export function updateActiveElement(element) {
     activeElement = element
 }
@@ -328,9 +333,7 @@ export function setModals(menu) {
 
                     let fillData
                     if (fillAttributeName === 'auth-id') {
-                        user.me().then((data) => {
-                            fillData = data;
-                        });
+                        fillData = authUserData;
                     } else {
                         let tab = fillAttributeName.split('-');
 

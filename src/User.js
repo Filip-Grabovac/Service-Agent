@@ -1,7 +1,4 @@
 export default class User {
-    constructor() {
-        this.userData = null;
-    }
     authenticate() {
         const failureRedirect = '/log-in';
         const authToken = localStorage.getItem('authToken');
@@ -38,7 +35,6 @@ export default class User {
                         window.location.href = failureRedirect;
                     }
                 } else {
-                    this.userData = result;
                     if (result.is_admin) {
                         if (window.location.pathname !== '/admin-dashboard') {
                             window.location.href = '/admin-dashboard';
@@ -60,11 +56,6 @@ export default class User {
             });
     }
     me () {
-        console.log(this.userData);
-        if (this.userData) {
-            return Promise.resolve(this.userData);
-        }
-
         const authToken = localStorage.getItem('authToken');
         return fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/me', {
             method: 'GET',
@@ -74,10 +65,9 @@ export default class User {
             },
         })
             .then((response) => response.json())
-            .then(function (result) {
-                this.userData = result;
+            .then((result) => {
                 return result;
-            }.bind(this))
+            })
             .catch((error) => {
                 console.error('Error:', error);
                 // Optionally handle errors, such as displaying a message to the user
