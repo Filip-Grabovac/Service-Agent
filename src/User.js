@@ -1,4 +1,7 @@
 export default class User {
+    constructor() {
+        this.userData = null;
+    }
     authenticate() {
         const failureRedirect = '/log-in';
         const authToken = localStorage.getItem('authToken');
@@ -56,6 +59,10 @@ export default class User {
             });
     }
     me () {
+        if (this.userData) {
+            return Promise.resolve(this.userData);
+        }
+
         const authToken = localStorage.getItem('authToken');
         return fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/me', {
             method: 'GET',
@@ -66,6 +73,7 @@ export default class User {
         })
             .then((response) => response.json())
             .then((result) => {
+                this.userData = result;
                 return result;
             })
             .catch((error) => {
