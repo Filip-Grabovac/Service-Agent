@@ -401,9 +401,6 @@ export function setModals(menu) {
 
         const handleClick = () => {
             const formData = new FormData(form);
-            for (const [key, value] of formData.entries()) {
-                console.log(key, value);
-            }
 
             const authToken =  localStorage.getItem('authToken');
             let requestData = {
@@ -423,9 +420,6 @@ export function setModals(menu) {
             }  else if (modalName === 'archive-document-popup') {
                 formData.append('archived', true)
             }
-            for (const [key, value] of formData.entries()) {
-                console.log(key, value);
-            }
 
             if (typeof form !== 'undefined') {
                 const checkboxes = form.querySelectorAll('input[type="checkbox"]');
@@ -437,18 +431,12 @@ export function setModals(menu) {
                         formData.append(checkbox.name, 1);
                     }
                 });
-                for (const [key, value] of formData.entries()) {
-                    console.log(key, value);
-                }
 
                 Array.from(form.elements).forEach(element => {
                     if (element.hasAttribute('disabled')) {
                         formData.delete(element.name);
                     }
                 });
-                for (const [key, value] of formData.entries()) {
-                    console.log(key, value);
-                }
 
                 if (modalName === 'request-forward-document-popup') {
                     formData.delete('shipping_type');
@@ -470,6 +458,7 @@ export function setModals(menu) {
                     if (key.includes('.')) {
                         let modifiedKey = key.split('.').pop();
 
+                        console.log(modifiedKey);
                         formData.delete(key);
                         formData.append(modifiedKey, value);
                     }
@@ -480,6 +469,9 @@ export function setModals(menu) {
 
                         return;
                     }
+                }
+                for (const [key, value] of formData.entries()) {
+                    console.log(key, value);
                 }
             }
             for (const [key, value] of formData.entries()) {
