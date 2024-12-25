@@ -360,7 +360,7 @@ export function setModals(menu) {
                                     newOption.value = "1";
                                     newOption.text = tariff.region + ' ' + tariff.label.charAt(0).toUpperCase();
 
-                                    tariff.appendChild(newOption);
+                                    element.appendChild(newOption);
                                     newOption.selected = true;
                                 }
                                 console.log(element)
