@@ -11,10 +11,10 @@ import {
 const user = new User();
 
 const logout = document.getElementsByClassName('logout');
+const profileImages = document.getElementsByClassName('profile-image');
 
 const userMenu1 = document.getElementById('user-menu1');
 const userMenu2 = document.getElementById('user-menu2');
-const profileImages = document.getElementsByClassName('profile-image');
 
 user.authenticate();
 

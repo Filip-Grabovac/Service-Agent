@@ -10,6 +10,7 @@ const user = new User();
 const documentFile = new Document();
 
 const logout = document.getElementsByClassName('logout');
+const profileImages = document.getElementsByClassName('profile-image');
 
 const adminMenu1 = document.getElementById('admin-menu1');
 const adminMenu1Tab1 = document.getElementById('admin-menu1-tab1');
@@ -129,6 +130,12 @@ populateSelectWithUsers()
 populateSelectWithShippingTariffs()
 setModals('initial-admin');
 getTabCount()
+
+user.me().then((data) => {
+    Array.from(profileImages).forEach((element) => {
+        element.setAttribute('data-id-user-id', data.id);
+    })
+});
 
 function getTabCount() {
     const menu1tab2 = document.getElementById('admin-menu1-tab2-text');
