@@ -128,7 +128,6 @@ adminMenu4Tab1.addEventListener('click', function (event) {
 adminMenu1.click()
 populateSelectWithUsers()
 populateSelectWithShippingTariffs()
-setModals('initial-admin');
 getTabCount()
 
 user.me().then((data) => {
@@ -137,6 +136,7 @@ user.me().then((data) => {
         element.setAttribute('data-fill-auth-id', '1');
         element.setAttribute('data-id-user-id', data.id);
     })
+    setModals('initial-admin');
 });
 
 function getTabCount() {
