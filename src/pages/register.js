@@ -24,25 +24,32 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!response.ok) {
                 throw new Error("Error fetching countries list");
             }
-            return response.json();
+            // Ispisivanje odgovora kao tekst
+            return response.text(); // Umesto response.json(), koristimo text()
         })
-        .then(data => {
-            // Convert object to array for easier manipulation
-            const countries = Object.entries(data);
+        .then(text => {
+            console.log(text);  // Ispisivanje odgovora u konzoli
+            // Ako je odgovor u validnom JSON formatu, parsiraj ga
+            try {
+                const data = JSON.parse(text);  // Parsiranje kao JSON
+                const countries = Object.entries(data);
 
-            // Find index of Chad and insert Channel Islands after it
-            const index = countries.findIndex(([code, name]) => name === "Chad");
-            if (index !== -1) {
-                countries.splice(index + 1, 0, ["CI", "Channel Islands"]);
+                // Pronalaženje "Chad" i umetanje "Channel Islands" posle njega
+                const index = countries.findIndex(([code, name]) => name === "Chad");
+                if (index !== -1) {
+                    countries.splice(index + 1, 0, ["CI", "Channel Islands"]);
+                }
+
+                // Popunjavanje select elementa
+                countries.forEach(([code, name]) => {
+                    const option = document.createElement("option");
+                    option.value = code;
+                    option.textContent = name;
+                    countrySelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error("JSON parsing error:", error);
             }
-
-            // Populate <select> element
-            countries.forEach(([code, name]) => {
-                const option = document.createElement("option");
-                option.value = name;
-                option.textContent = name;
-                countrySelect.appendChild(option);
-            });
         })
         .catch(error => {
             console.error("An error occurred:", error);
