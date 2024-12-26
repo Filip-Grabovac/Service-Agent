@@ -10,7 +10,7 @@ import {
 
 const user = new User();
 
-const home = document.getElementsByClassName('home');
+const home = document.getElementById('home');
 
 const logout = document.getElementsByClassName('logout');
 const profileImages = document.getElementsByClassName('profile-image');

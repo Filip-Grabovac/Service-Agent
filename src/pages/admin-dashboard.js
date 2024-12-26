@@ -9,7 +9,7 @@ import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUser
 const user = new User();
 const documentFile = new Document();
 
-const home = document.getElementsByClassName('home');
+const home = document.getElementById('home');
 
 const logout = document.getElementsByClassName('logout');
 const profileImages = document.getElementsByClassName('profile-image');
