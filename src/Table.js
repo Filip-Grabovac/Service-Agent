@@ -531,9 +531,7 @@ export function setModals(menu) {
                 }
             }
 
-            if (modalName === 'add-document-popup') {
-                loader.style.display = 'flex'
-            }
+            loader.style.display = 'flex'
 
             fetch(url, requestData)
                 .then((response) => {
@@ -561,9 +559,7 @@ export function setModals(menu) {
                         });
                     }
 
-                    if (modalName === 'add-document-popup') {
-                        loader.style.display = 'none'
-                    }
+                    loader.style.display = 'none'
                 })
                 .catch((error) => {
                     console.error("Error:", error);
