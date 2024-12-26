@@ -40,12 +40,16 @@ export default class User {
                             window.location.href = '/admin-dashboard';
                         }
                     } else {
-                        if (result.is_active) {
-                            if (window.location.pathname !== '/user-dashboard') {
-                                window.location.href = '/user-dashboard';
+                        if (result.is_verified) {
+                            if (result.is_active) {
+                                if (window.location.pathname !== '/user-dashboard') {
+                                    window.location.href = '/user-dashboard';
+                                }
+                            } else {
+                                window.location.href = '/registration-4-4';
                             }
                         } else {
-                            window.location.href = '/registration-4-4';
+                            window.location.href = '/registration-4-3';
                         }
                     }
                 }
