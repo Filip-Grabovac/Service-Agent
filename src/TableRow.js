@@ -289,7 +289,7 @@ export default class TableRow {
                             <path d="M9.0003 8.25C10.2429 8.25 11.2503 7.24264 11.2503 6C11.2503 4.75736 10.2429 3.75 9.0003 3.75C7.75766 3.75 6.7503 4.75736 6.7503 6C6.7503 7.24264 7.75766 8.25 9.0003 8.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg></div>
                         ${item._document_status?.status_label === 'waiting_for_payment' ? `
-                            <div onclick="window.open('${item.payment_link}', '_blank');" class="actions-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 12 18" fill="none" class="action-svg smaller">
+                            <div onclick="window.open('${item.payment_link + '?client_reference_id=' + item.id + '&prefilled_email=' + item._user.email}', '_blank');" class="actions-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 12 18" fill="none" class="action-svg smaller">
                                 <path d="M1.5 12C1.5 13.6569 2.84315 15 4.5 15H7.5C9.15685 15 10.5 13.6569 10.5 12C10.5 10.3431 9.15685 9 7.5 9H4.5C2.84315 9 1.5 7.65685 1.5 6C1.5 4.34315 2.84315 3 4.5 3H7.5C9.15685 3 10.5 4.34315 10.5 6M6 1.5V16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                               </svg></div>
                             <div data-modal-open="request-forward-document-popup" data-id-documents-id="${item.id}" data-fill-5-1=${item.id} class="forvard-doc-scg-wrap no-padd"><img loading="lazy" src="https://cdn.prod.website-files.com/673cc2bec8c34d28fd73175f/67519f8578799b349334867f_Forwarding%20Mail.svg" alt="" class="action-svg bigger"></div>
