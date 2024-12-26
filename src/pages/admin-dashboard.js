@@ -11,6 +11,7 @@ const documentFile = new Document();
 
 const logout = document.getElementsByClassName('logout');
 const profileImages = document.getElementsByClassName('profile-image');
+const gear = document.getElementById('gear');
 
 const adminMenu1 = document.getElementById('admin-menu1');
 const adminMenu1Tab1 = document.getElementById('admin-menu1-tab1');
@@ -136,6 +137,9 @@ user.me().then((data) => {
         element.setAttribute('data-fill-auth-id', '1');
         element.setAttribute('data-id-user-id', data.id);
     })
+    gear.setAttribute('data-modal-open', 'edit-user-popup');
+    gear.setAttribute('data-fill-auth-id', '1');
+    gear.setAttribute('data-id-user-id', data.id);
     setModals('initial-admin');
 });
 
