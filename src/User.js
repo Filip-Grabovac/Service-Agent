@@ -49,7 +49,7 @@ export default class User {
                                 window.location.href = '/registration-4-4';
                             }
                         } else {
-                            window.location.href = '/registration-4-3';
+                            window.location.href = '/registration-3-4';
                         }
                     }
                 }
