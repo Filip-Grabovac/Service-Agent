@@ -10,6 +10,8 @@ import {
 
 const user = new User();
 
+const home = document.getElementsByClassName('home');
+
 const logout = document.getElementsByClassName('logout');
 const profileImages = document.getElementsByClassName('profile-image');
 const gear = document.getElementById('gear');
@@ -36,6 +38,11 @@ userMenu2.addEventListener('click', function (event) {
     updateActiveRole('user')
 
     fillTable(6, 1, 1)
+})
+
+home.addEventListener('click', function (event) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
 })
 
 userMenu1.click()

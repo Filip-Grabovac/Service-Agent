@@ -9,6 +9,8 @@ import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUser
 const user = new User();
 const documentFile = new Document();
 
+const home = document.getElementsByClassName('home');
+
 const logout = document.getElementsByClassName('logout');
 const profileImages = document.getElementsByClassName('profile-image');
 const gear = document.getElementById('gear');
@@ -124,6 +126,11 @@ adminMenu4Tab1.addEventListener('click', function (event) {
     resetSearchInput()
 
     fillTable(4, 1)
+})
+
+home.addEventListener('click', function (event) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
 })
 
 adminMenu1.click()
