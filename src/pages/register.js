@@ -17,43 +17,215 @@ const phoneInput = document.getElementById('Phone');
 user.authenticate();
 
 document.addEventListener('DOMContentLoaded', function () {
-    const url = "https://gist.githubusercontent.com/kalinchernev/486393efcca01623b18d/raw/daa24c9fea66afb7d68f8d69f0c4b8eeb9406e83/countries";
+    // Lista zemalja kao običan tekst
+    const countriesText = `
+      Afghanistan
+      Albania
+      Algeria
+      Andorra
+      Angola
+      Antigua & Deps
+      Argentina
+      Armenia
+      Australia
+      Austria
+      Azerbaijan
+      Bahamas
+      Bahrain
+      Bangladesh
+      Barbados
+      Belarus
+      Belgium
+      Belize
+      Benin
+      Bhutan
+      Bolivia
+      Bosnia Herzegovina
+      Botswana
+      Brazil
+      Brunei
+      Bulgaria
+      Burkina
+      Burundi
+      Cambodia
+      Cameroon
+      Canada
+      Cape Verde
+      Central African Rep
+      Chad
+      Channel Islands
+      Chile
+      China
+      Colombia
+      Comoros
+      Congo
+      Congo {Democratic Rep}
+      Costa Rica
+      Croatia
+      Cuba
+      Cyprus
+      Czech Republic
+      Denmark
+      Djibouti
+      Dominica
+      Dominican Republic
+      East Timor
+      Ecuador
+      Egypt
+      El Salvador
+      Equatorial Guinea
+      Eritrea
+      Estonia
+      Ethiopia
+      Fiji
+      Finland
+      France
+      Gabon
+      Gambia
+      Georgia
+      Germany
+      Ghana
+      Greece
+      Grenada
+      Guatemala
+      Guinea
+      Guinea-Bissau
+      Guyana
+      Haiti
+      Honduras
+      Hungary
+      Iceland
+      India
+      Indonesia
+      Iran
+      Iraq
+      Ireland {Republic}
+      Israel
+      Italy
+      Ivory Coast
+      Jamaica
+      Japan
+      Jordan
+      Kazakhstan
+      Kenya
+      Kiribati
+      Korea North
+      Korea South
+      Kosovo
+      Kuwait
+      Kyrgyzstan
+      Laos
+      Latvia
+      Lebanon
+      Lesotho
+      Liberia
+      Libya
+      Liechtenstein
+      Lithuania
+      Luxembourg
+      Macedonia
+      Madagascar
+      Malawi
+      Malaysia
+      Maldives
+      Mali
+      Malta
+      Marshall Islands
+      Mauritania
+      Mauritius
+      Mexico
+      Micronesia
+      Moldova
+      Monaco
+      Mongolia
+      Montenegro
+      Morocco
+      Mozambique
+      Myanmar, {Burma}
+      Namibia
+      Nauru
+      Nepal
+      Netherlands
+      New Zealand
+      Nicaragua
+      Niger
+      Nigeria
+      Norway
+      Oman
+      Pakistan
+      Palau
+      Panama
+      Papua New Guinea
+      Paraguay
+      Peru
+      Philippines
+      Poland
+      Portugal
+      Qatar
+      Romania
+      Russian Federation
+      Rwanda
+      St Kitts & Nevis
+      St Lucia
+      Saint Vincent & the Grenadines
+      Samoa
+      San Marino
+      Sao Tome & Principe
+      Saudi Arabia
+      Senegal
+      Serbia
+      Seychelles
+      Sierra Leone
+      Singapore
+      Slovakia
+      Slovenia
+      Solomon Islands
+      Somalia
+      South Africa
+      South Sudan
+      Spain
+      Sri Lanka
+      Sudan
+      Suriname
+      Swaziland
+      Sweden
+      Switzerland
+      Syria
+      Taiwan
+      Tajikistan
+      Tanzania
+      Thailand
+      Togo
+      Tonga
+      Trinidad & Tobago
+      Tunisia
+      Turkey
+      Turkmenistan
+      Tuvalu
+      Uganda
+      Ukraine
+      United Arab Emirates
+      United Kingdom
+      United States
+      Uruguay
+      Uzbekistan
+      Vanuatu
+      Vatican City
+      Venezuela
+      Vietnam
+      Yemen
+      Zambia
+      Zimbabwe
+    `;
 
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Error fetching countries list");
-            }
-            // Ispisivanje odgovora kao tekst
-            return response.text(); // Umesto response.json(), koristimo text()
-        })
-        .then(text => {
-            console.log(text);  // Ispisivanje odgovora u konzoli
-            // Ako je odgovor u validnom JSON formatu, parsiraj ga
-            try {
-                const data = JSON.parse(text);  // Parsiranje kao JSON
-                const countries = Object.entries(data);
+    const countries = countriesText.trim().split("\n");
 
-                // Pronalaženje "Chad" i umetanje "Channel Islands" posle njega
-                const index = countries.findIndex(([code, name]) => name === "Chad");
-                if (index !== -1) {
-                    countries.splice(index + 1, 0, ["CI", "Channel Islands"]);
-                }
-
-                // Popunjavanje select elementa
-                countries.forEach(([code, name]) => {
-                    const option = document.createElement("option");
-                    option.value = code;
-                    option.textContent = name;
-                    countrySelect.appendChild(option);
-                });
-            } catch (error) {
-                console.error("JSON parsing error:", error);
-            }
-        })
-        .catch(error => {
-            console.error("An error occurred:", error);
-        });
+    countries.forEach(country => {
+        const option = document.createElement("option");
+        option.textContent = country;
+        option.value = country;
+        countrySelect.appendChild(option);
+    });
 });
 
 nextBtn.addEventListener('click', function (event) {
