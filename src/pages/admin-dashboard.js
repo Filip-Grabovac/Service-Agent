@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
         disabledTabs.forEach(function (tab) {
             tab.addEventListener('click', function (event) {
                 event.stopImmediatePropagation(); // Sprečava Webflow event
-                event.preventDefault(); // Sprečava default ponašanje linka
+                // event.preventDefault(); // Sprečava default ponašanje linka
                 console.log('Klik na deaktiviran tab link.');
             });
         });
