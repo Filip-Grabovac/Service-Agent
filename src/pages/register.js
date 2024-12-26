@@ -16,6 +16,39 @@ const phoneInput = document.getElementById('Phone');
 
 user.authenticate();
 
+document.addEventListener('DOMContentLoaded', function () {
+    const url = "https://gist.githubusercontent.com/kalinchernev/486393efcca01623b18d/raw/daa24c9fea66afb7d68f8d69f0c4b8eeb9406e83/countries";
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error fetching countries list");
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Convert object to array for easier manipulation
+            const countries = Object.entries(data);
+
+            // Find index of Chad and insert Channel Islands after it
+            const index = countries.findIndex(([code, name]) => name === "Chad");
+            if (index !== -1) {
+                countries.splice(index + 1, 0, ["CI", "Channel Islands"]);
+            }
+
+            // Populate <select> element
+            countries.forEach(([code, name]) => {
+                const option = document.createElement("option");
+                option.value = name;
+                option.textContent = name;
+                countrySelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error("An error occurred:", error);
+        });
+});
+
 nextBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
