@@ -11,6 +11,7 @@ const stateSelect = document.getElementById('State-2');
 const cityInput = document.getElementById('City');
 const zipInput = document.getElementById('Zip-Code');
 const streetInput = document.getElementById('Street');
+const numberInput = document.getElementById('Number');
 const emailInput = document.getElementById('E-mail');
 const phoneInput = document.getElementById('Phone');
 
@@ -239,6 +240,7 @@ nextBtn.addEventListener('click', function (event) {
         city: cityInput.value,
         zip: zipInput.value,
         street: streetInput.value,
+        number: numberInput.value,
         email: emailInput.value,
         phone_number: phoneInput.value,
     };
