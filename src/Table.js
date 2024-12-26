@@ -305,6 +305,7 @@ export function setModals(menu) {
 
         openButtons.forEach(button => {
             button.addEventListener("click", function (e) {
+                console.log('clicked')
                 e.stopImmediatePropagation();
                 e.preventDefault()
 
