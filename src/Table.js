@@ -305,6 +305,7 @@ export function setModals(menu) {
 
         openButtons.forEach(button => {
             button.addEventListener("click", function (e) {
+                e.stopImmediatePropagation();
                 e.preventDefault()
 
                 const changeDocumentAddress = modal.querySelector('#change-document-address');
