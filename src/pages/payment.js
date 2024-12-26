@@ -13,7 +13,15 @@ fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx/sessions/' + sessionId, {
     .then((response) => response.json())
     .then((result) => {
         console.log(result);
-        return result;
+        if (result.status !== 'complete') {
+            const heading = document.getElementById('payment-heading');
+            const description = document.getElementById('payment-description');
+            const icon = document.getElementById('payment-icon');
+
+            heading.innerText = 'Payment Failed';
+            description.innerText = 'Your payment failed. Please try again later or contact support.';
+            icon.setAttribute('src', 'new-image-url.jpg');
+        }
     })
     .catch((error) => {
         console.error('Error:', error);
