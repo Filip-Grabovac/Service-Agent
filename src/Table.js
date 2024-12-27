@@ -413,19 +413,6 @@ export function setModals(menu) {
                     }
                 }
             });
-
-            if (button.tagName === 'option') {
-                console.log(button)
-                button.addEventListener("mousedown", function (e) {
-                    e.preventDefault()
-
-                    method = item.method;
-                    modalName = item.modal
-                    url = item.action
-
-                    modal.classList.remove('hide');
-                })
-            }
         });
 
         closeButtons.forEach(button => {
