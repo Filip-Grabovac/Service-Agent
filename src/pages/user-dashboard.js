@@ -14,6 +14,7 @@ const home = document.getElementById('home');
 
 const logout = document.getElementsByClassName('logout');
 const profileImages = document.getElementsByClassName('profile-image');
+const gearWrapper = document.getElementById('gear-wrapper');
 const gear = document.getElementById('gear');
 
 const userMenu1 = document.getElementById('user-menu1');
@@ -46,6 +47,10 @@ home.addEventListener('click', function (event) {
     event.stopImmediatePropagation();
     event.preventDefault();
 })
+gearWrapper.addEventListener('click', function (event) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+})
 
 user.me().then((data) => {
     Array.from(profileImages).forEach((element) => {
@@ -56,12 +61,6 @@ user.me().then((data) => {
     gear.setAttribute('data-modal-open', 'edit-user-popup');
     gear.setAttribute('data-fill-auth-id', '1');
     gear.setAttribute('data-id-user-id', data.id);
-
-    gear.addEventListener('click', function(event) {
-        event.preventDefault();
-    });
-
-    gear.setAttribute('disabled', '');
 
     setModals('initial-user');
 });
