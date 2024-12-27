@@ -24,9 +24,15 @@ const loader = document.getElementById('loader');
 const successWrapper = document.getElementById('success-wrapper');
 const successMessage = document.getElementById('success-message');
 const successClose = document.getElementById('success-close');
+const errorWrapper = document.getElementById('error-wrapper');
+const errorMessage = document.getElementById('error-message');
+const errorClose = document.getElementById('error-close');
 
 successClose.addEventListener('click', (e) => {
     successWrapper.classList.add('hide');
+})
+errorClose.addEventListener('click', (e) => {
+    errorWrapper.classList.add('hide');
 })
 
 const searchInputs = document.getElementsByClassName('search-input');
@@ -514,8 +520,12 @@ export function setModals(menu) {
                     }
 
                     if (!value.trim()) {
-                        console.log(key)
-                        console.error(`Fields empty.`);
+                        errorMessage.innerHTML = 'Please, fill in all fields.';
+                        errorWrapper.classList.remove('hide');
+
+                        setTimeout(function() {
+                            successWrapper.classList.add('hide');
+                        }, 3000);
 
                         return;
                     }
