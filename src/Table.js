@@ -78,7 +78,8 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
 
     const text = document.getElementById(activeRole + '-menu' + menu + '-tab' + tab + '-text');
     const number = document.getElementById(activeRole + '-menu' + menu + '-tab' + tab + '-number');
-    const pagination = document.getElementById(activeRole + '-menu' + menu + '-tab' + tab + '-table').getElementsByClassName('pagination-buttons')[0];
+    const table = document.getElementById(activeRole + '-menu' + menu + '-tab' + tab + '-table');
+    const pagination = table.getElementsByClassName('pagination-buttons')[0];
     const search = document.getElementById(activeRole + '-menu' + menu + '-tab' + tab + '-search');
 
     search.setAttribute('data-menu', menu)
@@ -124,6 +125,10 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
             allData[menu] = [];
         }
         allData[menu][tab] = data.items;
+
+        if (data.items.length < 1) {
+            table.innerHTML = 'No items to display';
+        }
 
         data.items.forEach((item) => {
             status = item._document_status?.status_label;
