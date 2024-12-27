@@ -47,18 +47,17 @@ home.addEventListener('click', function (event) {
     event.preventDefault();
 })
 
-document.addEventListener('DOMContentLoaded', function() {
-    user.me().then((data) => {
-        Array.from(profileImages).forEach((element) => {
-            element.setAttribute('data-modal-open', 'edit-user-popup');
-            element.setAttribute('data-fill-auth-id', '1');
-            element.setAttribute('data-id-user-id', data.id);
-        })
-        gear.setAttribute('data-modal-open', 'edit-user-popup');
-        gear.setAttribute('data-fill-auth-id', '1');
-        gear.setAttribute('data-id-user-id', data.id);
+user.me().then((data) => {
+    Array.from(profileImages).forEach((element) => {
+        element.setAttribute('data-modal-open', 'edit-user-popup');
+        element.setAttribute('data-fill-auth-id', '1');
+        element.setAttribute('data-id-user-id', data.id);
+    })
+    gear.setAttribute('data-modal-open', 'edit-user-popup');
+    gear.setAttribute('data-fill-auth-id', '1');
+    gear.setAttribute('data-id-user-id', data.id);
+    gear.setAttribute('disabled', "true");
 
-        setModals('initial-user');
-    });
+    setModals('initial-user');
 });
 
