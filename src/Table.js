@@ -303,12 +303,10 @@ export function setModals(menu) {
         const dropZones = modal.querySelectorAll('[data-modal-action="dropzone"]');
         const form = modal.getElementsByTagName("form")[0];
 
-        if (item.modal === 'add-tariff-popup') {
-            console.log(openButtons)
-        }
+
         openButtons.forEach(button => {
             button.addEventListener("click", function (e) {
-                e.stopImmediatePropagation();
+                console.log('clicked')
                 e.preventDefault()
 
                 const changeDocumentAddress = modal.querySelector('#change-document-address');
