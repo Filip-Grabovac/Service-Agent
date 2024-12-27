@@ -816,6 +816,8 @@ export function populateSelectWithShippingTariffs() {
     const editDocumentShippingTariff = document.getElementById('edit-document-shipping-tariff');
     const paymentDocumentShippingTariff = document.getElementById('payment-document-shipping-tariff');
 
+    paymentDocumentShippingTariff.innerHTML += `<option value="" data-modal-open="add-tariff-popup">Create New Tariff</option>`
+
     shippingTariff.getAll(1, 999999).then((shippingTariffs) => {
         if (shippingTariffs.items.length) {
             let shippingTariffsOptions = '';
