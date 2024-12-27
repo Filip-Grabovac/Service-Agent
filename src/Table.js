@@ -79,6 +79,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
     const text = document.getElementById(activeRole + '-menu' + menu + '-tab' + tab + '-text');
     const number = document.getElementById(activeRole + '-menu' + menu + '-tab' + tab + '-number');
     const table = document.getElementById(activeRole + '-menu' + menu + '-tab' + tab + '-table');
+    const emptyTable = table.closest('.empty-table');
     const pagination = table.getElementsByClassName('pagination-buttons')[0];
     const search = document.getElementById(activeRole + '-menu' + menu + '-tab' + tab + '-search');
 
@@ -126,8 +127,11 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         }
         allData[menu][tab] = data.items;
 
+        table.style.display = 'flex';
+        emptyTable.style.display = 'none';
         if (data.items.length < 1) {
-            table.innerHTML = 'No items to display';
+            table.style.display = 'none';
+            emptyTable.style.display = 'flex';
         }
 
         data.items.forEach((item) => {
