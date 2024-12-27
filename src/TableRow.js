@@ -4,7 +4,7 @@ export default class TableRow {
             document: {
                 id: () => `
                 <div class="row-inside">
-                    <div>${item.real_id}</div>
+                    <div># ${item.real_id}</div>
                 </div>
             `,
                 name: () => `
@@ -46,7 +46,7 @@ export default class TableRow {
             user: {
                 id: () => `
                 <div class="row-inside">
-                    <div>${item.id}</div>
+                    <div># ${item.id}</div>
                 </div>
             `,
                 name: () => `
@@ -74,7 +74,7 @@ export default class TableRow {
             shippingTariff: {
                 id: () => `
                 <div class="row-inside">
-                    <div>${item.id}</div>
+                    <div># ${item.id}</div>
                 </div>
             `,
                 name: () => `
@@ -110,7 +110,7 @@ export default class TableRow {
             user_document: {
                 id: () => `
                 <div class="row-inside">
-                    <div>${item.real_id}</div>
+                    <div># ${item.real_id}</div>
                 </div>
             `,
                 name: () => `
