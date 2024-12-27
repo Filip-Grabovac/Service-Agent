@@ -524,7 +524,7 @@ export function setModals(menu) {
                         errorWrapper.classList.remove('hide');
 
                         setTimeout(function() {
-                            successWrapper.classList.add('hide');
+                            errorWrapper.classList.add('hide');
                         }, 3000);
 
                         return;
