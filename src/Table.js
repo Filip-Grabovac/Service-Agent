@@ -305,18 +305,6 @@ export function setModals(menu) {
 
 
         openButtons.forEach(button => {
-            if (button.tagName === 'option') {
-                button.addEventListener("mousedown", function (e) {
-                    e.preventDefault()
-
-                    method = item.method;
-                    modalName = item.modal
-                    url = item.action
-
-                    modal.classList.remove('hide');
-                })
-            }
-
             button.addEventListener("click", function (e) {
                 e.preventDefault()
 
@@ -827,8 +815,6 @@ export function populateSelectWithUsers() {
 export function populateSelectWithShippingTariffs() {
     const editDocumentShippingTariff = document.getElementById('edit-document-shipping-tariff');
     const paymentDocumentShippingTariff = document.getElementById('payment-document-shipping-tariff');
-
-    paymentDocumentShippingTariff.innerHTML += `<option value="" data-modal-open="add-tariff-popup">Create New Tariff</option>`
 
     shippingTariff.getAll(1, 999999).then((shippingTariffs) => {
         if (shippingTariffs.items.length) {
