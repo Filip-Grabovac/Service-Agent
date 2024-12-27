@@ -79,7 +79,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
     const text = document.getElementById(activeRole + '-menu' + menu + '-tab' + tab + '-text');
     const number = document.getElementById(activeRole + '-menu' + menu + '-tab' + tab + '-number');
     const table = document.getElementById(activeRole + '-menu' + menu + '-tab' + tab + '-table');
-    const emptyTable = table.closest('.empty-table');
+    const emptyTable = table.parentElement.querySelector('.empty-table');
     const pagination = table.getElementsByClassName('pagination-buttons')[0];
     const search = document.getElementById(activeRole + '-menu' + menu + '-tab' + tab + '-search');
 
