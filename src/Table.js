@@ -43,7 +43,7 @@ Array.from(searchInputs).forEach(input => {
     const typingDelay = 2000;
 
     const handleTypingFinished = () => {
-        loader.style.display = 'block';
+        loader.style.display = 'flex';
 
         fillTable(
             Number(input.getAttribute('data-menu')),
