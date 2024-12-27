@@ -43,6 +43,8 @@ Array.from(searchInputs).forEach(input => {
     const typingDelay = 2000;
 
     const handleTypingFinished = () => {
+        loader.style.display = 'block';
+
         fillTable(
             Number(input.getAttribute('data-menu')),
             Number(input.getAttribute('data-tab')),
@@ -176,6 +178,8 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         setModals(menu);
 
         createPagination(menu, tab, statusIds, pagination, data);
+
+        loader.style.display = 'none';
     })
 }
 
