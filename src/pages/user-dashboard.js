@@ -58,7 +58,6 @@ user.me().then((data) => {
     gear.setAttribute('data-id-user-id', data.id);
 
     gear.addEventListener('click', function(event) {
-        event.preventDefault();
         event.stopImmediatePropagation();
     });
 
