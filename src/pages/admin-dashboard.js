@@ -148,8 +148,8 @@ user.me().then((data) => {
     gear.setAttribute('data-modal-open', 'edit-user-popup');
     gear.setAttribute('data-fill-auth-id', '1');
     gear.setAttribute('data-id-user-id', data.id);
-    gear.setAttribute('disabled', "true");
-    newDocumentMenu.setAttribute('disabled', "true");
+    gear.disabled = true;
+    newDocumentMenu.disabled = true;
 
     setModals('initial-admin');
 });
