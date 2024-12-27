@@ -23,6 +23,11 @@ let activeRole;
 const loader = document.getElementById('loader');
 const successWrapper = document.getElementById('success-wrapper');
 const successMessage = document.getElementById('success-message');
+const successClose = document.getElementById('success-close');
+
+successClose.addEventListener('click', (e) => {
+    successClose.classList.add('hide');
+})
 
 const searchInputs = document.getElementsByClassName('search-input');
 let lastSearchInput = '';
@@ -574,10 +579,10 @@ export function setModals(menu) {
                     }
 
                     successMessage.innerHTML = item.success_message;
-                    successWrapper.style.display = 'flex';
+                    successWrapper.classList.remove('hide');
 
                     setTimeout(function() {
-                        successWrapper.style.display = 'none';
+                        successWrapper.classList.add('hide');
                     }, 3000);
 
                     loader.style.display = 'none'
