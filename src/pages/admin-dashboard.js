@@ -14,7 +14,8 @@ const home = document.getElementById('home');
 const logout = document.getElementsByClassName('logout');
 const profileImages = document.getElementsByClassName('profile-image');
 const gear = document.getElementById('gear');
-const newDocumentMenu = document.getElementById('new-document-menu');
+const gearWrapper = document.getElementById('gear-wrapper');
+const newDocumentMenuWrapper = document.getElementById('new-document-menu-wrapper');
 
 const adminMenu1 = document.getElementById('admin-menu1');
 const adminMenu1Tab1 = document.getElementById('admin-menu1-tab1');
@@ -129,15 +130,23 @@ adminMenu4Tab1.addEventListener('click', function (event) {
     fillTable(4, 1)
 })
 
-home.addEventListener('click', function (event) {
-    event.stopImmediatePropagation();
-    event.preventDefault();
-})
-
 adminMenu1.click()
 populateSelectWithUsers()
 populateSelectWithShippingTariffs()
 getTabCount()
+
+home.addEventListener('click', function (event) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+})
+gearWrapper.addEventListener('click', function (event) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+})
+newDocumentMenuWrapper.addEventListener('click', function (event) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+})
 
 user.me().then((data) => {
     Array.from(profileImages).forEach((element) => {
@@ -148,8 +157,6 @@ user.me().then((data) => {
     gear.setAttribute('data-modal-open', 'edit-user-popup');
     gear.setAttribute('data-fill-auth-id', '1');
     gear.setAttribute('data-id-user-id', data.id);
-    gear.disabled = true;
-    newDocumentMenu.disabled = true;
 
     setModals('initial-admin');
 });
