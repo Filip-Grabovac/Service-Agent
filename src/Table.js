@@ -306,6 +306,7 @@ export function setModals(menu) {
 
         openButtons.forEach(button => {
             if (button.tagName === 'option') {
+                console.log(button)
                 button.addEventListener("mousedown", function (e) {
                     e.preventDefault()
 
