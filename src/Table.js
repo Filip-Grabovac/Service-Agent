@@ -1034,7 +1034,6 @@ function setPdf(pdfUrl) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
     const countriesText = `
       Afghanistan
       Albania
@@ -1246,4 +1245,3 @@ document.addEventListener('DOMContentLoaded', function () {
             element.appendChild(option);
         });
     })
-});
