@@ -624,7 +624,8 @@ function getModals(menu) {
                 modal: 'edit-user-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/{user_id}',
                 method: 'PUT',
-                files: []
+                files: [],
+                success_message: 'The user has been successfully updated.',
             },
         },
         'initial-user': {
@@ -632,7 +633,8 @@ function getModals(menu) {
                 modal: 'edit-user-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/{user_id}',
                 method: 'PUT',
-                files: []
+                files: [],
+                success_message: 'Your profile has been successfully updated.',
             },
         },
         1: {
@@ -640,31 +642,36 @@ function getModals(menu) {
                 modal: 'shred-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
-                files: []
+                files: [],
+                success_message: 'The document has been successfully shredded.',
             },
             2: {
                 modal: 'delete-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'DELETE',
-                files: []
+                files: [],
+                success_message: 'The document has been successfully deleted.',
             },
             3: {
                 modal: 'edit-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
-                files: []
+                files: [],
+                success_message: 'The document has been successfully updated.',
             },
             4: {
                 modal: 'forward-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
-                files: []
+                files: [],
+                success_message: 'The document has been successfully updated.',
             },
             5: {
                 modal: 'payment-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
-                files: []
+                files: [],
+                success_message: 'The document has been successfully updated.',
             }
         },
         2: {
@@ -672,13 +679,15 @@ function getModals(menu) {
                 modal: 'edit-user-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/{user_id}',
                 method: 'PUT',
-                files: []
+                files: [],
+                success_message: 'The user has been successfully updated.',
             },
             2: {
                 modal: 'delete-user-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/{user_id}',
                 method: 'DELETE',
-                files: []
+                files: [],
+                success_message: 'The user has been successfully deleted.',
             }
         },
         3: {
@@ -686,13 +695,15 @@ function getModals(menu) {
                 modal: 'shred-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
-                files: []
+                files: [],
+                success_message: 'The document has been successfully shredded.',
             },
             2: {
                 modal: 'delete-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'DELETE',
-                files: []
+                files: [],
+                success_message: 'The document has been successfully deleted.',
             }
         },
         4: {
@@ -700,13 +711,15 @@ function getModals(menu) {
                 modal: 'edit-tariff-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX/shipping_tariffs/{shipping_tariffs_id}',
                 method: 'PATCH',
-                files: []
+                files: [],
+                success_message: 'The tariff has been successfully updated.',
             },
             2: {
                 modal: 'delete-tariff-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX/shipping_tariffs/{shipping_tariffs_id}',
                 method: 'DELETE',
-                files: []
+                files: [],
+                success_message: 'The tariff has been successfully deleted.',
             },
         },
         5: {
@@ -720,31 +733,36 @@ function getModals(menu) {
                 modal: 'request-forward-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
-                files: []
+                files: [],
+                success_message: 'The forwarding has been successfully requested.',
             },
             3: {
                 modal: 'request-shred-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
-                files: []
+                files: [],
+                success_message: 'The shredding has been successfully requested.',
             },
             4: {
                 modal: 'delete-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'DELETE',
-                files: []
+                files: [],
+                success_message: 'The document has been successfully deleted.',
             },
             5: {
                 modal: 'archive-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'PATCH',
-                files: []
+                files: [],
+                success_message: 'The document has been successfully archived.',
             },
             6: {
                 modal: 'edit-document-address-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/document_addresses/{document_addresses_id}',
                 method: 'PUT',
-                files: []
+                files: [],
+                success_message: 'The document address has been successfully updated.',
             },
         },
         6: {
@@ -758,7 +776,8 @@ function getModals(menu) {
                 modal: 'delete-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
                 method: 'DELETE',
-                files: []
+                files: [],
+                success_message: 'The document has been successfully deleted.',
             }
         }
     }
