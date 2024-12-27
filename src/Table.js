@@ -26,7 +26,7 @@ const successMessage = document.getElementById('success-message');
 const successClose = document.getElementById('success-close');
 
 successClose.addEventListener('click', (e) => {
-    successClose.classList.add('hide');
+    successWrapper.classList.add('hide');
 })
 
 const searchInputs = document.getElementsByClassName('search-input');
