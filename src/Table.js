@@ -21,6 +21,8 @@ let activeElement;
 let activeRole;
 
 const loader = document.getElementById('loader');
+const successWrapper = document.getElementById('success-wrapper');
+const successMessage = document.getElementById('success-message');
 
 const searchInputs = document.getElementsByClassName('search-input');
 let lastSearchInput = '';
@@ -571,6 +573,13 @@ export function setModals(menu) {
                         });
                     }
 
+                    successMessage.innerHTML = item.success_message;
+                    successWrapper.style.display = 'flex';
+
+                    setTimeout(function() {
+                        successWrapper.style.display = 'none';
+                    }, 3000);
+
                     loader.style.display = 'none'
                 })
                 .catch((error) => {
@@ -596,13 +605,15 @@ function getModals(menu) {
                 modal: 'add-document-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents',
                 method: 'POST',
-                files: []
+                files: [],
+                success_message: 'The document has been successfully uploaded and assigned to a user.',
             },
             2: {
                 modal: 'add-tariff-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX/shipping_tariffs',
                 method: 'POST',
-                files: []
+                files: [],
+                success_message: 'The tariff has been successfully created.',
             },
             3: {
                 modal: 'edit-user-popup',
