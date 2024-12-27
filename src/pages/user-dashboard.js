@@ -56,7 +56,7 @@ user.me().then((data) => {
     gear.setAttribute('data-modal-open', 'edit-user-popup');
     gear.setAttribute('data-fill-auth-id', '1');
     gear.setAttribute('data-id-user-id', data.id);
-    gear.disabled = true;
+    gear.setAttribute('disabled', '');
 
     setModals('initial-user');
 });
