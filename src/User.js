@@ -10,9 +10,11 @@ export default class User {
         this.errorClose.addEventListener('click', (e) => {
             this.errorWrapper.classList.add('hide');
         });
-        this.successClose.addEventListener('click', (e) => {
-            this.successWrapper.classList.add('hide');
-        })
+        if (this.successClose) {
+            this.successClose.addEventListener('click', (e) => {
+                this.successWrapper.classList.add('hide');
+            })
+        }
     }
     showError(message) {
         this.errorMessage.innerHTML = message;
