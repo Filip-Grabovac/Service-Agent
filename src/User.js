@@ -38,7 +38,7 @@ export default class User {
 
         // If there's no auth token, redirect to the failure page if not already there
         if (!authToken) {
-            if (window.location.pathname === '/registration' || window.location.pathname === '/registration-2-4' || window.location.pathname === '/registration-3-4') {
+            if (window.location.pathname === '/registration' || window.location.pathname === '/registration-2-4' || window.location.pathname === '/registration-3-4' || window.location.pathname === '/forgotten-password' || window.location.pathname === '/reset-password') {
                 return;
             }
             if (window.location.pathname !== failureRedirect) {
