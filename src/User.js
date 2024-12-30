@@ -3,20 +3,34 @@ export default class User {
         this.errorWrapper = document.getElementById('error-wrapper');
         this.errorMessage = document.getElementById('error-message');
         this.errorClose = document.getElementById('error-close');
+        this.successWrapper = document.getElementById('success-wrapper');
+        this.successMessage = document.getElementById('success-message');
+        this.successClose = document.getElementById('success-close');
 
         this.errorClose.addEventListener('click', (e) => {
             this.errorWrapper.classList.add('hide');
         });
+        this.successClose.addEventListener('click', (e) => {
+            this.successWrapper.classList.add('hide');
+        })
     }
-    showError(error) {
-        this.errorMessage.innerHTML = error;
+    showError(message) {
+        this.errorMessage.innerHTML = message;
         this.errorWrapper.classList.remove('hide');
 
         setTimeout(() => {
             this.errorWrapper.classList.add('hide');
         }, 3000);
 
-        console.error('Error:', error);
+        console.error('Error:', message);
+    }
+    showSuccess(message) {
+        this.successMessage.innerHTML = message;
+        this.successWrapper.classList.remove('hide');
+
+        setTimeout(() => {
+            this.successWrapper.classList.add('hide');
+        }, 3000);
     }
     authenticate() {
         const failureRedirect = '/log-in';
@@ -89,6 +103,8 @@ export default class User {
             .then((result) => {
                 if (result.code) {
                     this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
                 }
 
                 return result;
@@ -110,6 +126,8 @@ export default class User {
             .then((result) => {
                 if (result.code) {
                     this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
                 }
 
                 if (result.authToken) {
@@ -135,6 +153,8 @@ export default class User {
             .then((result) => {
                 if (result.code) {
                     this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
                 }
 
                 if (result.is_verified) {
@@ -158,6 +178,8 @@ export default class User {
             .then((result) => {
                 if (result.code) {
                     this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
                 }
 
                 if (result.authToken) {
@@ -197,6 +219,8 @@ export default class User {
             .then((result) => {
                 if (result.code) {
                     this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
                 }
 
                 return result;
@@ -221,9 +245,34 @@ export default class User {
             .then((result) => {
                 if (result.code) {
                     this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
                 }
 
                 return result
+            })
+            .catch((error) => {
+                this.showError('Server Error! Please, try again or contact support.');
+            });
+    }
+    reset(data) {
+        // Call the Xano API
+        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/password/forgot', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
+                }
+
+                this.showSuccess('Please check your Email for a link to reset password');
             })
             .catch((error) => {
                 this.showError('Server Error! Please, try again or contact support.');

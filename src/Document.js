@@ -38,6 +38,8 @@ export default class Document {
             .then((result) => {
                 if (result.code) {
                     this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
                 }
 
                 return result
@@ -67,6 +69,8 @@ export default class Document {
             .then((result) => {
                 if (result.code) {
                     this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
                 }
 
                 return result
@@ -90,6 +94,8 @@ export default class Document {
             .then((result) => {
                 if (result.code) {
                     this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
                 }
 
                 return result

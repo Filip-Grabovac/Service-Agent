@@ -38,6 +38,8 @@ export default class ShippingTariff {
             .then((result) => {
                 if (result.code) {
                     this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
                 }
 
                 return result
