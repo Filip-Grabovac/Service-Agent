@@ -23,7 +23,6 @@ let activeRole;
 const usersTable = document.getElementById('users-table');
 const usersDetails = document.getElementById('users-details');
 const usersDetailsClose = document.getElementById('users-details-close');
-const usersDetailsElements = document.querySelectorAll('[data-users-details]');
 if (usersDetailsClose) {
     usersDetailsClose.addEventListener('click', (e) => {
         e.preventDefault();
@@ -202,6 +201,10 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         });
 
         setModals(menu);
+
+        if (menu === 2) {
+            setUserDetails();
+        }
 
         createPagination(menu, tab, statusIds, pagination, data);
 
@@ -1316,8 +1319,10 @@ elements.forEach(element => {
     });
 })
 
-console.log(usersDetailsElements);
-if (usersDetailsElements) {
+function setUserDetails() {
+    const usersDetailsElements = document.querySelectorAll('[data-users-details]');
+
+    console.log(usersDetailsElements);
     usersDetailsElements.forEach(element => {
         console.log(element);
         element.addEventListener("click", e => {
