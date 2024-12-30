@@ -1350,7 +1350,7 @@ function fillUsersDetails(data) {
     street.innerHTML = data._user_addresses_of_user.street + ' ' + data._user_addresses_of_user.number
     country.innerHTML = data._user_addresses_of_user.zip + ' ' + data._user_addresses_of_user.country
     email.innerHTML = data.email
-    phone.innerHTML = data.phone
+    phone.innerHTML = data.phone_number
     const createdAt = new Date(data.created_at);
     since.innerHTML = createdAt.toLocaleString()
 }
