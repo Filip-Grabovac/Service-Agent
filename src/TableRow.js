@@ -17,7 +17,6 @@ export default class TableRow {
             `,
                 user: () => `
                 <div class="row-inside">
-                    <div class="user-image" style="background-image: url('${item._user?.profile_img?.url}')"></div>
                     <div class="txt-row">${item._user?.first_name} ${item._user?.last_name}</div>
                 </div>
             `,
@@ -51,7 +50,6 @@ export default class TableRow {
             `,
                 name: () => `
                 <div class="row-inside">
-                    <div class="user-image" style="background-image: url('${item.profile_img?.url}')"></div>
                     <div class="txt-row">${item.first_name} ${item.last_name}</div>
                 </div>
             `,

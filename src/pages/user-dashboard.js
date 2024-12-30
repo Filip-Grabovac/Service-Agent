@@ -13,7 +13,6 @@ const user = new User();
 const home = document.getElementById('home');
 
 const logout = document.getElementsByClassName('logout');
-const profileImages = document.getElementsByClassName('profile-image');
 const gearWrapper = document.getElementById('gear-wrapper');
 const gear = document.getElementById('gear');
 
@@ -53,11 +52,6 @@ gearWrapper.addEventListener('click', function (event) {
 })
 
 user.me().then((data) => {
-    Array.from(profileImages).forEach((element) => {
-        element.setAttribute('data-modal-open', 'edit-user-popup');
-        element.setAttribute('data-fill-auth-id', '1');
-        element.setAttribute('data-id-user-id', data.id);
-    })
     gear.setAttribute('data-modal-open', 'edit-user-popup');
     gear.setAttribute('data-fill-auth-id', '1');
     gear.setAttribute('data-id-user-id', data.id);
