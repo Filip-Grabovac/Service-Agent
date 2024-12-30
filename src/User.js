@@ -135,7 +135,7 @@ export default class User {
                 if (result.authToken) {
                     localStorage.setItem('authToken', result.authToken);
 
-                    // window.location.href = '/registration-3-4';
+                    window.location.href = '/registration-3-4';
                 }
             })
             .catch((error) => {
