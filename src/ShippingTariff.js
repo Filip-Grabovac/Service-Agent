@@ -1,4 +1,23 @@
 export default class ShippingTariff {
+    constructor() {
+        this.errorWrapper = document.getElementById('error-wrapper');
+        this.errorMessage = document.getElementById('error-message');
+        this.errorClose = document.getElementById('error-close');
+
+        this.errorClose.addEventListener('click', (e) => {
+            this.errorWrapper.classList.add('hide');
+        });
+    }
+    showError(error) {
+        this.errorMessage.innerHTML = error;
+        this.errorWrapper.classList.remove('hide');
+
+        setTimeout(() => {
+            this.errorWrapper.classList.add('hide');
+        }, 3000);
+
+        console.error('Error:', error);
+    }
     getAll(page = 1, perPage = 10, search = '') {
         const authToken =  localStorage.getItem('authToken');
 
@@ -15,12 +34,16 @@ export default class ShippingTariff {
                 'Content-Type': 'application/json',
             },
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+            })
             .then((result) => {
                 return result
             })
             .catch((error) => {
-                console.error('Error:', error);
+                this.showError('Server Error! Please, try again or contact support.');
             });
     }
     callMethod(methodName, ...args) {

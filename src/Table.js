@@ -571,8 +571,6 @@ export function setModals(menu) {
                         setTimeout(function() {
                             errorWrapper.classList.add('hide');
                         }, 3000);
-
-                        console.error(response.json());
                     }
                 })
                 .then((data) => {
@@ -610,8 +608,6 @@ export function setModals(menu) {
                     setTimeout(function() {
                         errorWrapper.classList.add('hide');
                     }, 3000);
-
-                    console.error(error.message);
                 });
         }
 

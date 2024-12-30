@@ -8,6 +8,16 @@ export default class User {
             this.errorWrapper.classList.add('hide');
         });
     }
+    showError(error) {
+        this.errorMessage.innerHTML = error;
+        this.errorWrapper.classList.remove('hide');
+
+        setTimeout(() => {
+            this.errorWrapper.classList.add('hide');
+        }, 3000);
+
+        console.error('Error:', error);
+    }
     authenticate() {
         const failureRedirect = '/log-in';
         const authToken = localStorage.getItem('authToken');
@@ -31,14 +41,17 @@ export default class User {
                 'Content-Type': 'application/json',
             },
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+            })
             .then((result) => {
                 if (result.code === 'ERROR_CODE_UNAUTHORIZED') {
                     if (window.location.pathname === '/registration' || window.location.pathname === '/registration-2-4' || window.location.pathname === '/registration-3-4') {
                         return;
                     }
 
-                    // If the token is invalid, remove it and redirect to the failure page if not there already
                     localStorage.removeItem('authToken');
                     if (window.location.pathname !== failureRedirect) {
                         window.location.href = failureRedirect;
@@ -64,8 +77,7 @@ export default class User {
                 }
             })
             .catch((error) => {
-                console.error('Error:', error);
-                // Optionally handle errors, such as displaying a message to the user
+                this.showError('Server Error! Please, try again or contact support.');
             });
     }
     me () {
@@ -77,13 +89,16 @@ export default class User {
                 'Content-Type': 'application/json',
             },
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+            })
             .then((result) => {
                 return result;
             })
             .catch((error) => {
-                console.error('Error:', error);
-                // Optionally handle errors, such as displaying a message to the user
+                this.showError('Server Error! Please, try again or contact support.');
             });
     }
     register(data) {
@@ -95,25 +110,20 @@ export default class User {
             },
             body: JSON.stringify(data),
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+            })
             .then((result) => {
                 if (result.authToken) {
                     localStorage.setItem('authToken', result.authToken);
 
                     window.location.href = '/registration-3-4';
-                } else {
-                    this.errorMessage.innerHTML = result.message;
-                    this.errorWrapper.classList.remove('hide');
-
-                    setTimeout(() => {
-                        this.errorWrapper.classList.add('hide');
-                    }, 3000);
-
-                    console.error('Error:', result.message);
                 }
             })
             .catch((error) => {
-                console.error('Error:', error);
+                this.showError('Server Error! Please, try again or contact support.');
             });
     }
     confirmCode(data) {
@@ -125,16 +135,18 @@ export default class User {
             },
             body: JSON.stringify(data),
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+            })
             .then((result) => {
                 if (result.is_verified) {
                     window.location.href = '/registration-4-4';
-                } else {
-                    console.error('Error:', 'Not verified');
                 }
             })
             .catch((error) => {
-                console.error('Error:', error);
+                this.showError('Server Error! Please, try again or contact support.');
             });
     }
     login(data) {
@@ -146,27 +158,27 @@ export default class User {
             },
             body: JSON.stringify(data),
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+            })
             .then((result) => {
                 if (result.authToken) {
                     localStorage.setItem('authToken', result.authToken);
 
                     this.authenticate();
-                } else {
-                    console.error('Error:', result.message);
-                }
 
-                localStorage.removeItem('registerData');
+                    localStorage.removeItem('registerData');
+                }
             })
             .catch((error) => {
-                console.error('Error:', error);
+                this.showError('Server Error! Please, try again or contact support.');
             });
     }
     logOut() {
-        // Remove the authToken from local storage
         localStorage.removeItem('authToken');
 
-        // Redirect to the login page
         window.location.href = '/log-in';
     }
     getAll(page = 1, perPage = 10, search = '') {
@@ -185,12 +197,16 @@ export default class User {
                 'Content-Type': 'application/json',
             },
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+            })
             .then((result) => {
                 return result;
             })
             .catch((error) => {
-                console.error('Error:', error);
+                this.showError('Server Error! Please, try again or contact support.');
             });
     }
     initialPayment(data) {
@@ -205,12 +221,16 @@ export default class User {
             },
             body: JSON.stringify(data),
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+            })
             .then((result) => {
                 return result
             })
             .catch((error) => {
-                console.error('Error:', error);
+                this.showError('Server Error! Please, try again or contact support.');
             });
     }
     callMethod(methodName, ...args) {
