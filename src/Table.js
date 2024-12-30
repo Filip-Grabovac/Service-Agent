@@ -565,9 +565,15 @@ export function setModals(menu) {
             fetch(url, requestData)
                 .then((response) => {
                     if (!response.ok) {
-                        console.error("Error:", error);
+                        errorMessage.innerHTML = 'Server Error! Please, try again or contact support.';
+                        errorWrapper.classList.remove('hide');
+
+                        setTimeout(function() {
+                            errorWrapper.classList.add('hide');
+                        }, 3000);
+
+                        console.error(response.json());
                     }
-                    return response.json();
                 })
                 .then((data) => {
                     modal.classList.add('hide');
@@ -598,7 +604,14 @@ export function setModals(menu) {
                     loader.style.display = 'none'
                 })
                 .catch((error) => {
-                    console.error("Error:", error);
+                    errorMessage.innerHTML = 'Server Error! Please, try again or contact support.';
+                    errorWrapper.classList.remove('hide');
+
+                    setTimeout(function() {
+                        errorWrapper.classList.add('hide');
+                    }, 3000);
+
+                    console.error(error.message);
                 });
         }
 
@@ -1042,6 +1055,7 @@ function fillDocumentDetails(data, menu, modal) {
 
 function setPdf(pdfUrl) {
     const pdfContainer = document.getElementById('pdf-container');
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
     pdfjsLib.getDocument(pdfUrl).promise.then((pdf) => {
         pdf.getPage(1).then((firstPage) => {
@@ -1068,9 +1082,7 @@ function setPdf(pdfUrl) {
                         viewport: viewport,
                     };
 
-                    page.render(renderContext).promise.then(() => {
-                        console.log(`Page ${pageNum} not rendered.`);
-                    });
+                    page.render(renderContext);
                 }).catch((error) => {
                     console.error(`Error while rendering page ${pageNum}:`, error);
                 });
