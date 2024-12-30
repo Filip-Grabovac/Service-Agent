@@ -20,6 +20,19 @@ let modalName = '';
 let activeElement;
 let activeRole;
 
+const usersTable = document.getElementById('users-table');
+const usersDetails = document.getElementById('users-details');
+const usersDetailsClose = document.getElementById('users-details-close');
+const usersDetailsElements = document.querySelectorAll('[data-users-details]');
+if (usersDetailsClose) {
+    usersDetailsClose.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        usersTable.classList.remove('hide');
+        usersDetails.classList.add('hide');
+    })
+}
+
 const loader = document.getElementById('loader');
 const successWrapper = document.getElementById('success-wrapper');
 const successMessage = document.getElementById('success-message');
@@ -1302,3 +1315,20 @@ elements.forEach(element => {
         element.appendChild(option);
     });
 })
+
+if (usersDetailsElements) {
+    usersDetailsElements.forEach(element => {
+        element.addEventListener("click", e => {
+            let data = Array.from(allData[2][1]).find(item => item.id.toString().match(element.getAttribute("data-users-details")));
+
+            fillUsersDetails(data);
+
+            usersDetails.classList.remove("hide");
+            usersTable.classList.add("hide");
+        })
+    })
+}
+
+function fillUsersDetails(data) {
+    console.log(data);
+}
