@@ -4,7 +4,8 @@ import User from 'https://service-agent.pages.dev/src/User.js';
 const user = new User();
 
 const resetBtn = document.getElementById('reset');
-const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('New-Password');
+const confirmInput = document.getElementById('Confirm-Password');
 
 const errorWrapper = document.getElementById('error-wrapper');
 const errorMessage = document.getElementById('error-message');
@@ -19,12 +20,18 @@ user.authenticate();
 resetBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
+    const params = new URLSearchParams(new URL(url).search);
+
+    const token = params.get('token');
+
     const data = {
-        email: emailInput.value,
+        password: passwordInput.value,
+        confirmPassword: confirmInput.value,
+        token: token,
     };
 
     if (validateData(data) === 1) {
-        errorMessage.innerHTML = 'Please, fill in all fields.';
+        errorMessage.innerHTML = 'Please, fill in all fields. Passwords must match.';
         errorWrapper.classList.remove('hide');
 
         setTimeout(function() {
@@ -34,7 +41,7 @@ resetBtn.addEventListener('click', function (event) {
         return;
     }
 
-    user.forgot(data);
+    user.reset(data);
 });
 
 function validateData(data) {
@@ -44,11 +51,11 @@ function validateData(data) {
         if (value.length === 0) {
             hasErrors = 1;
         }
-
-        if (key === 'email' && !isValidEmail(value)) {
-            hasErrors = 1;
-        }
     });
+
+    if (data.password !== data.confirmPassword) {
+        hasErrors = 1;
+    }
 
     return hasErrors;
 }

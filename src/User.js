@@ -257,7 +257,7 @@ export default class User {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
-    reset(data) {
+    forgot(data) {
         // Call the Xano API
         fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/password/forgot', {
             method: 'POST',
@@ -275,6 +275,29 @@ export default class User {
                 }
 
                 this.showSuccess('Please check your Email for a link to reset password');
+            })
+            .catch((error) => {
+                this.showError('Server Error! Please, try again or contact support.');
+            });
+    }
+    reset(data) {
+        // Call the Xano API
+        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/password/reset', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
+                }
+
+                window.location.href = '/log-in';
             })
             .catch((error) => {
                 this.showError('Server Error! Please, try again or contact support.');
