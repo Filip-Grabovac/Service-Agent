@@ -1,4 +1,13 @@
 export default class User {
+    constructor() {
+        const errorWrapper = document.getElementById('error-wrapper');
+        const errorMessage = document.getElementById('error-message');
+        const errorClose = document.getElementById('error-close');
+
+        errorClose.addEventListener('click', (e) => {
+            errorWrapper.classList.add('hide');
+        })
+    }
     authenticate() {
         const failureRedirect = '/log-in';
         const authToken = localStorage.getItem('authToken');
@@ -93,6 +102,13 @@ export default class User {
 
                     window.location.href = '/registration-3-4';
                 } else {
+                    errorMessage.innerHTML = result.message;
+                    errorWrapper.classList.remove('hide');
+
+                    setTimeout(function() {
+                        errorWrapper.classList.add('hide');
+                    }, 3000);
+
                     console.error('Error:', result.message);
                 }
             })
