@@ -1318,6 +1318,7 @@ elements.forEach(element => {
 
 if (usersDetailsElements) {
     usersDetailsElements.forEach(element => {
+        console.log(element);
         element.addEventListener("click", e => {
             let data = Array.from(allData[2][1]).find(item => item.id.toString().match(element.getAttribute("data-users-details")));
 
