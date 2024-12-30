@@ -1,12 +1,12 @@
 export default class User {
     constructor() {
-        const errorWrapper = document.getElementById('error-wrapper');
-        const errorMessage = document.getElementById('error-message');
-        const errorClose = document.getElementById('error-close');
+        this.errorWrapper = document.getElementById('error-wrapper');
+        this.errorMessage = document.getElementById('error-message');
+        this.errorClose = document.getElementById('error-close');
 
-        errorClose.addEventListener('click', (e) => {
-            errorWrapper.classList.add('hide');
-        })
+        this.errorClose.addEventListener('click', (e) => {
+            this.errorWrapper.classList.add('hide');
+        });
     }
     authenticate() {
         const failureRedirect = '/log-in';
@@ -102,11 +102,11 @@ export default class User {
 
                     window.location.href = '/registration-3-4';
                 } else {
-                    errorMessage.innerHTML = result.message;
-                    errorWrapper.classList.remove('hide');
+                    this.errorMessage.innerHTML = result.message;
+                    this.errorWrapper.classList.remove('hide');
 
-                    setTimeout(function() {
-                        errorWrapper.classList.add('hide');
+                    setTimeout(() => {
+                        this.errorWrapper.classList.add('hide');
                     }, 3000);
 
                     console.error('Error:', result.message);
