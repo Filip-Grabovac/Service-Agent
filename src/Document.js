@@ -34,12 +34,9 @@ export default class Document {
                 'Content-Type': 'application/json',
             },
         })
-            .then((response) => {
-                if (!response.ok) {
-                    this.showError('Server Error! Please, try again or contact support.');
-                }
-            })
+            .then((response) => response.json())
             .then((result) => {
+                console.log(result)
                 return result
             })
             .catch((error) => {
@@ -63,11 +60,7 @@ export default class Document {
                 'Content-Type': 'application/json',
             },
         })
-            .then((response) => {
-                if (!response.ok) {
-                    this.showError('Server Error! Please, try again or contact support.');
-                }
-            })
+            .then((response) => response.json())
             .then((result) => {
                 return result
             })
@@ -86,11 +79,7 @@ export default class Document {
                 'Content-Type': 'application/json',
             },
         })
-            .then((response) => {
-                if (!response.ok) {
-                    this.showError('Server Error! Please, try again or contact support.');
-                }
-            })
+            .then((response) => response.json())
             .then((result) => {
                 return result
             })
