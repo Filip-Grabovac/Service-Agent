@@ -41,11 +41,7 @@ export default class User {
                 'Content-Type': 'application/json',
             },
         })
-            .then((response) => {
-                if (!response.ok) {
-                    this.showError('Server Error! Please, try again or contact support.');
-                }
-            })
+            .then((response) => response.json())
             .then((result) => {
                 if (result.code === 'ERROR_CODE_UNAUTHORIZED') {
                     if (window.location.pathname === '/registration' || window.location.pathname === '/registration-2-4' || window.location.pathname === '/registration-3-4') {
@@ -89,11 +85,7 @@ export default class User {
                 'Content-Type': 'application/json',
             },
         })
-            .then((response) => {
-                if (!response.ok) {
-                    this.showError('Server Error! Please, try again or contact support.');
-                }
-            })
+            .then((response) => response.json())
             .then((result) => {
                 return result;
             })
@@ -110,11 +102,7 @@ export default class User {
             },
             body: JSON.stringify(data),
         })
-            .then((response) => {
-                if (!response.ok) {
-                    this.showError('Server Error! Please, try again or contact support.');
-                }
-            })
+            .then((response) => response.json())
             .then((result) => {
                 if (result.authToken) {
                     localStorage.setItem('authToken', result.authToken);
@@ -135,11 +123,7 @@ export default class User {
             },
             body: JSON.stringify(data),
         })
-            .then((response) => {
-                if (!response.ok) {
-                    this.showError('Server Error! Please, try again or contact support.');
-                }
-            })
+            .then((response) => response.json())
             .then((result) => {
                 if (result.is_verified) {
                     window.location.href = '/registration-4-4';
@@ -158,11 +142,7 @@ export default class User {
             },
             body: JSON.stringify(data),
         })
-            .then((response) => {
-                if (!response.ok) {
-                    this.showError('Server Error! Please, try again or contact support.');
-                }
-            })
+            .then((response) => response.json())
             .then((result) => {
                 if (result.authToken) {
                     localStorage.setItem('authToken', result.authToken);
@@ -197,11 +177,7 @@ export default class User {
                 'Content-Type': 'application/json',
             },
         })
-            .then((response) => {
-                if (!response.ok) {
-                    this.showError('Server Error! Please, try again or contact support.');
-                }
-            })
+            .then((response) => response.json())
             .then((result) => {
                 return result;
             })
@@ -221,11 +197,7 @@ export default class User {
             },
             body: JSON.stringify(data),
         })
-            .then((response) => {
-                if (!response.ok) {
-                    this.showError('Server Error! Please, try again or contact support.');
-                }
-            })
+            .then((response) => response.json())
             .then((result) => {
                 return result
             })

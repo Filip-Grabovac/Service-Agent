@@ -39,7 +39,7 @@ export default class Document {
                 if (result.code) {
                     this.showError('Server Error! Please, try again or contact support.');
                 }
-                console.log(result.code)
+
                 return result
             })
             .catch((error) => {
@@ -65,6 +65,10 @@ export default class Document {
         })
             .then((response) => response.json())
             .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+
                 return result
             })
             .catch((error) => {
@@ -84,6 +88,10 @@ export default class Document {
         })
             .then((response) => response.json())
             .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+
                 return result
             })
             .catch((error) => {

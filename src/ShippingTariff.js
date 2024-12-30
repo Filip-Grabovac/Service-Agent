@@ -34,12 +34,12 @@ export default class ShippingTariff {
                 'Content-Type': 'application/json',
             },
         })
-            .then((response) => {
-                if (!response.ok) {
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
                     this.showError('Server Error! Please, try again or contact support.');
                 }
-            })
-            .then((result) => {
+
                 return result
             })
             .catch((error) => {
