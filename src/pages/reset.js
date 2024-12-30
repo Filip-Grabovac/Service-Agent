@@ -20,8 +20,8 @@ user.authenticate();
 resetBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
+    const url = window.location.href;
     const params = new URLSearchParams(new URL(url).search);
-
     const token = params.get('token');
 
     const data = {
