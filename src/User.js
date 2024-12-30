@@ -87,6 +87,10 @@ export default class User {
         })
             .then((response) => response.json())
             .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+
                 return result;
             })
             .catch((error) => {
@@ -104,6 +108,10 @@ export default class User {
         })
             .then((response) => response.json())
             .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+
                 if (result.authToken) {
                     localStorage.setItem('authToken', result.authToken);
 
@@ -125,6 +133,10 @@ export default class User {
         })
             .then((response) => response.json())
             .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+
                 if (result.is_verified) {
                     window.location.href = '/registration-4-4';
                 }
@@ -144,6 +156,10 @@ export default class User {
         })
             .then((response) => response.json())
             .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+
                 if (result.authToken) {
                     localStorage.setItem('authToken', result.authToken);
 
@@ -179,6 +195,10 @@ export default class User {
         })
             .then((response) => response.json())
             .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+
                 return result;
             })
             .catch((error) => {
@@ -199,6 +219,10 @@ export default class User {
         })
             .then((response) => response.json())
             .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+
                 return result
             })
             .catch((error) => {
