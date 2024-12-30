@@ -1316,6 +1316,7 @@ elements.forEach(element => {
     });
 })
 
+console.log(usersDetailsElements);
 if (usersDetailsElements) {
     usersDetailsElements.forEach(element => {
         console.log(element);
