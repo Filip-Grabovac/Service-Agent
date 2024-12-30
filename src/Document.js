@@ -36,7 +36,10 @@ export default class Document {
         })
             .then((response) => response.json())
             .then((result) => {
-                console.log(result)
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+                }
+                console.log(result.code)
                 return result
             })
             .catch((error) => {
