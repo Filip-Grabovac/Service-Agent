@@ -4,6 +4,14 @@ const params = new URLSearchParams(new URL(url).search);
 
 const sessionId = params.get('session_id');
 
+const errorWrapper = document.getElementById('error-wrapper');
+const errorMessage = document.getElementById('error-message');
+const errorClose = document.getElementById('error-close');
+
+errorClose.addEventListener('click', (e) => {
+    errorWrapper.classList.add('hide');
+})
+
 fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx/sessions/' + sessionId, {
     method: 'GET',
     headers: {
@@ -12,7 +20,6 @@ fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx/sessions/' + sessionId, {
 })
     .then((response) => response.json())
     .then((result) => {
-        console.log(result);
         if (result.status !== 'complete') {
             const heading = document.getElementById('payment-heading');
             const description = document.getElementById('payment-description');
@@ -24,6 +31,12 @@ fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx/sessions/' + sessionId, {
         }
     })
     .catch((error) => {
-        console.error('Error:', error);
-        // Optionally handle errors, such as displaying a message to the user
+        errorMessage.innerHTML = 'Server Error! Please, try again or contact support.';
+        errorWrapper.classList.remove('hide');
+
+        setTimeout(function() {
+            errorWrapper.classList.add('hide');
+        }, 3000);
+
+        console.error(error.message);
     });

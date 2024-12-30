@@ -7,6 +7,14 @@ const loginBtn = document.getElementById('login');
 const emailInput = document.getElementById('E-mail');
 const passwordInput = document.getElementById('Password');
 
+const errorWrapper = document.getElementById('error-wrapper');
+const errorMessage = document.getElementById('error-message');
+const errorClose = document.getElementById('error-close');
+
+errorClose.addEventListener('click', (e) => {
+    errorWrapper.classList.add('hide');
+})
+
 user.authenticate();
 
 loginBtn.addEventListener('click', function (event) {
@@ -18,7 +26,12 @@ loginBtn.addEventListener('click', function (event) {
     };
 
     if (validateData(loginData) === 1) {
-        console.log('Error validating form');
+        errorMessage.innerHTML = 'Please, fill in all fields.';
+        errorWrapper.classList.remove('hide');
+
+        setTimeout(function() {
+            errorWrapper.classList.add('hide');
+        }, 3000);
 
         return;
     }

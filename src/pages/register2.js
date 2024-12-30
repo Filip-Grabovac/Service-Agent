@@ -7,6 +7,14 @@ const nextBtn = document.getElementById('next-btn');
 const passwordInput = document.getElementById('Password');
 const confirmPasswordInput = document.getElementById('Confirm-Password');
 
+const errorWrapper = document.getElementById('error-wrapper');
+const errorMessage = document.getElementById('error-message');
+const errorClose = document.getElementById('error-close');
+
+errorClose.addEventListener('click', (e) => {
+    errorWrapper.classList.add('hide');
+})
+
 user.authenticate();
 
 nextBtn.addEventListener('click', function (event) {
@@ -20,7 +28,12 @@ nextBtn.addEventListener('click', function (event) {
     }
 
     if (validateData(passwordData) === 1) {
-        console.log('Error validating form');
+        errorMessage.innerHTML = 'Please, fill in all fields. Passwords must match.';
+        errorWrapper.classList.remove('hide');
+
+        setTimeout(function() {
+            errorWrapper.classList.add('hide');
+        }, 3000);
 
         return;
     }
