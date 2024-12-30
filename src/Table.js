@@ -1322,9 +1322,7 @@ elements.forEach(element => {
 function setUserDetails() {
     const usersDetailsElements = document.querySelectorAll('[data-users-details]');
 
-    console.log(usersDetailsElements);
     usersDetailsElements.forEach(element => {
-        console.log(element);
         element.addEventListener("click", e => {
             let data = Array.from(allData[2][1]).find(item => item.id.toString().match(element.getAttribute("data-users-details")));
 
@@ -1337,5 +1335,22 @@ function setUserDetails() {
 }
 
 function fillUsersDetails(data) {
-    console.log(data);
+    const name = document.getElementById('users-details-name');
+    const id = document.getElementById('users-details-id');
+    const city = document.getElementById('users-details-city');
+    const street = document.getElementById('users-details-street');
+    const country = document.getElementById('users-details-country');
+    const email = document.getElementById('users-details-email');
+    const phone = document.getElementById('users-details-phone');
+    const since = document.getElementById('users-details-since');
+
+    name.innerText = data.first_name + ' ' + data.last_name;
+    id.innerHTML = '#' . data.id;
+    city.innerHTML = data._user_addresses_of_user.city + ', ' + data._user_addresses_of_user.state
+    street.innerHTML = data._user_addresses_of_user.street + ' ' + data._user_addresses_of_user.number
+    country.innerHTML = data._user_addresses_of_user.zip + ' ' + data._user_addresses_of_user.country
+    email.innerHTML = data.email
+    phone.innerHTML = data.phone
+    const createdAt = new Date(data.created_at);
+    since.innerHTML = createdAt.toLocaleString()
 }
