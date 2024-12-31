@@ -136,7 +136,6 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         model = user;
         modelName = 'user'
     } else if (menu === 2 && tab === 2) {
-        model = user;
         modelName = 'user_document_admin'
     } else if (menu === 4) {
         model = shippingTariff;
