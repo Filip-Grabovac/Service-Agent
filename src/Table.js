@@ -155,7 +155,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         methodName = 'getAllByUser'
     }
 
-    model.callMethod(methodName, page, 10, search ? search.value : '', statusIds !== null ? statusIds : undefined, archived !== null ? archived : undefined, selectedUserId !== null ? archived : undefined).then((data) => {
+    model.callMethod(methodName, page, 10, search ? search.value : '', statusIds !== null ? statusIds : undefined, archived !== null ? archived : undefined, selectedUserId !== null ? selectedUserId : undefined).then((data) => {
         if (!isUserDocumentsInAdmin) {
             number.innerHTML = data.itemsTotal
 
