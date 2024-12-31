@@ -615,7 +615,7 @@ export function setModals(menu) {
                     activeElement.click()
                     setTimeout(() => {
                         activeUserDetailsElement.click();
-                    }, 100);
+                    }, 200);
 
                     user.me().then((data) => {
                         authUserData = data;
