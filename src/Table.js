@@ -92,6 +92,10 @@ export function resetSearchInput() {
 }
 
 export function fillTable(menu, tab, statusIds = null, page = 1) {
+    let isUserDocumentsInAdmin = false;
+    if(menu === 2 && tab === 2) {
+        isUserDocumentsInAdmin = true;
+    }
     if (statusIds === 'null') {
         statusIds = null
     }
@@ -110,15 +114,17 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
     const pagination = table.getElementsByClassName('pagination-buttons')[0];
     const search = document.getElementById(activeRole + '-menu' + menu + '-tab' + tab + '-search');
 
-    search.setAttribute('data-menu', menu)
-    search.setAttribute('data-tab', tab)
-    search.setAttribute('data-status-ids', statusIds)
-    search.setAttribute('data-page', page)
+    if (!isUserDocumentsInAdmin) {
+        search.setAttribute('data-menu', menu)
+        search.setAttribute('data-tab', tab)
+        search.setAttribute('data-status-ids', statusIds)
+        search.setAttribute('data-page', page)
 
-    if (search.value !== lastSearchInput) {
-        page = 1;
+        if (search.value !== lastSearchInput) {
+            page = 1;
+        }
+        lastSearchInput = search.value
     }
-    lastSearchInput = search.value
 
     let status, statusBadgeColor;
 
@@ -126,7 +132,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
     let modelName = 'document';
     if (activeRole === 'user') {
         modelName = 'user_document'
-    } else if (menu === 2) {
+    } else if (menu === 2 && tab === 1) {
         model = user;
         modelName = 'user'
     } else if (menu === 4) {
@@ -143,10 +149,12 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
     }
 
     model.callMethod(methodName, page, 10, search.value, statusIds !== null ? statusIds : undefined, archived !== null ? archived : undefined).then((data) => {
-        number.innerHTML = data.itemsTotal
+        if (!isUserDocumentsInAdmin) {
+            number.innerHTML = data.itemsTotal
 
-        if (search.value === '' && activeRole === 'admin') {
-            text.innerHTML = getTabTitle(menu, tab) + ` (${data.itemsTotal})`
+            if (search.value === '' && activeRole === 'admin') {
+                text.innerHTML = getTabTitle(menu, tab) + ` (${data.itemsTotal})`
+            }
         }
 
         if (!Array.isArray(allData[menu])) {
@@ -315,6 +323,7 @@ function getColumns(menu, tab) {
         },
         2: {
             1: ['id', 'name', 'address', 'email', 'blank', 'actions'],
+            2: ['id', 'name', 'status', 'actions'],
         },
         3: {
             1: ['id', 'name', 'user', 'status', 'blank', 'actions'],
@@ -1376,4 +1385,6 @@ function fillUsersDetails(data) {
     deleteIcon.setAttribute('data-modal-open', 'delete-user-popup');
     deleteIcon.setAttribute('data-id-user-id', data.id);
     setModals(2);
+
+    fillTable(2, 2);
 }
