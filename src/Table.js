@@ -1359,11 +1359,16 @@ function fillUsersDetails(data) {
     const createdAt = new Date(data.created_at);
     since.innerHTML = createdAt.toLocaleString()
 
-    phoneIcon.href = `tel:${data.phone_number}`;
-    emailIcon.href = `mailto:${data.email}`;
+    phoneIcon.addEventListener("click", () => {
+        window.location.href = `tel:${data.phone_number}`;
+    });
+    emailIcon.addEventListener("click", () => {
+        window.location.href = `mailto:${data.email}`;
+    });
     editIcon.setAttribute('data-modal-open', 'edit-user-popup');
     editIcon.setAttribute('data-fill-2-1', data.id);
     editIcon.setAttribute('data-id-user-id', data.id);
     deleteIcon.setAttribute('data-modal-open', 'delete-user-popup');
     deleteIcon.setAttribute('data-id-user-id', data.id);
+    setModals(2);
 }
