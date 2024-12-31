@@ -219,7 +219,9 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
             setUserDetails();
         }
 
-        createPagination(menu, tab, statusIds, pagination, data);
+        if (!isUserDocumentsInAdmin) {
+            createPagination(menu, tab, statusIds, pagination, data);
+        }
 
         loader.style.display = 'none';
     })
