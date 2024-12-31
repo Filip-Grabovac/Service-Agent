@@ -55,7 +55,7 @@ export default class TableRow {
             `,
                 address: () => `
                 <div class="row-inside txt-lowercase">
-                    <div>${item._user_addresses_of_user?.street}, ${item._user_addresses_of_user?.city} ${item._user_addresses_of_user?.zip}, ${item._user_addresses_of_user?.country}</div>
+                    <div>${item._user_addresses_of_user?.street} ${item._user_addresses_of_user?.number}, ${item._user_addresses_of_user?.zip} ${item._user_addresses_of_user?.city}, ${item._user_addresses_of_user?.state} ${item._user_addresses_of_user?.country}</div>
                 </div>
             `,
                 email: () => `

@@ -1381,9 +1381,9 @@ function fillUsersDetails(data) {
 
     name.innerText = data.first_name + ' ' + data.last_name;
     id.innerHTML = '#' + data.id;
-    city.innerHTML = data._user_addresses_of_user.city + ', ' + data._user_addresses_of_user.state
-    street.innerHTML = data._user_addresses_of_user.street + ' ' + data._user_addresses_of_user.number
-    country.innerHTML = data._user_addresses_of_user.zip + ' ' + data._user_addresses_of_user.country
+    city.innerHTML = data._user_addresses_of_user.street + ' ' + data._user_addresses_of_user.number + ','
+    street.innerHTML = data._user_addresses_of_user.zip + ' ' + data._user_addresses_of_user.city + ','
+    country.innerHTML = data._user_addresses_of_user.state + ' ' + data._user_addresses_of_user.country + ','
     email.innerHTML = data.email
     phone.innerHTML = data.phone_number
     const createdAt = new Date(data.created_at);
