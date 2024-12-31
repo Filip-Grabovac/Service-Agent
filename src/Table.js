@@ -616,6 +616,11 @@ export function setModals(menu) {
                     }, 3000);
 
                     loader.style.display = 'none'
+
+                    if (usersTable.classList.contains('hide')) {
+                        usersDetails.classList.add("hide");
+                        usersTable.classList.remove("hide");
+                    }
                 })
                 .catch((error) => {
                     errorMessage.innerHTML = 'Server Error! Please, try again or contact support.';
