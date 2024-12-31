@@ -636,7 +636,7 @@ export function setModals(menu) {
 
                     loader.style.display = 'none'
 
-                    if (usersTable.classList.contains('hide')) {
+                    if (usersTable.classList.contains('hide') && modalName === 'delete-document-popup') {
                         usersDetails.classList.add("hide");
                         usersTable.classList.remove("hide");
                     }
