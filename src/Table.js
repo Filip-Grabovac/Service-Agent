@@ -149,15 +149,13 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
     if (activeRole === 'user') {
         archived = statusIds
         statusIds = null
+        methodName = 'getAllByAuthUser'
+    }
+    if (modelName === 'user_document_admin'){
         methodName = 'getAllByUser'
     }
 
-    let userId = authUserData.id
-    if (selectedUserId !== null) {
-        userId = selectedUserId
-    }
-
-    model.callMethod(methodName, page, 10, search ? search.value : '', statusIds !== null ? statusIds : undefined, archived !== null ? archived : undefined, userId).then((data) => {
+    model.callMethod(methodName, page, 10, search ? search.value : '', statusIds !== null ? statusIds : undefined, archived !== null ? archived : undefined, selectedUserId !== null ? archived : undefined).then((data) => {
         if (!isUserDocumentsInAdmin) {
             number.innerHTML = data.itemsTotal
 
@@ -229,9 +227,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
             setUserDetails();
         }
 
-        // if (!isUserDocumentsInAdmin) {
-            createPagination(menu, tab, statusIds, pagination, data);
-        // }
+        createPagination(menu, tab, statusIds, pagination, data);
 
         loader.style.display = 'none';
     })
@@ -1407,5 +1403,6 @@ function fillUsersDetails(data) {
     setModals(2);
 
     selectedUserId = data.id;
+
     fillTable(2, 2);
 }
