@@ -613,7 +613,9 @@ export function setModals(menu) {
                     modal.classList.add('hide');
 
                     activeElement.click()
-                    activeUserDetailsElement.click()
+                    setTimeout(() => {
+                        activeUserDetailsElement.click();
+                    }, 100);
 
                     user.me().then((data) => {
                         authUserData = data;
