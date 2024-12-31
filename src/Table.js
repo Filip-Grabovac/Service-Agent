@@ -20,6 +20,7 @@ let modalName = '';
 let activeElement;
 let activeRole;
 let activeUserDetailsElement;
+let selectedUserId = null;
 
 const usersTable = document.getElementById('users-table');
 const usersDetails = document.getElementById('users-details');
@@ -151,7 +152,12 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         methodName = 'getAllByUser'
     }
 
-    model.callMethod(methodName, page, 10, search ? search.value : '', statusIds !== null ? statusIds : undefined, archived !== null ? archived : undefined).then((data) => {
+    let userId = authUserData.id
+    if (selectedUserId !== null) {
+        userId = selectedUserId
+    }
+
+    model.callMethod(methodName, page, 10, search ? search.value : '', statusIds !== null ? statusIds : undefined, archived !== null ? archived : undefined, userId).then((data) => {
         if (!isUserDocumentsInAdmin) {
             number.innerHTML = data.itemsTotal
 
@@ -1400,5 +1406,6 @@ function fillUsersDetails(data) {
     deleteIcon.setAttribute('data-id-user-id', data.id);
     setModals(2);
 
+    selectedUserId = data.id;
     fillTable(2, 2);
 }

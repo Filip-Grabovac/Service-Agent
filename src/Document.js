@@ -48,10 +48,10 @@ export default class Document {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
-    getAllByUser( page = 1, perPage = 10, search = '', statusIds = '1,2,3,4,5,6,7,8', archived) {
+    getAllByUser( page = 1, perPage = 10, search = '', statusIds = '1,2,3,4,5,6,7,8', archived, userId = null) {
         const authToken =  localStorage.getItem('authToken');
 
-        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents-user?page=${page}&per_page=${perPage}&document_status_ids=${statusIds}`;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/user/${userId}?page=${page}&per_page=${perPage}&document_status_ids=${statusIds}`;
         if (search !== '') {
             url += `&search=${encodeURIComponent(search)}`
         }
