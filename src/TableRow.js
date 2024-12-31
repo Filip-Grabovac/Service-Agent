@@ -270,10 +270,10 @@ export default class TableRow {
                 2: `
                     <div class="ud-column lowercase no-border">
                         ${item._document_status?.status_label === 'forwarding_requested' ? `
-                            <div data-modal-open="payment-document-popup" data-id-documents-id="${item.id}" data-fill-1-1=${item.id} class="forvard-doc-scg-wrap no-padd"><img loading="lazy" src="https://cdn.prod.website-files.com/673cc2bec8c34d28fd73175f/67519f8578799b349334867f_Forwarding%20Mail.svg" alt="" class="action-svg bigger"></div>
+                            <div data-modal-open="payment-document-popup" data-id-documents-id="${item.id}" data-fill-2-2=${item.id} class="forvard-doc-scg-wrap no-padd"><img loading="lazy" src="https://cdn.prod.website-files.com/673cc2bec8c34d28fd73175f/67519f8578799b349334867f_Forwarding%20Mail.svg" alt="" class="action-svg bigger"></div>
                         ` : ''}
                         ${item._document_status?.status_label === 'waiting_for_payment' ? `
-                            <div data-modal-open="edit-document-popup" data-id-documents-id="${item.id}" data-fill-1-1=${item.id} class="edit-doc-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 17 17" fill="none" class="action-svg">
+                            <div data-modal-open="edit-document-popup" data-id-documents-id="${item.id}" data-fill-2-2=${item.id} class="edit-doc-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 17 17" fill="none" class="action-svg">
                                 <path d="M12.5 7.50023L9.50002 4.50023M0.875 16.1252L3.41328 15.8432C3.72339 15.8087 3.87845 15.7915 4.02338 15.7446C4.15197 15.703 4.27434 15.6442 4.38717 15.5698C4.51434 15.4859 4.62466 15.3756 4.84529 15.1549L14.75 5.25023C15.5784 4.4218 15.5784 3.07865 14.75 2.25023C13.9216 1.4218 12.5784 1.4218 11.75 2.25023L1.8453 12.1549C1.62466 12.3756 1.51434 12.4859 1.43048 12.6131C1.35607 12.7259 1.29726 12.8483 1.25564 12.9768C1.20872 13.1218 1.19149 13.2768 1.15703 13.587L0.875 16.1252Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg></div>
                             <div data-modal-open="shred-document-popup" data-id-documents-id="${item.id}" class="shred-doc-svg-wrap no-padd"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 20 19" fill="none" class="action-svg bigger">
@@ -283,7 +283,7 @@ export default class TableRow {
                             </svg></div>
                         ` : ''}
                         ${item._document_status?.status_label === 'paid' ? `
-                            <div data-modal-open="forward-document-popup" data-id-documents-id="${item.id}" data-fill-1-1=${item.id} class="forvard-doc-scg-wrap no-padd"><img loading="lazy" src="https://cdn.prod.website-files.com/673cc2bec8c34d28fd73175f/67519f8578799b349334867f_Forwarding%20Mail.svg" alt="" class="action-svg bigger"></div>
+                            <div data-modal-open="forward-document-popup" data-id-documents-id="${item.id}" data-fill-2-2=${item.id} class="forvard-doc-scg-wrap no-padd"><img loading="lazy" src="https://cdn.prod.website-files.com/673cc2bec8c34d28fd73175f/67519f8578799b349334867f_Forwarding%20Mail.svg" alt="" class="action-svg bigger"></div>
                         ` : ''}
                         ${item._document_status?.status_label === 'shred_requested' ? `
                             <div data-modal-open="shred-document-popup" data-id-documents-id="${item.id}" class="shred-doc-svg-wrap no-padd"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 20 19" fill="none" class="action-svg bigger">
@@ -292,7 +292,7 @@ export default class TableRow {
                                 <path d="M14.5 14.5V16.375V18.25M5.5 14.5V18.25M11.5 14.5V18.25M8.5 14.5V18.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg></div>
                         ` : ''}
-                        <div data-modal-open="delete-document-popup" data-id-documents-id="${item.id}" data-fill-1-1=${item.id} class="delete-doc-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 16 18" fill="none" class="action-svg">
+                        <div data-modal-open="delete-document-popup" data-id-documents-id="${item.id}" data-fill-2-2=${item.id} class="delete-doc-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 16 18" fill="none" class="action-svg">
                             <path d="M11 4.5V3.9C11 3.05992 11 2.63988 10.8365 2.31901C10.6927 2.03677 10.4632 1.8073 10.181 1.66349C9.86012 1.5 9.44008 1.5 8.6 1.5H7.4C6.55992 1.5 6.13988 1.5 5.81901 1.66349C5.53677 1.8073 5.3073 2.03677 5.16349 2.31901C5 2.63988 5 3.05992 5 3.9V4.5M6.5 8.625V12.375M9.5 8.625V12.375M1.25 4.5H14.75M13.25 4.5V12.9C13.25 14.1601 13.25 14.7902 13.0048 15.2715C12.789 15.6948 12.4448 16.039 12.0215 16.2548C11.5402 16.5 10.9101 16.5 9.65 16.5H6.35C5.08988 16.5 4.45982 16.5 3.97852 16.2548C3.55516 16.039 3.21095 15.6948 2.99524 15.2715C2.75 14.7902 2.75 14.1601 2.75 12.9V4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg></div>
                     </div>

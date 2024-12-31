@@ -213,8 +213,11 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
             }
         });
 
-        setModals(menu);
-
+        if (!isUserDocumentsInAdmin) {
+            setModals(menu);
+        } else {
+            setModals(1);
+        }
         if (menu === 2) {
             setUserDetails();
         }
