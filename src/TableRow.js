@@ -69,6 +69,29 @@ export default class TableRow {
                 </div>
             `,
             },
+            user_document_admin: {
+                id: () => `
+                <div class="ud-column">
+                    <div># ${item.real_id}</div>
+                </div>
+            `,
+                name: () => `
+                <div class="ud-column">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 19 22" fill="none" class="svg">
+                        <path d="M10.5 1H13.2C14.8802 1 15.7202 1 16.362 1.32698C16.9265 1.6146 17.3854 2.07354 17.673 2.63803C18 3.27976 18 4.11984 18 5.8V16.2C18 17.8802 18 18.7202 17.673 19.362C17.3854 19.9265 16.9265 20.3854 16.362 20.673C15.7202 21 14.8802 21 13.2 21H6.8C5.11984 21 4.27976 21 3.63803 20.673C3.07354 20.3854 2.6146 19.9265 2.32698 19.362C2 18.7202 2 17.8802 2 16.2V15.5M14 12H9.5M14 8H10.5M14 16H6M4 9V3.5C4 2.67157 4.67157 2 5.5 2C6.32843 2 7 2.67157 7 3.5V9C7 10.6569 5.65685 12 4 12C2.34315 12 1 10.6569 1 9V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <div class="txt-row">${item.title}</div>
+                </div>
+            `,
+                status: () => `
+                <div class="ud-column">
+                    <div class="status-box ${statusBadgeColor}">
+                        <div class="dot ${statusBadgeColor}"></div>
+                        <div class="badge-text ${statusBadgeColor}">${item._document_status.status_label.replaceAll('_', ' ')}</div>
+                    </div>
+                </div>
+            `,
+            },
             shippingTariff: {
                 id: () => `
                 <div class="row-inside">
@@ -245,7 +268,7 @@ export default class TableRow {
                     </div>
                 `,
                 2: `
-                    <div class="row-inside right">
+                    <div class="ud-column lowercase no-border">
                         ${item._document_status?.status_label === 'forwarding_requested' ? `
                             <div data-modal-open="payment-document-popup" data-id-documents-id="${item.id}" data-fill-1-1=${item.id} class="forvard-doc-scg-wrap no-padd"><img loading="lazy" src="https://cdn.prod.website-files.com/673cc2bec8c34d28fd73175f/67519f8578799b349334867f_Forwarding%20Mail.svg" alt="" class="action-svg bigger"></div>
                         ` : ''}
