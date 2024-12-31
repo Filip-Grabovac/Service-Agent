@@ -1344,6 +1344,11 @@ function fillUsersDetails(data) {
     const phone = document.getElementById('users-details-phone');
     const since = document.getElementById('users-details-since');
 
+    const phoneIcon = document.getElementById('users-details-phone-icon');
+    const emailIcon = document.getElementById('users-details-email-icon');
+    const editIcon = document.getElementById('users-details-edit-icon');
+    const deleteIcon = document.getElementById('users-details-delete-icon');
+
     name.innerText = data.first_name + ' ' + data.last_name;
     id.innerHTML = '#' + data.id;
     city.innerHTML = data._user_addresses_of_user.city + ', ' + data._user_addresses_of_user.state
@@ -1353,4 +1358,12 @@ function fillUsersDetails(data) {
     phone.innerHTML = data.phone_number
     const createdAt = new Date(data.created_at);
     since.innerHTML = createdAt.toLocaleString()
+
+    phoneIcon.href = `tel:${data.phone_number}`;
+    emailIcon.href = `mailto:${data.email}`;
+    editIcon.setAttribute('data-modal-open', 'edit-user-popup');
+    editIcon.setAttribute('data-fill-2-1', data.id);
+    editIcon.setAttribute('data-id-user-id', data.id);
+    deleteIcon.setAttribute('data-modal-open', 'delete-user-popup');
+    deleteIcon.setAttribute('data-id-user-id', data.id);
 }
