@@ -83,7 +83,9 @@ export default class User {
                                 window.location.href = '/registration-4-4';
                             }
                         } else {
-                            window.location.href = '/registration-3-4';
+                            if (window.location.pathname !== '/registration-3-4') {
+                                window.location.href = '/registration-3-4';
+                            }
                         }
                     }
                 }
