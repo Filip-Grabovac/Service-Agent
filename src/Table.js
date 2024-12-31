@@ -164,7 +164,10 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         }
         allData[menu][tab] = data.items;
 
-        table.style.display = 'flex';
+        table.style.display = 'grid';
+        if (!isUserDocumentsInAdmin) {
+            table.style.display = 'flex';
+        }
         emptyTable.style.display = 'none';
         if (data.items.length < 1) {
             table.style.display = 'none';
