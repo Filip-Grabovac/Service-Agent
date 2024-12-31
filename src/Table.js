@@ -613,9 +613,7 @@ export function setModals(menu) {
                     modal.classList.add('hide');
 
                     activeElement.click()
-                    setTimeout(() => {
-                        activeUserDetailsElement.click();
-                    }, 200);
+                    activeUserDetailsElement.click()
 
                     user.me().then((data) => {
                         authUserData = data;
@@ -640,7 +638,7 @@ export function setModals(menu) {
 
                     loader.style.display = 'none'
 
-                    if (usersTable.classList.contains('hide') && modalName === 'delete-user-popup') {
+                    if (usersTable.classList.contains('hide') && (modalName === 'delete-user-popup' || modalName === 'edit-user-popup')) {
                         usersDetails.classList.add("hide");
                         usersTable.classList.remove("hide");
                     }
