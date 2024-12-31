@@ -10,6 +10,8 @@ const errorWrapper = document.getElementById('error-wrapper');
 const errorMessage = document.getElementById('error-message');
 const errorClose = document.getElementById('error-close');
 
+user.authenticate();
+
 errorClose.addEventListener('click', (e) => {
     errorWrapper.classList.add('hide');
 })
