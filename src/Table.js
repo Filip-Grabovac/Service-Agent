@@ -19,6 +19,7 @@ let method = '';
 let modalName = '';
 let activeElement;
 let activeRole;
+let activeUserDetailsElement;
 
 const usersTable = document.getElementById('users-table');
 const usersDetails = document.getElementById('users-details');
@@ -612,6 +613,7 @@ export function setModals(menu) {
                     modal.classList.add('hide');
 
                     activeElement.click()
+                    activeUserDetailsElement.click()
 
                     user.me().then((data) => {
                         authUserData = data;
@@ -1354,6 +1356,8 @@ function setUserDetails() {
 
             usersDetails.classList.remove("hide");
             usersTable.classList.add("hide");
+
+            activeUserDetailsElement = element;
         })
     })
 }
