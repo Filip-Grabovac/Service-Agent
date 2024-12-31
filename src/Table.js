@@ -1383,7 +1383,7 @@ function fillUsersDetails(data) {
     id.innerHTML = '#' + data.id;
     city.innerHTML = data._user_addresses_of_user.street + ' ' + data._user_addresses_of_user.number + ','
     street.innerHTML = data._user_addresses_of_user.zip + ' ' + data._user_addresses_of_user.city + ','
-    country.innerHTML = data._user_addresses_of_user.state + ' ' + data._user_addresses_of_user.country
+    country.innerHTML = data._user_addresses_of_user.state + ', ' + data._user_addresses_of_user.country
     email.innerHTML = data.email
     phone.innerHTML = data.phone_number
     const createdAt = new Date(data.created_at);
