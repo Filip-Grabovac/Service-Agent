@@ -991,7 +991,7 @@ function fillDocumentDetails(data, menu, modal) {
     price.innerHTML = '...'
     trackingNumber.innerHTML = '...'
 
-    id.innerHTML = 'ID';
+    id.innerHTML = data.id;
     title.innerHTML = data.title;
 
     let statusBadgeColor = ''
