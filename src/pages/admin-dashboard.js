@@ -1,13 +1,10 @@
 // import User from '../User';
-// import Document from '../Document';
 // import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs, setModals, resetSearchInput, getTabTitle} from '../Table.js';
 import User from 'https://service-agent.pages.dev/src/User.js';
-import Document from 'https://service-agent.pages.dev/src/Document.js';
-import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs, setModals, resetSearchInput, getTabTitle} from 'https://service-agent.pages.dev/src/Table.js';
+import {fillTable, updateActiveElement, updateActiveRole, populateSelectWithUsers, populateSelectWithShippingTariffs, setModals, resetSearchInput, getTabCount} from 'https://service-agent.pages.dev/src/Table.js';
 
 
 const user = new User();
-const documentFile = new Document();
 
 const home = document.getElementById('home');
 
@@ -154,36 +151,3 @@ user.me().then((data) => {
 
     setModals('initial-admin');
 });
-
-function getTabCount() {
-    const menu1tab2 = document.getElementById('admin-menu1-tab2-text');
-    const menu1tab3 = document.getElementById('admin-menu1-tab3-text');
-    const menu1tab4 = document.getElementById('admin-menu1-tab4-text');
-    const menu1tab5 = document.getElementById('admin-menu1-tab5-text');
-    const menu1tab6 = document.getElementById('admin-menu1-tab6-text');
-    const menu3tab1 = document.getElementById('admin-menu3-tab1-text');
-    const menu3tab2 = document.getElementById('admin-menu3-tab2-text');
-
-    documentFile.getCountByStatus().then(data => {
-        menu1tab2.innerHTML = getTabTitle(1, 2) + ' (' + getCount(data, [2]) + ')'
-        menu1tab3.innerHTML = getTabTitle(1, 3) + ' (' + getCount(data, [3]) + ')'
-        menu1tab4.innerHTML = getTabTitle(1, 4) + ' (' + getCount(data, [4]) + ')'
-        menu1tab5.innerHTML = getTabTitle(1, 5) + ' (' + getCount(data, [5, 6]) + ')'
-        menu1tab6.innerHTML = getTabTitle(1, 6) + ' (' + getCount(data, [7]) + ')'
-        menu3tab1.innerHTML = getTabTitle(3, 1) + ' (' + getCount(data, [7]) + ')'
-        menu3tab2.innerHTML = getTabTitle(3, 2) + ' (' + getCount(data, [8]) + ')'
-    })
-
-    function getCount(data, tabs) {
-        let sum = 0;
-
-        tabs.forEach(id => {
-            const item = data.find(entry => entry.documents_document_status_id === id);
-            if (item) {
-                sum += item._documents_of_document_status;
-            }
-        });
-
-        return sum;
-    }
-}
