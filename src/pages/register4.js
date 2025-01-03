@@ -3,11 +3,6 @@ import User from 'https://service-agent.pages.dev/src/User.js';
 
 const user = new User();
 
-let email;
-user.me().then(result => {
-    email = result.email;
-})
-
 const payBtn = document.getElementById('pay-button');
 
 payBtn.addEventListener('click', function (event) {
@@ -20,7 +15,6 @@ payBtn.addEventListener('click', function (event) {
             {
                 price: "price_1QXMupCA20rcDWGhemNihUF8",
                 quantity: "1",
-                prefilled_email: email,
             }
         ]
     };
