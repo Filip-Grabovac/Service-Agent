@@ -270,7 +270,7 @@ function createPaginationButton(menu, tab, statusIds, label, page = null, isNumb
     const numberClass = isNumber ? ' number' : '';
     const activeStyle = isActive ? 'style="1px solid black" disabled' : '';
     return `
-        <div${activeStyle} class="pagination-btn${numberClass}" ${pageData}>
+        <div ${activeStyle} class="pagination-btn${numberClass}" ${pageData}>
             <div class="pagination-btn-txt">${label}</div>
         </div>
     `;
