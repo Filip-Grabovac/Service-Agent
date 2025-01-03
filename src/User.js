@@ -129,7 +129,11 @@ export default class User {
             .then((response) => response.json())
             .then((result) => {
                 if (result.code) {
-                    this.showError('Server Error! Please, try again or contact support.');
+                    if (result.message !== '') {
+                        this.showError(result.message);
+                    } else {
+                        this.showError('Server Error! Please, try again or contact support.');
+                    }
 
                     return;
                 }
@@ -156,7 +160,11 @@ export default class User {
             .then((response) => response.json())
             .then((result) => {
                 if (result.code) {
-                    this.showError('Server Error! Please, try again or contact support.');
+                    if (result.message !== '') {
+                        this.showError(result.message);
+                    } else {
+                        this.showError('Server Error! Please, try again or contact support.');
+                    }
 
                     return;
                 }
@@ -181,7 +189,11 @@ export default class User {
             .then((response) => response.json())
             .then((result) => {
                 if (result.code) {
-                    this.showError('Server Error! Please, try again or contact support.');
+                    if (result.message !== '') {
+                        this.showError(result.message);
+                    } else {
+                        this.showError('Server Error! Please, try again or contact support.');
+                    }
 
                     return;
                 }
@@ -271,7 +283,11 @@ export default class User {
             .then((response) => response.json())
             .then((result) => {
                 if (result.code) {
-                    this.showError('Server Error! Please, try again or contact support.');
+                    if (result.message !== '') {
+                        this.showError(result.message);
+                    } else {
+                        this.showError('Server Error! Please, try again or contact support.');
+                    }
 
                     return;
                 }
@@ -294,7 +310,11 @@ export default class User {
             .then((response) => response.json())
             .then((result) => {
                 if (result.code) {
-                    this.showError('Server Error! Please, try again or contact support.');
+                    if (result.message !== '') {
+                        this.showError(result.message);
+                    } else {
+                        this.showError('Server Error! Please, try again or contact support.');
+                    }
 
                     return;
                 }
