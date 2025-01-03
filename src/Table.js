@@ -643,10 +643,12 @@ export function setModals(menu) {
                             dropZone.firstElementChild.style.display = 'flex';
                         });
 
-                        const selectElement = document.getElementById('create-document-user');
-                        selectElement.value = '';
-                        const event = new Event('change', { bubbles: true });
-                        selectElement.dispatchEvent(event);
+                        const select2Element = document.getElementById('create-document-user');
+                        if (select2Element) {
+                            select2Element.value = '';
+                            const event = new Event('change', {bubbles: true});
+                            select2Element.dispatchEvent(event);
+                        }
                     }
 
                     successMessage.innerHTML = item.success_message;
@@ -664,7 +666,6 @@ export function setModals(menu) {
                     }
                 })
                 .catch((error) => {
-                    console.log(error)
                     errorMessage.innerHTML = 'Server Error! Please, try again or contact support.';
                     errorWrapper.classList.remove('hide');
 
