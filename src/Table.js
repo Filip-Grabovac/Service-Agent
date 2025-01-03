@@ -469,6 +469,8 @@ export function setModals(menu) {
 
                             if (element.getAttribute('type') === 'radio') {
                                 element.checked = false;
+                                console.log(fillData[element.getAttribute('name')])
+                                console.log(element.value)
                                 if (element.value === fillData[element.getAttribute('name')]) {
                                     element.checked = true;
                                 }
