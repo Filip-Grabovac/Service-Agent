@@ -325,6 +325,35 @@ export default class User {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
+    resendCode(data) {
+        const authToken =  localStorage.getItem('authToken');
+        // Call the Xano API
+        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/register/resend-code', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    if (result.message !== '') {
+                        this.showError(result.message);
+                    } else {
+                        this.showError('Server Error! Please, try again or contact support.');
+                    }
+
+                    return;
+                }
+
+                this.showSuccess('Your code has been sent successfully!')
+            })
+            .catch((error) => {
+                this.showError('Server Error! Please, try again or contact support.');
+            });
+    }
     callMethod(methodName, ...args) {
         if (typeof this[methodName] === 'function') {
             return this[methodName](...args);

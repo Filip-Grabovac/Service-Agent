@@ -5,6 +5,7 @@ const user = new User();
 
 const nextBtn = document.getElementById('next-btn');
 const code = document.getElementById('Enter-Codee');
+const resendCode = document.getElementById('resend-code');
 
 const errorWrapper = document.getElementById('error-wrapper');
 const errorMessage = document.getElementById('error-message');
@@ -14,6 +15,9 @@ user.authenticate();
 
 errorClose.addEventListener('click', (e) => {
     errorWrapper.classList.add('hide');
+})
+resendCode.addEventListener('click', (e) => {
+    user.resendCode();
 })
 
 nextBtn.addEventListener('click', function (event) {
