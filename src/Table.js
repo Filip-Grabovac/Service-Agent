@@ -648,7 +648,6 @@ export function setModals(menu) {
                     }
                 })
                 .catch((error) => {
-                    console.error(error)
                     errorMessage.innerHTML = 'Server Error! Please, try again or contact support.';
                     errorWrapper.classList.remove('hide');
 
@@ -976,6 +975,17 @@ function fillDocumentDetails(data, menu, modal) {
     deleteDocumentBox.style.display = 'flex';
     archiveDocumentBox.style.display = 'flex';
     payment.style.display = 'flex';
+    shippingAddress.innerHTML = '...'
+    shippingCity.innerHTML = '...'
+    assignedAt.innerHTML = '...'
+    deliveryRequestedAt.innerHTML = '...'
+    paidAt.innerHTML = '...'
+    shippedAt.innerHTML = '...'
+    shredRequestedAt.innerHTML = '...'
+    shreddedAt.innerHTML = '...'
+    shippingType.innerHTML = '...'
+    price.innerHTML = '...'
+    trackingNumber.innerHTML = '...'
 
     id.innerHTML = 'ID';
     title.innerHTML = data.title;
