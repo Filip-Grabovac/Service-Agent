@@ -615,7 +615,9 @@ export function setModals(menu) {
                     modal.classList.add('hide');
 
                     activeElement.click()
-                    activeUserDetailsElement.click()
+                    if (activeUserDetailsElement) {
+                        activeUserDetailsElement.click()
+                    }
 
                     user.me().then((data) => {
                         authUserData = data;
@@ -646,7 +648,6 @@ export function setModals(menu) {
                     }
                 })
                 .catch((error) => {
-                    console.log(error)
                     errorMessage.innerHTML = 'Server Error! Please, try again or contact support.';
                     errorWrapper.classList.remove('hide');
 
