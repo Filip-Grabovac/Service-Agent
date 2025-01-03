@@ -19,12 +19,13 @@ payBtn.addEventListener('click', function (event) {
         line_items: [
             {
                 price: "price_1QXMupCA20rcDWGhemNihUF8",
-                quantity: "1"
+                quantity: "1",
+                email: email,
             }
         ]
     };
 
     user.initialPayment(data).then(result => {
-        window.location.href = result.url + '?prefilled_email=' + email
+        window.location.href = result.url
     });
 });
