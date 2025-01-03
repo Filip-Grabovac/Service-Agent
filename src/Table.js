@@ -635,6 +635,11 @@ export function setModals(menu) {
                             outputDivs.forEach(div => div.remove());
                             dropZone.firstElementChild.style.display = 'flex';
                         });
+
+                        const selectElement = document.getElementById('create-document-user');
+                        selectElement.value = '';
+                        const event = new Event('change', { bubbles: true });
+                        selectElement.dispatchEvent(event);
                     }
 
                     successMessage.innerHTML = item.success_message;
@@ -991,7 +996,7 @@ function fillDocumentDetails(data, menu, modal) {
     price.innerHTML = '...'
     trackingNumber.innerHTML = '...'
 
-    id.innerHTML = data.real_id;
+    id.innerHTML = '# ' + data.real_id;
     title.innerHTML = data.title;
 
     let statusBadgeColor = ''
