@@ -871,7 +871,19 @@ function createDropZone(dropZone, item, fileName) {
 
     fileInput.addEventListener('change', function () {
         if (fileInput.files.length > 0) {
-            const files = fileInput.files;
+            const files = Array.from(fileInput.files).filter(file => file.type === "application/pdf");
+
+            if (files.length === 0) {
+                this.errorMessage.innerHTML = "Only PDF files are allowed.";
+                this.errorWrapper.classList.remove('hide');
+
+                setTimeout(() => {
+                    this.errorWrapper.classList.add('hide');
+                }, 3000);
+
+                return;
+            }
+
             item.files[fileName].length = 0
             item.files[fileName].push(files)
 
@@ -895,8 +907,21 @@ function createDropZone(dropZone, item, fileName) {
     });
 
     dropZone.addEventListener("drop", e => {
+        const files = Array.from(e.dataTransfer.files).filter(file => file.type === "application/pdf");
+
+        if (files.length === 0) {
+            this.errorMessage.innerHTML = "Only PDF files are allowed.";
+            this.errorWrapper.classList.remove('hide');
+
+            setTimeout(() => {
+                this.errorWrapper.classList.add('hide');
+            }, 3000);
+
+            return;
+        }
+
         item.files[fileName].length = 0
-        item.files[fileName].push(e.dataTransfer.files)
+        item.files[fileName].push(files)
 
         handleFiles(item.files[fileName]);
     });
