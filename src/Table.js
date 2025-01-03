@@ -266,6 +266,9 @@ function createPagination(menu, tab, statusIds, pagination, data) {
 }
 
 function createPaginationButton(menu, tab, statusIds, label, page = null, isNumber = false, isActive = false) {
+    if (isActive) {
+        page = null;
+    }
     const pageData = page !== null ? ` data-menu="${menu}" data-tab="${tab}" data-status-ids="${statusIds}" data-page="${page}"` : '';
     const numberClass = isNumber ? ' number' : '';
     const activeStyle = isActive ? 'style="border: 1px solid black" disabled' : '';
