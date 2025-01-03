@@ -271,7 +271,7 @@ function createPaginationButton(menu, tab, statusIds, label, page = null, isNumb
     }
     const pageData = page !== null ? ` data-menu="${menu}" data-tab="${tab}" data-status-ids="${statusIds}" data-page="${page}"` : '';
     const numberClass = isNumber ? ' number' : '';
-    const activeStyle = isActive ? 'style="border: 1px solid black" disabled' : '';
+    const activeStyle = isActive ? 'style="border: 1px solid black"' : '';
     return `
         <div ${activeStyle} class="pagination-btn${numberClass}" ${pageData}>
             <div class="pagination-btn-txt">${label}</div>
@@ -991,7 +991,7 @@ function fillDocumentDetails(data, menu, modal) {
     price.innerHTML = '...'
     trackingNumber.innerHTML = '...'
 
-    id.innerHTML = data.id;
+    id.innerHTML = data.real_id;
     title.innerHTML = data.title;
 
     let statusBadgeColor = ''
