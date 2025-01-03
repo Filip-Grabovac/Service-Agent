@@ -3,7 +3,10 @@ import User from 'https://service-agent.pages.dev/src/User.js';
 
 const user = new User();
 
-const email = user.me();
+let email;
+user.me().then(result => {
+    email = result.email;
+})
 
 const payBtn = document.getElementById('pay-button');
 
@@ -22,8 +25,6 @@ payBtn.addEventListener('click', function (event) {
     };
 
     user.initialPayment(data).then(result => {
-        console.log(result);
-        console.log(email);
-        // window.location.href = result.url + '?email=' + email
+        window.location.href = result.url + '?prefilled_email=' + email
     });
 });
