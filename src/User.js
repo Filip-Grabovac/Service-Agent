@@ -286,7 +286,7 @@ export default class User {
                     if (result.message !== '') {
                         this.showError(result.message);
                     } else {
-                        this.showError('Server Error! Please, try again or contact support.');
+                        this.showError('We can not find user with provided email address.');
                     }
 
                     return;

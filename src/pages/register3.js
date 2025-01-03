@@ -22,7 +22,7 @@ nextBtn.addEventListener('click', function (event) {
     let registerData = JSON.parse(localStorage.getItem('registerData'));
 
     if (validateData(code.value) === 1) {
-        errorMessage.innerHTML = 'Please, fill in all fields.';
+        errorMessage.innerHTML = 'Confirmation code is not correct.';
         errorWrapper.classList.remove('hide');
 
         setTimeout(function() {
