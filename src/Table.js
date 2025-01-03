@@ -467,6 +467,12 @@ export function setModals(menu) {
                                 }
                             }
 
+                            if (element.getAttribute('type') === 'radio') {
+                                if (element.value === fillData[element.getAttribute('name')]) {
+                                    element.checked = true;
+                                }
+                            }
+
                             if (element.hasAttribute('data-readonly')) {
                                 element.setAttribute("readonly", true);
                             }
