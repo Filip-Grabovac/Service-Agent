@@ -20,7 +20,7 @@ payBtn.addEventListener('click', function (event) {
             {
                 price: "price_1QXMupCA20rcDWGhemNihUF8",
                 quantity: "1",
-                email: email,
+                prefilled_email: email,
             }
         ]
     };
