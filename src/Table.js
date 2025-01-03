@@ -248,7 +248,7 @@ function createPagination(menu, tab, statusIds, pagination, data) {
         paginationHTML += createPaginationButton(menu, tab, statusIds, data.curPage - 1, data.curPage - 1, true);
     }
 
-    paginationHTML += createPaginationButton(menu, tab, statusIds, data.curPage, data.curPage, true);
+    paginationHTML += createPaginationButton(menu, tab, statusIds, data.curPage, data.curPage, true, true);
 
     if (data.curPage !== data.pageTotal) {
         paginationHTML += createPaginationButton(menu, tab, statusIds, data.curPage + 1, data.curPage + 1, true);
@@ -265,11 +265,12 @@ function createPagination(menu, tab, statusIds, pagination, data) {
     pagination.innerHTML = paginationHTML
 }
 
-function createPaginationButton(menu, tab, statusIds, label, page = null, isNumber = false) {
+function createPaginationButton(menu, tab, statusIds, label, page = null, isNumber = false, isActive = false) {
     const pageData = page !== null ? ` data-menu="${menu}" data-tab="${tab}" data-status-ids="${statusIds}" data-page="${page}"` : '';
     const numberClass = isNumber ? ' number' : '';
+    const activeStyle = isActive ? 'style="1px solid black" disabled' : '';
     return `
-        <div class="pagination-btn${numberClass}" ${pageData}>
+        <div${activeStyle} class="pagination-btn${numberClass}" ${pageData}>
             <div class="pagination-btn-txt">${label}</div>
         </div>
     `;

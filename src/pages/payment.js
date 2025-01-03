@@ -27,7 +27,7 @@ fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx/sessions/' + sessionId, {
 
             heading.innerText = 'Payment Failed';
             description.innerText = 'Your payment failed. Please try again later or contact support.';
-            icon.setAttribute('src', 'new-image-url.jpg');
+            icon.setAttribute('src', 'https://cdn.prod.website-files.com/673cc2bec8c34d28fd73175f/6777b770202d5aa733d194c2_payment-failed-icon.svg');
         }
     })
     .catch((error) => {
