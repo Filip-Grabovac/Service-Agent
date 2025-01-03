@@ -874,11 +874,11 @@ function createDropZone(dropZone, item, fileName) {
             const files = Array.from(fileInput.files).filter(file => file.type === "application/pdf");
 
             if (files.length === 0) {
-                this.errorMessage.innerHTML = "Only PDF files are allowed.";
-                this.errorWrapper.classList.remove('hide');
+                errorMessage.innerHTML = "Only PDF files are allowed.";
+                errorWrapper.classList.remove('hide');
 
                 setTimeout(() => {
-                    this.errorWrapper.classList.add('hide');
+                    errorWrapper.classList.add('hide');
                 }, 3000);
 
                 return;
@@ -910,11 +910,11 @@ function createDropZone(dropZone, item, fileName) {
         const files = Array.from(e.dataTransfer.files).filter(file => file.type === "application/pdf");
 
         if (files.length === 0) {
-            this.errorMessage.innerHTML = "Only PDF files are allowed.";
-            this.errorWrapper.classList.remove('hide');
+            errorMessage.innerHTML = "Only PDF files are allowed.";
+            errorWrapper.classList.remove('hide');
 
             setTimeout(() => {
-                this.errorWrapper.classList.add('hide');
+                errorWrapper.classList.add('hide');
             }, 3000);
 
             return;
