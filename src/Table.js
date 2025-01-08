@@ -166,7 +166,9 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
     model.callMethod(methodName, page, 10, search ? search.value : '', statusIds !== null ? statusIds : undefined, archived !== null ? archived : undefined, selectedUserId !== null ? selectedUserId : undefined).then((data) => {
         if (!isUserDocumentsInAdmin) {
             number.innerHTML = data.itemsTotal
+        }
 
+        if (!isUserDocumentsInAdmin && menu !== 7) {
             if (search.value === '' && activeRole === 'admin') {
                 text.innerHTML = getTabTitle(menu, tab) + ` (${data.itemsTotal})`
             }
