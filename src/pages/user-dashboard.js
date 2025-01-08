@@ -73,8 +73,10 @@ certificate.getAllActive().then((data) => {
     if (data && data.length === 0) {
         userMenu1.style.display = 'none';
         userMenu2.style.display = 'none';
+        const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
+        activeTabLink.click();
 
-        changeActiveTab()
+        // changeActiveTab()
     }
 })
 
