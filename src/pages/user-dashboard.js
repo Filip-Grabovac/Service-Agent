@@ -1,6 +1,7 @@
 // import User from '../User';
 // import { fillTable, updateActiveElement, updateActiveRole } from '../Table.js';
 import User from 'https://service-agent.pages.dev/src/User.js';
+import Certificate from 'https://service-agent.pages.dev/src/Certificate.js';
 import {
     fillTable,
     updateActiveElement,
@@ -9,6 +10,7 @@ import {
 } from 'https://service-agent.pages.dev/src/Table.js';
 
 const user = new User();
+const certificate = new Certificate();
 
 const home = document.getElementById('home');
 
@@ -66,6 +68,10 @@ user.me().then((data) => {
 
     setModals('initial-user');
 });
+
+certificate.getAllActive().then((data) => {
+    console.log(data)
+})
 
 const aircraft = document.querySelector('input[type="radio"][value="aircraft_registration_certificate"]');
 const airman = document.querySelector('input[type="radio"][value="airman_certificate"]');
