@@ -97,11 +97,19 @@ airman.addEventListener('click', function (event) {
 })
 newCertificate.addEventListener('click', function (event) {
     chooseMedicalWrapper.classList.remove('hidden');
+    if (!existingCertificateWrapper.classList.contains('hidden')) {
+        existingCertificateWrapper.classList.add('hidden');
+    }
+    if (!ffaCertificateNumberWrapper.classList.contains('hidden')) {
+        ffaCertificateNumberWrapper.classList.add('hidden');
+    }
     if (nonMedical.checked) {
         trackingNumberWrapper.classList.remove('hidden');
+        ffaCertificateNumberWrapper.classList.remove('hidden');
     }
     if (isMedical.checked) {
         applicantIdWrapper.classList.remove('hidden');
+        ffaCertificateNumberWrapper.classList.remove('hidden');
     }
 })
 existingCertificate.addEventListener('click', function (event) {
