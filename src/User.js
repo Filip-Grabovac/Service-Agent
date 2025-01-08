@@ -75,12 +75,8 @@ export default class User {
                         }
                     } else {
                         if (result.is_verified) {
-                            if (result.is_active) {
-                                if (window.location.pathname !== '/user-dashboard') {
-                                    window.location.href = '/user-dashboard';
-                                }
-                            } else {
-                                window.location.href = '/registration-4-4';
+                            if (window.location.pathname !== '/user-dashboard') {
+                                window.location.href = '/user-dashboard';
                             }
                         } else {
                             if (window.location.pathname !== '/registration-3-4') {

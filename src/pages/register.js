@@ -4,6 +4,13 @@ import User from 'https://service-agent.pages.dev/src/User.js';
 const user = new User();
 
 const nextBtn = document.getElementById('next-btn');
+const secondStepInputs = document.getElementById('second-step-inputs');
+const companyRadio = document.getElementById('company');
+const individualRadio = document.getElementById('individual');
+const companyNameWrapper = document.getElementById('Company-Name-Wrapper');
+const companyNameInput = document.getElementById('Company-Name');
+const dateOfBirthWrapper = document.getElementById('Date-of-Birth-Wrapper');
+const dateOfBirthInput = document.getElementById('Date-of-Birth');
 const firstNameInput = document.getElementById('First-name');
 const lastNameInput = document.getElementById('Last-name');
 const countrySelect = document.getElementById('Country');
@@ -24,6 +31,73 @@ errorClose.addEventListener('click', (e) => {
 })
 
 user.authenticate();
+
+companyRadio.addEventListener('click', function (event) {
+    companyNameWrapper.style.display = 'flex';
+    dateOfBirthWrapper.style.display = 'none';
+})
+
+individualRadio.addEventListener('click', function (event) {
+    companyNameWrapper.style.display = 'none';
+    dateOfBirthWrapper.style.display = 'flex';
+})
+
+nextBtn.addEventListener('click', function (event) {
+    event.preventDefault(); // Prevent form from submitting
+
+    if (secondStepInputs.style.display === 'none') {
+        secondStepInputs.style.display = 'flex';
+    } else {
+        const registerData = {
+            first_name: firstNameInput.value,
+            last_name: lastNameInput.value,
+            country: countrySelect.value,
+            state: stateSelect.value,
+            city: cityInput.value,
+            zip: zipInput.value,
+            street: streetInput.value,
+            number: numberInput.value,
+            email: emailInput.value,
+            phone_number: phoneInput.value,
+        };
+
+        if (validateData(registerData) === 1) {
+            errorMessage.innerHTML = 'Please, fill in all fields.';
+            errorWrapper.classList.remove('hide');
+
+            setTimeout(function() {
+                errorWrapper.classList.add('hide');
+            }, 3000);
+
+            return;
+        }
+
+        localStorage.setItem('registerData', JSON.stringify(registerData));
+
+        window.location.href = '/registration-2-4';
+    }
+});
+
+function validateData(registerData) {
+    let hasErrors = 0;
+
+    Object.entries(registerData).forEach(([key, value]) => {
+        if (value.length === 0) {
+            hasErrors = 1;
+        }
+
+        if (key === 'email' && !isValidEmail(value)) {
+            hasErrors = 1;
+        }
+    });
+
+    return hasErrors;
+}
+
+function isValidEmail(email) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     const countriesText = `
@@ -235,56 +309,3 @@ document.addEventListener('DOMContentLoaded', function () {
         countrySelect.appendChild(option);
     });
 });
-
-nextBtn.addEventListener('click', function (event) {
-    event.preventDefault(); // Prevent form from submitting
-
-    const registerData = {
-        first_name: firstNameInput.value,
-        last_name: lastNameInput.value,
-        country: countrySelect.value,
-        state: stateSelect.value,
-        city: cityInput.value,
-        zip: zipInput.value,
-        street: streetInput.value,
-        number: numberInput.value,
-        email: emailInput.value,
-        phone_number: phoneInput.value,
-    };
-
-    if (validateData(registerData) === 1) {
-        errorMessage.innerHTML = 'Please, fill in all fields.';
-        errorWrapper.classList.remove('hide');
-
-        setTimeout(function() {
-            errorWrapper.classList.add('hide');
-        }, 3000);
-
-        return;
-    }
-
-    localStorage.setItem('registerData', JSON.stringify(registerData));
-
-    window.location.href = '/registration-2-4';
-});
-
-function validateData(registerData) {
-    let hasErrors = 0;
-
-    Object.entries(registerData).forEach(([key, value]) => {
-        if (value.length === 0) {
-            hasErrors = 1;
-        }
-
-        if (key === 'email' && !isValidEmail(value)) {
-            hasErrors = 1;
-        }
-    });
-
-    return hasErrors;
-}
-
-function isValidEmail(email) {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-}
