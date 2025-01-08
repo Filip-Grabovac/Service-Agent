@@ -170,6 +170,11 @@ export default class TableRow {
             `,
             },
             certificates: {
+                id: () => `
+                <div class="row-inside">
+                    <div># ${item.id}</div>
+                </div>
+            `,
                 details: () => `
                 <div class="row-inside">
                     <div class="txt-row">${item.aircraft_details}</div>
