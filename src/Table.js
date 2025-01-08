@@ -905,6 +905,15 @@ function getModals(menu) {
                 files: [],
                 success_message: 'The document has been successfully deleted.',
             }
+        },
+        7: {
+            1: {
+                modal: 'delete-certificate-popup',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates/{certificates_id}',
+                method: 'DELETE',
+                files: [],
+                success_message: 'The certificate has been successfully deleted.',
+            }
         }
     }
 
