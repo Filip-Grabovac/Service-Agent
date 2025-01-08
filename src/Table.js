@@ -489,6 +489,11 @@ export function setModals(menu) {
                 }
 
                 modal.classList.remove('hide');
+                if (modalName === 'add-certificate-popup') {
+                    const certificatesTable = document.getElementById('certificate-tables');
+
+                    certificatesTable.classList.add('hide');
+                }
             });
         });
 
@@ -497,6 +502,11 @@ export function setModals(menu) {
                 e.preventDefault()
 
                 modal.classList.add('hide');
+                if (modalName === 'add-certificate-popup') {
+                    const certificatesTable = document.getElementById('certificate-tables');
+
+                    certificatesTable.classList.remove('hide');
+                }
             });
         });
 
