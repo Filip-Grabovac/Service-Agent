@@ -224,7 +224,7 @@ export default class TableRow {
             `,
                 existing_certificate: () => `
                 <div class="row-inside">
-                    <div class="txt-row">${item.existing_certificate}</div>
+                    <div class="txt-row">${item.existing_certificate === 'part_61' ?? 'Pilot, Flight Instructor, Ground Instructor (Part 61)'}${item.existing_certificate === 'part_65' ?? 'ATC Tower Operator, Aircraft Dispatcher, Mechanic, Repairman, Parachute Rigger (Part 65)'}</div>
                 </div>
             `,
                 blank: () => `
