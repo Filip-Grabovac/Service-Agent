@@ -52,7 +52,7 @@ nextBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
     if (secondStepInputs.classList.contains('hidden')) {
-        secondStepInputs.classList.add('hidden');
+        secondStepInputs.classList.remove('hidden');
     } else {
         const registerData = {
             first_name: firstNameInput.value,
