@@ -74,6 +74,15 @@ const trackingNumberWrapper = document.getElementById('tracking_number_wrapper')
 const existingCertificateWrapper = document.getElementById('existing_certificate_wrapper');
 const ffaCertificateNumberWrapper = document.getElementById('ffa_certificate_number_wrapper');
 
+
+radioOption1.classList.add('hidden');
+radioOption2.classList.add('hidden');
+chooseMedicalWrapper.classList.add('hidden');
+applicantIdWrapper.classList.add('hidden');
+trackingNumberWrapper.classList.add('hidden');
+existingCertificateWrapper.classList.add('hidden');
+ffaCertificateNumberWrapper.classList.add('hidden');
+
 aircraft.addEventListener('click', function (event) {
     radioOption1.classList.remove('hidden');
     if (!radioOption2.classList.contains('hidden')) {
