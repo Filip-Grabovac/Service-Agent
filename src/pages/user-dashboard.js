@@ -70,7 +70,10 @@ user.me().then((data) => {
 });
 
 certificate.getAllActive().then((data) => {
-    console.log(data)
+    if (data && data.length === 0) {
+        userMenu1.style.display = 'none';
+        userMenu2.style.display = 'none';
+    }
 })
 
 const aircraft = document.querySelector('input[type="radio"][value="aircraft_registration_certificate"]');
