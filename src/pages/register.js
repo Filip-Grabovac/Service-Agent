@@ -26,6 +26,8 @@ const errorWrapper = document.getElementById('error-wrapper');
 const errorMessage = document.getElementById('error-message');
 const errorClose = document.getElementById('error-close');
 
+let isCompany;
+
 errorClose.addEventListener('click', (e) => {
     errorWrapper.classList.add('hide');
 })
@@ -35,22 +37,28 @@ user.authenticate();
 companyRadio.addEventListener('click', function (event) {
     companyNameWrapper.style.display = 'flex';
     dateOfBirthWrapper.style.display = 'none';
+
+    isCompany = true;
 })
 
 individualRadio.addEventListener('click', function (event) {
     companyNameWrapper.style.display = 'none';
     dateOfBirthWrapper.style.display = 'flex';
+
+    isCompany = false;
 })
 
 nextBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
-    if (secondStepInputs.style.display === 'none') {
-        secondStepInputs.style.display = 'flex';
+    if (secondStepInputs.classList.contains('hidden')) {
+        secondStepInputs.classList.add('hidden');
     } else {
         const registerData = {
+            company_name: companyNameInput.value,
             first_name: firstNameInput.value,
             last_name: lastNameInput.value,
+            date_of_birth: dateOfBirthInput.value,
             country: countrySelect.value,
             state: stateSelect.value,
             city: cityInput.value,
@@ -59,6 +67,7 @@ nextBtn.addEventListener('click', function (event) {
             number: numberInput.value,
             email: emailInput.value,
             phone_number: phoneInput.value,
+            is_company: isCompany,
         };
 
         if (validateData(registerData) === 1) {
