@@ -316,8 +316,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     countries.forEach(country => {
         const option = document.createElement("option");
-        option.textContent = country;
-        option.value = country;
+        option.textContent = country.replace(/\s+/g, '');
+        option.value = country.replace(/\s+/g, '');
         countrySelect.appendChild(option);
     });
 });
