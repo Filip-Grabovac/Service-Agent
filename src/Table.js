@@ -118,7 +118,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
     const pagination = table.getElementsByClassName('pagination-buttons')[0];
     const search = document.getElementById(activeRole + '-menu' + menu + '-tab' + tab + '-search');
 
-    if (!isUserDocumentsInAdmin || menu !== 7) {
+    if (!isUserDocumentsInAdmin && menu !== 7) {
         search.setAttribute('data-menu', menu)
         search.setAttribute('data-tab', tab)
         search.setAttribute('data-status-ids', statusIds)
