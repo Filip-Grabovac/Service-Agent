@@ -73,28 +73,11 @@ certificate.getAllActive().then((data) => {
     if (data && data.length === 0) {
         userMenu1.style.display = 'none';
         userMenu2.style.display = 'none';
+
         const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
         activeTabLink.click();
-
-        // changeActiveTab()
     }
 })
-
-function changeActiveTab() {
-    const tabLinks = document.querySelectorAll('.w-tab-link');
-    const tabPanes = document.querySelectorAll('.w-tab-pane');
-
-    tabLinks.forEach(link => link.classList.remove('w--current'));
-    tabPanes.forEach(pane => pane.classList.remove('w--current'));
-
-    const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
-    const activeTabPane = document.querySelector(`.w-tab-pane[data-w-tab="Tab 4"]`);
-
-    if (activeTabLink && activeTabPane) {
-        activeTabLink.classList.add('w--current');
-        activeTabPane.classList.add('w--current');
-    }
-}
 
 const aircraft = document.querySelector('input[type="radio"][value="aircraft_registration_certificate"]');
 const airman = document.querySelector('input[type="radio"][value="airman_certificate"]');
