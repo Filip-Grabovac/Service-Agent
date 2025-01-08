@@ -355,6 +355,9 @@ function getColumns(menu, tab) {
         6: {
             1: ['id', 'name', 'description', 'price', 'status', 'blank', 'actions'],
         },
+        7: {
+            1: ['id', 'details', 'make', 'model', 'serial_number', 'blank', 'actions'],
+        },
     };
 
     return columns[menu]?.[tab] || 'unknown';

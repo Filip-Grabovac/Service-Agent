@@ -18,6 +18,7 @@ const gear = document.getElementById('gear');
 
 const userMenu1 = document.getElementById('user-menu1');
 const userMenu2 = document.getElementById('user-menu2');
+const userMenu3 = document.getElementById('user-menu3');
 
 user.authenticate();
 
@@ -38,6 +39,12 @@ userMenu2.addEventListener('click', function (event) {
     updateActiveRole('user')
 
     fillTable(6, 1, 1)
+})
+userMenu3.addEventListener('click', function (event) {
+    updateActiveElement(userMenu3)
+    updateActiveRole('user')
+
+    fillTable(7, 1, 1)
 })
 
 userMenu1.click()
