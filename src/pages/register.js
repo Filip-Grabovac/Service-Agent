@@ -9,7 +9,6 @@ const companyRadio = document.getElementById('company');
 const individualRadio = document.getElementById('individual');
 const companyNameWrapper = document.getElementById('Company-Name-Wrapper');
 const companyNameInput = document.getElementById('Company-Name');
-const dateOfBirthWrapper = document.getElementById('Date-of-Birth-Wrapper');
 const dateOfBirthInput = document.getElementById('Date-of-Birth');
 const firstNameInput = document.getElementById('First-name');
 const lastNameInput = document.getElementById('Last-name');
@@ -36,14 +35,14 @@ user.authenticate();
 
 companyRadio.addEventListener('click', function (event) {
     companyNameWrapper.style.display = 'flex';
-    dateOfBirthWrapper.style.display = 'none';
+    dateOfBirthInput.style.display = 'none';
 
     isCompany = true;
 })
 
 individualRadio.addEventListener('click', function (event) {
     companyNameWrapper.style.display = 'none';
-    dateOfBirthWrapper.style.display = 'flex';
+    dateOfBirthInput.style.display = 'flex';
 
     isCompany = false;
 })
