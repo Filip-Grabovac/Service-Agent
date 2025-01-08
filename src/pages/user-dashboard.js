@@ -44,7 +44,8 @@ userMenu3.addEventListener('click', function (event) {
     updateActiveElement(userMenu3)
     updateActiveRole('user')
 
-    fillTable(7, 1, 1)
+    fillTable(7, 1, 'aircraft_registration_certificate')
+    // fillTable(7, 2, 'airman_certificate')
 })
 
 userMenu1.click()

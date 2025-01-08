@@ -5,12 +5,14 @@
 import User from 'https://service-agent.pages.dev/src/User.js';
 import Document from 'https://service-agent.pages.dev/src/Document.js';
 import ShippingTariff from 'https://service-agent.pages.dev/src/ShippingTariff.js';
+import Certificate from 'https://service-agent.pages.dev/src/Certificate.js';
 import TableRow from 'https://service-agent.pages.dev/src/TableRow.js';
 
 const user = new User();
 const documentFile = new Document();
 const shippingTariff = new ShippingTariff();
 const tableRow = new TableRow();
+const certificate = new Certificate();
 
 let allData = [];
 
@@ -132,7 +134,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
 
     let model = documentFile;
     let modelName = 'document';
-    if (activeRole === 'user') {
+    if (menu === 5 || menu === 6) {
         modelName = 'user_document'
     } else if (menu === 2 && tab === 1) {
         model = user;
@@ -142,11 +144,14 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
     } else if (menu === 4) {
         model = shippingTariff;
         modelName = 'shippingTariff'
+    } else if (menu === 7) {
+        model = certificate;
+        modelName = 'certificates'
     }
 
     let methodName = 'getAll';
     let archived = null
-    if (activeRole === 'user') {
+    if (activeRole === 'user' && (menu === 5 || menu === 6)) {
         archived = statusIds
         statusIds = null
         methodName = 'getAllByAuthUser'
