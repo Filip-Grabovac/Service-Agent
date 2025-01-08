@@ -686,6 +686,12 @@ export function setModals(menu) {
                     if (menu === 1 || menu === 3) {
                         getTabCount()
                     }
+
+                    if (modalName === 'add-certificate-popup') {
+                        const certificatesTable = document.getElementById('certificate-tables');
+
+                        certificatesTable.classList.remove('hide');
+                    }
                 })
                 .catch((error) => {
                     errorMessage.innerHTML = 'Server Error! Please, try again or contact support.';
