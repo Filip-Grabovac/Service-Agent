@@ -569,24 +569,26 @@ export function setModals(menu) {
                     }
                 }
 
-                const entries = Array.from(formData.entries());
-                for (const [key, value] of entries) {
-                    if (key.includes('.')) {
-                        let modifiedKey = key.split('.').pop();
+                if (modalName !== 'add-certificate-popup') {
+                    const entries = Array.from(formData.entries());
+                    for (const [key, value] of entries) {
+                        if (key.includes('.')) {
+                            let modifiedKey = key.split('.').pop();
 
-                        formData.delete(key);
-                        formData.append(modifiedKey, value);
-                    }
+                            formData.delete(key);
+                            formData.append(modifiedKey, value);
+                        }
 
-                    if (!value.trim()) {
-                        errorMessage.innerHTML = 'Please, fill in all fields.';
-                        errorWrapper.classList.remove('hide');
+                        if (!value.trim()) {
+                            errorMessage.innerHTML = 'Please, fill in all fields.';
+                            errorWrapper.classList.remove('hide');
 
-                        setTimeout(function() {
-                            errorWrapper.classList.add('hide');
-                        }, 3000);
+                            setTimeout(function () {
+                                errorWrapper.classList.add('hide');
+                            }, 3000);
 
-                        return;
+                            return;
+                        }
                     }
                 }
             }
