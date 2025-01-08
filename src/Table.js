@@ -144,9 +144,12 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
     } else if (menu === 4) {
         model = shippingTariff;
         modelName = 'shippingTariff'
-    } else if (menu === 7) {
+    } else if (menu === 7 && tab === 1) {
         model = certificate;
-        modelName = 'certificates'
+        modelName = 'aircraft_certificates'
+    } else if (menu === 7 && tab === 2) {
+        model = certificate;
+        modelName = 'airman_certificates'
     }
 
     let methodName = 'getAll';
@@ -362,6 +365,7 @@ function getColumns(menu, tab) {
         },
         7: {
             1: ['id', 'details', 'make', 'model', 'serial_number', 'blank', 'actions'],
+            2: ['id', 'ffa_certificate_number', 'applicant_id_number', 'iarca_tracking_number', 'existing_certificate', 'blank', 'actions'],
         },
     };
 

@@ -169,7 +169,7 @@ export default class TableRow {
                 </div>
             `,
             },
-            certificates: {
+            aircraft_certificates: {
                 id: () => `
                 <div class="row-inside">
                     <div># ${item.id}</div>
@@ -193,6 +193,38 @@ export default class TableRow {
                 serial_number: () => `
                 <div class="row-inside">
                     <div class="txt-row">${item.aircraft_serial_number}</div>
+                </div>
+            `,
+                blank: () => `
+                <div class="row-inside">
+                    <div class="gray-box"></div>
+                </div>
+            `,
+            },
+            airman_certificates: {
+                id: () => `
+                <div class="row-inside">
+                    <div># ${item.id}</div>
+                </div>
+            `,
+                ffa_certificate_number: () => `
+                <div class="row-inside">
+                    <div class="txt-row">${item.ffa_certificate_number}</div>
+                </div>
+            `,
+                applicant_id_number: () => `
+                <div class="row-inside">
+                    <div class="txt-row">${item.applicant_id_number}</div>
+                </div>
+            `,
+                iarca_tracking_number: () => `
+                <div class="row-inside">
+                    <div class="txt-row">${item.iarca_tracking_number}</div>
+                </div>
+            `,
+                existing_certificate: () => `
+                <div class="row-inside">
+                    <div class="txt-row">${item.existing_certificate}</div>
                 </div>
             `,
                 blank: () => `
