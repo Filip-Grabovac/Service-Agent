@@ -75,36 +75,50 @@ const existingCertificateWrapper = document.getElementById('existing_certificate
 const ffaCertificateNumberWrapper = document.getElementById('ffa_certificate_number_wrapper');
 
 aircraft.addEventListener('click', function (event) {
-    radioOption1.style.display = 'flex';
-    radioOption2.style.display = 'none';
+    radioOption1.classList.remove('hidden');
+    if (!radioOption2.classList.contains('hidden')) {
+        radioOption2.classList.add('hidden');
+    }
 })
 airman.addEventListener('click', function (event) {
-    radioOption1.style.display = 'none';
-    radioOption2.style.display = 'flex';
+    radioOption2.classList.remove('hidden');
+    if (!radioOption1.classList.contains('hidden')) {
+        radioOption1.classList.add('hidden');
+    }
 })
 newCertificate.addEventListener('click', function (event) {
-    chooseMedicalWrapper.style.display = 'flex';
+    chooseMedicalWrapper.classList.remove('hidden');
     if (nonMedical.checked) {
-        trackingNumberWrapper.style.display = 'flex';
+        trackingNumberWrapper.classList.remove('hidden');
     }
     if (isMedical.checked) {
-        applicantIdWrapper.style.display = 'flex';
+        applicantIdWrapper.classList.remove('hidden');
     }
 })
 existingCertificate.addEventListener('click', function (event) {
-    existingCertificateWrapper.style.display = 'flex';
-    ffaCertificateNumberWrapper.style.display = 'flex';
-    chooseMedicalWrapper.style.display = 'none';
-    trackingNumberWrapper.style.display = 'none';
-    applicantIdWrapper.style.display = 'none';
+    existingCertificateWrapper.classList.remove('hidden');
+    ffaCertificateNumberWrapper.classList.remove('hidden');
+    if (!chooseMedicalWrapper.classList.contains('hidden')) {
+        chooseMedicalWrapper.classList.add('hidden');
+    }
+    if (!trackingNumberWrapper.classList.contains('hidden')) {
+        trackingNumberWrapper.classList.add('hidden');
+    }
+    if (!applicantIdWrapper.classList.contains('hidden')) {
+        applicantIdWrapper.classList.add('hidden');
+    }
 })
 nonMedical.addEventListener('click', function (event) {
-    ffaCertificateNumberWrapper.style.display = 'flex';
-    trackingNumberWrapper.style.display = 'flex';
-    applicantIdWrapper.style.display = 'none';
+    ffaCertificateNumberWrapper.classList.remove('hidden');
+    trackingNumberWrapper.classList.remove('hidden');
+    if (!applicantIdWrapper.classList.contains('hidden')) {
+        applicantIdWrapper.classList.add('hidden');
+    }
 })
 isMedical.addEventListener('click', function (event) {
-    ffaCertificateNumberWrapper.style.display = 'flex';
-    applicantIdWrapper.style.display = 'flex';
-    trackingNumberWrapper.style.display = 'none';
+    ffaCertificateNumberWrapper.classList.remove('hidden');
+    applicantIdWrapper.classList.remove('hidden');
+    if (!trackingNumberWrapper.classList.contains('hidden')) {
+        trackingNumberWrapper.classList.add('hidden');
+    }
 })
