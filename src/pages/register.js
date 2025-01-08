@@ -55,10 +55,8 @@ nextBtn.addEventListener('click', function (event) {
         secondStepInputs.classList.add('hidden');
     } else {
         const registerData = {
-            company_name: companyNameInput.value,
             first_name: firstNameInput.value,
             last_name: lastNameInput.value,
-            date_of_birth: dateOfBirthInput.value,
             country: countrySelect.value,
             state: stateSelect.value,
             city: cityInput.value,
@@ -69,6 +67,12 @@ nextBtn.addEventListener('click', function (event) {
             phone_number: phoneInput.value,
             is_company: isCompany,
         };
+
+        if (isCompany) {
+            registerData.company_name = companyNameInput.value;
+        } else {
+            registerData.date_of_birth = dateOfBirthInput.value;
+        }
 
         if (validateData(registerData) === 1) {
             errorMessage.innerHTML = 'Please, fill in all fields.';
