@@ -872,7 +872,16 @@ function getModals(menu) {
                 files: [],
                 success_message: 'The document has been successfully deleted.',
             }
-        }
+        },
+        // 7: {
+        //     1: {
+        //         modal: 'add-certificate-popup',
+        //         action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates',
+        //         method: 'POST',
+        //         files: [],
+        //         success_message: 'The certificate has been successfully created.',
+        //     },
+        // }
     }
 
     return modals[menu] || 'unknown';

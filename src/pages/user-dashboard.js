@@ -59,3 +59,52 @@ user.me().then((data) => {
     setModals('initial-user');
 });
 
+const aircraft = document.querySelector('input[type="radio"][value="aircraft_registration_certificate"]');
+const airman = document.querySelector('input[type="radio"][value="airman_certificate"]');
+const newCertificate = document.querySelector('input[type="radio"][name="is_existing"][value="false"]');
+const existingCertificate = document.querySelector('input[type="radio"][name="is_existing"][value="true"]');
+const nonMedical = document.querySelector('input[type="radio"][name="is_medical"][value="false"]');
+const isMedical = document.querySelector('input[type="radio"][name="is_medical"][value="true"]');
+
+const radioOption1 = document.getElementById('radio-option-1');
+const radioOption2 = document.getElementById('radio-option-2');
+const chooseMedicalWrapper = document.getElementById('choose-medical-wrapper');
+const applicantIdWrapper = document.getElementById('applicant_id_wrapper');
+const trackingNumberWrapper = document.getElementById('tracking_number_wrapper');
+const existingCertificateWrapper = document.getElementById('existing_certificate_wrapper');
+const ffaCertificateNumberWrapper = document.getElementById('ffa_certificate_number_wrapper');
+
+aircraft.addEventListener('click', function (event) {
+    radioOption1.style.display = 'flex';
+    radioOption2.style.display = 'none';
+})
+airman.addEventListener('click', function (event) {
+    radioOption1.style.display = 'none';
+    radioOption2.style.display = 'flex';
+})
+newCertificate.addEventListener('click', function (event) {
+    chooseMedicalWrapper.style.display = 'flex';
+    if (nonMedical.checked) {
+        trackingNumberWrapper.style.display = 'flex';
+    }
+    if (isMedical.checked) {
+        applicantIdWrapper.style.display = 'flex';
+    }
+})
+existingCertificate.addEventListener('click', function (event) {
+    existingCertificateWrapper.style.display = 'flex';
+    ffaCertificateNumberWrapper.style.display = 'flex';
+    chooseMedicalWrapper.style.display = 'none';
+    trackingNumberWrapper.style.display = 'none';
+    applicantIdWrapper.style.display = 'none';
+})
+nonMedical.addEventListener('click', function (event) {
+    ffaCertificateNumberWrapper.style.display = 'flex';
+    trackingNumberWrapper.style.display = 'flex';
+    applicantIdWrapper.style.display = 'none';
+})
+isMedical.addEventListener('click', function (event) {
+    ffaCertificateNumberWrapper.style.display = 'flex';
+    applicantIdWrapper.style.display = 'flex';
+    trackingNumberWrapper.style.display = 'none';
+})
