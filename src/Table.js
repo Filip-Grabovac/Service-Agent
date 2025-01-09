@@ -825,6 +825,12 @@ export function setModals(menu) {
                         document.querySelectorAll('.w--redirected-checked').forEach(el => {
                             el.classList.remove('w--redirected-checked');
                         });
+
+                        const selectCertificateElement = document.getElementById('certificates_id');
+                        console.log(selectCertificateElement)
+                        if (selectCertificateElement) {
+                            selectCertificateElement.innerHTML = '';
+                        }
                     }
 
                     if (modalName === 'add-certificate-popup') {
@@ -857,11 +863,6 @@ export function setModals(menu) {
                     if (usersTable && usersTable.classList.contains('hide') && (modalName === 'delete-user-popup' || modalName === 'edit-user-popup')) {
                         usersDetails.classList.add("hide");
                         usersTable.classList.remove("hide");
-                    }
-
-                    const selectCertificateElement = document.getElementById('certificates_id');
-                    if (selectCertificateElement) {
-                        selectCertificateElement.innerHTML = '';
                     }
 
                     if (menu === 4) {
