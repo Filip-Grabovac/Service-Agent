@@ -598,6 +598,24 @@ export function setModals(menu) {
                         formData.delete('aircraft_make');
                         formData.delete('aircraft_model');
                         formData.delete('aircraft_serial_number');
+
+                        const existingValue = entries.find(item => item[0] === 'existing_certificate')?.[1];
+
+                        if (existingValue === false) {
+                            formData.delete('existing_certificate');
+                        } else {
+                            formData.delete('is_medical');
+                            formData.delete('applicant_id_number');
+                            formData.delete('iarca_tracking_number');
+
+                            const medicalValue = entries.find(item => item[0] === 'is_medical')?.[1];
+
+                            if (medicalValue === false) {
+                                formData.delete('applicant_id_number');
+                            } else {
+                                formData.delete('iarca_tracking_number');
+                            }
+                        }
                     }
                 }
 
