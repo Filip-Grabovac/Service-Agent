@@ -536,6 +536,7 @@ export function setModals(menu) {
                                     element.checked = true;
                                 }
                             }
+                            console.log(element)
 
                             if (element.hasAttribute('data-readonly')) {
                                 element.setAttribute("readonly", true);
