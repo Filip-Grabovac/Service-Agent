@@ -23,6 +23,7 @@ let activeElement;
 let activeRole;
 let activeUserDetailsElement;
 let selectedUserId = null;
+let hasActiveCertificate;
 
 const usersTable = document.getElementById('users-table');
 const usersDetails = document.getElementById('users-details');
@@ -190,6 +191,9 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         }
 
         data.items.forEach((item) => {
+            if (menu === 7 && item.is_active === true) {
+                hasActiveCertificate = true;
+            }
             status = item._document_status?.status_label;
             if (status) {
                 if (status === 'paid' || status === 'delivered') {
@@ -251,6 +255,21 @@ function setCertificatePayment() {
     const payment = document.querySelectorAll('[data-payment-open]');
     payment.forEach(element => {
         element.addEventListener('click', function (event) {
+            let price = "";
+            if (element.getAttribute('data-payment-open') === 'aircraft') {
+                price = "price_1QXMupCA20rcDWGhemNihUF8";
+            } else if (element.getAttribute('data-payment-open') === 'airman') {
+                if (hasActiveCertificate) {
+                    price = "";
+                } else {
+                    price = "price_1QXMupCA20rcDWGhemNihUF8";
+                }
+            }
+
+            if (price === '') {
+                return
+            }
+
             loader.style.display = 'flex';
             let data = {
                 success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
@@ -258,7 +277,7 @@ function setCertificatePayment() {
                 certificates_id: element.getAttribute('data-id-certificates-id'),
                 line_items: [
                     {
-                        price: "price_1QXMupCA20rcDWGhemNihUF8",
+                        price: price,
                         quantity: "1",
                     }
                 ]
