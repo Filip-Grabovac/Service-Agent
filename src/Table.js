@@ -746,7 +746,18 @@ export function setModals(menu) {
             loader.style.display = 'flex'
 
             fetch(url, requestData)
-                .then((response) => response.json())
+                .then((response) => {
+                    if (!response.ok) {
+                        errorMessage.innerHTML = 'Server Error! Please, try again or contact support.';
+                        errorWrapper.classList.remove('hide');
+
+                        setTimeout(function() {
+                            errorWrapper.classList.add('hide');
+                        }, 3000);
+                    }
+
+                    return response.json();
+                })
                 .then((data) => {
                     modal.classList.add('hide');
 
