@@ -838,7 +838,8 @@ export function setModals(menu) {
 
                         certificatesTable.classList.remove('hide');
 
-                        // certificatePayment(data.id)
+                        console.log(data.type.split('_')[0])
+                        // certificatePayment(data.id, data.type.split('_')[0])
                     }
                 })
                 .catch((error) => {
