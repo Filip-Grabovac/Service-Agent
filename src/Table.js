@@ -593,6 +593,20 @@ export function setModals(menu) {
                         formData.delete('ffa_certificate_number');
                         formData.delete('applicant_id_number');
                         formData.delete('iarca_tracking_number');
+
+                        const regex = /^N\d{6}$/;
+                        const detailsValue = entries.find(item => item[0] === 'aircraft_details')?.[1];
+
+                        if (!regex.test(detailsValue)) {
+                            errorMessage.innerHTML = 'Aircraft Detail must start with "N" and have 6 numbers after.';
+                            errorWrapper.classList.remove('hide');
+
+                            setTimeout(function () {
+                                errorWrapper.classList.add('hide');
+                            }, 3000);
+
+                            return;
+                        }
                     } else {
                         formData.delete('aircraft_details');
                         formData.delete('aircraft_make');
