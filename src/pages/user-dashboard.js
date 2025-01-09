@@ -91,12 +91,14 @@ certificate.getAllActive().then((data) => {
 })
 
 if (urlParams.has('certificate-added')) {
-    successMessage.innerHTML = 'Certificate has been successfully paid.';
-    successWrapper.classList.remove('hide');
-
     setTimeout(function () {
-        successWrapper.classList.add('hide');
-    }, 3000);
+        successMessage.innerHTML = 'Certificate has been successfully paid.';
+        successWrapper.classList.remove('hide');
+
+        setTimeout(function () {
+            successWrapper.classList.add('hide');
+        }, 3000);
+    }, 1000);
 }
 
 const aircraft = document.querySelector('input[type="radio"][value="aircraft_registration_certificate"]');
