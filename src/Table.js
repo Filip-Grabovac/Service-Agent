@@ -567,6 +567,18 @@ export function setModals(menu) {
 
                     certificatesTable.classList.add('hide');
                 }
+
+                if (modalName === 'add-document-popup') {
+                    const selectUserElement = document.getElementById('create-document-user');
+
+                    selectUserElement.addEventListener('change', function() {
+                        const selectedValue = selectUserElement.value;
+
+                        certificate.getAllActive(selectedValue).then((data) => {
+                            console.log(data)
+                        })
+                    });
+                }
             });
         });
 
@@ -1703,13 +1715,3 @@ export function getTabCount() {
         return sum;
     }
 }
-
-const selectUserElement = document.getElementById('create-document-user');
-
-selectUserElement.addEventListener('change', function() {
-    const selectedValue = selectUserElement.value;
-
-    certificate.getAllActive(selectedValue).then((data) => {
-        console.log(data)
-    })
-});
