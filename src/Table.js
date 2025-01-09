@@ -574,16 +574,13 @@ export function setModals(menu) {
 
                     $(document).ready(function() {
                         $('#create-document-user').on('select2:select', function(e) {
-                            console.log('Izbor je promenjen na:', e.params.data.text);
+                            console.log(e.params.data);
+                            // const selectedValue = selectUserElement.value;
+                            //
+                            // certificate.getAllActive(selectedValue).then((data) => {
+                            //     console.log(data)
+                            // })
                         });
-                    });
-                    selectUserElement.addEventListener('change', function() {
-                        console.log(selectUserElement.value)
-                        const selectedValue = selectUserElement.value;
-
-                        certificate.getAllActive(selectedValue).then((data) => {
-                            console.log(data)
-                        })
                     });
                 }
             });
