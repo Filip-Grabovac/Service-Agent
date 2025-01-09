@@ -575,11 +575,11 @@ export function setModals(menu) {
                     $(document).ready(function() {
                         $('#create-document-user').on('select2:select', function(e) {
                             console.log(e.params.data);
-                            // const selectedValue = selectUserElement.value;
-                            //
-                            // certificate.getAllActive(selectedValue).then((data) => {
-                            //     console.log(data)
-                            // })
+                            const selectedValue = e.params.data.id;
+
+                            certificate.getAllActive(selectedValue).then((data) => {
+                                console.log(data)
+                            })
                         });
                     });
                 }
