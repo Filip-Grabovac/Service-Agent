@@ -580,17 +580,15 @@ export function setModals(menu) {
                                 data.forEach(cert => {
                                     const option = document.createElement('option');
                                     option.value = cert.id;
-                                    console.log(data)
-                                    console.log(data.type)
 
-                                    let type = data.type.split('_')[0]
+                                    let type = cert.type.split('_')[0]
                                     let typeFormated = type.charAt(0).toUpperCase() + type.slice(1);
 
                                     let secondString;
                                     if (type === 'airman') {
-                                        secondString = data.ffa_certificate_number;
+                                        secondString = cert.ffa_certificate_number;
                                     } else if (type === 'aircraft') {
-                                        secondString = data.aircraft_serial_number;
+                                        secondString = cert.aircraft_serial_number;
                                     }
 
                                     option.textContent = typeFormated + ' ' + secondString;
