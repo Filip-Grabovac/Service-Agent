@@ -274,7 +274,7 @@ function setCertificatePayment() {
             let data = {
                 success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
                 cancel_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
-                certificates_id: element.getAttribute('data-id-certificates-id'),
+                // certificates_id: element.getAttribute('data-id-certificates-id'),
                 line_items: [
                     {
                         price: price,
