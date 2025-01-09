@@ -536,7 +536,6 @@ export function setModals(menu) {
                                     element.checked = true;
                                 }
                             }
-                            console.log(element)
 
                             if (element.hasAttribute('data-readonly')) {
                                 element.setAttribute("readonly", true);
@@ -570,15 +569,21 @@ export function setModals(menu) {
                 }
 
                 if (modalName === 'add-document-popup') {
-                    const selectUserElement = document.getElementById('create-document-user');
-
                     $(document).ready(function() {
                         $('#create-document-user').on('select2:select', function(e) {
                             const selectCertificateElement = document.getElementById('certificates_id');
                             selectCertificateElement.innerHTML = '';
+                            selectCertificateElement.setAttribute('disabled', 1);
+                            selectCertificateElement.setAttribute('data-disabled', 1);
+
                             const selectedValue = e.params.data.id;
 
                             certificate.getAllActive(selectedValue).then((data) => {
+                                if (data && data.length > 0) {
+                                    selectCertificateElement.removeAttribute('disabled');
+                                    selectCertificateElement.removeAttribute('data-disabled');
+                                }
+
                                 data.forEach(cert => {
                                     const option = document.createElement('option');
                                     option.value = cert.id;
