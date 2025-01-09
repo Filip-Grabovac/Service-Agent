@@ -274,7 +274,7 @@ function certificatePayment(id, type) {
 
     loader.style.display = 'flex';
     let data = {
-        success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
+        success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard?certificate-added=1",
         cancel_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
         certificates_id: id,
         line_items: [
@@ -756,7 +756,6 @@ export function setModals(menu) {
                     }
                 })
                 .then((data) => {
-                    console.log(data)
                     modal.classList.add('hide');
 
                     activeElement.click()

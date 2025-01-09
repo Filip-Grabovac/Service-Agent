@@ -41,6 +41,10 @@ companyRadio.addEventListener('click', function (event) {
     dateOfBirthInput.style.display = 'none';
 
     isCompany = true;
+
+    if (secondStepInputs.classList.contains('hidden')) {
+        secondStepInputs.classList.remove('hidden');
+    }
 })
 
 individualRadio.addEventListener('click', function (event) {
@@ -48,49 +52,49 @@ individualRadio.addEventListener('click', function (event) {
     dateOfBirthInput.style.display = 'flex';
 
     isCompany = false;
+
+    if (secondStepInputs.classList.contains('hidden')) {
+        secondStepInputs.classList.remove('hidden');
+    }
 })
 
 nextBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
-    if (secondStepInputs.classList.contains('hidden')) {
-        secondStepInputs.classList.remove('hidden');
+    const registerData = {
+        first_name: firstNameInput.value,
+        last_name: lastNameInput.value,
+        country: countrySelect.value,
+        state: stateSelect.value,
+        city: cityInput.value,
+        zip: zipInput.value,
+        street: streetInput.value,
+        number: numberInput.value,
+        email: emailInput.value,
+        phone_number: phoneInput.value,
+        is_company: isCompany,
+    };
+
+    if (isCompany) {
+        registerData.company_name = companyNameInput.value;
     } else {
-        const registerData = {
-            first_name: firstNameInput.value,
-            last_name: lastNameInput.value,
-            country: countrySelect.value,
-            state: stateSelect.value,
-            city: cityInput.value,
-            zip: zipInput.value,
-            street: streetInput.value,
-            number: numberInput.value,
-            email: emailInput.value,
-            phone_number: phoneInput.value,
-            is_company: isCompany,
-        };
-
-        if (isCompany) {
-            registerData.company_name = companyNameInput.value;
-        } else {
-            registerData.date_of_birth = dateOfBirthInput.value;
-        }
-
-        if (validateData(registerData) === 1) {
-            errorMessage.innerHTML = 'Please, fill in all fields.';
-            errorWrapper.classList.remove('hide');
-
-            setTimeout(function() {
-                errorWrapper.classList.add('hide');
-            }, 3000);
-
-            return;
-        }
-
-        localStorage.setItem('registerData', JSON.stringify(registerData));
-
-        window.location.href = '/registration-2-4';
+        registerData.date_of_birth = dateOfBirthInput.value;
     }
+
+    if (validateData(registerData) === 1) {
+        errorMessage.innerHTML = 'Please, fill in all fields.';
+        errorWrapper.classList.remove('hide');
+
+        setTimeout(function() {
+            errorWrapper.classList.add('hide');
+        }, 3000);
+
+        return;
+    }
+
+    localStorage.setItem('registerData', JSON.stringify(registerData));
+
+    window.location.href = '/registration-2-4';
 });
 
 function validateData(registerData) {

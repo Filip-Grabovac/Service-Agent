@@ -22,6 +22,13 @@ const userMenu1 = document.getElementById('user-menu1');
 const userMenu2 = document.getElementById('user-menu2');
 const userMenu3 = document.getElementById('user-menu3');
 
+const successWrapper = document.getElementById('success-wrapper');
+const successMessage = document.getElementById('success-message');
+const successClose = document.getElementById('success-close');
+successClose.addEventListener('click', (e) => {
+    successWrapper.classList.add('hide');
+})
+
 user.authenticate();
 
 Array.from(logout).forEach((element) => {
@@ -78,6 +85,20 @@ certificate.getAllActive().then((data) => {
         activeTabLink.click();
     }
 })
+
+const urlParams = new URLSearchParams(window.location.search);
+
+if (urlParams.has('certificate-added')) {
+    const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
+    activeTabLink.click();
+
+    successMessage.innerHTML = 'Certificate has been successfully paid.';
+    successWrapper.classList.remove('hide');
+
+    setTimeout(function() {
+        successWrapper.classList.add('hide');
+    }, 3000);
+}
 
 const aircraft = document.querySelector('input[type="radio"][value="aircraft_registration_certificate"]');
 const airman = document.querySelector('input[type="radio"][value="airman_certificate"]');
