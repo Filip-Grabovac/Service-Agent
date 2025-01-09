@@ -571,26 +571,13 @@ export function setModals(menu) {
                 if (modalName === 'add-document-popup') {
                     $(document).ready(function() {
                         const selectCertificateElement = document.getElementById('certificates_id');
-                        selectCertificateElement.setAttribute('disabled', 1);
-                        selectCertificateElement.setAttribute('data-disabled', 1);
                         $('#create-document-user').on('select2:select', function(e) {
                             loader.style.display = 'flex';
                             selectCertificateElement.innerHTML = '';
-                            if (!selectCertificateElement.hasAttribute('disabled')) {
-                                selectCertificateElement.setAttribute('disabled', 1);
-                            }
-                            if (!selectCertificateElement.hasAttribute('data-disabled')) {
-                                selectCertificateElement.setAttribute('data-disabled', 1);
-                            }
 
                             const selectedValue = e.params.data.id;
 
                             certificate.getAllActive(selectedValue).then((data) => {
-                                if (data && data.length > 0) {
-                                    selectCertificateElement.removeAttribute('disabled');
-                                    selectCertificateElement.removeAttribute('data-disabled');
-                                }
-
                                 const option = document.createElement('option');
                                 option.value = '';
                                 option.textContent = 'Choose certificate';
@@ -664,8 +651,6 @@ export function setModals(menu) {
                 formData.append('archived', true)
             }
 
-            const entries = Array.from(formData.entries());
-            console.log(entries)
             if (typeof form !== 'undefined') {
                 const checkboxes = form.querySelectorAll('input[type="checkbox"]');
                 checkboxes.forEach(checkbox => {
@@ -678,8 +663,7 @@ export function setModals(menu) {
                 });
 
                 Array.from(form.elements).forEach(element => {
-                    console.log(element.getAttribute('name'))
-                    if (element.hasAttribute('disabled') && element.getAttribute('name') !== 'certificates_id') {
+                    if (element.hasAttribute('disabled')) {
                         formData.delete(element.name);
                     }
                 });
