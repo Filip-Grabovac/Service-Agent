@@ -254,7 +254,7 @@ function setCertificatePayment() {
             loader.style.display = 'flex';
             let data = {
                 success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
-                cancel_url: "https://agent-for-service-cbd62c.webflow.io/registration-4-4",
+                cancel_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
                 certificates_id: element.getAttribute('data-id-certificates-id'),
                 line_items: [
                     {
@@ -265,7 +265,6 @@ function setCertificatePayment() {
             };
 
             user.initialPayment(data).then(result => {
-                loader.style.display = 'none';
                 window.location.href = result.url
             });
         })
