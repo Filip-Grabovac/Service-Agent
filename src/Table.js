@@ -756,6 +756,7 @@ export function setModals(menu) {
                     }
                 })
                 .then((data) => {
+                    console.log(data)
                     modal.classList.add('hide');
 
                     activeElement.click()
@@ -797,7 +798,6 @@ export function setModals(menu) {
                         const existingCertificateWrapper = document.getElementById('existing_certificate_wrapper');
                         const ffaCertificateNumberWrapper = document.getElementById('ffa_certificate_number_wrapper');
 
-
                         radioOption1.classList.add('hidden');
                         radioOption2.classList.add('hidden');
                         chooseMedicalWrapper.classList.add('hidden');
@@ -836,7 +836,6 @@ export function setModals(menu) {
 
                         certificatesTable.classList.remove('hide');
 
-                        console.log(data)
                         // certificatePayment(data.id)
                     }
                 })
