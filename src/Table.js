@@ -572,7 +572,7 @@ export function setModals(menu) {
                     $(document).ready(function() {
                         const selectCertificateElement = document.getElementById('certificates_id');
                         $('#create-document-user').on('select2:select', function(e) {
-                            selectCertificateElement.innerHTML = '';
+                            selectCertificateElement.options.length = 0;
 
                             const selectedValue = e.params.data.id;
 
@@ -825,12 +825,6 @@ export function setModals(menu) {
                         document.querySelectorAll('.w--redirected-checked').forEach(el => {
                             el.classList.remove('w--redirected-checked');
                         });
-
-                        const selectCertificateElement = document.getElementById('certificates_id');
-                        console.log(selectCertificateElement)
-                        if (selectCertificateElement) {
-                            selectCertificateElement.innerHTML = '';
-                        }
                     }
 
                     if (modalName === 'add-certificate-popup') {
