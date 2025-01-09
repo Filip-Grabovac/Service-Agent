@@ -573,10 +573,11 @@ export function setModals(menu) {
 
                     $(document).ready(function() {
                         $('#create-document-user').on('select2:select', function(e) {
+                            const selectCertificateElement = document.getElementById('certificates_id');
+                            selectCertificateElement.innerHTML = '';
                             const selectedValue = e.params.data.id;
 
                             certificate.getAllActive(selectedValue).then((data) => {
-                                const selectElement = document.getElementById('certificates_id');
                                 data.forEach(cert => {
                                     const option = document.createElement('option');
                                     option.value = cert.id;
@@ -592,7 +593,7 @@ export function setModals(menu) {
                                     }
 
                                     option.textContent = typeFormated + ' ' + secondString;
-                                    selectElement.appendChild(option);
+                                    selectCertificateElement.appendChild(option);
                                 });
                             })
                         });
