@@ -634,7 +634,6 @@ export function setModals(menu) {
                 }
 
                 const entries = Array.from(formData.entries());
-                console.log(entries)
                 for (const [key, value] of entries) {
                     if (key.includes('.')) {
                         let modifiedKey = key.split('.').pop();
@@ -727,6 +726,7 @@ export function setModals(menu) {
 
                         const radios = form.querySelectorAll('input[type="radio"]');
 
+                        console.log(radios);
                         radios.forEach(radio => {
                             radio.checked = false;
                         });
