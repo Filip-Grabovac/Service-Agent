@@ -494,6 +494,10 @@ export function setModals(menu) {
                             if (element.hasAttribute('data-disabled')) {
                                 element.setAttribute("disabled", true);
                             }
+
+                            if (modalName === 'edit-airman-popup' && element.value === '') {
+                                element.setAttribute("disabled", true);
+                            }
                         });
                     }
 
