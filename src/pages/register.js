@@ -33,6 +33,9 @@ errorClose.addEventListener('click', (e) => {
 
 user.authenticate();
 
+const today = new Date().toISOString().split('T')[0];
+dateOfBirthInput.setAttribute('max', today);
+
 companyRadio.addEventListener('click', function (event) {
     companyNameWrapper.style.display = 'flex';
     dateOfBirthInput.style.display = 'none';
