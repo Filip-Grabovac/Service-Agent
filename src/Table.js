@@ -570,8 +570,10 @@ export function setModals(menu) {
 
                 if (modalName === 'add-document-popup') {
                     const selectUserElement = document.getElementById('create-document-user');
+                    console.log(selectUserElement)
 
                     selectUserElement.addEventListener('change', function() {
+                        console.log(selectUserElement.value)
                         const selectedValue = selectUserElement.value;
 
                         certificate.getAllActive(selectedValue).then((data) => {
