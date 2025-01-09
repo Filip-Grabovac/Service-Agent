@@ -582,12 +582,14 @@ export function setModals(menu) {
                             const selectedValue = e.params.data.id;
 
                             certificate.getAllActive(selectedValue).then((data) => {
+                                console.log(data);
                                 const option = document.createElement('option');
                                 option.value = '';
                                 option.textContent = 'Choose certificate';
                                 selectCertificateElement.appendChild(option);
 
                                 data.forEach(cert => {
+                                    console.log(cert);
                                     const option = document.createElement('option');
                                     option.value = cert.id;
 
