@@ -664,6 +664,8 @@ export function setModals(menu) {
                 formData.append('archived', true)
             }
 
+            const entries = Array.from(formData.entries());
+            console.log(entries)
             if (typeof form !== 'undefined') {
                 const checkboxes = form.querySelectorAll('input[type="checkbox"]');
                 checkboxes.forEach(checkbox => {
