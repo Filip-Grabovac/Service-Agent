@@ -443,6 +443,11 @@ export default class TableRow {
             7: {
                 1:`
                     <div class="row-inside right">
+                        ${item.is_active === false ? `
+                            <div data-payment-open="aircraft" data-id-certificates-id="${item.id}" class="actions-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 12 18" fill="none" class="action-svg smaller">
+                                <path d="M1.5 12C1.5 13.6569 2.84315 15 4.5 15H7.5C9.15685 15 10.5 13.6569 10.5 12C10.5 10.3431 9.15685 9 7.5 9H4.5C2.84315 9 1.5 7.65685 1.5 6C1.5 4.34315 2.84315 3 4.5 3H7.5C9.15685 3 10.5 4.34315 10.5 6M6 1.5V16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                              </svg></div>
+                        ` : ''}
                         <div data-modal-open="edit-aircraft-popup" data-id-certificates-id="${item.id}" data-fill-7-1=${item.id} class="edit-doc-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 17 17" fill="none" class="action-svg">
                             <path d="M12.5 7.50023L9.50002 4.50023M0.875 16.1252L3.41328 15.8432C3.72339 15.8087 3.87845 15.7915 4.02338 15.7446C4.15197 15.703 4.27434 15.6442 4.38717 15.5698C4.51434 15.4859 4.62466 15.3756 4.84529 15.1549L14.75 5.25023C15.5784 4.4218 15.5784 3.07865 14.75 2.25023C13.9216 1.4218 12.5784 1.4218 11.75 2.25023L1.8453 12.1549C1.62466 12.3756 1.51434 12.4859 1.43048 12.6131C1.35607 12.7259 1.29726 12.8483 1.25564 12.9768C1.20872 13.1218 1.19149 13.2768 1.15703 13.587L0.875 16.1252Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg></div>
@@ -453,6 +458,11 @@ export default class TableRow {
                 `,
                 2:`
                     <div class="row-inside right">
+                        ${item.is_active === false ? `
+                            <div data-payment-open="airman" data-id-certificates-id="${item.id}" class="actions-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 12 18" fill="none" class="action-svg smaller">
+                                <path d="M1.5 12C1.5 13.6569 2.84315 15 4.5 15H7.5C9.15685 15 10.5 13.6569 10.5 12C10.5 10.3431 9.15685 9 7.5 9H4.5C2.84315 9 1.5 7.65685 1.5 6C1.5 4.34315 2.84315 3 4.5 3H7.5C9.15685 3 10.5 4.34315 10.5 6M6 1.5V16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                              </svg></div>
+                        ` : ''}
                         <div data-modal-open="edit-airman-popup" data-id-certificates-id="${item.id}" data-fill-7-2=${item.id} class="edit-doc-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 17 17" fill="none" class="action-svg">
                             <path d="M12.5 7.50023L9.50002 4.50023M0.875 16.1252L3.41328 15.8432C3.72339 15.8087 3.87845 15.7915 4.02338 15.7446C4.15197 15.703 4.27434 15.6442 4.38717 15.5698C4.51434 15.4859 4.62466 15.3756 4.84529 15.1549L14.75 5.25023C15.5784 4.4218 15.5784 3.07865 14.75 2.25023C13.9216 1.4218 12.5784 1.4218 11.75 2.25023L1.8453 12.1549C1.62466 12.3756 1.51434 12.4859 1.43048 12.6131C1.35607 12.7259 1.29726 12.8483 1.25564 12.9768C1.20872 13.1218 1.19149 13.2768 1.15703 13.587L0.875 16.1252Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg></div>
