@@ -599,7 +599,7 @@ export function setModals(menu) {
                         formData.delete('aircraft_model');
                         formData.delete('aircraft_serial_number');
 
-                        const existingValue = entries.find(item => item[0] === 'existing_certificate')?.[1];
+                        const existingValue = entries.find(item => item[0] === 'is_existing')?.[1];
 
                         if (existingValue === 'false') {
                             formData.delete('existing_certificate');
