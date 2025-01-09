@@ -284,6 +284,7 @@ function setCertificatePayment() {
             };
 
             user.initialPayment(data).then(result => {
+                loader.style.display = 'none';
                 window.location.href = result.url
             });
         })
