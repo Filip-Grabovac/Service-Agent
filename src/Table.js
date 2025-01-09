@@ -571,6 +571,7 @@ export function setModals(menu) {
                 if (modalName === 'add-document-popup') {
                     $(document).ready(function() {
                         const selectCertificateElement = document.getElementById('certificates_id');
+                        selectCertificateElement.options.length = 0;
                         $('#create-document-user').on('select2:select', function(e) {
                             selectCertificateElement.options.length = 0;
 
