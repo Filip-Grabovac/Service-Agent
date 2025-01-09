@@ -495,7 +495,7 @@ export function setModals(menu) {
                                 element.setAttribute("disabled", true);
                             }
 
-                            if (modalName === 'edit-airman-popup' && element.value === '') {
+                            if (modalName === 'edit-airman-popup') {
                                 if (element.value === '') {
                                     element.setAttribute("data-disabled", true);
                                     element.setAttribute("disabled", true);
