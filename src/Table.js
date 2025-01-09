@@ -572,6 +572,11 @@ export function setModals(menu) {
                     const selectUserElement = document.getElementById('create-document-user');
                     console.log(selectUserElement)
 
+                    $(document).ready(function() {
+                        $('#create-document-user').on('select2:select', function(e) {
+                            console.log('Izbor je promenjen na:', e.params.data.text);
+                        });
+                    });
                     selectUserElement.addEventListener('change', function() {
                         console.log(selectUserElement.value)
                         const selectedValue = selectUserElement.value;
