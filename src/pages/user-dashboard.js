@@ -89,15 +89,17 @@ certificate.getAllActive().then((data) => {
 const urlParams = new URLSearchParams(window.location.search);
 
 if (urlParams.has('certificate-added')) {
-    const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
-    activeTabLink.click();
+    document.addEventListener('DOMContentLoaded', function () {
+        const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
+        activeTabLink.click();
 
-    successMessage.innerHTML = 'Certificate has been successfully paid.';
-    successWrapper.classList.remove('hide');
+        successMessage.innerHTML = 'Certificate has been successfully paid.';
+        successWrapper.classList.remove('hide');
 
-    setTimeout(function() {
-        successWrapper.classList.add('hide');
-    }, 3000);
+        setTimeout(function () {
+            successWrapper.classList.add('hide');
+        }, 3000);
+    })
 }
 
 const aircraft = document.querySelector('input[type="radio"][value="aircraft_registration_certificate"]');
