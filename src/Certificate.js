@@ -48,10 +48,14 @@ export default class Certificate {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
-    getAllActive() {
+    getAllActive(userId = null) {
         const authToken =  localStorage.getItem('authToken');
 
         let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/active-certificates`;
+
+        if (userId !== null) {
+            url += `&user_id=${userId}`;
+        }
 
         // Call the Xano API
         return fetch(url, {
