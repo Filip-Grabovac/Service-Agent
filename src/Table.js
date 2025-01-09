@@ -274,9 +274,10 @@ function certificatePayment(id, type) {
 
     loader.style.display = 'flex';
     let data = {
-        success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard?certificate-added=1",
+        success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard?certificate-paid=1",
         cancel_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
         certificates_id: id,
+        email: authUserData.email,
         line_items: [
             {
                 price: price,

@@ -84,13 +84,13 @@ certificate.getAllActive().then((data) => {
         userMenu2.style.display = 'none';
     }
 
-    if (data && data.length === 0 || urlParams.has('certificate-added')) {
+    if (data && data.length === 0 || urlParams.has('certificate-paid')) {
         const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
         activeTabLink.click();
     }
 })
 
-if (urlParams.has('certificate-added')) {
+if (urlParams.has('certificate-paid')) {
     setTimeout(function () {
         successMessage.innerHTML = 'Certificate has been successfully paid.';
         successWrapper.classList.remove('hide');
