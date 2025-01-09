@@ -496,8 +496,13 @@ export function setModals(menu) {
                             }
 
                             if (modalName === 'edit-airman-popup' && element.value === '') {
-                                element.setAttribute("data-disabled", true);
-                                element.setAttribute("disabled", true);
+                                if (element.value === '') {
+                                    element.setAttribute("data-disabled", true);
+                                    element.setAttribute("disabled", true);
+                                } else {
+                                    element.removeAttribute("data-disabled");
+                                    element.removeAttribute("disabled");
+                                }
                             }
                         });
                     }
