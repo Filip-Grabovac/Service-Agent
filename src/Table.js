@@ -580,6 +580,8 @@ export function setModals(menu) {
                                 data.forEach(cert => {
                                     const option = document.createElement('option');
                                     option.value = cert.id;
+                                    console.log(data)
+                                    console.log(data.type)
 
                                     let type = data.type.split('_')[0]
                                     let typeFormated = type.charAt(0).toUpperCase() + type.slice(1);
