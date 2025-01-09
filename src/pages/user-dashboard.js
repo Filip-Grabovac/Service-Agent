@@ -159,24 +159,3 @@ isMedical.addEventListener('click', function (event) {
         trackingNumberWrapper.classList.add('hidden');
     }
 })
-
-const aircraftPayment = document.querySelectorAll('[data-payment-open="aircraft"]');
-aircraftPayment.forEach(element => {
-    element.addEventListener('click', function (event) {
-        let data = {
-            success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
-            cancel_url: "https://agent-for-service-cbd62c.webflow.io/registration-4-4",
-            certificates_id: element.getAttribute('data-id-certificates-id'),
-            line_items: [
-                {
-                    price: "price_1QXMupCA20rcDWGhemNihUF8",
-                    quantity: "1",
-                }
-            ]
-        };
-
-        user.initialPayment(data).then(result => {
-            window.location.href = result.url
-        });
-    })
-});

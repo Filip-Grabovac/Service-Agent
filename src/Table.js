@@ -237,10 +237,37 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
             setUserDetails();
         }
 
+        if (menu === 7) {
+            setCertificatePayment()
+        }
+
         createPagination(menu, tab, statusIds, pagination, data);
 
         loader.style.display = 'none';
     })
+}
+
+function setCertificatePayment() {
+    const payment = document.querySelectorAll('[data-payment-open]');
+    payment.forEach(element => {
+        element.addEventListener('click', function (event) {
+            let data = {
+                success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
+                cancel_url: "https://agent-for-service-cbd62c.webflow.io/registration-4-4",
+                certificates_id: element.getAttribute('data-id-certificates-id'),
+                line_items: [
+                    {
+                        price: "price_1QXMupCA20rcDWGhemNihUF8",
+                        quantity: "1",
+                    }
+                ]
+            };
+
+            user.initialPayment(data).then(result => {
+                window.location.href = result.url
+            });
+        })
+    });
 }
 
 function createPagination(menu, tab, statusIds, pagination, data) {
