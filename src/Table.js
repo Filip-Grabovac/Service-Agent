@@ -260,7 +260,7 @@ function setCertificatePayment() {
                 price = "price_1QfGqbCA20rcDWGhGrIUBQVr";
             } else if (element.getAttribute('data-payment-open') === 'airman') {
                 if (hasActiveCertificate) {
-                    price = "price_1QfGvQCA20rcDWGhcTgI7dlp";
+                    price = "price_1QfGwoCA20rcDWGh4qFwuPTJ";
                 } else {
                     price = "price_1QfGuICA20rcDWGhM3Y5GQb7";
                 }
