@@ -572,11 +572,9 @@ export function setModals(menu) {
                     $(document).ready(function() {
                         const selectCertificateElement = document.getElementById('certificates_id');
                         console.log(selectCertificateElement);
-                        console.log(selectCertificateElement.value);
-                        console.log(selectCertificateElement.options);
-                        console.log(selectCertificateElement.options.length);
                         console.log(selectCertificateElement.innerHTML);
-                        selectCertificateElement.options.length = 0;
+                        selectCertificateElement.innerHTML = '';
+                        console.log(selectCertificateElement.innerHTML);
                         $('#create-document-user').on('select2:select', function(e) {
                             selectCertificateElement.options.length = 0;
 
