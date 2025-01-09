@@ -570,11 +570,18 @@ export function setModals(menu) {
 
                 if (modalName === 'add-document-popup') {
                     $(document).ready(function() {
+                        const selectCertificateElement = document.getElementById('certificates_id');
+                        selectCertificateElement.setAttribute('disabled', 1);
+                        selectCertificateElement.setAttribute('data-disabled', 1);
                         $('#create-document-user').on('select2:select', function(e) {
-                            const selectCertificateElement = document.getElementById('certificates_id');
+                            loader.style.display = 'flex';
                             selectCertificateElement.innerHTML = '';
-                            selectCertificateElement.setAttribute('disabled', 1);
-                            selectCertificateElement.setAttribute('data-disabled', 1);
+                            if (!selectCertificateElement.hasAttribute('disabled')) {
+                                selectCertificateElement.setAttribute('disabled', 1);
+                            }
+                            if (!selectCertificateElement.hasAttribute('data-disabled')) {
+                                selectCertificateElement.setAttribute('data-disabled', 1);
+                            }
 
                             const selectedValue = e.params.data.id;
 
@@ -602,6 +609,7 @@ export function setModals(menu) {
                                     selectCertificateElement.appendChild(option);
                                 });
                             })
+                            loader.style.display = 'none';
                         });
                     });
                 }
