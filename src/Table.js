@@ -572,7 +572,6 @@ export function setModals(menu) {
                     $(document).ready(function() {
                         const selectCertificateElement = document.getElementById('certificates_id');
                         $('#create-document-user').on('select2:select', function(e) {
-                            loader.style.display = 'flex';
                             selectCertificateElement.innerHTML = '';
 
                             const selectedValue = e.params.data.id;
@@ -601,7 +600,6 @@ export function setModals(menu) {
                                     selectCertificateElement.appendChild(option);
                                 });
                             })
-                            loader.style.display = 'none';
                         });
                     });
                 }
@@ -717,7 +715,6 @@ export function setModals(menu) {
                 }
 
                 const entries = Array.from(formData.entries());
-                console.log(entries)
                 for (const [key, value] of entries) {
                     if (key.includes('.')) {
                         let modifiedKey = key.split('.').pop();
@@ -860,6 +857,11 @@ export function setModals(menu) {
                     if (usersTable && usersTable.classList.contains('hide') && (modalName === 'delete-user-popup' || modalName === 'edit-user-popup')) {
                         usersDetails.classList.add("hide");
                         usersTable.classList.remove("hide");
+                    }
+
+                    const selectCertificateElement = document.getElementById('certificates_id');
+                    if (selectCertificateElement) {
+                        selectCertificateElement.innerHTML = '';
                     }
 
                     if (menu === 4) {
