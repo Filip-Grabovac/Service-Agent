@@ -591,6 +591,11 @@ export function setModals(menu) {
                                     selectCertificateElement.removeAttribute('data-disabled');
                                 }
 
+                                const option = document.createElement('option');
+                                option.value = '';
+                                option.textContent = 'Choose certificate';
+                                selectCertificateElement.appendChild(option);
+
                                 data.forEach(cert => {
                                     const option = document.createElement('option');
                                     option.value = cert.id;
