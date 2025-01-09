@@ -583,30 +583,43 @@ export function setModals(menu) {
                     }
                 }
 
-                if (modalName !== 'add-certificate-popup') {
+                if (modalName === 'add-certificate-popup') {
                     const entries = Array.from(formData.entries());
-                    for (const [key, value] of entries) {
-                        if (key.includes('.')) {
-                            let modifiedKey = key.split('.').pop();
 
-                            formData.delete(key);
-                            formData.append(modifiedKey, value);
-                        }
+                    const typeValue = entries.find(item => item[0] === 'type')?.[1];
 
-                        if (!value.trim()) {
-                            errorMessage.innerHTML = 'Please, fill in all fields.';
-                            errorWrapper.classList.remove('hide');
-
-                            setTimeout(function () {
-                                errorWrapper.classList.add('hide');
-                            }, 3000);
-
-                            return;
-                        }
+                    if (typeValue === 'aircraft_registration_certificate') {
+                        formData.delete('existing_certificate');
+                        formData.delete('ffa_certificate_number');
+                        formData.delete('applicant_id_number');
+                        formData.delete('iarca_tracking_number');
+                    } else {
+                        formData.delete('aircraft_details');
+                        formData.delete('aircraft_make');
+                        formData.delete('aircraft_model');
+                        formData.delete('aircraft_serial_number');
                     }
-                } else {
-                    const entries = Array.from(formData.entries());
-                    console.log(entries)
+                }
+
+                const entries = Array.from(formData.entries());
+                for (const [key, value] of entries) {
+                    if (key.includes('.')) {
+                        let modifiedKey = key.split('.').pop();
+
+                        formData.delete(key);
+                        formData.append(modifiedKey, value);
+                    }
+
+                    if (!value.trim()) {
+                        errorMessage.innerHTML = 'Please, fill in all fields.';
+                        errorWrapper.classList.remove('hide');
+
+                        setTimeout(function () {
+                            errorWrapper.classList.add('hide');
+                        }, 3000);
+
+                        return;
+                    }
                 }
             }
 
