@@ -671,7 +671,7 @@ export function setModals(menu) {
                 });
 
                 Array.from(form.elements).forEach(element => {
-                    if (element.hasAttribute('disabled')) {
+                    if (element.hasAttribute('disabled') && element.name !== 'certificates_id') {
                         formData.delete(element.name);
                     }
                 });
