@@ -724,11 +724,8 @@ export function setModals(menu) {
                             select2Element.dispatchEvent(event);
                         }
 
-                        const radios = form.querySelectorAll('input[type="radio"]');
-
-                        console.log(radios);
-                        radios.forEach(radio => {
-                            radio.checked = false;
+                        document.querySelectorAll('.w--redirected-checked').forEach(el => {
+                            el.classList.remove('w--redirected-checked');
                         });
                     }
 
