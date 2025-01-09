@@ -601,7 +601,7 @@ export function setModals(menu) {
 
                         const existingValue = entries.find(item => item[0] === 'existing_certificate')?.[1];
 
-                        if (existingValue === false) {
+                        if (existingValue === 'false') {
                             formData.delete('existing_certificate');
                         } else {
                             formData.delete('is_medical');
@@ -610,7 +610,7 @@ export function setModals(menu) {
 
                             const medicalValue = entries.find(item => item[0] === 'is_medical')?.[1];
 
-                            if (medicalValue === false) {
+                            if (medicalValue === 'false') {
                                 formData.delete('applicant_id_number');
                             } else {
                                 formData.delete('iarca_tracking_number');
