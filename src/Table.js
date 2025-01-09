@@ -676,6 +676,7 @@ export function setModals(menu) {
                 });
 
                 Array.from(form.elements).forEach(element => {
+                    console.log(element)
                     if (element.hasAttribute('disabled') && element.name !== 'certificates_id') {
                         formData.delete(element.name);
                     }
