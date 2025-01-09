@@ -604,6 +604,9 @@ export function setModals(menu) {
                             return;
                         }
                     }
+                } else {
+                    const entries = Array.from(formData.entries());
+                    console.log(entries)
                 }
             }
 
