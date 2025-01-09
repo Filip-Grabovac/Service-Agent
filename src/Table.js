@@ -576,7 +576,24 @@ export function setModals(menu) {
                             const selectedValue = e.params.data.id;
 
                             certificate.getAllActive(selectedValue).then((data) => {
-                                console.log(data)
+                                const selectElement = document.getElementById('certificates_id');
+                                data.forEach(cert => {
+                                    const option = document.createElement('option');
+                                    option.value = cert.id;
+
+                                    let type = data.type.split('_')[0]
+                                    let typeFormated = type.charAt(0).toUpperCase() + type.slice(1);
+
+                                    let secondString;
+                                    if (type === 'airman') {
+                                        secondString = data.ffa_certificate_number;
+                                    } else if (type === 'aircraft') {
+                                        secondString = data.aircraft_serial_number;
+                                    }
+
+                                    option.textContent = typeFormated + ' ' + secondString;
+                                    selectElement.appendChild(option);
+                                });
                             })
                         });
                     });
