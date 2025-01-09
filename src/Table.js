@@ -251,6 +251,7 @@ function setCertificatePayment() {
     const payment = document.querySelectorAll('[data-payment-open]');
     payment.forEach(element => {
         element.addEventListener('click', function (event) {
+            loader.style.display = 'flex';
             let data = {
                 success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
                 cancel_url: "https://agent-for-service-cbd62c.webflow.io/registration-4-4",
@@ -264,6 +265,7 @@ function setCertificatePayment() {
             };
 
             user.initialPayment(data).then(result => {
+                loader.style.display = 'none';
                 window.location.href = result.url
             });
         })
