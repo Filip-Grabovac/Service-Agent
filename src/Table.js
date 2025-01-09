@@ -993,6 +993,13 @@ function getModals(menu) {
                 success_message: 'The certificate has been successfully updated.',
             },
             2: {
+                modal: 'edit-airman-popup',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates/{certificates_id}',
+                method: 'PATCH',
+                files: [],
+                success_message: 'The certificate has been successfully updated.',
+            },
+            3: {
                 modal: 'delete-certificate-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates/{certificates_id}',
                 method: 'DELETE',
