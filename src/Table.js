@@ -987,7 +987,7 @@ function getModals(menu) {
             1: {
                 modal: 'edit-aircraft-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates/{certificates_id}',
-                method: 'DELETE',
+                method: 'PATCH',
                 files: [],
                 success_message: 'The certificate has been successfully updated.',
             },
