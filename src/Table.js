@@ -570,11 +570,9 @@ export function setModals(menu) {
 
                 if (modalName === 'add-document-popup') {
                     const selectUserElement = document.getElementById('create-document-user');
-                    console.log(selectUserElement)
 
                     $(document).ready(function() {
                         $('#create-document-user').on('select2:select', function(e) {
-                            console.log(e.params.data);
                             const selectedValue = e.params.data.id;
 
                             certificate.getAllActive(selectedValue).then((data) => {

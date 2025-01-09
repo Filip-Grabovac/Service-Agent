@@ -54,7 +54,7 @@ export default class Certificate {
         let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/active-certificates`;
 
         if (userId !== null) {
-            url += `&user_id=${userId}`;
+            url += `?user_id=${userId}`;
         }
 
         // Call the Xano API
