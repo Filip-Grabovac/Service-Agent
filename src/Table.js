@@ -242,7 +242,12 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         }
 
         if (menu === 7) {
-            setCertificatePayment()
+            const payment = document.querySelectorAll('[data-payment-open]');
+            payment.forEach(element => {
+                element.addEventListener('click', function (event) {
+                    certificatePayment(element.getAttribute('data-id-certificates-id'), element.getAttribute('data-payment-open'))
+                })
+            });
         }
 
         createPagination(menu, tab, statusIds, pagination, data);
@@ -251,43 +256,38 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
     })
 }
 
-function setCertificatePayment() {
-    const payment = document.querySelectorAll('[data-payment-open]');
-    payment.forEach(element => {
-        element.addEventListener('click', function (event) {
-            let price = "";
-            if (element.getAttribute('data-payment-open') === 'aircraft') {
-                price = "price_1QfGqbCA20rcDWGhGrIUBQVr";
-            } else if (element.getAttribute('data-payment-open') === 'airman') {
-                if (hasActiveCertificate) {
-                    price = "price_1QfGwoCA20rcDWGh4qFwuPTJ";
-                } else {
-                    price = "price_1QfGuICA20rcDWGhM3Y5GQb7";
-                }
+function certificatePayment(id, type) {
+    let price = "";
+    if (type === 'aircraft') {
+        price = "price_1QfGqbCA20rcDWGhGrIUBQVr";
+    } else if (type === 'airman') {
+        if (hasActiveCertificate) {
+            price = "price_1QfGwoCA20rcDWGh4qFwuPTJ";
+        } else {
+            price = "price_1QfGuICA20rcDWGhM3Y5GQb7";
+        }
+    }
+
+    if (price === '') {
+        return
+    }
+
+    loader.style.display = 'flex';
+    let data = {
+        success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
+        cancel_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
+        certificates_id: id,
+        line_items: [
+            {
+                price: price,
+                quantity: "1",
             }
+        ]
+    };
 
-            if (price === '') {
-                return
-            }
-
-            loader.style.display = 'flex';
-            let data = {
-                success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
-                cancel_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
-                certificates_id: element.getAttribute('data-id-certificates-id'),
-                line_items: [
-                    {
-                        price: price,
-                        quantity: "1",
-                    }
-                ]
-            };
-
-            user.initialPayment(data).then(result => {
-                loader.style.display = 'none';
-                window.location.href = result.url
-            });
-        })
+    user.initialPayment(data).then(result => {
+        loader.style.display = 'none';
+        window.location.href = result.url
     });
 }
 
@@ -835,6 +835,9 @@ export function setModals(menu) {
                         const certificatesTable = document.getElementById('certificate-tables');
 
                         certificatesTable.classList.remove('hide');
+
+                        console.log(data)
+                        // certificatePayment(data.id)
                     }
                 })
                 .catch((error) => {
