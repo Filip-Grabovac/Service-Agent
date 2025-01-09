@@ -209,17 +209,17 @@ export default class TableRow {
             `,
                 ffa_certificate_number: () => `
                 <div class="row-inside">
-                    <div class="txt-row">${item.ffa_certificate_number}</div>
+                    <div class="txt-row">${item.ffa_certificate_number ?? ''}</div>
                 </div>
             `,
                 applicant_id_number: () => `
                 <div class="row-inside">
-                    <div class="txt-row">${item.applicant_id_number}</div>
+                    <div class="txt-row">${item.applicant_id_number ?? ''}</div>
                 </div>
             `,
                 iarca_tracking_number: () => `
                 <div class="row-inside">
-                    <div class="txt-row">${item.iarca_tracking_number}</div>
+                    <div class="txt-row">${item.iarca_tracking_number ?? ''}</div>
                 </div>
             `,
                 existing_certificate: () => `
