@@ -724,6 +724,12 @@ export function setModals(menu) {
                             const event = new Event('change', {bubbles: true});
                             select2Element.dispatchEvent(event);
                         }
+
+                        const radios = form.querySelectorAll('input[type="radio"]');
+
+                        radios.forEach(radio => {
+                            radio.checked = false;
+                        });
                     }
 
                     successMessage.innerHTML = item.success_message;
