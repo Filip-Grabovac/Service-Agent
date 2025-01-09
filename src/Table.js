@@ -257,12 +257,12 @@ function setCertificatePayment() {
         element.addEventListener('click', function (event) {
             let price = "";
             if (element.getAttribute('data-payment-open') === 'aircraft') {
-                price = "price_1QXMupCA20rcDWGhemNihUF8";
+                price = "price_1QfGqbCA20rcDWGhGrIUBQVr";
             } else if (element.getAttribute('data-payment-open') === 'airman') {
                 if (hasActiveCertificate) {
-                    price = "";
+                    price = "price_1QfGvQCA20rcDWGhcTgI7dlp";
                 } else {
-                    price = "price_1QXMupCA20rcDWGhemNihUF8";
+                    price = "price_1QfGuICA20rcDWGhM3Y5GQb7";
                 }
             }
 
