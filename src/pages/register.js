@@ -62,7 +62,7 @@ individualRadio.addEventListener('click', function (event) {
 
 dateOfBirthInput.addEventListener('focus', () => datePlaceholder.style.display = 'none');
 dateOfBirthInput.addEventListener('blur', () => {
-    if (!dateOfBirthInput.value) datePlaceholder.style.display = 'block';
+    if (!dateOfBirthInput.value) datePlaceholder.style.display = 'flex';
 });
 
 nextBtn.addEventListener('click', function (event) {
