@@ -572,42 +572,37 @@ export function setModals(menu) {
                     $(document).ready(function() {
                         const selectCertificateElement = document.getElementById('certificates_id');
                         selectCertificateElement.innerHTML = '';
-                        let eventAdded = false
 
-                        console.log(eventAdded);
-                        if (!eventAdded) {
-                            $('#create-document-user').on('select2:select', function (e) {
-                                eventAdded = true;
-                                selectCertificateElement.innerHTML = '';
+                        $('#create-document-user').one('select2:select', function (e) {
+                            selectCertificateElement.innerHTML = '';
 
-                                const selectedValue = e.params.data.id;
+                            const selectedValue = e.params.data.id;
 
-                                certificate.getAllActive(selectedValue).then((data) => {
+                            certificate.getAllActive(selectedValue).then((data) => {
+                                const option = document.createElement('option');
+                                option.value = '';
+                                option.textContent = 'Choose certificate';
+                                selectCertificateElement.appendChild(option);
+
+                                data.forEach(cert => {
                                     const option = document.createElement('option');
-                                    option.value = '';
-                                    option.textContent = 'Choose certificate';
+                                    option.value = cert.id;
+
+                                    let type = cert.type.split('_')[0]
+                                    let typeFormated = type.charAt(0).toUpperCase() + type.slice(1);
+
+                                    let secondString;
+                                    if (type === 'airman') {
+                                        secondString = cert.ffa_certificate_number;
+                                    } else if (type === 'aircraft') {
+                                        secondString = cert.aircraft_serial_number;
+                                    }
+
+                                    option.textContent = typeFormated + ' ' + secondString;
                                     selectCertificateElement.appendChild(option);
-
-                                    data.forEach(cert => {
-                                        const option = document.createElement('option');
-                                        option.value = cert.id;
-
-                                        let type = cert.type.split('_')[0]
-                                        let typeFormated = type.charAt(0).toUpperCase() + type.slice(1);
-
-                                        let secondString;
-                                        if (type === 'airman') {
-                                            secondString = cert.ffa_certificate_number;
-                                        } else if (type === 'aircraft') {
-                                            secondString = cert.aircraft_serial_number;
-                                        }
-
-                                        option.textContent = typeFormated + ' ' + secondString;
-                                        selectCertificateElement.appendChild(option);
-                                    });
-                                })
-                            });
-                        }
+                                });
+                            })
+                        });
                     });
                 }
             });
