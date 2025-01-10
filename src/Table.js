@@ -621,6 +621,13 @@ export function setModals(menu) {
 
                 if (modalName === 'add-document-popup') {
                     $('#create-document-user').off('select2:select');
+
+                    const select2Element = document.getElementById('create-document-user');
+                    if (select2Element) {
+                        select2Element.value = '';
+                        const event = new Event('change', {bubbles: true});
+                        select2Element.dispatchEvent(event);
+                    }
                 }
             });
         });
