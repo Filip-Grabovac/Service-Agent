@@ -10,6 +10,8 @@ const individualRadio = document.getElementById('individual');
 const companyNameWrapper = document.getElementById('Company-Name-Wrapper');
 const companyNameInput = document.getElementById('Company-Name');
 const dateOfBirthInput = document.getElementById('Date-of-Birth');
+const dateOfBirthWrapper = document.getElementById('date-wrapper');
+const datePlaceholder = document.getElementById('date-placeholder');
 const firstNameInput = document.getElementById('First-name');
 const lastNameInput = document.getElementById('Last-name');
 const countrySelect = document.getElementById('Country');
@@ -38,7 +40,7 @@ dateOfBirthInput.setAttribute('max', today);
 
 companyRadio.addEventListener('click', function (event) {
     companyNameWrapper.style.display = 'flex';
-    dateOfBirthInput.style.display = 'none';
+    dateOfBirthWrapper.style.display = 'none';
 
     isCompany = true;
 
@@ -49,7 +51,7 @@ companyRadio.addEventListener('click', function (event) {
 
 individualRadio.addEventListener('click', function (event) {
     companyNameWrapper.style.display = 'none';
-    dateOfBirthInput.style.display = 'flex';
+    dateOfBirthWrapper.style.display = 'flex';
 
     isCompany = false;
 
@@ -58,12 +60,9 @@ individualRadio.addEventListener('click', function (event) {
     }
 })
 
-const dateInput = document.getElementById('Date-of-Birth');
-const placeholder = document.getElementById('date-placeholder');
-
-dateInput.addEventListener('focus', () => placeholder.style.display = 'none');
-dateInput.addEventListener('blur', () => {
-    if (!dateInput.value) placeholder.style.display = 'block';
+dateOfBirthInput.addEventListener('focus', () => datePlaceholder.style.display = 'none');
+dateOfBirthInput.addEventListener('blur', () => {
+    if (!dateOfBirthInput.value) datePlaceholder.style.display = 'block';
 });
 
 nextBtn.addEventListener('click', function (event) {
