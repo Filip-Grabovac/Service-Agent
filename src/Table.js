@@ -876,8 +876,7 @@ export function setModals(menu) {
                         usersTable.classList.remove("hide");
                     }
 
-                    console.log(menu)
-                    if (menu === 1 || menu === 3 || menu === 4) {
+                    if (menu === 4 || menu === 'initial-admin') {
                         populateSelectWithShippingTariffs()
                     }
                     if (menu === 2) {
