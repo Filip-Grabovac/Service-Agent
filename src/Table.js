@@ -191,7 +191,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         }
 
         data.items.forEach((item) => {
-            if (menu === 7 && item.is_active === true) {
+            if (menu === 7 && item.is_active === true && item.type === 'airman_certificate') {
                 hasActiveCertificate = true;
             }
             status = item._document_status?.status_label;
