@@ -876,7 +876,7 @@ export function setModals(menu) {
                         usersTable.classList.remove("hide");
                     }
 
-                    if (menu === 4) {
+                    if (menu === 1 || menu === 3 || menu === 4) {
                         populateSelectWithShippingTariffs()
                     }
                     if (menu === 2) {
