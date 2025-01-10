@@ -58,6 +58,14 @@ individualRadio.addEventListener('click', function (event) {
     }
 })
 
+const dateInput = document.getElementById('Date-of-Birth');
+const placeholder = document.getElementById('date-placeholder');
+
+dateInput.addEventListener('focus', () => placeholder.style.display = 'none');
+dateInput.addEventListener('blur', () => {
+    if (!dateInput.value) placeholder.style.display = 'block';
+});
+
 nextBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
