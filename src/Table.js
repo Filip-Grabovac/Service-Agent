@@ -571,43 +571,43 @@ export function setModals(menu) {
                 if (modalName === 'add-document-popup') {
                     $(document).ready(function() {
                         const selectCertificateElement = document.getElementById('certificates_id');
-                        console.log(selectCertificateElement);
-                        console.log(selectCertificateElement.innerHTML);
                         selectCertificateElement.innerHTML = '';
-                        console.log(selectCertificateElement.innerHTML);
-                        $('#create-document-user').on('select2:select', function(e) {
-                            selectCertificateElement.innerHTML = '';
-                            console.log(selectCertificateElement.innerHTML);
+                        let eventAdded = false
 
-                            const selectedValue = e.params.data.id;
+                        console.log(eventAdded);
+                        if (!eventAdded) {
+                            $('#create-document-user').on('select2:select', function (e) {
+                                eventAdded = true;
+                                selectCertificateElement.innerHTML = '';
 
-                            certificate.getAllActive(selectedValue).then((data) => {
-                                console.log(data);
-                                const option = document.createElement('option');
-                                option.value = '';
-                                option.textContent = 'Choose certificate';
-                                selectCertificateElement.appendChild(option);
+                                const selectedValue = e.params.data.id;
 
-                                data.forEach(cert => {
-                                    console.log(cert);
+                                certificate.getAllActive(selectedValue).then((data) => {
                                     const option = document.createElement('option');
-                                    option.value = cert.id;
-
-                                    let type = cert.type.split('_')[0]
-                                    let typeFormated = type.charAt(0).toUpperCase() + type.slice(1);
-
-                                    let secondString;
-                                    if (type === 'airman') {
-                                        secondString = cert.ffa_certificate_number;
-                                    } else if (type === 'aircraft') {
-                                        secondString = cert.aircraft_serial_number;
-                                    }
-
-                                    option.textContent = typeFormated + ' ' + secondString;
+                                    option.value = '';
+                                    option.textContent = 'Choose certificate';
                                     selectCertificateElement.appendChild(option);
-                                });
-                            })
-                        });
+
+                                    data.forEach(cert => {
+                                        const option = document.createElement('option');
+                                        option.value = cert.id;
+
+                                        let type = cert.type.split('_')[0]
+                                        let typeFormated = type.charAt(0).toUpperCase() + type.slice(1);
+
+                                        let secondString;
+                                        if (type === 'airman') {
+                                            secondString = cert.ffa_certificate_number;
+                                        } else if (type === 'aircraft') {
+                                            secondString = cert.aircraft_serial_number;
+                                        }
+
+                                        option.textContent = typeFormated + ' ' + secondString;
+                                        selectCertificateElement.appendChild(option);
+                                    });
+                                })
+                            });
+                        }
                     });
                 }
             });
