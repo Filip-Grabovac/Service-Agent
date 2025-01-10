@@ -573,7 +573,7 @@ export function setModals(menu) {
                         const selectCertificateElement = document.getElementById('certificates_id');
                         selectCertificateElement.innerHTML = '';
 
-                        $('#create-document-user').one('select2:select', function (e) {
+                        $('#create-document-user').on('select2:select', function (e) {
                             selectCertificateElement.innerHTML = '';
 
                             const selectedValue = e.params.data.id;
@@ -798,6 +798,10 @@ export function setModals(menu) {
                 })
                 .then((data) => {
                     modal.classList.add('hide');
+
+                    if (modalName === 'add-document-popup') {
+                        $('#create-document-user').off('select2:select');
+                    }
 
                     activeElement.click()
                     if (activeUserDetailsElement) {
