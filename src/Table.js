@@ -618,6 +618,10 @@ export function setModals(menu) {
 
                     certificatesTable.classList.remove('hide');
                 }
+
+                if (modalName === 'add-document-popup') {
+                    $('#create-document-user').off('select2:select');
+                }
             });
         });
 
