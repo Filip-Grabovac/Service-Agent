@@ -797,13 +797,6 @@ export function setModals(menu) {
             fetch(url, requestData)
                 .then((response) => {
                     if (!response.ok) {
-                        // errorMessage.innerHTML = 'Server Error! Please, try again or contact support.';
-                        // errorWrapper.classList.remove('hide');
-                        //
-                        // setTimeout(function() {
-                        //     errorWrapper.classList.add('hide');
-                        // }, 3000);
-
                         throw new Error('Server responded with an error!');
                     }
 
@@ -899,6 +892,8 @@ export function setModals(menu) {
                 .catch((error) => {
                     errorMessage.innerHTML = 'Server Error! Please, try again or contact support.';
                     errorWrapper.classList.remove('hide');
+
+                    loader.style.display = 'none'
 
                     setTimeout(function() {
                         errorWrapper.classList.add('hide');
