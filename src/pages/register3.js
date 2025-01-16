@@ -11,6 +11,12 @@ const errorWrapper = document.getElementById('error-wrapper');
 const errorMessage = document.getElementById('error-message');
 const errorClose = document.getElementById('error-close');
 
+const regCodeText = document.getElementById('reg-code-text');
+
+let registerData = JSON.parse(localStorage.getItem('registerData'));
+
+regCodeText.innerHTML = regCodeText.replace('{email}', registerData.email);
+
 user.authenticate();
 
 errorClose.addEventListener('click', (e) => {
@@ -22,8 +28,6 @@ resendCode.addEventListener('click', (e) => {
 
 nextBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
-
-    let registerData = JSON.parse(localStorage.getItem('registerData'));
 
     if (validateData(code.value) === 1) {
         errorMessage.innerHTML = 'Confirmation code is not correct.';
