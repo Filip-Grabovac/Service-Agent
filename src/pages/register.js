@@ -115,14 +115,14 @@ function validateData(registerData) {
     let hasErrors = 0;
 
     Object.entries(registerData).forEach(([key, value]) => {
-        value.parent.querySelector('.register-input-error').style.display = 'none';
+        value.parentElement.querySelector('.register-input-error').style.display = 'none';
         if (value.length === 0) {
-            value.parent.querySelector('.register-input-error').style.display = 'block';
+            value.parentElement.querySelector('.register-input-error').style.display = 'block';
             hasErrors = 1;
         }
 
         if (key === 'email' && !isValidEmail(value)) {
-            value.parent.querySelector('.register-input-error').style.display = 'block';
+            value.parentElement.querySelector('.register-input-error').style.display = 'block';
             hasErrors = 1;
         }
     });
