@@ -653,7 +653,7 @@ export function setModals(menu) {
             } else if (modalName === 'request-shred-document-popup') {
                 formData.append('document_status_id', 7)
             }  else if (modalName === 'shred-document-popup') {
-                formData.append('document_status_id', 4)
+                formData.append('document_status_id', 8)
             }  else if (modalName === 'payment-document-popup' || modalName === 'edit-document-popup') {
                 formData.append('document_status_id', 3)
             }  else if (modalName === 'forward-document-popup') {
