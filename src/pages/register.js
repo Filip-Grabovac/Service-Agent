@@ -11,7 +11,6 @@ const companyNameWrapper = document.getElementById('Company-Name-Wrapper');
 const companyNameInput = document.getElementById('Company-Name');
 const dateOfBirthInput = document.getElementById('Date-of-Birth');
 const dateOfBirthWrapper = document.getElementById('date-wrapper');
-const datePlaceholder = document.getElementById('date-placeholder');
 const firstNameInput = document.getElementById('First-name');
 const lastNameInput = document.getElementById('Last-name');
 const countrySelect = document.getElementById('Country');
@@ -59,11 +58,6 @@ individualRadio.addEventListener('click', function (event) {
         secondStepInputs.classList.remove('hidden');
     }
 })
-
-dateOfBirthInput.addEventListener('focus', () => datePlaceholder.style.display = 'none');
-dateOfBirthInput.addEventListener('blur', () => {
-    if (!dateOfBirthInput.value) datePlaceholder.style.display = 'flex';
-});
 
 nextBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
