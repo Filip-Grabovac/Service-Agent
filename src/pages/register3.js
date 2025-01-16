@@ -15,7 +15,7 @@ const regCodeText = document.getElementById('reg-code-text');
 
 let registerData = JSON.parse(localStorage.getItem('registerData'));
 
-regCodeText.innerHTML = regCodeText.replace('{email}', registerData.email);
+regCodeText.innerHTML = regCodeText.innerHTML.replace('{email}', registerData.email);
 
 user.authenticate();
 
