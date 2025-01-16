@@ -82,36 +82,28 @@ nextBtn.addEventListener('click', function (event) {
         registerData.date_of_birth = dateOfBirthInput.value;
     }
 
-    if (validateData(registerData) === 1) {
-        errorMessage.innerHTML = 'Please, fill in all fields.';
-        errorWrapper.classList.remove('hide');
+    let newData = validateData(registerData)
 
-        setTimeout(function() {
-            errorWrapper.classList.add('hide');
-        }, 3000);
-
-        return;
-    }
-
-    localStorage.setItem('registerData', JSON.stringify(registerData));
+    localStorage.setItem('registerData', JSON.stringify(newData));
 
     window.location.href = '/registration-2-4';
 });
 
 function validateData(registerData) {
-    let hasErrors = 0;
-
+    let newData = {};
     Object.entries(registerData).forEach(([key, value]) => {
+        value.parent.querySelector('.register-input-error').style.display = 'none';
         if (value.length === 0) {
-            hasErrors = 1;
+            value.parent.querySelector('.register-input-error').style.display = 'block';
         }
 
         if (key === 'email' && !isValidEmail(value)) {
-            hasErrors = 1;
+            value.parent.querySelector('.register-input-error').style.display = 'block';
         }
+        newData[key] = value.value;
     });
 
-    return hasErrors;
+    return newData;
 }
 
 function isValidEmail(email) {
