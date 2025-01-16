@@ -111,18 +111,18 @@ nextBtn.addEventListener('click', function (event) {
     window.location.href = '/registration-2-4';
 });
 
-function validateData(registerData) {
+function validateData(dataForValidation) {
     let hasErrors = 0;
 
-    Object.entries(registerData).forEach(([key, value]) => {
-        value.parentElement.querySelector('.register-input-error').style.display = 'none';
-        if (value.length === 0) {
-            value.parentElement.querySelector('.register-input-error').style.display = 'block';
+    Object.entries(dataForValidation).forEach(([key, element]) => {
+        element.parentElement.querySelector('.register-input-error').style.display = 'none';
+        if (element.value.length === 0) {
+            element.parentElement.querySelector('.register-input-error').style.display = 'block';
             hasErrors = 1;
         }
 
-        if (key === 'email' && !isValidEmail(value)) {
-            value.parentElement.querySelector('.register-input-error').style.display = 'block';
+        if (key === 'email' && !isValidEmail(element.value)) {
+            element.parentElement.querySelector('.register-input-error').style.display = 'block';
             hasErrors = 1;
         }
     });
