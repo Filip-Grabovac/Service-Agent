@@ -62,6 +62,19 @@ individualRadio.addEventListener('click', function (event) {
 nextBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
+    const dataForValidation = {
+        first_name: firstNameInput,
+        last_name: lastNameInput,
+        country: countrySelect,
+        state: stateSelect,
+        city: cityInput,
+        zip: zipInput,
+        street: streetInput,
+        number: numberInput,
+        email: emailInput,
+        phone_number: phoneInput,
+    };
+
     const registerData = {
         first_name: firstNameInput.value,
         last_name: lastNameInput.value,
@@ -82,28 +95,39 @@ nextBtn.addEventListener('click', function (event) {
         registerData.date_of_birth = dateOfBirthInput.value;
     }
 
-    let newData = validateData(registerData)
+    if (validateData(dataForValidation) === 1) {
+        errorMessage.innerHTML = 'Please, fill in all fields.';
+        errorWrapper.classList.remove('hide');
 
-    localStorage.setItem('registerData', JSON.stringify(newData));
+        setTimeout(function() {
+            errorWrapper.classList.add('hide');
+        }, 3000);
+
+        return;
+    }
+
+    localStorage.setItem('registerData', JSON.stringify(registerData));
 
     window.location.href = '/registration-2-4';
 });
 
 function validateData(registerData) {
-    let newData = {};
+    let hasErrors = 0;
+
     Object.entries(registerData).forEach(([key, value]) => {
         value.parent.querySelector('.register-input-error').style.display = 'none';
         if (value.length === 0) {
             value.parent.querySelector('.register-input-error').style.display = 'block';
+            hasErrors = 1;
         }
 
         if (key === 'email' && !isValidEmail(value)) {
             value.parent.querySelector('.register-input-error').style.display = 'block';
+            hasErrors = 1;
         }
-        newData[key] = value.value;
     });
 
-    return newData;
+    return hasErrors;
 }
 
 function isValidEmail(email) {
