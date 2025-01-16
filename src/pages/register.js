@@ -90,8 +90,10 @@ nextBtn.addEventListener('click', function (event) {
     };
 
     if (isCompany) {
+        dataForValidation.company_name = companyNameInput;
         registerData.company_name = companyNameInput.value;
     } else {
+        dataForValidation.date_of_birth = dateOfBirthInput;
         registerData.date_of_birth = dateOfBirthInput.value;
     }
 
