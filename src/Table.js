@@ -688,7 +688,7 @@ export function setModals(menu) {
                 });
 
                 if (modalName === 'edit-user-popup') {
-                    formData.append('phone_country', iti.getSelectedCountryData().iso2);
+                    formData.append('phone_country', ini.getSelectedCountryData().iso2);
                 }
 
                 if (modalName === 'request-forward-document-popup') {
