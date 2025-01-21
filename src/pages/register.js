@@ -34,6 +34,11 @@ errorClose.addEventListener('click', (e) => {
 
 user.authenticate();
 
+const iti = window.intlTelInput(phoneInput, {
+    initialCountry: "us",
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+});
+
 const today = new Date().toISOString().split('T')[0];
 dateOfBirthInput.setAttribute('max', today);
 
@@ -351,5 +356,13 @@ document.addEventListener('DOMContentLoaded', function () {
         option.value = country.name;
         option.setAttribute("data-code", country.code);
         countrySelect.appendChild(option);
+    });
+
+    countrySelect.addEventListener("change", function () {
+        if (phoneInput.value === '') {
+            const selectedOption = this.options[this.selectedIndex];
+            iti.setCountry(selectedOption.dataset.code);
+            console.log(iti.getSelectedCountryData())
+        }
     });
 });
