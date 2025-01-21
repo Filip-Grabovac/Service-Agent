@@ -553,6 +553,13 @@ export function setModals(menu) {
                                     element.removeAttribute("disabled");
                                 }
                             }
+
+                            if (modalName === 'edit-user-popup' && element.getAttribute('name').includes("phone_number")) {
+                                window.intlTelInput(element, {
+                                    initialCountry: fillData['phone_country'],
+                                    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+                                });
+                            }
                         });
                     }
 
