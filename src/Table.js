@@ -25,7 +25,7 @@ let activeUserDetailsElement;
 let selectedUserId = null;
 let hasActiveCertificate;
 
-let ini;
+let iti = null;
 
 const usersTable = document.getElementById('users-table');
 const usersDetails = document.getElementById('users-details');
@@ -556,10 +556,14 @@ export function setModals(menu) {
                             }
 
                             if (modalName === 'edit-user-popup' && element.getAttribute('name').includes("phone_number")) {
-                                ini = window.intlTelInput(element, {
-                                    initialCountry: fillData['phone_country'],
-                                    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-                                });
+                                if (iti) {
+                                    iti.setCountry(fillData['phone_country']);
+                                } else {
+                                    iti = window.intlTelInput(element, {
+                                        initialCountry: fillData['phone_country'],
+                                        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+                                    });
+                                }
                             }
                         });
                     }
@@ -688,7 +692,7 @@ export function setModals(menu) {
                 });
 
                 if (modalName === 'edit-user-popup') {
-                    formData.append('phone_country', ini.getSelectedCountryData().iso2);
+                    formData.append('phone_country', iti.getSelectedCountryData().iso2);
                 }
 
                 if (modalName === 'request-forward-document-popup') {
