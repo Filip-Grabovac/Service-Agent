@@ -92,6 +92,7 @@ nextBtn.addEventListener('click', function (event) {
         email: emailInput.value,
         phone_number: phoneInput.value,
         is_company: isCompany,
+        phone_country: iti.getSelectedCountryData().iso2,
     };
 
     if (isCompany) {
@@ -362,7 +363,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (phoneInput.value === '') {
             const selectedOption = this.options[this.selectedIndex];
             iti.setCountry(selectedOption.dataset.code);
-            console.log(iti.getSelectedCountryData())
         }
     });
 });
