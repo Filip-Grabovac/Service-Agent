@@ -58,3 +58,25 @@ function validateData(passwordData) {
 
     return hasErrors;
 }
+
+const inputs = document.querySelectorAll('.input-rows');
+
+inputs.forEach(input => {
+    input.querySelector('.eye-icon-show').addEventListener('click', function () {
+        const passwordField = input.querySelector('.input-field');
+
+        passwordField.type = 'password';
+
+        input.querySelector('.eye-icon-show').classList.add('hidden');
+        input.querySelector('.eye-icon-hide').classList.remove('hidden');
+    });
+
+    input.querySelector('.eye-icon-hide').addEventListener('click', function () {
+        const passwordField = input.querySelector('.input-field');
+
+        passwordField.type = 'text';
+
+        input.querySelector('.eye-icon-show').classList.remove('hidden');
+        input.querySelector('.eye-icon-hide').classList.add('hidden');
+    });
+})
