@@ -25,6 +25,8 @@ let activeUserDetailsElement;
 let selectedUserId = null;
 let hasActiveCertificate;
 
+let ini;
+
 const usersTable = document.getElementById('users-table');
 const usersDetails = document.getElementById('users-details');
 const usersDetailsClose = document.getElementById('users-details-close');
@@ -434,7 +436,6 @@ export function setModals(menu) {
         const dropZones = modal.querySelectorAll('[data-modal-action="dropzone"]');
         const form = modal.getElementsByTagName("form")[0];
 
-
         openButtons.forEach(button => {
             button.addEventListener("click", function (e) {
                 e.preventDefault()
@@ -555,9 +556,7 @@ export function setModals(menu) {
                             }
 
                             if (modalName === 'edit-user-popup' && element.getAttribute('name').includes("phone_number")) {
-                                console.log(fillData)
-                                console.log(fillData['phone_country'])
-                                window.intlTelInput(element, {
+                                ini = window.intlTelInput(element, {
                                     initialCountry: fillData['phone_country'],
                                     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
                                 });
@@ -687,6 +686,10 @@ export function setModals(menu) {
                         formData.delete(element.name);
                     }
                 });
+
+                if (modalName === 'edit-user-popup') {
+                    formData.append('phone_country', iti.getSelectedCountryData().iso2);
+                }
 
                 if (modalName === 'request-forward-document-popup') {
                     formData.delete('shipping_type');
