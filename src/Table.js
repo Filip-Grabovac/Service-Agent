@@ -737,10 +737,10 @@ export function setModals(menu) {
                     }
 
                     if (key === 'aircraft_details') {
-                        const regex = /^N\d{6}$/;
+                        const regex = /^N.{1,4}$/;
 
                         if (!regex.test(value)) {
-                            errorMessage.innerHTML = 'Aircraft Detail must start with "N" and have 6 numbers after.';
+                            errorMessage.innerHTML = 'Aircraft Detail must start with "N" and have between 2 and 5 characters in total.';
                             errorWrapper.classList.remove('hide');
 
                             setTimeout(function () {
@@ -1655,8 +1655,8 @@ const elements = document.querySelectorAll('[data-name="country-select"]');
 elements.forEach(element => {
     countries.forEach(country => {
         const option = document.createElement("option");
-        option.textContent = country.replace(/\s+/g, '');
-        option.value = country.replace(/\s+/g, '');
+        option.textContent = country.trim();
+        option.value = country.trim();
         element.appendChild(option);
     });
 })
