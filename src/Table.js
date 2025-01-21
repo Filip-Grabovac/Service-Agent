@@ -555,6 +555,8 @@ export function setModals(menu) {
                             }
 
                             if (modalName === 'edit-user-popup' && element.getAttribute('name').includes("phone_number")) {
+                                console.log(fillData)
+                                console.log(fillData['phone_country'])
                                 window.intlTelInput(element, {
                                     initialCountry: fillData['phone_country'],
                                     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
