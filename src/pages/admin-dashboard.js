@@ -134,6 +134,9 @@ getTabCount()
 home.addEventListener('click', function (event) {
     event.stopImmediatePropagation();
     event.preventDefault();
+
+    const dashboardLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 2"]`);
+    dashboardLink.click();
 })
 gearWrapper.addEventListener('click', function (event) {
     event.stopImmediatePropagation();
