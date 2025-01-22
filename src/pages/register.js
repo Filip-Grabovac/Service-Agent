@@ -37,6 +37,7 @@ user.authenticate();
 const iti = window.intlTelInput(phoneInput, {
     initialCountry: "us",
     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+    formatOnDisplay: false
 });
 phoneInput.value = '+1'
 
