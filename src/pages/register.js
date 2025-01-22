@@ -37,9 +37,17 @@ user.authenticate();
 const iti = window.intlTelInput(phoneInput, {
     initialCountry: "us",
     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-    formatOnDisplay: false
+    formatOnDisplay: false,
+    separateDialCode: true,
 });
 phoneInput.value = '+1'
+phoneInput.addEventListener("countrychange", function() {
+    if (phoneInput.value === '') {
+        const dialCode = iti.getSelectedCountryData().dialCode;
+
+        phoneInput.value = `+${dialCode} `;
+    }
+});
 
 const today = new Date().toISOString().split('T')[0];
 dateOfBirthInput.setAttribute('max', today);

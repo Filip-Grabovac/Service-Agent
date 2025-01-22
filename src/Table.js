@@ -562,7 +562,8 @@ export function setModals(menu) {
                                     iti = window.intlTelInput(element, {
                                         initialCountry: fillData['phone_country'],
                                         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-                                        formatOnDisplay: false
+                                        formatOnDisplay: false,
+                                        separateDialCode: true,
                                     });
                                 }
                             }
