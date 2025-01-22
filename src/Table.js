@@ -753,10 +753,10 @@ export function setModals(menu) {
                     }
 
                     if (key === 'aircraft_details') {
-                        const regex = /^N.{1,4}$/;
+                        const regex = /^N.{2,5}$/;
 
                         if (!regex.test(value)) {
-                            errorMessage.innerHTML = 'Aircraft Detail must start with "N" and have between 2 and 5 characters in total.';
+                            errorMessage.innerHTML = 'Aircraft Detail must start with "N" and have between 3 and 6 characters in total.';
                             errorWrapper.classList.remove('hide');
 
                             setTimeout(function () {
