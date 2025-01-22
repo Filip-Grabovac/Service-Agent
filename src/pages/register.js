@@ -363,6 +363,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (phoneInput.value === '') {
             const selectedOption = this.options[this.selectedIndex];
             iti.setCountry(selectedOption.dataset.code);
+
+            console.log(iti.getSelectedCountryData())
+            // phoneInput.value = iti.getSelectedCountryData().iso2
         }
     });
 });
