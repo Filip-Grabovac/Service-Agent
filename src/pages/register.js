@@ -38,7 +38,7 @@ const iti = window.intlTelInput(phoneInput, {
     initialCountry: "us",
     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
     formatOnDisplay: false,
-    separateDialCode: true,
+    // separateDialCode: true,
 });
 phoneInput.value = '+1'
 phoneInput.addEventListener("countrychange", function() {
