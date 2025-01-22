@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     countrySelect.addEventListener("change", function () {
-        if (phoneInput.value === '+' + iti.getSelectedCountryData().dialCode) {
+        if (phoneInput.value === '' || phoneInput.value === '+' + iti.getSelectedCountryData().dialCode) {
             const selectedOption = this.options[this.selectedIndex];
             iti.setCountry(selectedOption.dataset.code);
 
