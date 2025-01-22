@@ -38,6 +38,7 @@ const iti = window.intlTelInput(phoneInput, {
     initialCountry: "us",
     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
 });
+phoneInput.value = '+1'
 
 const today = new Date().toISOString().split('T')[0];
 dateOfBirthInput.setAttribute('max', today);
@@ -360,12 +361,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     countrySelect.addEventListener("change", function () {
-        if (phoneInput.value === '') {
+        if (phoneInput.value === '+' + iti.getSelectedCountryData().dialCode) {
             const selectedOption = this.options[this.selectedIndex];
             iti.setCountry(selectedOption.dataset.code);
 
-            console.log(iti.getSelectedCountryData())
-            // phoneInput.value = iti.getSelectedCountryData().iso2
+            phoneInput.value = '+' + iti.getSelectedCountryData().dialCode
         }
     });
 });
