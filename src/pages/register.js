@@ -40,12 +40,11 @@ const iti = window.intlTelInput(phoneInput, {
     formatOnDisplay: false,
     separateDialCode: true,
 });
-phoneInput.value = '+1'
 phoneInput.addEventListener("countrychange", function() {
     if (phoneInput.value === '' || phoneInput.value === '+' + iti.getSelectedCountryData().dialCode) {
         const dialCode = iti.getSelectedCountryData().dialCode;
 
-        phoneInput.value = `+${dialCode} `;
+        // phoneInput.value = `+${dialCode} `;
     }
 });
 
