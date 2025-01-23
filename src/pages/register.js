@@ -40,13 +40,6 @@ const iti = window.intlTelInput(phoneInput, {
     formatOnDisplay: false,
     separateDialCode: true,
 });
-phoneInput.addEventListener("countrychange", function() {
-    if (phoneInput.value === '' || phoneInput.value === '+' + iti.getSelectedCountryData().dialCode) {
-        const dialCode = iti.getSelectedCountryData().dialCode;
-
-        // phoneInput.value = `+${dialCode} `;
-    }
-});
 
 const today = new Date().toISOString().split('T')[0];
 dateOfBirthInput.setAttribute('max', today);
@@ -372,8 +365,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (phoneInput.value === '' || phoneInput.value === '+' + iti.getSelectedCountryData().dialCode) {
             const selectedOption = this.options[this.selectedIndex];
             iti.setCountry(selectedOption.dataset.code);
-
-            // phoneInput.value = '+' + iti.getSelectedCountryData().dialCode
         }
     });
 });
