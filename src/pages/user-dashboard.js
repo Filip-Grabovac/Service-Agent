@@ -62,9 +62,6 @@ userMenu1.click()
 home.addEventListener('click', function (event) {
     event.stopImmediatePropagation();
     event.preventDefault();
-
-    const dashboardLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 2"]`);
-    dashboardLink.click();
 })
 gearWrapper.addEventListener('click', function (event) {
     event.stopImmediatePropagation();
@@ -90,6 +87,18 @@ certificate.getAllActive().then((data) => {
     if (data && data.length === 0 || urlParams.has('certificate-paid')) {
         const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
         activeTabLink.click();
+
+        const addCertificateElement = document.querySelector('[data-modal-open="add-certificate-popup"]');
+        addCertificateElement.click();
+
+    } else {
+        home.addEventListener('click', function (event) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+
+            const dashboardLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 2"]`);
+            dashboardLink.click();
+        })
     }
 })
 
