@@ -90,14 +90,17 @@ certificate.getAllActive().then((data) => {
     }
 
     if (data && data.length === 0) {
-        const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
-        activeTabLink.click();
-
-        const addCertificateElement = document.querySelector('[data-modal-open="add-certificate-popup"]');
-        addCertificateElement.click();
-
-        const closeElement = document.querySelector('[data-modal-action="close"]');
-        closeElement.disabled = true;
+        clickElement(`.w-tab-link[data-w-tab="Tab 4"]`)
+            .then(() => clickElement('[data-modal-open="add-certificate-popup"]'))
+            .then(() => {
+                const closeElement = document.querySelector('[data-modal-action="close"]');
+                if (closeElement) {
+                    closeElement.disabled = true;
+                } else {
+                    console.error('Element za zatvaranje nije pronađen.');
+                }
+            })
+            .catch((error) => console.error(error));
     } else {
         home.addEventListener('click', function (event) {
             event.stopImmediatePropagation();
@@ -106,6 +109,16 @@ certificate.getAllActive().then((data) => {
             const dashboardLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 2"]`);
             dashboardLink.click();
         })
+    }
+
+    function clickElement(selector) {
+        return new Promise((resolve, reject) => {
+            const element = document.querySelector(selector);
+            if (element) {
+                element.click();
+                resolve();
+            }
+        });
     }
 })
 
