@@ -85,17 +85,30 @@ certificate.getAllActive().then((data) => {
         activeTabLink.click();
     }
 
+    function clickElement(selector) {
+        return new Promise((resolve, reject) => {
+            const element = document.querySelector(selector);
+            if (element) {
+                element.click();
+                resolve();
+            } else {
+                reject(`"${selector}" not found.`);
+            }
+        });
+    }
+
     if (data && data.length === 0) {
-        const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
-        activeTabLink.click();
-
-        const addCertificateElement = document.querySelector('[data-modal-open="add-certificate-popup"]');
-        console.log(addCertificateElement)
-        addCertificateElement.click();
-
-        const closeElement = document.querySelector('[data-modal-action="close"]');
-        console.log(closeElement)
-        closeElement.disabled = true;
+        clickElement(`.w-tab-link[data-w-tab="Tab 4"]`)
+            .then(() => clickElement('[data-modal-open="add-certificate-popup"]'))
+            .then(() => {
+                const closeElement = document.querySelector('[data-modal-action="close"]');
+                if (closeElement) {
+                    closeElement.disabled = true;
+                } else {
+                    console.error('Element not found.');
+                }
+            })
+            .catch((error) => console.error(error));
 
         home.addEventListener('click', function (event) {
             event.stopImmediatePropagation();
