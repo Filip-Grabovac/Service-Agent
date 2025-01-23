@@ -103,7 +103,7 @@ certificate.getAllActive().then((data) => {
             .then(() => {
                 const closeElement = document.querySelector('[data-modal-action="close"]');
                 if (closeElement) {
-                    closeElement.disabled = true;
+                    closeElement.style.display = 'none';
                 } else {
                     console.error('Element not found.');
                 }
