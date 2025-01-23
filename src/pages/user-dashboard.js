@@ -59,10 +59,6 @@ userMenu3.addEventListener('click', function (event) {
 
 userMenu1.click()
 
-home.addEventListener('click', function (event) {
-    event.stopImmediatePropagation();
-    event.preventDefault();
-})
 gearWrapper.addEventListener('click', function (event) {
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -100,6 +96,11 @@ certificate.getAllActive().then((data) => {
         const closeElement = document.querySelector('[data-modal-action="close"]');
         console.log(closeElement)
         closeElement.disabled = true;
+
+        home.addEventListener('click', function (event) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+        })
     } else {
         home.addEventListener('click', function (event) {
             event.stopImmediatePropagation();
