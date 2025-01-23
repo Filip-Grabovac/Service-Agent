@@ -18,10 +18,13 @@ export default class Certificate {
 
         console.error('Error:', error);
     }
-    getAll(page = 1, perPage = 10, search = '', type) {
+    getAll(page = 1, perPage = 10, search = '', type = '') {
         const authToken =  localStorage.getItem('authToken');
 
-        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates?page=${page}&per_page=${perPage}&type=${type}`;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates?page=${page}&per_page=${perPage}`;
+        if (type !== '') {
+            url += `&type=${type}`
+        }
         if (search !== '') {
             url += `&search=${encodeURIComponent(search)}`
         }
