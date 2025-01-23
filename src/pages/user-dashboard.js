@@ -89,14 +89,18 @@ certificate.getAllActive().then((data) => {
         const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
         activeTabLink.click();
 
-        const modal = document.getElementById('add-certificate-popup');
-        modal.classList.remove('hide');
+        certificate.getAll().then((data) => {
+            if (data.items && data.items.length === 0) {
+                const modal = document.getElementById('add-certificate-popup');
+                modal.classList.remove('hide');
 
-        const certificatesTable = document.getElementById('certificate-tables');
-        certificatesTable.classList.add('hide');
+                const certificatesTable = document.getElementById('certificate-tables');
+                certificatesTable.classList.add('hide');
 
-        const closeElement = document.querySelector('[data-modal-action="close"]');
-        closeElement.style.display = 'none';
+                const closeElement = document.querySelector('[data-modal-action="close"]');
+                closeElement.style.display = 'none';
+            }
+        });
 
         home.addEventListener('click', function (event) {
             event.stopImmediatePropagation();
