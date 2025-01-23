@@ -84,13 +84,20 @@ certificate.getAllActive().then((data) => {
         userMenu2.style.display = 'none';
     }
 
-    if (data && data.length === 0 || urlParams.has('certificate-paid')) {
+    if (urlParams.has('certificate-paid')) {
+        const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
+        activeTabLink.click();
+    }
+
+    if (data && data.length === 0) {
         const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
         activeTabLink.click();
 
         const addCertificateElement = document.querySelector('[data-modal-open="add-certificate-popup"]');
         addCertificateElement.click();
 
+        const closeElement = document.querySelector('[data-modal-action="close"]');
+        closeElement.disabled = true;
     } else {
         home.addEventListener('click', function (event) {
             event.stopImmediatePropagation();
