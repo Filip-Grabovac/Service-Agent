@@ -111,6 +111,9 @@ certificate.getAllActive().then((data) => {
             const dashboardLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 2"]`);
             dashboardLink.click();
         })
+
+        const certificateText = document.querySelector('.certificate-text-wrap');
+        certificateText.style.display = 'none';
     }
 })
 
