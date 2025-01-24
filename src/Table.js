@@ -780,8 +780,6 @@ export function setModals(menu) {
                 }
             }
 
-            console.log(Object.keys(item.files).length)
-            console.log(Object.keys(item.files))
             if (Object.keys(item.files).length !== 0) {
                 Object.keys(item.files).forEach((fileName) => {
                     const fileArray = item.files[fileName];
@@ -796,10 +794,7 @@ export function setModals(menu) {
                     'Authorization': `Bearer ${authToken}`,
                 }
             } else {
-                console.log('else')
-                console.log(modalName)
                 if (modalName === 'add-document-popup') {
-                    console.log('if')
                     errorMessage.innerHTML = 'Please, fill in all fields.';
                     errorWrapper.classList.remove('hide');
 
@@ -836,6 +831,8 @@ export function setModals(menu) {
                 })
                 .then((data) => {
                     modal.classList.add('hide');
+
+                    item.files = undefined;
 
                     if (modalName === 'add-document-popup') {
                         $('#create-document-user').off('select2:select');
