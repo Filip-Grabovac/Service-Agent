@@ -40,7 +40,7 @@ export default class User {
 
         // If there's no auth token, redirect to the failure page if not already there
         if (!authToken) {
-            if (window.location.pathname === '/registration' || window.location.pathname === '/registration-2-4' || window.location.pathname === '/registration-3-4' || window.location.pathname === '/forgotten-password' || window.location.pathname === '/reset-password') {
+            if (window.location.pathname === '/registration' || window.location.pathname === '/registration-2-3' || window.location.pathname === '/registration-3-3' || window.location.pathname === '/forgotten-password' || window.location.pathname === '/reset-password') {
                 return;
             }
             if (window.location.pathname !== failureRedirect) {
@@ -60,7 +60,7 @@ export default class User {
             .then((response) => response.json())
             .then((result) => {
                 if (result.code === 'ERROR_CODE_UNAUTHORIZED') {
-                    if (window.location.pathname === '/registration' || window.location.pathname === '/registration-2-4' || window.location.pathname === '/registration-3-4') {
+                    if (window.location.pathname === '/registration' || window.location.pathname === '/registration-2-3' || window.location.pathname === '/registration-3-3') {
                         return;
                     }
 
@@ -79,8 +79,8 @@ export default class User {
                                 window.location.href = '/user-dashboard';
                             }
                         } else {
-                            if (window.location.pathname !== '/registration-3-4') {
-                                window.location.href = '/registration-3-4';
+                            if (window.location.pathname !== '/registration-3-3') {
+                                window.location.href = '/registration-3-3';
                             }
                         }
                     }
@@ -137,7 +137,7 @@ export default class User {
                 if (result.authToken) {
                     localStorage.setItem('authToken', result.authToken);
 
-                    window.location.href = '/registration-3-4';
+                    window.location.href = '/registration-3-3';
                 }
             })
             .catch((error) => {

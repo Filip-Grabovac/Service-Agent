@@ -118,7 +118,7 @@ nextBtn.addEventListener('click', function (event) {
 
     localStorage.setItem('registerData', JSON.stringify(registerData));
 
-    window.location.href = '/registration-2-4';
+    window.location.href = '/registration-2-3';
 });
 
 function validateData(dataForValidation) {

@@ -92,14 +92,7 @@ certificate.getAllActive().then((data) => {
         certificate.getAll().then((data) => {
             if (data.items && data.items.length === 0) {
                 const addCertificateButton = document.querySelector(`[data-modal-open="add-certificate-popup"]`);
-                console.log(addCertificateButton);
                 addCertificateButton.click();
-
-                // const modal = document.getElementById('add-certificate-popup');
-                // modal.classList.remove('hide');
-                //
-                // const certificatesTable = document.getElementById('certificate-tables');
-                // certificatesTable.classList.add('hide');
 
                 const closeElement = document.querySelector('[data-modal-action="close"]');
                 closeElement.style.display = 'none';
