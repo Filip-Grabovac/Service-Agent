@@ -782,6 +782,8 @@ export function setModals(menu) {
                 }
             }
 
+            console.log(Object.keys(item.files).length)
+            console.log(Object.keys(item.files))
             if (Object.keys(item.files).length !== 0) {
                 Object.keys(item.files).forEach((fileName) => {
                     const fileArray = item.files[fileName];
