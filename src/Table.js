@@ -770,6 +770,8 @@ export function setModals(menu) {
                     }
 
                     if (!value.trim()) {
+                        console.log(key)
+                        console.log(value)
                         errorMessage.innerHTML = 'Please, fill in all fields.';
                         errorWrapper.classList.remove('hide');
 
