@@ -796,7 +796,10 @@ export function setModals(menu) {
                     'Authorization': `Bearer ${authToken}`,
                 }
             } else {
+                console.log('else')
+                console.log(modalName)
                 if (modalName === 'add-document-popup') {
+                    console.log('if')
                     errorMessage.innerHTML = 'Please, fill in all fields.';
                     errorWrapper.classList.remove('hide');
 
