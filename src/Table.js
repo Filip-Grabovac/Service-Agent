@@ -832,7 +832,7 @@ export function setModals(menu) {
                 .then((data) => {
                     modal.classList.add('hide');
 
-                    item.files = undefined;
+                    item.files = [];
 
                     if (modalName === 'add-document-popup') {
                         $('#create-document-user').off('select2:select');
