@@ -649,8 +649,6 @@ export function setModals(menu) {
         dropZones.forEach(dropZone => {
             const fileName = dropZone.getAttribute('data-dropzone-name')
 
-            item.files[fileName] = [];
-
             createDropZone(dropZone, item, fileName);
         });
 
@@ -1176,6 +1174,10 @@ function createDropZone(dropZone, item, fileName) {
                 return;
             }
 
+            if (typeof item.files[fileName] === 'undefined') {
+                item.files[fileName] = [];
+            }
+
             item.files[fileName].length = 0
             item.files[fileName].push(files)
 
@@ -1210,6 +1212,10 @@ function createDropZone(dropZone, item, fileName) {
             }, 3000);
 
             return;
+        }
+
+        if (typeof item.files[fileName] === 'undefined') {
+            item.files[fileName] = [];
         }
 
         item.files[fileName].length = 0
