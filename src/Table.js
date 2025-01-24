@@ -796,6 +796,17 @@ export function setModals(menu) {
                     'Authorization': `Bearer ${authToken}`,
                 }
             } else {
+                if (modalName === 'add-document-popup') {
+                    errorMessage.innerHTML = 'Please, fill in all fields.';
+                    errorWrapper.classList.remove('hide');
+
+                    setTimeout(function () {
+                        errorWrapper.classList.add('hide');
+                    }, 3000);
+
+                    return;
+                }
+
                 let jsonObject = {};
 
                 formData.forEach((value, key) => {
