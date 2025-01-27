@@ -38,7 +38,7 @@ Array.from(logout).forEach((element) => {
 });
 
 usersLink.addEventListener('click', function (event) {
-    const userDetailsTable = document.getElementById('user-details');
+    const userDetailsTable = document.getElementById('users-details');
 
     if (!userDetailsTable.classList.contains('hide')) {
         const userDetailsTableClose = document.getElementById('users-details-close');
