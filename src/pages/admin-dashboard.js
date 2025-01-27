@@ -12,6 +12,7 @@ const logout = document.getElementsByClassName('logout');
 const gear = document.getElementById('gear');
 const gearWrapper = document.getElementById('gear-wrapper');
 const newDocumentMenuWrapper = document.getElementById('new-document-menu-wrapper');
+const usersLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 3"]`);
 
 const adminMenu1 = document.getElementById('admin-menu1');
 const adminMenu1Tab1 = document.getElementById('admin-menu1-tab1');
@@ -35,6 +36,16 @@ Array.from(logout).forEach((element) => {
         user.logOut()
     })
 });
+
+usersLink.addEventListener('click', function (event) {
+    const userDetailsTable = document.getElementById('user-details');
+
+    if (!userDetailsTable.classList.contains('hide')) {
+        const userDetailsTableClose = document.getElementById('users-details-close');
+
+        userDetailsTableClose.click();
+    }
+})
 
 updateActiveRole('admin')
 
