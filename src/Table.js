@@ -779,6 +779,17 @@ export function setModals(menu) {
 
                         return;
                     }
+
+                    if (key === 'shipping_tariffs_id' && value === 0) {
+                        errorMessage.innerHTML = 'Please, fill in all fields.';
+                        errorWrapper.classList.remove('hide');
+
+                        setTimeout(function () {
+                            errorWrapper.classList.add('hide');
+                        }, 3000);
+
+                        return;
+                    }
                 }
             }
 
@@ -1269,9 +1280,9 @@ export function populateSelectWithShippingTariffs() {
 
     editDocumentShippingTariff.innerHTML = '';
     paymentDocumentShippingTariff.innerHTML = '';
+    let shippingTariffsOptions = '<option value="0">Choose shipping tariff</option>';
     shippingTariff.getAll(1, 999999).then((shippingTariffs) => {
         if (shippingTariffs.items.length) {
-            let shippingTariffsOptions = '';
             shippingTariffs.items.forEach((shippingTariff) => {
                 shippingTariffsOptions += `<option value="${shippingTariff.id}">${shippingTariff.region} ${shippingTariff.label.charAt(0).toUpperCase() + shippingTariff.label.slice(1)}</option>`
             })
