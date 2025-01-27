@@ -745,8 +745,6 @@ export function setModals(menu) {
 
                 const entries = Array.from(formData.entries());
                 for (const [key, value] of entries) {
-                    console.log(key);
-                    console.log(value);
                     if (key.includes('.')) {
                         let modifiedKey = key.split('.').pop();
 
