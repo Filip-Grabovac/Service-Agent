@@ -780,7 +780,7 @@ export function setModals(menu) {
                         return;
                     }
 
-                    if (key === 'shipping_tariffs_id' && value === 0) {
+                    if (key === 'shipping_tariffs_id' && value === '0') {
                         errorMessage.innerHTML = 'Please, fill in all fields.';
                         errorWrapper.classList.remove('hide');
 
