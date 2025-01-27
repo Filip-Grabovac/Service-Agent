@@ -1267,9 +1267,9 @@ export function populateSelectWithShippingTariffs() {
 
     editDocumentShippingTariff.innerHTML = '';
     paymentDocumentShippingTariff.innerHTML = '';
+    let shippingTariffsOptions = '<option value="">Choose shipping tariff</option>';
     shippingTariff.getAll(1, 999999).then((shippingTariffs) => {
         if (shippingTariffs.items.length) {
-            let shippingTariffsOptions = '';
             shippingTariffs.items.forEach((shippingTariff) => {
                 shippingTariffsOptions += `<option value="${shippingTariff.id}">${shippingTariff.region} ${shippingTariff.label.charAt(0).toUpperCase() + shippingTariff.label.slice(1)}</option>`
             })
