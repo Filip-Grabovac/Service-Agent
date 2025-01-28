@@ -1322,6 +1322,13 @@ function fillDocumentDetails(data, menu, modal) {
     const shredRequestedAt = document.getElementById('document-shred-requested-at');
     const shreddedAt = document.getElementById('document-shredded-at');
 
+    const assignedAtBox = document.getElementById('document-assigned-at-box');
+    const deliveryRequestedAtBox = document.getElementById('document-delivery-requested-at-box');
+    const paidAtBox = document.getElementById('document-paid-at-box');
+    const shippedAtBox = document.getElementById('document-shipped-at-box');
+    const shredRequestedAtBox = document.getElementById('document-shred-requested-at-box');
+    const shreddedAtBox = document.getElementById('document-shredded-at-box');
+
     const shippingType = document.getElementById('document-shipping-type');
     const price = document.getElementById('document-price');
     const trackingNumber = document.getElementById('document-tracking-number');
@@ -1374,31 +1381,43 @@ function fillDocumentDetails(data, menu, modal) {
         const timestamp = new Date(data._document_status_changes_of_documents.assigned_at);
 
         assignedAt.innerHTML = timestamp.toLocaleString();
+    } else {
+        assignedAtBox.style.display = 'none';
     }
     if (data._document_status_changes_of_documents.delivery_requested_at) {
         const timestamp = new Date(data._document_status_changes_of_documents.delivery_requested_at);
 
         deliveryRequestedAt.innerHTML = timestamp.toLocaleString()
+    } else {
+        deliveryRequestedAtBox.style.display = 'none';
     }
     if (data._document_status_changes_of_documents.paid_at) {
         const timestamp = new Date(data._document_status_changes_of_documents.paid_at);
 
         paidAt.innerHTML = timestamp.toLocaleString()
+    } else {
+        paidAtBox.style.display = 'none';
     }
     if (data._document_status_changes_of_documents.shipped_at) {
         const timestamp = new Date(data._document_status_changes_of_documents.shipped_at);
 
         shippedAt.innerHTML = timestamp.toLocaleString()
+    } else {
+        shippedAtBox.style.display = 'none';
     }
     if (data._document_status_changes_of_documents.shred_requested_at) {
         const timestamp = new Date(data._document_status_changes_of_documents.shred_requested_at);
 
         shredRequestedAt.innerHTML = timestamp.toLocaleString()
+    } else {
+        shredRequestedAtBox.style.display = 'none';
     }
     if (data._document_status_changes_of_documents.shredded_at) {
         const timestamp = new Date(data._document_status_changes_of_documents.shredded_at);
 
         shreddedAt.innerHTML = timestamp.toLocaleString()
+    } else {
+        shreddedAtBox.style.display = 'none';
     }
 
     shippingName.innerHTML = data._user.first_name + ' ' + data._user.last_name;
