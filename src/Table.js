@@ -1472,9 +1472,11 @@ function fillDocumentDetails(data, menu, modal) {
 
     downloadDocument.addEventListener("click", function() {
         const pdfUrl = data._files_of_documents.file.url;
+        const fileName = pdfUrl.split('/').pop().split('?')[0];
 
         const link = document.createElement("a");
         link.href = pdfUrl;
+        link.download = fileName;
         link.target = '_blank';
         link.click();
     });
