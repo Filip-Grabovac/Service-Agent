@@ -770,7 +770,7 @@ export function setModals(menu) {
                     if (!value.trim()) {
                         if (key === 'description') {
                             formData.delete('description');
-                            formData.append('description', '');
+                            formData.append('description', null);
                         } else {
                             errorMessage.innerHTML = 'Please, fill in all fields.';
                             errorWrapper.classList.remove('hide');
