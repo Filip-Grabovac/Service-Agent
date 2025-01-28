@@ -841,6 +841,10 @@ export function setModals(menu) {
                     return response.json();
                 })
                 .then((data) => {
+                    if (modalName === 'delete-certificate-popup') {
+                        location.reload();
+                    }
+
                     modal.classList.add('hide');
 
                     item.files = [];
