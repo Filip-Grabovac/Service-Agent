@@ -767,15 +767,19 @@ export function setModals(menu) {
                         }
                     }
 
-                    if (!value.trim() && key !== 'description') {
-                        errorMessage.innerHTML = 'Please, fill in all fields.';
-                        errorWrapper.classList.remove('hide');
+                    if (!value.trim()) {
+                        if (key === 'description') {
+                            formData.delete('description');
+                        } else {
+                            errorMessage.innerHTML = 'Please, fill in all fields.';
+                            errorWrapper.classList.remove('hide');
 
-                        setTimeout(function () {
-                            errorWrapper.classList.add('hide');
-                        }, 3000);
+                            setTimeout(function () {
+                                errorWrapper.classList.add('hide');
+                            }, 3000);
 
-                        return;
+                            return;
+                        }
                     }
 
                     if (key === 'shipping_tariffs_id' && value === '0') {
