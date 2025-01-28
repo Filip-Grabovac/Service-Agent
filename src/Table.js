@@ -1314,6 +1314,7 @@ function fillDocumentDetails(data, menu, modal) {
     const shippingName = document.getElementById('document-shipping-name');
     const shippingAddress = document.getElementById('document-shipping-address');
     const shippingCity = document.getElementById('document-shipping-city');
+    const shippingAddressBox = document.getElementById('document-shipping-address-box');
 
     const assignedAt = document.getElementById('document-assigned-at');
     const deliveryRequestedAt = document.getElementById('document-delivery-requested-at');
@@ -1332,6 +1333,10 @@ function fillDocumentDetails(data, menu, modal) {
     const shippingType = document.getElementById('document-shipping-type');
     const price = document.getElementById('document-price');
     const trackingNumber = document.getElementById('document-tracking-number');
+    const shippingTypeBox = document.getElementById('document-shipping-type-box');
+    const priceBox = document.getElementById('document-price-box');
+    const trackingNumberBox = document.getElementById('document-tracking-number-box');
+    const dataBox = document.getElementById('document-data-box');
 
     const requestShreddingBox = document.getElementById('document-request-shredding-box');
     const requestShredding = document.getElementById('document-request-shredding');
@@ -1381,6 +1386,7 @@ function fillDocumentDetails(data, menu, modal) {
         const timestamp = new Date(data._document_status_changes_of_documents.assigned_at);
 
         assignedAt.innerHTML = timestamp.toLocaleString();
+        assignedAtBox.style.display = 'flex';
     } else {
         assignedAtBox.style.display = 'none';
     }
@@ -1388,6 +1394,7 @@ function fillDocumentDetails(data, menu, modal) {
         const timestamp = new Date(data._document_status_changes_of_documents.delivery_requested_at);
 
         deliveryRequestedAt.innerHTML = timestamp.toLocaleString()
+        deliveryRequestedAtBox.style.display = 'flex';
     } else {
         deliveryRequestedAtBox.style.display = 'none';
     }
@@ -1395,6 +1402,7 @@ function fillDocumentDetails(data, menu, modal) {
         const timestamp = new Date(data._document_status_changes_of_documents.paid_at);
 
         paidAt.innerHTML = timestamp.toLocaleString()
+        paidAtBox.style.display = 'flex';
     } else {
         paidAtBox.style.display = 'none';
     }
@@ -1402,6 +1410,7 @@ function fillDocumentDetails(data, menu, modal) {
         const timestamp = new Date(data._document_status_changes_of_documents.shipped_at);
 
         shippedAt.innerHTML = timestamp.toLocaleString()
+        shippedAtBox.style.display = 'flex';
     } else {
         shippedAtBox.style.display = 'none';
     }
@@ -1409,6 +1418,7 @@ function fillDocumentDetails(data, menu, modal) {
         const timestamp = new Date(data._document_status_changes_of_documents.shred_requested_at);
 
         shredRequestedAt.innerHTML = timestamp.toLocaleString()
+        shredRequestedAtBox.style.display = 'flex';
     } else {
         shredRequestedAtBox.style.display = 'none';
     }
@@ -1416,6 +1426,7 @@ function fillDocumentDetails(data, menu, modal) {
         const timestamp = new Date(data._document_status_changes_of_documents.shredded_at);
 
         shreddedAt.innerHTML = timestamp.toLocaleString()
+        shreddedAtBox.style.display = 'flex';
     } else {
         shreddedAtBox.style.display = 'none';
     }
@@ -1423,19 +1434,38 @@ function fillDocumentDetails(data, menu, modal) {
     shippingName.innerHTML = data._user.first_name + ' ' + data._user.last_name;
     if (data._document_addresses_of_documents) {
         shippingAddress.innerHTML = data._document_addresses_of_documents.street + ' ' + data._document_addresses_of_documents.number;
-    }
-    if (data._document_addresses_of_documents) {
         shippingCity.innerHTML = data._document_addresses_of_documents.zip + ' ' + data._document_addresses_of_documents.country;
+        shippingAddressBox.style.display = 'flex';
+    } else {
+        shippingAddressBox.style.display = 'none';
     }
 
+    let hideData = true;
     if (data.shipping_type) {
+        hideData = false;
         shippingType.innerHTML = data.shipping_type;
+        shippingTypeBox.style.display = 'flex';
+    } else {
+        shippingTypeBox.style.display = 'none';
     }
     if (data._choosed_shipping_tariffs) {
+        hideData = false;
         price.innerHTML = data._choosed_shipping_tariffs.price + ' $';
+        priceBox.style.display = 'flex';
+    } else {
+        priceBox.style.display = 'none';
     }
     if (data.tracking_code) {
+        hideData = false;
         trackingNumber.innerHTML = data.tracking_code;
+        trackingNumberBox.style.display = 'flex';
+    } else {
+        trackingNumberBox.style.display = 'none';
+    }
+    if (hideData) {
+        dataBox.style.display = 'none';
+    } else {
+        dataBox.style.display = 'flex';
     }
 
     if (documentStatus !== 'new' && documentStatus !== 'waiting_for_payment') {
