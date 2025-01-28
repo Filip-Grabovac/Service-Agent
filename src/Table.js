@@ -769,7 +769,7 @@ export function setModals(menu) {
 
                     if (!value.trim()) {
                         if (key === 'description') {
-                            if (modalName === 'create-document-popup') {
+                            if (modalName === 'add-document-popup') {
                                 formData.delete('description');
                                 formData.append('description', null);
                             } else {
