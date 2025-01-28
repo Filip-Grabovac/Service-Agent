@@ -1470,11 +1470,14 @@ function fillDocumentDetails(data, menu, modal) {
         dataBox.style.display = 'flex';
     }
 
-    const pdfUrl = data._files_of_documents.file.url;
-    const fileName = pdfUrl.split('/').pop().split('?')[0];
-    downloadDocument.href = pdfUrl;
-    downloadDocument.download = 'file.pdf';
+    downloadDocument.addEventListener("click", function() {
+        const pdfUrl = data._files_of_documents.file.url;
 
+        const link = document.createElement("a");
+        link.href = pdfUrl;
+        link.target = '_blank';
+        link.click();
+    });
     let hideActions = true;
     if (documentStatus !== 'new' && documentStatus !== 'waiting_for_payment') {
         requestShreddingBox.style.display = 'none';
