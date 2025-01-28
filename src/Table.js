@@ -767,7 +767,7 @@ export function setModals(menu) {
                         }
                     }
 
-                    if (!value.trim()) {
+                    if (!value.trim() && key !== 'description') {
                         errorMessage.innerHTML = 'Please, fill in all fields.';
                         errorWrapper.classList.remove('hide');
 
