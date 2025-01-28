@@ -1338,6 +1338,7 @@ function fillDocumentDetails(data, menu, modal) {
     const trackingNumberBox = document.getElementById('document-tracking-number-box');
     const dataBox = document.getElementById('document-data-box');
 
+    const downloadDocument = document.getElementById('document-download-document');
     const requestShreddingBox = document.getElementById('document-request-shredding-box');
     const requestShredding = document.getElementById('document-request-shredding');
     const deleteDocumentBox = document.getElementById('document-delete-document-box');
@@ -1469,6 +1470,13 @@ function fillDocumentDetails(data, menu, modal) {
         dataBox.style.display = 'flex';
     }
 
+    downloadDocument.addEventListener("click", function() {
+        const pdfUrl = data._files_of_documents.file.url;
+        const link = document.createElement("a");
+        link.href = pdfUrl;
+        // link.download = "file.pdf";
+        link.click();
+    });
     let hideActions = true;
     if (documentStatus !== 'new' && documentStatus !== 'waiting_for_payment') {
         requestShreddingBox.style.display = 'none';
