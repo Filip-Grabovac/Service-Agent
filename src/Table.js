@@ -1472,13 +1472,24 @@ function fillDocumentDetails(data, menu, modal) {
 
     downloadDocument.addEventListener("click", function() {
         const pdfUrl = data._files_of_documents.file.url;
+
+        // Ekstrakcija imena fajla iz URL-a
         const fileName = pdfUrl.split('/').pop().split('?')[0];
 
-        console.log(fileName)
+        // Kreiraj <a> element za preuzimanje
         const link = document.createElement("a");
-        link.href = pdfUrl;
-        link.download = fileName;
+        link.href = pdfUrl; // Postavi URL fajla
+        link.download = fileName; // Postavi dinamičko ime fajla
+        link.style.display = 'none'; // Sakrij link, pošto je samo za preuzimanje
+
+        // Dodaj link u DOM (neće biti vidljiv)
+        document.body.appendChild(link);
+
+        // Simuliraj klik na <a> element
         link.click();
+
+        // Ukloni link sa stranice nakon preuzimanja
+        document.body.removeChild(link);
     });
     let hideActions = true;
     if (documentStatus !== 'new' && documentStatus !== 'waiting_for_payment') {
