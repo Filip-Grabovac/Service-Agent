@@ -774,6 +774,7 @@ export function setModals(menu) {
                                 formData.append('description', null);
                             } else {
                                 formData.delete('description');
+                                formData.append('description', '');
                             }
                         } else {
                             errorMessage.innerHTML = 'Please, fill in all fields.';
