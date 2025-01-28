@@ -1474,6 +1474,7 @@ function fillDocumentDetails(data, menu, modal) {
         const pdfUrl = data._files_of_documents.file.url;
         const fileName = pdfUrl.split('/').pop().split('?')[0];
 
+        console.log(fileName)
         const link = document.createElement("a");
         link.href = pdfUrl;
         link.download = fileName;
