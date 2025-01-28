@@ -1473,7 +1473,7 @@ function fillDocumentDetails(data, menu, modal) {
     const pdfUrl = data._files_of_documents.file.url;
     const fileName = pdfUrl.split('/').pop().split('?')[0];
     downloadDocument.href = pdfUrl;
-    downloadDocument.download = fileName;
+    downloadDocument.download = 'file.pdf';
 
     let hideActions = true;
     if (documentStatus !== 'new' && documentStatus !== 'waiting_for_payment') {
