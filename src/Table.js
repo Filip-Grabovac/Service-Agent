@@ -100,8 +100,10 @@ export function resetSearchInput() {
 
 export function fillTable(menu, tab, statusIds = null, page = 1) {
     let isUserDocumentsInAdmin = false;
-    if(menu === 2 && tab === 2) {
-        isUserDocumentsInAdmin = true;
+    if (menu === 2) {
+        if (tab === 2 || tab === 3 || tab === 4) {
+            isUserDocumentsInAdmin = true;
+        }
     }
     if (statusIds === 'null') {
         statusIds = null
@@ -144,6 +146,12 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         modelName = 'user'
     } else if (menu === 2 && tab === 2) {
         modelName = 'user_document_admin'
+    } else if (menu === 2 && tab === 3) {
+        model = certificate;
+        modelName = 'aircraft_certificates'
+    } else if (menu === 2 && tab === 4) {
+        model = certificate;
+        modelName = 'airman_certificates'
     } else if (menu === 4) {
         model = shippingTariff;
         modelName = 'shippingTariff'
@@ -165,6 +173,9 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
     if (modelName === 'user_document_admin'){
         methodName = 'getAllByUser'
     }
+    // if ((menu === 2 && tab === 3) || (menu === 2 && tab === 4)) {
+    //     methodName = 'getAllByUser'
+    // }
 
     model.callMethod(methodName, page, 10, search ? search.value : '', statusIds !== null ? statusIds : undefined, archived !== null ? archived : undefined, selectedUserId !== null ? selectedUserId : undefined).then((data) => {
         if (!isUserDocumentsInAdmin) {
@@ -402,6 +413,8 @@ function getColumns(menu, tab) {
         2: {
             1: ['id', 'name', 'address', 'email', 'blank', 'actions'],
             2: ['id', 'name', 'status', 'actions'],
+            3: ['id', 'details', 'make', 'model', 'serial_number'],
+            4: ['id', 'ffa_certificate_number', 'applicant_id_number', 'iarca_tracking_number', 'existing_certificate'],
         },
         3: {
             1: ['id', 'name', 'user', 'status', 'blank', 'actions'],
@@ -1852,6 +1865,8 @@ function fillUsersDetails(data) {
     selectedUserId = data.id;
 
     fillTable(2, 2);
+    fillTable(2, 3);
+    fillTable(2, 4);
 }
 
 export function getTabCount() {
