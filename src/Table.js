@@ -232,6 +232,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         })
 
         Object.entries(columnElements).forEach(([key, columnElement]) => {
+            console.log(columnElement)
             let children = columnElement.children;
 
             for (let i = children.length - 1; i > 0; i--) {
