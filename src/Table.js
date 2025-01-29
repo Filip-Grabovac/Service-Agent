@@ -232,7 +232,6 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         })
 
         Object.entries(columnElements).forEach(([key, columnElement]) => {
-            console.log(columnElement)
             let children = columnElement.children;
 
             for (let i = children.length - 1; i > 0; i--) {
@@ -1866,8 +1865,8 @@ function fillUsersDetails(data) {
     selectedUserId = data.id;
 
     fillTable(2, 2);
-    fillTable(2, 3);
-    fillTable(2, 4);
+    fillTable(2, 3, 'aircraft_registration_certificate')
+    fillTable(2, 4, 'airman_certificate')
 }
 
 export function getTabCount() {
