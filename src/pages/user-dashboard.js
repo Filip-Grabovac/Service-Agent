@@ -122,6 +122,9 @@ if (urlParams.has('certificate-paid')) {
         successMessage.innerHTML = 'Certificate has been successfully paid.';
         successWrapper.classList.remove('hide');
 
+        const tour1 = document.getElementById('tour-1');
+        tour1.style.display = 'flex';
+
         setTimeout(function () {
             successWrapper.classList.add('hide');
         }, 3000);
