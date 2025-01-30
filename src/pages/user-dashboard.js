@@ -102,7 +102,10 @@ tour4Finish.addEventListener('click', function (event) {
 })
 
 tourSkips.forEach((el, index) => {
-    el.addEventListener('click', () => {
+    el.addEventListener('click', (event) => {
+        event.stopImmediatePropagation();
+        event.preventDefault();
+
         el.closest('.tour').style.display = 'none';
     });
 });
