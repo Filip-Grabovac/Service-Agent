@@ -1359,7 +1359,6 @@ function fillDocumentDetails(data, menu, modal) {
     const archiveDocumentBox = document.getElementById('document-archive-document-box');
     const archiveDocument = document.getElementById('document-archive-document');
     const payment = document.getElementById('document-payment');
-    const actionsBox = document.getElementById('document-actions-box');
 
     requestShreddingBox.style.display = 'flex';
     deleteDocumentBox.style.display = 'flex';
@@ -1493,11 +1492,9 @@ function fillDocumentDetails(data, menu, modal) {
         link.target = '_blank';
         link.click();
     });
-    let hideActions = true;
     if (documentStatus !== 'new' && documentStatus !== 'waiting_for_payment') {
         requestShreddingBox.style.display = 'none';
     } else {
-        hideActions = false;
         requestShredding.addEventListener('click', function () {
             modal.classList.add('hide');
 
@@ -1511,7 +1508,6 @@ function fillDocumentDetails(data, menu, modal) {
     if (menu !== 6) {
         deleteDocumentBox.style.display = 'none';
     } else {
-        hideActions = false;
         deleteDocument.addEventListener('click', function () {
             modal.classList.add('hide');
 
@@ -1525,7 +1521,6 @@ function fillDocumentDetails(data, menu, modal) {
     if ((documentStatus !== 'delivered' && documentStatus !== 'shredded') || data.archived === true) {
         archiveDocumentBox.style.display = 'none';
     } else {
-        hideActions = false;
         archiveDocument.addEventListener('click', function () {
             modal.classList.add('hide');
 
@@ -1539,15 +1534,9 @@ function fillDocumentDetails(data, menu, modal) {
     if (data.payment_link === '' || documentStatus === 'paid' || documentStatus === 'shipped' || documentStatus === 'delivered') {
         payment.style.display = 'none';
     } else {
-        hideActions = false;
         payment.addEventListener('click', function () {
             window.open(data.payment_link, '_blank');
         })
-    }
-    if (hideActions) {
-        actionsBox.style.display = 'none';
-    } else {
-        actionsBox.style.display = 'flex';
     }
 
     setPdf(data._files_of_documents.file.url)
