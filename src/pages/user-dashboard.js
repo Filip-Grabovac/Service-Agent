@@ -25,7 +25,7 @@ const tour1 = document.getElementById('tour-1');
 const tour2 = document.getElementById('tour-2');
 const tour3 = document.getElementById('tour-3');
 const tour4 = document.getElementById('tour-4');
-const tourSkips = Array.from(document.getElementsByClassName('tour-skip'));
+const tourSkips = Array.from(document.getElementsByClassName('tour_skip'));
 
 const userMenu1 = document.getElementById('user-menu1');
 const userMenu2 = document.getElementById('user-menu2');
