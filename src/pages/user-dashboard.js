@@ -17,6 +17,8 @@ const home = document.getElementById('home');
 const logout = document.getElementsByClassName('logout');
 const gearWrapper = document.getElementById('gear-wrapper');
 const gear = document.getElementById('gear');
+const tour4Finish = document.getElementById('tour-4-finish');
+const tour4 = document.getElementById('tour-4');
 
 const userMenu1 = document.getElementById('user-menu1');
 const userMenu2 = document.getElementById('user-menu2');
@@ -62,6 +64,10 @@ userMenu1.click()
 gearWrapper.addEventListener('click', function (event) {
     event.stopImmediatePropagation();
     event.preventDefault();
+})
+
+tour4Finish.addEventListener('click', function (event) {
+    tour4.style.display = 'none';
 })
 
 user.me().then((data) => {
