@@ -25,6 +25,7 @@ const tour1 = document.getElementById('tour-1');
 const tour2 = document.getElementById('tour-2');
 const tour3 = document.getElementById('tour-3');
 const tour4 = document.getElementById('tour-4');
+const tourSkips = Array.from(document.getElementsByClassName('tour-skip'));
 
 const userMenu1 = document.getElementById('user-menu1');
 const userMenu2 = document.getElementById('user-menu2');
@@ -99,6 +100,12 @@ tour3Next.addEventListener('click', function (event) {
 tour4Finish.addEventListener('click', function (event) {
     tour4.style.display = 'none';
 })
+
+tourSkips.forEach((el, index) => {
+    el.addEventListener('click', () => {
+        el.closest('.tour').style.display = 'none';
+    });
+});
 
 user.me().then((data) => {
     gear.setAttribute('data-modal-open', 'edit-user-popup');
