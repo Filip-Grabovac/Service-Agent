@@ -17,7 +17,13 @@ const home = document.getElementById('home');
 const logout = document.getElementsByClassName('logout');
 const gearWrapper = document.getElementById('gear-wrapper');
 const gear = document.getElementById('gear');
+const tour1Next = document.getElementById('tour-1-next');
+const tour2Next = document.getElementById('tour-2-next');
+const tour3Next = document.getElementById('tour-3-next');
 const tour4Finish = document.getElementById('tour-4-finish');
+const tour1 = document.getElementById('tour-1');
+const tour2 = document.getElementById('tour-2');
+const tour3 = document.getElementById('tour-3');
 const tour4 = document.getElementById('tour-4');
 
 const userMenu1 = document.getElementById('user-menu1');
@@ -64,6 +70,30 @@ userMenu1.click()
 gearWrapper.addEventListener('click', function (event) {
     event.stopImmediatePropagation();
     event.preventDefault();
+})
+
+tour1Next.addEventListener('click', function (event) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+
+    tour1.style.display = 'none';
+    tour2.style.display = 'flex';
+})
+
+tour2Next.addEventListener('click', function (event) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+
+    tour2.style.display = 'none';
+    tour3.style.display = 'flex';
+})
+
+tour3Next.addEventListener('click', function (event) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+
+    tour3.style.display = 'none';
+    tour4.style.display = 'flex';
 })
 
 tour4Finish.addEventListener('click', function (event) {
