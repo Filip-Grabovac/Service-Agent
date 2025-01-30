@@ -173,9 +173,9 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
     if (modelName === 'user_document_admin'){
         methodName = 'getAllByUser'
     }
-    // if ((menu === 2 && tab === 3) || (menu === 2 && tab === 4)) {
-    //     methodName = 'getAllByUser'
-    // }
+    if ((menu === 2 && tab === 3) || (menu === 2 && tab === 4)) {
+        methodName = 'getAllByUser'
+    }
 
     model.callMethod(methodName, page, 10, search ? search.value : '', statusIds !== null ? statusIds : undefined, archived !== null ? archived : undefined, selectedUserId !== null ? selectedUserId : undefined).then((data) => {
         if (!isUserDocumentsInAdmin) {

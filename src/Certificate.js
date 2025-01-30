@@ -51,6 +51,39 @@ export default class Certificate {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
+    getAllByUser(page = 1, perPage = 10, search = '', type = '', notUsed = null, userId) {
+        const authToken =  localStorage.getItem('authToken');
+
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates?page=${page}&per_page=${perPage}&user_id=${userId}`;
+        if (type !== '') {
+            url += `&type=${type}`
+        }
+        if (search !== '') {
+            url += `&search=${encodeURIComponent(search)}`
+        }
+
+        // Call the Xano API
+        return fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
+                }
+
+                return result
+            })
+            .catch((error) => {
+                this.showError('Server Error! Please, try again or contact support.');
+            });
+    }
     getAllActive(userId = null) {
         const authToken =  localStorage.getItem('authToken');
 
