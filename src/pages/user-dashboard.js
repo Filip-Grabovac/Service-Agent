@@ -165,6 +165,14 @@ certificate.getAllActive().then((data) => {
 
 if (urlParams.has('certificate-paid')) {
     setTimeout(function () {
+        const removeQueryParam = (param) => {
+            const url = new URL(window.location);
+            url.searchParams.delete(param);
+            window.history.replaceState({}, document.title, url.pathname + url.search);
+        };
+
+        removeQueryParam('certificate-paid');
+
         successMessage.innerHTML = 'Certificate has been successfully paid.';
         successWrapper.classList.remove('hide');
 
@@ -174,6 +182,7 @@ if (urlParams.has('certificate-paid')) {
         setTimeout(function () {
             successWrapper.classList.add('hide');
         }, 3000);
+
     }, 1000);
 }
 
