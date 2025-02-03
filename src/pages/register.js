@@ -21,6 +21,7 @@ const streetInput = document.getElementById('Street');
 const numberInput = document.getElementById('Number');
 const emailInput = document.getElementById('E-mail');
 const phoneInput = document.getElementById('Phone');
+const referralSource = document.getElementById('referral_source');
 
 const errorWrapper = document.getElementById('error-wrapper');
 const errorMessage = document.getElementById('error-message');
@@ -95,6 +96,7 @@ nextBtn.addEventListener('click', function (event) {
         phone_number: phoneInput.value,
         is_company: isCompany,
         phone_country: iti.getSelectedCountryData().iso2,
+        referral_source: referralSource,
     };
 
     if (isCompany) {
