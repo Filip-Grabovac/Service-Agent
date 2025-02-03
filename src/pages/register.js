@@ -96,7 +96,7 @@ nextBtn.addEventListener('click', function (event) {
         phone_number: phoneInput.value,
         is_company: isCompany,
         phone_country: iti.getSelectedCountryData().iso2,
-        referral_source: referralSource,
+        referral_source: referralSource.value,
     };
 
     if (isCompany) {
