@@ -11,6 +11,8 @@ const errorWrapper = document.getElementById('error-wrapper');
 const errorMessage = document.getElementById('error-message');
 const errorClose = document.getElementById('error-close');
 
+const loader = document.getElementById('loader');
+
 errorClose.addEventListener('click', (e) => {
     errorWrapper.classList.add('hide');
 })
@@ -19,6 +21,8 @@ user.authenticate();
 
 nextBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
+
+    loader.style.display = 'flex';
 
     let registerData = JSON.parse(localStorage.getItem('registerData'));
 
@@ -40,7 +44,9 @@ nextBtn.addEventListener('click', function (event) {
 
     registerData.password = passwordData.password;
 
-    user.register(registerData);
+    user.register(registerData).then(() => {
+        loader.style.display = 'none';
+    });
 });
 
 function validateData(passwordData) {

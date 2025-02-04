@@ -115,7 +115,7 @@ export default class User {
     }
     register(data) {
         // Call the Xano API
-        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/signup', {
+        return fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -146,7 +146,7 @@ export default class User {
     }
     confirmCode(data) {
         // Call the Xano API
-        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/register/confirm-email', {
+        return fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/register/confirm-email', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
