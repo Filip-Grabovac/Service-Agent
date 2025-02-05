@@ -159,6 +159,7 @@ export default class User {
             .then((response) => response.json())
             .then((result) => {
                 const loader = document.getElementById('loader');
+                console.log(loader)
                 loader.style.display = 'none';
 
                 if (result.code) {
