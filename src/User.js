@@ -115,7 +115,7 @@ export default class User {
     }
     register(data) {
         // Call the Xano API
-        return fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/signup', {
+        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -124,6 +124,8 @@ export default class User {
         })
             .then((response) => response.json())
             .then((result) => {
+                const loader = document.getElementById('loader');
+
                 if (result.code) {
                     if (result.message !== '') {
                         this.showError(result.message);
@@ -133,6 +135,8 @@ export default class User {
 
                     return;
                 }
+
+                loader.style.display = 'none';
 
                 if (result.authToken) {
                     localStorage.setItem('authToken', result.authToken);
@@ -146,7 +150,7 @@ export default class User {
     }
     confirmCode(data) {
         // Call the Xano API
-        return fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/register/confirm-email', {
+        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/register/confirm-email', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -155,6 +159,8 @@ export default class User {
         })
             .then((response) => response.json())
             .then((result) => {
+                const loader = document.getElementById('loader');
+
                 if (result.code) {
                     if (result.message !== '') {
                         this.showError(result.message);
@@ -164,6 +170,8 @@ export default class User {
 
                     return;
                 }
+
+                loader.style.display = 'none';
 
                 if (result.is_verified) {
                     window.location.href = '/user-dashboard';

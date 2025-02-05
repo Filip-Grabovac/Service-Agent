@@ -44,9 +44,7 @@ nextBtn.addEventListener('click', function (event) {
 
     registerData.password = passwordData.password;
 
-    user.register(registerData).then(() => {
-        loader.style.display = 'none';
-    });
+    user.register(registerData);
 });
 
 function validateData(passwordData) {

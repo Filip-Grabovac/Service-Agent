@@ -51,9 +51,7 @@ nextBtn.addEventListener('click', function (event) {
 
     localStorage.removeItem('registerData');
 
-    user.confirmCode(data).then(() => {
-        loader.style.display = 'none';
-    });
+    user.confirmCode(data);
 });
 
 function validateData(code) {
