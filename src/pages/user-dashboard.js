@@ -34,6 +34,7 @@ const userMenu3 = document.getElementById('user-menu3');
 const successWrapper = document.getElementById('success-wrapper');
 const successMessage = document.getElementById('success-message');
 const successClose = document.getElementById('success-close');
+
 successClose.addEventListener('click', (e) => {
     successWrapper.classList.add('hide');
 })
@@ -79,6 +80,8 @@ tour1Next.addEventListener('click', function (event) {
 
     tour1.style.display = 'none';
     tour2.style.display = 'flex';
+
+    localStorage.setItem('tourStage', '2');
 })
 
 tour2Next.addEventListener('click', function (event) {
@@ -87,6 +90,8 @@ tour2Next.addEventListener('click', function (event) {
 
     tour2.style.display = 'none';
     tour3.style.display = 'flex';
+
+    localStorage.setItem('tourStage', '3');
 })
 
 tour3Next.addEventListener('click', function (event) {
@@ -95,11 +100,27 @@ tour3Next.addEventListener('click', function (event) {
 
     tour3.style.display = 'none';
     tour4.style.display = 'flex';
+
+    localStorage.setItem('tourStage', '4');
 })
 
 tour4Finish.addEventListener('click', function (event) {
     tour4.style.display = 'none';
+
+    localStorage.removeItem('tourStage');
 })
+
+const tourStage =  localStorage.getItem('tourStage');
+
+if (tourStage && tourStage === '1') {
+    tour1.style.display = 'flex';
+} else if (tourStage && tourStage === '2') {
+    tour2.style.display = 'flex';
+} else if (tourStage && tourStage === '3') {
+    tour3.style.display = 'flex';
+} else if (tourStage && tourStage === '4') {
+    tour4.style.display = 'flex';
+}
 
 tourSkips.forEach((el, index) => {
     el.addEventListener('click', (event) => {
@@ -107,6 +128,8 @@ tourSkips.forEach((el, index) => {
         event.preventDefault();
 
         el.closest('.tour').style.display = 'none';
+
+        localStorage.removeItem('tourStage');
     });
 });
 
@@ -178,6 +201,7 @@ if (urlParams.has('certificate-paid')) {
 
         const tour1 = document.getElementById('tour-1');
         tour1.style.display = 'flex';
+        localStorage.setItem('tourStage', '1');
 
         setTimeout(function () {
             successWrapper.classList.add('hide');
