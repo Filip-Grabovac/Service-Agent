@@ -15,11 +15,14 @@ const loader = document.getElementById('loader');
 
 const regCodeText = document.getElementById('reg-code-text');
 
-let registerData = JSON.parse(localStorage.getItem('registerData'));
-
-regCodeText.innerHTML = regCodeText.innerHTML.replace('{email}', registerData.email);
-
 user.authenticate();
+
+let userEmail = '';
+user.me().then((data) => {
+    userEmail = data.email;
+
+    regCodeText.innerHTML = regCodeText.innerHTML.replace('{email}', data.email);
+})
 
 errorClose.addEventListener('click', (e) => {
     errorWrapper.classList.add('hide');
