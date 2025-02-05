@@ -32,6 +32,8 @@ nextBtn.addEventListener('click', function (event) {
     }
 
     if (validateData(passwordData) === 1) {
+        loader.style.display = 'none';
+
         errorMessage.innerHTML = 'Please, fill in all fields. Passwords must match.';
         errorWrapper.classList.remove('hide');
 

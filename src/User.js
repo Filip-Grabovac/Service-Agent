@@ -126,8 +126,7 @@ export default class User {
         })
             .then((response) => response.json())
             .then((result) => {
-                const loader = document.getElementById('loader');
-                loader.style.display = 'none';
+                this.loader.style.display = 'none';
 
                 if (result.code) {
                     if (result.message !== '') {
@@ -160,7 +159,6 @@ export default class User {
         })
             .then((response) => response.json())
             .then((result) => {
-                console.log(this.loader)
                 this.loader.style.display = 'none';
 
                 if (result.code) {

@@ -39,7 +39,7 @@ nextBtn.addEventListener('click', function (event) {
     if (validateData(code.value) === 1) {
         loader.style.display = 'none';
 
-        errorMessage.innerHTML = 'Confirmation code is not correct.';
+        errorMessage.innerHTML = 'Invalid confirmation code!';
         errorWrapper.classList.remove('hide');
 
         setTimeout(function() {
