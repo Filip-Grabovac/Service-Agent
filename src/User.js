@@ -125,6 +125,7 @@ export default class User {
             .then((response) => response.json())
             .then((result) => {
                 const loader = document.getElementById('loader');
+                loader.style.display = 'none';
 
                 if (result.code) {
                     if (result.message !== '') {
@@ -135,8 +136,6 @@ export default class User {
 
                     return;
                 }
-
-                loader.style.display = 'none';
 
                 if (result.authToken) {
                     localStorage.setItem('authToken', result.authToken);
@@ -160,6 +159,7 @@ export default class User {
             .then((response) => response.json())
             .then((result) => {
                 const loader = document.getElementById('loader');
+                loader.style.display = 'none';
 
                 if (result.code) {
                     if (result.message !== '') {
@@ -170,8 +170,6 @@ export default class User {
 
                     return;
                 }
-
-                loader.style.display = 'none';
 
                 if (result.is_verified) {
                     window.location.href = '/user-dashboard';
