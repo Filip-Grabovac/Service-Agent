@@ -1,5 +1,7 @@
 export default class User {
     constructor() {
+        this.loader = document.getElementById('loader');
+
         this.errorWrapper = document.getElementById('error-wrapper');
         this.errorMessage = document.getElementById('error-message');
         this.errorClose = document.getElementById('error-close');
@@ -158,9 +160,8 @@ export default class User {
         })
             .then((response) => response.json())
             .then((result) => {
-                const loader = document.getElementById('loader');
-                console.log(loader)
-                loader.style.display = 'none';
+                console.log(this.loader)
+                this.loader.style.display = 'none';
 
                 if (result.code) {
                     if (result.message !== '') {
