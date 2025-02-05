@@ -34,6 +34,8 @@ nextBtn.addEventListener('click', function (event) {
     loader.style.display = 'flex';
 
     if (validateData(code.value) === 1) {
+        loader.style.display = 'none';
+
         errorMessage.innerHTML = 'Confirmation code is not correct.';
         errorWrapper.classList.remove('hide');
 
