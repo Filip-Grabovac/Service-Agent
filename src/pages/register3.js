@@ -50,7 +50,7 @@ nextBtn.addEventListener('click', function (event) {
     }
 
     let data = {
-        email: registerData.email,
+        email: userEmail,
         confirmation_code: code.value
     };
 
