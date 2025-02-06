@@ -875,7 +875,6 @@ export function setModals(menu) {
             fetch(url, requestData)
                 .then((response) => {
                     if (!response.ok) {
-                        console.log(response)
                         throw new Error('Server responded with an error!');
                     }
 
@@ -979,8 +978,11 @@ export function setModals(menu) {
                     }
                 })
                 .catch((error) => {
-                    console.log(error)
-                    errorMessage.innerHTML = 'Server Error! Please, try again or contact support.';
+                    if (emailChanged) {
+                        errorMessage.innerHTML = 'Email already taken.';
+                    } else {
+                        errorMessage.innerHTML = 'Server Error! Please, try again or contact support.';
+                    }
                     errorWrapper.classList.remove('hide');
 
                     loader.style.display = 'none'
