@@ -15,8 +15,6 @@ const loader = document.getElementById('loader');
 
 const regCodeText = document.getElementById('reg-code-text');
 
-user.authenticate();
-
 let userEmail = '';
 user.me().then((data) => {
     userEmail = data.email;
