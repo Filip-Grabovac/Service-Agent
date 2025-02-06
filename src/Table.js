@@ -875,6 +875,7 @@ export function setModals(menu) {
             fetch(url, requestData)
                 .then((response) => {
                     if (!response.ok) {
+                        console.log(response)
                         throw new Error('Server responded with an error!');
                     }
 
