@@ -28,6 +28,7 @@ let hasActiveCertificate;
 let iti = null;
 
 let emailChanged = false;
+let oldEmail = '';
 
 const usersTable = document.getElementById('users-table');
 const usersDetails = document.getElementById('users-details');
@@ -521,6 +522,10 @@ export function setModals(menu) {
                                 element.value = fillData[element.getAttribute('name')] ?? "";
                             }
 
+                            if (element.getAttribute('name').includes("email")) {
+                                oldEmail = fillData[element.getAttribute('name')];
+                            }
+
                             if (element.getAttribute('name').includes("document_user_address")) {
                                 let address = fillData?._document_addresses_of_documents;
 
@@ -804,9 +809,13 @@ export function setModals(menu) {
                     }
 
                     if (key === 'email') {
-                        emailChanged = true
-                        formData.delete(key);
-                        formData.append('new_email', value);
+                        if (value === oldEmail) {
+                            formData.delete(key);
+                        } else {
+                            emailChanged = true
+                            formData.delete(key);
+                            formData.append('new_email', value);
+                        }
                     }
 
                     if (key === 'shipping_tariffs_id' && value === '0') {
