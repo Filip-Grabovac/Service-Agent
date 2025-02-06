@@ -19,7 +19,7 @@ let userEmail = '';
 user.me().then((data) => {
     userEmail = data.email;
 
-    regCodeText.innerHTML = regCodeText.innerHTML.replace('{email}', data.email);
+    regCodeText.innerHTML = regCodeText.innerHTML.replace('{email}', data.new_email);
 })
 
 errorClose.addEventListener('click', (e) => {
