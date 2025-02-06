@@ -978,6 +978,7 @@ export function setModals(menu) {
                     }
                 })
                 .catch((error) => {
+                    console.log(error)
                     errorMessage.innerHTML = 'Server Error! Please, try again or contact support.';
                     errorWrapper.classList.remove('hide');
 
