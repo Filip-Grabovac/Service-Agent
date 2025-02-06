@@ -27,6 +27,8 @@ let hasActiveCertificate;
 
 let iti = null;
 
+let emailChanged = false;
+
 const usersTable = document.getElementById('users-table');
 const usersDetails = document.getElementById('users-details');
 const usersDetailsClose = document.getElementById('users-details-close');
@@ -801,6 +803,12 @@ export function setModals(menu) {
                         }
                     }
 
+                    if (key === 'email') {
+                        emailChanged = true
+                        formData.delete(key);
+                        formData.append('new_email', value);
+                    }
+
                     if (key === 'shipping_tariffs_id' && value === '0') {
                         errorMessage.innerHTML = 'Please, fill in all fields.';
                         errorWrapper.classList.remove('hide');
@@ -954,6 +962,10 @@ export function setModals(menu) {
                         certificatesTable.classList.remove('hide');
 
                         certificatePayment(data.id, data.type.split('_')[0])
+                    }
+
+                    if (emailChanged) {
+                        window.location.href = '/email-verification';
                     }
                 })
                 .catch((error) => {
