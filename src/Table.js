@@ -275,12 +275,12 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
 function certificatePayment(id, type) {
     let price = "";
     if (type === 'aircraft') {
-        price = "price_1QfGqbCA20rcDWGhGrIUBQVr";
+        price = "price_1Qrbi9CA20rcDWGhZg72KAVO";
     } else if (type === 'airman') {
         if (hasActiveCertificate) {
-            price = "price_1QfGwoCA20rcDWGh4qFwuPTJ";
+            price = "price_1Qrbi2CA20rcDWGhJFtiXTwu";
         } else {
-            price = "price_1QfGuICA20rcDWGhM3Y5GQb7";
+            price = "price_1Qrbi2CA20rcDWGhoyhcf8hs";
         }
     }
 
