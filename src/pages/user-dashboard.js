@@ -149,7 +149,7 @@ certificate.getAllActive().then((data) => {
         userMenu2.style.display = 'none';
     }
 
-    if (urlParams.has('certificate-paid')) {
+    if (urlParams.has('certificate')) {
         const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
         activeTabLink.click();
     }
@@ -186,7 +186,7 @@ certificate.getAllActive().then((data) => {
     }
 })
 
-if (urlParams.has('certificate-paid')) {
+if (urlParams.has('certificate')) {
     setTimeout(function () {
         const removeQueryParam = (param) => {
             const url = new URL(window.location);
@@ -194,7 +194,7 @@ if (urlParams.has('certificate-paid')) {
             window.history.replaceState({}, document.title, url.pathname + url.search);
         };
 
-        removeQueryParam('certificate-paid');
+        removeQueryParam('certificate');
 
         successMessage.innerHTML = 'Certificate has been successfully paid.';
         successWrapper.classList.remove('hide');

@@ -274,12 +274,16 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
 
 function certificatePayment(id, type) {
     let price = "";
+    let certificate = "";
     if (type === 'aircraft') {
+        certificate = "aircraft_75";
         price = "price_1Qrbi9CA20rcDWGhZg72KAVO";
     } else if (type === 'airman') {
         if (hasActiveCertificate) {
+            certificate = "airman_35";
             price = "price_1Qrbi2CA20rcDWGhJFtiXTwu";
         } else {
+            certificate = "airman_75";
             price = "price_1Qrbi2CA20rcDWGhoyhcf8hs";
         }
     }
@@ -290,7 +294,7 @@ function certificatePayment(id, type) {
 
     loader.style.display = 'flex';
     let data = {
-        success_url: "https://" + window.location.hostname + "/user-dashboard?certificate-paid=1",
+        success_url: "https://" + window.location.hostname + "/user-dashboard?certificate=" + certificate,
         cancel_url: "https://" + window.location.hostname + "/user-dashboard",
         certificates_id: id,
         email: authUserData.email,

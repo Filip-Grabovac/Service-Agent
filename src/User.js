@@ -172,7 +172,7 @@ export default class User {
                 }
 
                 if (result.is_verified) {
-                    window.location.href = '/user-dashboard';
+                    window.location.href = '/user-dashboard?registration=successful';
                 }
             })
             .catch((error) => {
