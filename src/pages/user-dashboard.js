@@ -139,6 +139,14 @@ user.me().then((data) => {
     gear.setAttribute('data-id-user-id', data.id);
 
     setModals('initial-user');
+
+    if (urlParams.has('certificate') && data.tutorial_shown === false) {
+        const tour1 = document.getElementById('tour-1');
+        tour1.style.display = 'flex';
+        localStorage.setItem('tourStage', '1');
+
+        user.tutorialShown(user.id);
+    }
 });
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -198,10 +206,6 @@ if (urlParams.has('certificate')) {
 
         successMessage.innerHTML = 'Certificate has been successfully paid.';
         successWrapper.classList.remove('hide');
-
-        const tour1 = document.getElementById('tour-1');
-        tour1.style.display = 'flex';
-        localStorage.setItem('tourStage', '1');
 
         setTimeout(function () {
             successWrapper.classList.add('hide');
