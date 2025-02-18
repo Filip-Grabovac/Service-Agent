@@ -206,9 +206,9 @@ if (urlParams.has('certificate')) {
         successMessage.innerHTML = 'Certificate has been successfully paid.';
         successWrapper.classList.remove('hide');
 
-        console.log(showTutorial)
         if (showTutorial) {
             const tour1 = document.getElementById('tour-1');
+            console.log(tour1)
             tour1.style.display = 'flex';
             localStorage.setItem('tourStage', '1');
         }
