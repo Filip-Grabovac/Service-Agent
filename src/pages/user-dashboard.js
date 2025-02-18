@@ -145,7 +145,7 @@ user.me().then((data) => {
         tour1.style.display = 'flex';
         localStorage.setItem('tourStage', '1');
 
-        user.tutorialShown(user.id);
+        user.tutorialShown(data.id);
     }
 });
 
