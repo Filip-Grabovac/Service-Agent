@@ -231,6 +231,13 @@ if (urlParams.has('certificate-deleted')) {
 
         const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
         activeTabLink.click();
+
+        successMessage.innerHTML = "The certificate has been successfully deleted.";
+        successWrapper.classList.remove('hide');
+
+        setTimeout(function() {
+            successWrapper.classList.add('hide');
+        }, 3000);
     }, 1000);
 }
 
