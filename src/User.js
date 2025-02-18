@@ -357,24 +357,24 @@ export default class User {
             });
     }
     tutorialShown(userId) {
-        const authToken =  localStorage.getItem('authToken');
-        const data = {
-            tutorial_shown: true
-        }
-        // Call the Xano API
-        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/' + userId, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `Bearer ${authToken}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then((response) => response.json())
-            .then((result) => {})
-            .catch((error) => {
-                this.showError('Server Error! Please, try again or contact support.');
-            });
+        // const authToken =  localStorage.getItem('authToken');
+        // const data = {
+        //     tutorial_shown: true
+        // }
+        // // Call the Xano API
+        // fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/' + userId, {
+        //     method: 'PUT',
+        //     headers: {
+        //         'Authorization': `Bearer ${authToken}`,
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(data),
+        // })
+        //     .then((response) => response.json())
+        //     .then((result) => {})
+        //     .catch((error) => {
+        //         this.showError('Server Error! Please, try again or contact support.');
+        //     });
     }
     callMethod(methodName, ...args) {
         if (typeof this[methodName] === 'function') {
