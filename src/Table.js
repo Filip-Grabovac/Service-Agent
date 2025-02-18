@@ -886,7 +886,7 @@ export function setModals(menu) {
                 })
                 .then((data) => {
                     if (modalName === 'delete-certificate-popup') {
-                        location.reload();
+                        window.location.href = window.location.pathname + "?certificate-deleted=1"
                     }
 
                     modal.classList.add('hide');

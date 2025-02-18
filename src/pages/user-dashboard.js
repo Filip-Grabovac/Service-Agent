@@ -219,6 +219,21 @@ if (urlParams.has('certificate')) {
     }, 1000);
 }
 
+if (urlParams.has('certificate-deleted')) {
+    setTimeout(function () {
+        const removeQueryParam = (param) => {
+            const url = new URL(window.location);
+            url.searchParams.delete(param);
+            window.history.replaceState({}, document.title, url.pathname + url.search);
+        };
+
+        removeQueryParam('certificate-deleted');
+
+        const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
+        activeTabLink.click();
+    }, 1000);
+}
+
 const aircraft = document.querySelector('input[type="radio"][value="aircraft_registration_certificate"]');
 const airman = document.querySelector('input[type="radio"][value="airman_certificate"]');
 const newCertificate = document.querySelector('input[type="radio"][name="is_existing"][value="false"]');
