@@ -35,6 +35,8 @@ const successWrapper = document.getElementById('success-wrapper');
 const successMessage = document.getElementById('success-message');
 const successClose = document.getElementById('success-close');
 
+let showTutorial = false;
+
 successClose.addEventListener('click', (e) => {
     successWrapper.classList.add('hide');
 })
@@ -141,10 +143,7 @@ user.me().then((data) => {
     setModals('initial-user');
 
     if (urlParams.has('certificate') && data.tutorial_shown === false) {
-        const tour1 = document.getElementById('tour-1');
-        tour1.style.display = 'flex';
-        localStorage.setItem('tourStage', '1');
-
+        showTutorial = true;
         user.tutorialShown(data.id);
     }
 });
@@ -206,6 +205,12 @@ if (urlParams.has('certificate')) {
 
         successMessage.innerHTML = 'Certificate has been successfully paid.';
         successWrapper.classList.remove('hide');
+
+        if (showTutorial) {
+            const tour1 = document.getElementById('tour-1');
+            tour1.style.display = 'flex';
+            localStorage.setItem('tourStage', '1');
+        }
 
         setTimeout(function () {
             successWrapper.classList.add('hide');

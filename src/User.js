@@ -359,7 +359,7 @@ export default class User {
     tutorialShown(userId) {
         const authToken =  localStorage.getItem('authToken');
         const data = {
-            tutorial_show: true
+            tutorial_shown: true
         }
         // Call the Xano API
         fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/' + userId, {
