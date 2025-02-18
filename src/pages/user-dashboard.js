@@ -208,7 +208,6 @@ if (urlParams.has('certificate')) {
 
         if (showTutorial) {
             const tour1 = document.getElementById('tour-1');
-            console.log(tour1)
             tour1.style.display = 'flex';
             localStorage.setItem('tourStage', '1');
         }
