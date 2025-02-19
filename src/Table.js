@@ -800,7 +800,7 @@ export function setModals(menu) {
                                 formData.delete('description');
                                 formData.append('description', '');
                             }
-                        } else if (key !== 'middle_name' && key !== 'user_addresses_of_user.address_additional') {
+                        } else if (key !== 'middle_name' && key !== 'user_addresses_of_user.address_additional' && key !== 'document_addresses_of_documents.address_additional') {
                             errorMessage.innerHTML = 'Please, fill in all fields.';
                             errorWrapper.classList.remove('hide');
 
