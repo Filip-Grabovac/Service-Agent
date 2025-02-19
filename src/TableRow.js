@@ -442,9 +442,7 @@ export default class TableRow {
                 1:`
                     <div class="row-inside right">
                         ${item.is_active === false ? `
-                            <div data-payment-open="aircraft" data-id-certificates-id="${item.id}" class="actions-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 12 18" fill="none" class="action-svg smaller">
-                                <path d="M1.5 12C1.5 13.6569 2.84315 15 4.5 15H7.5C9.15685 15 10.5 13.6569 10.5 12C10.5 10.3431 9.15685 9 7.5 9H4.5C2.84315 9 1.5 7.65685 1.5 6C1.5 4.34315 2.84315 3 4.5 3H7.5C9.15685 3 10.5 4.34315 10.5 6M6 1.5V16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                              </svg></div>
+                            <div data-payment-open="aircraft" data-id-certificates-id="${item.id}" class="actions-svg-wrap">Pay for certificate</div>
                         ` : ''}
                         <div data-modal-open="delete-certificate-popup" data-id-certificates-id="${item.id}" data-fill-7-1=${item.id} class="delete-doc-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 16 18" fill="none" class="action-svg">
                             <path d="M11 4.5V3.9C11 3.05992 11 2.63988 10.8365 2.31901C10.6927 2.03677 10.4632 1.8073 10.181 1.66349C9.86012 1.5 9.44008 1.5 8.6 1.5H7.4C6.55992 1.5 6.13988 1.5 5.81901 1.66349C5.53677 1.8073 5.3073 2.03677 5.16349 2.31901C5 2.63988 5 3.05992 5 3.9V4.5M6.5 8.625V12.375M9.5 8.625V12.375M1.25 4.5H14.75M13.25 4.5V12.9C13.25 14.1601 13.25 14.7902 13.0048 15.2715C12.789 15.6948 12.4448 16.039 12.0215 16.2548C11.5402 16.5 10.9101 16.5 9.65 16.5H6.35C5.08988 16.5 4.45982 16.5 3.97852 16.2548C3.55516 16.039 3.21095 15.6948 2.99524 15.2715C2.75 14.7902 2.75 14.1601 2.75 12.9V4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -454,9 +452,7 @@ export default class TableRow {
                 2:`
                     <div class="row-inside right">
                         ${item.is_active === false ? `
-                            <div data-payment-open="airman" data-id-certificates-id="${item.id}" class="actions-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 12 18" fill="none" class="action-svg smaller">
-                                <path d="M1.5 12C1.5 13.6569 2.84315 15 4.5 15H7.5C9.15685 15 10.5 13.6569 10.5 12C10.5 10.3431 9.15685 9 7.5 9H4.5C2.84315 9 1.5 7.65685 1.5 6C1.5 4.34315 2.84315 3 4.5 3H7.5C9.15685 3 10.5 4.34315 10.5 6M6 1.5V16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                              </svg></div>
+                            <div data-payment-open="airman" data-id-certificates-id="${item.id}" class="actions-svg-wrap">Pay for certificate</div>
                         ` : ''}
                         <div data-modal-open="delete-certificate-popup" data-id-certificates-id="${item.id}" data-fill-7-2=${item.id} class="delete-doc-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 16 18" fill="none" class="action-svg">
                             <path d="M11 4.5V3.9C11 3.05992 11 2.63988 10.8365 2.31901C10.6927 2.03677 10.4632 1.8073 10.181 1.66349C9.86012 1.5 9.44008 1.5 8.6 1.5H7.4C6.55992 1.5 6.13988 1.5 5.81901 1.66349C5.53677 1.8073 5.3073 2.03677 5.16349 2.31901C5 2.63988 5 3.05992 5 3.9V4.5M6.5 8.625V12.375M9.5 8.625V12.375M1.25 4.5H14.75M13.25 4.5V12.9C13.25 14.1601 13.25 14.7902 13.0048 15.2715C12.789 15.6948 12.4448 16.039 12.0215 16.2548C11.5402 16.5 10.9101 16.5 9.65 16.5H6.35C5.08988 16.5 4.45982 16.5 3.97852 16.2548C3.55516 16.039 3.21095 15.6948 2.99524 15.2715C2.75 14.7902 2.75 14.1601 2.75 12.9V4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
