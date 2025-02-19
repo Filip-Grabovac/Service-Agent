@@ -22,6 +22,8 @@ const numberInput = document.getElementById('Number');
 const emailInput = document.getElementById('E-mail');
 const phoneInput = document.getElementById('Phone');
 const referralSource = document.getElementById('referral_source');
+const middleName = document.getElementById('middle_name');
+const addressAdditional = document.getElementById('address_additional');
 
 const errorWrapper = document.getElementById('error-wrapper');
 const errorMessage = document.getElementById('error-message');
@@ -97,6 +99,8 @@ nextBtn.addEventListener('click', function (event) {
         is_company: isCompany,
         phone_country: iti.getSelectedCountryData().iso2,
         referral_source: referralSource.value,
+        middle_name: middleName.value,
+        address_additional: addressAdditional.value,
     };
 
     if (isCompany) {
