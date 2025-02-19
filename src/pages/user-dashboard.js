@@ -151,7 +151,7 @@ user.me().then((data) => {
 const urlParams = new URLSearchParams(window.location.search);
 
 certificate.getAllInactive().then((data) => {
-    if (data && data.length === 0) {
+    if (data && data.length > 0) {
         const noCertificateBox = document.querySelector('.no-certificate-text-wrap');
 
         noCertificateBox.style.display = 'block';
