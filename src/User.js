@@ -71,6 +71,7 @@ export default class User {
                         window.location.href = failureRedirect;
                     }
                 } else {
+                    console.log(result)
                     if (result.archived) {
                         localStorage.removeItem('authToken');
 
