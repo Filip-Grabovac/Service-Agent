@@ -142,7 +142,7 @@ user.me().then((data) => {
     gear.setAttribute('data-id-user-id', data.id);
     deleteAccount.setAttribute('data-id-user-id', data.id);
     deleteAccount.addEventListener('click', () => {
-        gear.querySelector('[data-modal-action="close"]').click();
+        document.querySelector('#edit-user-popup').querySelector('[data-modal-action="close"]').click();
     });
 
     setModals('initial-user');
