@@ -71,6 +71,12 @@ export default class User {
                         window.location.href = failureRedirect;
                     }
                 } else {
+                    if (result.archived) {
+                        localStorage.removeItem('authToken');
+
+                        window.location.href = '/log-in';
+                    }
+
                     if (result.is_admin) {
                         if (window.location.pathname !== '/admin-dashboard') {
                             window.location.href = '/admin-dashboard';
