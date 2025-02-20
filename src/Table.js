@@ -889,6 +889,10 @@ export function setModals(menu) {
                         window.location.href = window.location.pathname + "?certificate-deleted=1"
                     }
 
+                    if (modalName === 'delete-user-popup' && activeRole === 'user') {
+                        user.logOut()
+                    }
+
                     modal.classList.add('hide');
 
                     item.files = [];
