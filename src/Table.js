@@ -1042,6 +1042,13 @@ function getModals(menu) {
                 success_message: 'Your profile has been successfully updated.',
             },
             2: {
+                modal: 'delete-user-popup',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/{user_id}',
+                method: 'DELETE',
+                files: [],
+                success_message: 'The user has been successfully deleted.',
+            },
+            3: {
                 modal: 'add-certificate-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates',
                 method: 'POST',
