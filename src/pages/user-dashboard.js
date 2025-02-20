@@ -17,6 +17,7 @@ const home = document.getElementById('home');
 const logout = document.getElementsByClassName('logout');
 const gearWrapper = document.getElementById('gear-wrapper');
 const gear = document.getElementById('gear');
+const deleteAccount = document.getElementById('delete-account');
 const tour1Next = document.getElementById('tour-1-next');
 const tour2Next = document.getElementById('tour-2-next');
 const tour3Next = document.getElementById('tour-3-next');
@@ -139,6 +140,7 @@ user.me().then((data) => {
     gear.setAttribute('data-modal-open', 'edit-user-popup');
     gear.setAttribute('data-fill-auth-id', '1');
     gear.setAttribute('data-id-user-id', data.id);
+    deleteAccount.setAttribute('data-id-user-id', data.id);
 
     setModals('initial-user');
 
