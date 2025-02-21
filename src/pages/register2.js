@@ -65,7 +65,7 @@ function validateData(passwordData) {
     return hasErrors;
 }
 
-const inputs = document.querySelectorAll('.input-rows');
+const inputs = document.querySelectorAll('.input-rows-copy');
 
 inputs.forEach(input => {
     input.querySelector('.eye-icon-show').addEventListener('click', function () {
