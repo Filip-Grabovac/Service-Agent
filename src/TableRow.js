@@ -63,6 +63,11 @@ export default class TableRow {
                     <div>${item.email}</div>
                 </div>
             `,
+                status: () => `
+                <div class="row-inside">
+                    <div>${item._certificates_of_user[0] && item._certificates_of_user[0].is_active === true ? 'PAID' : 'NOT PAID'}</div>
+                </div>
+            `,
                 blank: () => `
                 <div class="row-inside">
                     <div class="gray-box"></div>

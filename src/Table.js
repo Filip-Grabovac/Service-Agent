@@ -418,7 +418,7 @@ function getColumns(menu, tab) {
             6: ['id', 'name', 'user', 'price', 'status', 'blank', 'actions'],
         },
         2: {
-            1: ['id', 'name', 'address', 'email', 'blank', 'actions'],
+            1: ['id', 'name', 'address', 'email', 'status', 'blank', 'actions'],
             2: ['id', 'name', 'status', 'actions'],
             3: ['id', 'details', 'make', 'model', 'serial_number'],
             4: ['id', 'ffa_certificate_number', 'applicant_id_number', 'iarca_tracking_number', 'existing_certificate'],
