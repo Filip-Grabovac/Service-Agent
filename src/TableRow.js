@@ -205,6 +205,11 @@ export default class TableRow {
                     <div class="gray-box"></div>
                 </div>
             `,
+                status: () => `
+                <div class="row-inside">
+                    <div class="txt-row">${item.is_active === true ? 'ACTIVE' : 'NOT ACTIVE'}</div>
+                </div>
+            `,
             },
             airman_certificates: {
                 id: () => `
@@ -235,6 +240,11 @@ export default class TableRow {
                 blank: () => `
                 <div class="row-inside">
                     <div class="gray-box"></div>
+                </div>
+            `,
+                status: () => `
+                <div class="row-inside">
+                    <div class="txt-row">${item.is_active === true ? 'ACTIVE' : 'NOT ACTIVE'}</div>
                 </div>
             `,
             }
