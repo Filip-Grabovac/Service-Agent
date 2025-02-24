@@ -218,6 +218,39 @@ export default class User {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
+    loginWithHash(data) {
+        // Call the Xano API
+        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/login-with-hash', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    if (result.message !== '') {
+                        this.showError(result.message);
+                    } else {
+                        this.showError('Server Error! Please, try again or contact support.');
+                    }
+
+                    return;
+                }
+
+                if (result.authToken) {
+                    localStorage.setItem('authToken', result.authToken);
+
+                    this.authenticate();
+
+                    localStorage.removeItem('registerData');
+                }
+            })
+            .catch((error) => {
+                this.showError('Server Error! Please, try again or contact support.');
+            });
+    }
     logOut() {
         localStorage.removeItem('authToken');
 

@@ -14,6 +14,13 @@ const errorClose = document.getElementById('error-close');
 errorClose.addEventListener('click', (e) => {
     errorWrapper.classList.add('hide');
 })
+const urlParams = new URLSearchParams(window.location.search);
+
+if (urlParams.has('hash')) {
+    user.loginWithHash({
+        hash: urlParams.get('hash'),
+    });
+}
 
 user.authenticate();
 
