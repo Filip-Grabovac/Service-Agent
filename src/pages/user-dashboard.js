@@ -196,6 +196,7 @@ certificate.getAllActive().then((data) => {
                         aircraftModel.value = prepopulatedUser.aircraft_model;
                         aircraftSerialNumber.value = prepopulatedUser.aircraft_serial_number;
                     } else if (prepopulatedUser && prepopulatedUser.have_airman === 'Yes') {
+                        airman.click();
                         airmanCertificateNumber.value = prepopulatedUser.ffa_certificate_number;
                         if (prepopulatedUser.existing_certificate !== '') {
                             existingCertificate.click();
@@ -284,7 +285,7 @@ const aircraftMake = document.querySelector('input[name="aircraft_make"]');
 const aircraftModel = document.querySelector('input[name="aircraft_model"]');
 const aircraftSerialNumber = document.querySelector('input[name="aircraft_serial_number"]');
 const airmanCertificateNumber = document.querySelector('input[name="ffa_certificate_number"]');
-const airmanExistingCertificate = document.querySelector('input[name="existing_certificate"]');
+const airmanExistingCertificate = document.querySelector('select[name="existing_certificate"]');
 
 const radioOption1 = document.getElementById('radio-option-1');
 const radioOption2 = document.getElementById('radio-option-2');
