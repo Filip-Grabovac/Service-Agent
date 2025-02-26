@@ -136,7 +136,9 @@ tourSkips.forEach((el, index) => {
     });
 });
 
+let prepopulatedUserId = null;
 user.me().then((data) => {
+    prepopulatedUserId = user.prepopulated_users_id;
     gear.setAttribute('data-modal-open', 'edit-user-popup');
     gear.setAttribute('data-fill-auth-id', '1');
     gear.setAttribute('data-id-user-id', data.id);
@@ -186,9 +188,9 @@ certificate.getAllActive().then((data) => {
                 const closeElement = document.querySelector('[data-modal-action="close"]');
                 closeElement.style.display = 'none';
 
-                // user.getPrepopulatedUSer(urlParams.get('hash')).then((prepopulatedUser) => {
-                //
-                // })
+                user.getPrepopulatedUSer(prepopulatedUserId).then((prepopulatedUser) => {
+                    console.log(prepopulatedUser)
+                })
             }
         });
 
