@@ -588,6 +588,7 @@ export function setModals(menu) {
                                         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
                                         formatOnDisplay: false,
                                         separateDialCode: true,
+                                        autoPlaceholder: "off",
                                     });
                                 }
                             }

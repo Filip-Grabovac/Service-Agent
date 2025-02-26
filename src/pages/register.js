@@ -38,6 +38,14 @@ errorClose.addEventListener('click', (e) => {
 
 user.authenticate();
 
+const urlParams = new URLSearchParams(window.location.search);
+
+if (urlParams.has('hash')) {
+    const prepopulatedUser = user.getPrepopulatedUSer(urlParams.get('hash'));
+
+    console.log(prepopulatedUser);
+}
+
 const iti = window.intlTelInput(phoneInput, {
     initialCountry: "us",
     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",

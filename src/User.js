@@ -286,6 +286,30 @@ export default class User {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
+    getPrepopulatedUSer(hash) {
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/prepopulated_users/${hash}`;
+
+        // Call the Xano API
+        return fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
+                }
+
+                return result;
+            })
+            .catch((error) => {
+                this.showError('Server Error! Please, try again or contact support.');
+            });
+    }
     initialPayment(data) {
         const authToken =  localStorage.getItem('authToken');
 
