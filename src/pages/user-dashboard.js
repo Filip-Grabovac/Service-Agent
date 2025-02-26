@@ -189,13 +189,13 @@ certificate.getAllActive().then((data) => {
                 closeElement.style.display = 'none';
 
                 user.getPrepopulatedUSer(prepopulatedUserId).then((prepopulatedUser) => {
-                    if (prepopulatedUser && prepopulatedUser.have_aircraft === 'Yes') {
+                    if (prepopulatedUser && !prepopulatedUser.certificate_created && prepopulatedUser.have_aircraft === 'Yes') {
                         aircraft.click();
                         aircraftDetails.value = prepopulatedUser.aircraft_details;
                         aircraftMake.value = prepopulatedUser.aircraft_make;
                         aircraftModel.value = prepopulatedUser.aircraft_model;
                         aircraftSerialNumber.value = prepopulatedUser.aircraft_serial_number;
-                    } else if (prepopulatedUser && prepopulatedUser.have_airman === 'Yes') {
+                    } else if (prepopulatedUser && !prepopulatedUser.certificate_created && prepopulatedUser.have_airman === 'Yes') {
                         airman.click();
                         airmanCertificateNumber.value = prepopulatedUser.ffa_certificate_number;
                         if (prepopulatedUser.existing_certificate !== '') {
