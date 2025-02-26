@@ -59,6 +59,18 @@ companyRadio.addEventListener('click', function (event) {
     }
 })
 
+function capitalizeWords(str) {
+    if (str === str.toUpperCase()) {
+        return str
+            .toLowerCase()
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    }
+
+    return str;
+}
+
 individualRadio.addEventListener('click', function (event) {
     companyNameWrapper.style.display = 'none';
     dateOfBirthWrapper.style.display = 'flex';
@@ -98,8 +110,8 @@ nextBtn.addEventListener('click', function (event) {
     };
 
     const registerData = {
-        first_name: firstNameInput.value,
-        last_name: lastNameInput.value,
+        first_name: capitalizeWords(firstNameInput.value),
+        last_name: capitalizeWords(lastNameInput.value),
         country: countrySelect.value,
         state: stateSelect.value,
         city: cityInput.value,
@@ -111,7 +123,7 @@ nextBtn.addEventListener('click', function (event) {
         is_company: isCompany,
         phone_country: iti.getSelectedCountryData().iso2,
         referral_source: referralSource.value,
-        middle_name: middleName.value,
+        middle_name: capitalizeWords(middleName.value),
         address_additional: addressAdditional.value,
     };
 
