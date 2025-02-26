@@ -185,6 +185,10 @@ certificate.getAllActive().then((data) => {
 
                 const closeElement = document.querySelector('[data-modal-action="close"]');
                 closeElement.style.display = 'none';
+
+                // user.getPrepopulatedUSer(urlParams.get('hash')).then((prepopulatedUser) => {
+                //
+                // })
             }
         });
 

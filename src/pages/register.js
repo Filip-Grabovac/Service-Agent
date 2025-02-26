@@ -51,7 +51,7 @@ if (urlParams.has('hash')) {
 
         removeQueryParam('hash');
 
-        if (!prepopulatedUser) {
+        if (!prepopulatedUser || prepopulatedUser.signed_up) {
             return;
         }
 
