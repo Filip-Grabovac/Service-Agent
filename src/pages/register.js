@@ -43,7 +43,7 @@ const iti = window.intlTelInput(phoneInput, {
     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
     formatOnDisplay: false,
     separateDialCode: true,
-    placeholder: false,
+    customPlaceholder: "",
 });
 
 const today = new Date().toISOString().split('T')[0];
