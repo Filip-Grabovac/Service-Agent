@@ -43,11 +43,17 @@ const urlParams = new URLSearchParams(window.location.search);
 let prepopulated_id = null;
 if (urlParams.has('hash')) {
     user.getPrepopulatedUSer(urlParams.get('hash')).then((prepopulatedUser) => {
+        const removeQueryParam = (param) => {
+            const url = new URL(window.location);
+            url.searchParams.delete(param);
+            window.history.replaceState({}, document.title, url.pathname + url.search);
+        };
+
+        removeQueryParam('hash');
+
         if (!prepopulatedUser) {
             return;
         }
-
-        console.log(prepopulatedUser);
 
         prepopulated_id = prepopulatedUser.id;
 
