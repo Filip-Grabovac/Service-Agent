@@ -138,7 +138,7 @@ tourSkips.forEach((el, index) => {
 
 let prepopulatedUserId = null;
 user.me().then((data) => {
-    prepopulatedUserId = user.prepopulated_users_id;
+    prepopulatedUserId = data.prepopulated_users_id;
     gear.setAttribute('data-modal-open', 'edit-user-popup');
     gear.setAttribute('data-fill-auth-id', '1');
     gear.setAttribute('data-id-user-id', data.id);
