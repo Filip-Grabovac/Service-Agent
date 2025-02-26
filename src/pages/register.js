@@ -24,6 +24,7 @@ const phoneInput = document.getElementById('Phone');
 const referralSource = document.getElementById('referral_source');
 const middleName = document.getElementById('middle_name');
 const addressAdditional = document.getElementById('address_additional');
+const terms = document.getElementById('terms');
 
 const errorWrapper = document.getElementById('error-wrapper');
 const errorMessage = document.getElementById('error-message');
@@ -71,6 +72,17 @@ individualRadio.addEventListener('click', function (event) {
 
 nextBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
+
+    if (!terms.checked) {
+        errorMessage.innerHTML = 'You must agree to the Terms & Conditions.';
+        errorWrapper.classList.remove('hide');
+
+        setTimeout(function() {
+            errorWrapper.classList.add('hide');
+        }, 3000);
+
+        return;
+    }
 
     const dataForValidation = {
         first_name: firstNameInput,
