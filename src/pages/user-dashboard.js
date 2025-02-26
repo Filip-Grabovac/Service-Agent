@@ -189,6 +189,13 @@ certificate.getAllActive().then((data) => {
                 closeElement.style.display = 'none';
 
                 user.getPrepopulatedUSer(prepopulatedUserId).then((prepopulatedUser) => {
+                    if (prepopulatedUser && prepopulatedUser.have_aircraft === 'Yes') {
+                        aircraft.click();
+                        aircraftDetails.value = prepopulatedUser.aircraft_details;
+                        aircraftMake.value = prepopulatedUser.aircraft_make;
+                        aircraftModel.value = prepopulatedUser.aircraft_model;
+                        aircraftSerialNumber.value = prepopulatedUser.aircraft_serial_number;
+                    }
                     console.log(prepopulatedUser)
                 })
             }
@@ -266,6 +273,11 @@ const newCertificate = document.querySelector('input[type="radio"][name="is_exis
 const existingCertificate = document.querySelector('input[type="radio"][name="is_existing"][value="true"]');
 const nonMedical = document.querySelector('input[type="radio"][name="is_medical"][value="false"]');
 const isMedical = document.querySelector('input[type="radio"][name="is_medical"][value="true"]');
+
+const aircraftDetails = document.getElementById('input[name="aircraft_details"]');
+const aircraftMake = document.getElementById('input[name="aircraft_make"]');
+const aircraftModel = document.getElementById('input[name="aircraft_model"]');
+const aircraftSerialNumber = document.getElementById('input[name="aircraft_serial_number"]');
 
 const radioOption1 = document.getElementById('radio-option-1');
 const radioOption2 = document.getElementById('radio-option-2');
