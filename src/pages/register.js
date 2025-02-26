@@ -40,6 +40,7 @@ user.authenticate();
 
 const urlParams = new URLSearchParams(window.location.search);
 
+let prepopulated_id = null;
 if (urlParams.has('hash')) {
     user.getPrepopulatedUSer(urlParams.get('hash')).then((prepopulatedUser) => {
         if (!prepopulatedUser) {
@@ -47,6 +48,8 @@ if (urlParams.has('hash')) {
         }
 
         console.log(prepopulatedUser);
+
+        prepopulated_id = prepopulatedUser.id;
 
         individualRadio.click();
 
@@ -151,6 +154,7 @@ nextBtn.addEventListener('click', function (event) {
         referral_source: referralSource.value,
         middle_name: capitalizeWords(middleName.value),
         address_additional: addressAdditional.value,
+        prepopulated_id: prepopulated_id,
     };
 
     if (isCompany) {
