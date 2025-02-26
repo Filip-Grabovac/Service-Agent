@@ -274,10 +274,10 @@ const existingCertificate = document.querySelector('input[type="radio"][name="is
 const nonMedical = document.querySelector('input[type="radio"][name="is_medical"][value="false"]');
 const isMedical = document.querySelector('input[type="radio"][name="is_medical"][value="true"]');
 
-const aircraftDetails = document.getElementById('input[name="aircraft_details"]');
-const aircraftMake = document.getElementById('input[name="aircraft_make"]');
-const aircraftModel = document.getElementById('input[name="aircraft_model"]');
-const aircraftSerialNumber = document.getElementById('input[name="aircraft_serial_number"]');
+const aircraftDetails = document.querySelector('input[name="aircraft_details"]');
+const aircraftMake = document.querySelector('input[name="aircraft_make"]');
+const aircraftModel = document.querySelector('input[name="aircraft_model"]');
+const aircraftSerialNumber = document.querySelector('input[name="aircraft_serial_number"]');
 
 const radioOption1 = document.getElementById('radio-option-1');
 const radioOption2 = document.getElementById('radio-option-2');
