@@ -45,6 +45,17 @@ if (urlParams.has('hash')) {
         console.log(prepopulatedUser);
 
         individualRadio.click();
+
+        firstNameInput.value = prepopulatedUser.first_name;
+        lastNameInput.value = prepopulatedUser.last_name;
+        middleName.value = prepopulatedUser.middle_name;
+        streetInput.value = prepopulatedUser.street;
+        addressAdditional.value = prepopulatedUser.address_additional;
+        cityInput.value = prepopulatedUser.city;
+        stateSelect.value = prepopulatedUser.state;
+        zipInput.value = prepopulatedUser.zip;
+        countrySelect.value = prepopulatedUser.country;
+        emailInput.value = prepopulatedUser.email;
     });
 }
 
