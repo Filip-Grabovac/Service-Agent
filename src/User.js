@@ -299,15 +299,13 @@ export default class User {
             .then((response) => response.json())
             .then((result) => {
                 if (result.code) {
-                    this.showError('Server Error! Please, try again or contact support.');
-
-                    return;
+                    return null;
                 }
 
                 return result;
             })
             .catch((error) => {
-                this.showError('Server Error! Please, try again or contact support.');
+                return null;
             });
     }
     initialPayment(data) {

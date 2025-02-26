@@ -42,6 +42,10 @@ const urlParams = new URLSearchParams(window.location.search);
 
 if (urlParams.has('hash')) {
     user.getPrepopulatedUSer(urlParams.get('hash')).then((prepopulatedUser) => {
+        if (!prepopulatedUser) {
+            return;
+        }
+
         console.log(prepopulatedUser);
 
         individualRadio.click();
