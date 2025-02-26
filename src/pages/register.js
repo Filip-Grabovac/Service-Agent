@@ -43,7 +43,9 @@ const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('hash')) {
     const prepopulatedUser = user.getPrepopulatedUSer(urlParams.get('hash'));
 
-    console.log(prepopulatedUser);
+    console.log(prepopulatedUser.email);
+
+    individualRadio.click()
 }
 
 const iti = window.intlTelInput(phoneInput, {
@@ -68,6 +70,17 @@ companyRadio.addEventListener('click', function (event) {
     }
 })
 
+individualRadio.addEventListener('click', function (event) {
+    companyNameWrapper.style.display = 'none';
+    dateOfBirthWrapper.style.display = 'flex';
+
+    isCompany = false;
+
+    if (secondStepInputs.classList.contains('hidden')) {
+        secondStepInputs.classList.remove('hidden');
+    }
+})
+
 function capitalizeWords(str) {
     if (str === str.toUpperCase()) {
         return str
@@ -79,17 +92,6 @@ function capitalizeWords(str) {
 
     return str;
 }
-
-individualRadio.addEventListener('click', function (event) {
-    companyNameWrapper.style.display = 'none';
-    dateOfBirthWrapper.style.display = 'flex';
-
-    isCompany = false;
-
-    if (secondStepInputs.classList.contains('hidden')) {
-        secondStepInputs.classList.remove('hidden');
-    }
-})
 
 nextBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
