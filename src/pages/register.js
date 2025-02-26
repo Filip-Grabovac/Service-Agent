@@ -41,11 +41,11 @@ user.authenticate();
 const urlParams = new URLSearchParams(window.location.search);
 
 if (urlParams.has('hash')) {
-    const prepopulatedUser = user.getPrepopulatedUSer(urlParams.get('hash'));
+    user.getPrepopulatedUSer(urlParams.get('hash')).then((prepopulatedUser) => {
+        console.log(prepopulatedUser.email);
 
-    console.log(prepopulatedUser.email);
-
-    individualRadio.click()
+        individualRadio.click()
+    });
 }
 
 const iti = window.intlTelInput(phoneInput, {
