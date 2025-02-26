@@ -42,9 +42,9 @@ const urlParams = new URLSearchParams(window.location.search);
 
 if (urlParams.has('hash')) {
     user.getPrepopulatedUSer(urlParams.get('hash')).then((prepopulatedUser) => {
-        console.log(prepopulatedUser.email);
+        console.log(prepopulatedUser);
 
-        individualRadio.click()
+        individualRadio.click();
     });
 }
 
