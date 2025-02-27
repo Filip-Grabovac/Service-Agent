@@ -360,3 +360,36 @@ isMedical.addEventListener('click', function (event) {
         trackingNumberWrapper.classList.add('hidden');
     }
 })
+
+const billingIcons = document.querySelector('[data-billing-open]')
+
+billingIcons.forEach(element => {
+    element.addEventListener('click', () => {
+        const certificateId = element.getAttribute('data-billing-open');
+
+        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx/portal-sessions', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
+                certificate_id: certificateId,
+            }),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
+                }
+
+                window.location.href = result;
+            })
+            .catch((error) => {
+                this.showError('Server Error! Please, try again or contact support.');
+            });
+    });
+});
