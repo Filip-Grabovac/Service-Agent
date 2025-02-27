@@ -1890,7 +1890,7 @@ function setBillingLinks() {
                 .catch((error) => {
                     this.showError('Server Error! Please, try again or contact support.');
                 });
-        });
+        }, { once: true });
     });
 }
 
