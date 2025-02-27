@@ -55,7 +55,7 @@ adminMenu1.addEventListener('click', function (event) {
 
     fillTable(1, 1, '1,2,3,4,5,6,7,8')
 
-    history.pushState({ page: 1 }, "documents", "/documents");
+    history.pushState({ page: 1 }, "documents", "/admin-dashboard/documents");
 })
 adminMenu1Tab1.addEventListener('click', function (event) {
     updateActiveElement(adminMenu1Tab1)
