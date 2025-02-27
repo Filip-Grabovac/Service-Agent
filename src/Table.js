@@ -1859,6 +1859,7 @@ function setUserDetails() {
 
 function setBillingLinks() {
     const billingIcons = document.querySelectorAll('[data-billing-open]')
+    const authToken =  localStorage.getItem('authToken');
 
     console.log(billingIcons)
     billingIcons.forEach(element => {
