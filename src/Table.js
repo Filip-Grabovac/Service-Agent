@@ -1885,7 +1885,7 @@ function setBillingLinks() {
                         return;
                     }
 
-                    window.location.href = result;
+                    window.open(result, "_blank");
                 })
                 .catch((error) => {
                     this.showError('Server Error! Please, try again or contact support.');
