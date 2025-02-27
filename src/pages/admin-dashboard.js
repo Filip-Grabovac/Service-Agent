@@ -54,12 +54,16 @@ adminMenu1.addEventListener('click', function (event) {
     resetSearchInput()
 
     fillTable(1, 1, '1,2,3,4,5,6,7,8')
+
+    history.pushState({ page: 1 }, "documents", "/documents");
 })
 adminMenu1Tab1.addEventListener('click', function (event) {
     updateActiveElement(adminMenu1Tab1)
     resetSearchInput()
 
     fillTable(1, 1, '1,2,3,4,5,6,7,8')
+
+    history.pushState({ page: 2 }, "shreaded documents", "/shreaded-documents");
 })
 adminMenu1Tab2.addEventListener('click', function (event) {
     updateActiveElement(adminMenu1Tab2)
