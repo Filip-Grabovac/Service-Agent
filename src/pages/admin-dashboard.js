@@ -31,17 +31,18 @@ const adminMenu4Tab1 = document.getElementById('admin-menu4-tab1');
 
 user.authenticate();
 
-const urlParams = new URLSearchParams(window.location.search);
+window.addEventListener("popstate", function(event) {
+    const urlParams = new URLSearchParams(window.location.search);
 
-
-if (urlParams.has('page')) {
-    if (urlParams.get('page') === 'documents') {
-        adminMenu1.click();
+    if (urlParams.has('page')) {
+        if (urlParams.get('page') === 'documents') {
+            adminMenu1.click();
+        }
+        if (urlParams.get('page') === 'shreaded-documents') {
+            adminMenu2.click();
+        }
     }
-    if (urlParams.get('page') === 'shreaded-documents') {
-        adminMenu2.click();
-    }
-}
+});
 
 Array.from(logout).forEach((element) => {
     element.addEventListener('click', function (event) {
