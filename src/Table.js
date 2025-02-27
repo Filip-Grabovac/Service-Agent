@@ -1873,7 +1873,7 @@ function setBillingLinks() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
+                    return_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
                     certificate_id: certificateId,
                 }),
             })
