@@ -1880,15 +1880,12 @@ function setBillingLinks() {
                 .then((response) => response.json())
                 .then((result) => {
                     if (result.code) {
-                        this.showError('Server Error! Please, try again or contact support.');
-
                         return;
                     }
 
                     window.open(result, "_blank");
                 })
                 .catch((error) => {
-                    this.showError('Server Error! Please, try again or contact support.');
                 });
         }, { once: true });
     });
