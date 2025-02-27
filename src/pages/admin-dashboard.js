@@ -31,18 +31,18 @@ const adminMenu4Tab1 = document.getElementById('admin-menu4-tab1');
 
 user.authenticate();
 
-window.addEventListener("popstate", function(event) {
-    const urlParams = new URLSearchParams(window.location.search);
-
-    if (urlParams.has('page')) {
-        if (urlParams.get('page') === 'documents') {
-            adminMenu1.click();
-        }
-        if (urlParams.get('page') === 'shreaded-documents') {
-            adminMenu2.click();
-        }
-    }
-});
+// window.addEventListener("popstate", function(event) {
+//     const urlParams = new URLSearchParams(window.location.search);
+//
+//     if (urlParams.has('page')) {
+//         if (urlParams.get('page') === 'documents') {
+//             adminMenu1.click();
+//         }
+//         if (urlParams.get('page') === 'shreaded-documents') {
+//             adminMenu2.click();
+//         }
+//     }
+// });
 
 Array.from(logout).forEach((element) => {
     element.addEventListener('click', function (event) {
@@ -68,7 +68,7 @@ adminMenu1.addEventListener('click', function (event) {
 
     fillTable(1, 1, '1,2,3,4,5,6,7,8')
 
-    history.pushState({ page: 1 }, "documents", "?page=documents");
+    // history.pushState({ page: 1 }, "documents", "?page=documents");
 })
 adminMenu1Tab1.addEventListener('click', function (event) {
     updateActiveElement(adminMenu1Tab1)
@@ -113,7 +113,7 @@ adminMenu2.addEventListener('click', function (event) {
 
     fillTable(2, 1)
 
-    history.pushState({ page: 2 }, "shreaded documents", "?page=shreaded-documents");
+    // history.pushState({ page: 2 }, "shreaded documents", "?page=shreaded-documents");
 })
 adminMenu2Tab1.addEventListener('click', function (event) {
     updateActiveElement(adminMenu2Tab1)
