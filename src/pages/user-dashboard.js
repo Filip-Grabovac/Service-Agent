@@ -364,6 +364,7 @@ isMedical.addEventListener('click', function (event) {
 document.addEventListener("DOMContentLoaded", function() {
     const billingIcons = document.querySelectorAll('[data-billing-open]')
 
+    console.log(billingIcons)
     billingIcons.forEach(element => {
         element.addEventListener('click', () => {
             const certificateId = element.getAttribute('data-billing-open');
