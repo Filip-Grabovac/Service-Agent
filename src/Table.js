@@ -451,6 +451,7 @@ function getColumns(menu, tab) {
 export function setModals(menu) {
     const modals = getModals(menu);
 
+    console.log(modals)
     Object.entries(modals).forEach(([key, item]) => {
         const modal = document.getElementById(item.modal);
         const openButtons = document.querySelectorAll(`[data-modal-open="${item.modal}"]`);
