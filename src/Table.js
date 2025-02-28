@@ -451,7 +451,6 @@ function getColumns(menu, tab) {
 export function setModals(menu) {
     const modals = getModals(menu);
 
-    console.log(modals)
     Object.entries(modals).forEach(([key, item]) => {
         const modal = document.getElementById(item.modal);
         const openButtons = document.querySelectorAll(`[data-modal-open="${item.modal}"]`);
@@ -460,6 +459,9 @@ export function setModals(menu) {
         const dropZones = modal.querySelectorAll('[data-modal-action="dropzone"]');
         const form = modal.getElementsByTagName("form")[0];
 
+        if (item.modal === 'delete-certificate-popup') {
+            console.log(openButtons);
+        }
         openButtons.forEach(button => {
             button.addEventListener("click", function (e) {
                 e.preventDefault()
