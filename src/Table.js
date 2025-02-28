@@ -685,12 +685,8 @@ export function setModals(menu) {
                 const deleteInput = document.getElementById('delete_confirmation');
 
                 if (deleteInput.value !== 'DELETE') {
-                    console.log('nije');
-                } else {
-                    console.log('jeste')
+                    return;
                 }
-
-                return;
             }
 
             const formData = new FormData(form);
