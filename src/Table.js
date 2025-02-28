@@ -681,6 +681,18 @@ export function setModals(menu) {
         });
 
         const handleClick = () => {
+            if (modalName === 'delete-user-popup') {
+                const deleteInput = document.getElementById('delete_confirmation');
+
+                if (deleteInput.value !== 'DELETE') {
+                    console.log('nije');
+                } else {
+                    console.log('jeste')
+                }
+
+                return;
+            }
+
             const formData = new FormData(form);
 
             const authToken =  localStorage.getItem('authToken');
