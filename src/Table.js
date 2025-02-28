@@ -1861,7 +1861,6 @@ function setBillingLinks() {
     const billingIcons = document.querySelectorAll('[data-billing-open]')
     const authToken =  localStorage.getItem('authToken');
 
-    console.log(billingIcons)
     billingIcons.forEach(element => {
         element.addEventListener('click', () => {
             const certificateId = element.getAttribute('data-billing-open');
