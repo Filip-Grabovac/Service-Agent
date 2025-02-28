@@ -248,12 +248,8 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
             }
         });
 
-        // if (!isUserDocumentsInAdmin) {
-            setModals(menu);
-        // } else {
-        //     setModals(1);
-        //     setModals(2);
-        // }
+        setModals(menu);
+
         if (menu === 2) {
             setUserDetails();
         }
@@ -460,9 +456,6 @@ export function setModals(menu) {
         const dropZones = modal.querySelectorAll('[data-modal-action="dropzone"]');
         const form = modal.getElementsByTagName("form")[0];
 
-        if (item.modal === 'delete-certificate-popup') {
-            console.log(openButtons);
-        }
         openButtons.forEach(button => {
             button.addEventListener("click", function (e) {
                 e.preventDefault()
@@ -901,7 +894,7 @@ export function setModals(menu) {
                     return response.json();
                 })
                 .then((data) => {
-                    if (modalName === 'delete-certificate-popup') {
+                    if (modalName === 'delete-certificate-popup' && menu !== 2) {
                         window.location.href = window.location.pathname + "?certificate-deleted=1"
                     }
 
