@@ -248,11 +248,12 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
             }
         });
 
-        if (!isUserDocumentsInAdmin) {
+        // if (!isUserDocumentsInAdmin) {
             setModals(menu);
-        } else {
-            setModals(1);
-        }
+        // } else {
+        //     setModals(1);
+        //     setModals(2);
+        // }
         if (menu === 2) {
             setUserDetails();
         }
@@ -1121,13 +1122,20 @@ function getModals(menu) {
                 success_message: 'The user has been successfully updated.',
             },
             2: {
+                modal: 'delete-document-popup',
+                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                method: 'DELETE',
+                files: [],
+                success_message: 'The document has been successfully deleted.',
+            },
+            3: {
                 modal: 'delete-user-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/{user_id}',
                 method: 'DELETE',
                 files: [],
                 success_message: 'The user has been successfully deleted.',
             },
-            3: {
+            4: {
                 modal: 'delete-certificate-popup',
                 action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates/{certificates_id}',
                 method: 'DELETE',
@@ -1875,39 +1883,6 @@ function setUserDetails() {
     })
 }
 
-function setBillingLinks() {
-    const billingIcons = document.querySelectorAll('[data-billing-open]')
-    const authToken =  localStorage.getItem('authToken');
-
-    billingIcons.forEach(element => {
-        element.addEventListener('click', () => {
-            const certificateId = element.getAttribute('data-billing-open');
-
-            fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx/portal-sessions', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${authToken}`,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    return_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
-                    certificate_id: certificateId,
-                }),
-            })
-                .then((response) => response.json())
-                .then((result) => {
-                    if (result.code) {
-                        return;
-                    }
-
-                    window.open(result, "_blank");
-                })
-                .catch((error) => {
-                });
-        }, { once: true });
-    });
-}
-
 function fillUsersDetails(data) {
     const name = document.getElementById('users-details-name');
     const id = document.getElementById('users-details-id');
@@ -1951,6 +1926,39 @@ function fillUsersDetails(data) {
     fillTable(2, 2);
     fillTable(2, 3, 'aircraft_registration_certificate')
     fillTable(2, 4, 'airman_certificate')
+}
+
+function setBillingLinks() {
+    const billingIcons = document.querySelectorAll('[data-billing-open]')
+    const authToken =  localStorage.getItem('authToken');
+
+    billingIcons.forEach(element => {
+        element.addEventListener('click', () => {
+            const certificateId = element.getAttribute('data-billing-open');
+
+            fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx/portal-sessions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    return_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
+                    certificate_id: certificateId,
+                }),
+            })
+                .then((response) => response.json())
+                .then((result) => {
+                    if (result.code) {
+                        return;
+                    }
+
+                    window.open(result, "_blank");
+                })
+                .catch((error) => {
+                });
+        }, { once: true });
+    });
 }
 
 export function getTabCount() {
