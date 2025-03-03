@@ -1901,13 +1901,22 @@ function fillUsersDetails(data) {
     const editIcon = document.getElementById('users-details-edit-icon');
     const deleteIcon = document.getElementById('users-details-delete-icon');
 
+    const hiddenInput = document.createElement("input");
+    hiddenInput.style.display = "none";
+    document.body.appendChild(hiddenInput);
+
+    const iti = window.intlTelInput(hiddenInput, {
+        initialCountry: data.phone_country,
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+    });
+
     name.innerText = data.first_name + ' ' + data.last_name;
     id.innerHTML = '#' + data.id;
     city.innerHTML = data._user_addresses_of_user.street + ' ' + data._user_addresses_of_user.number + ','
     street.innerHTML = data._user_addresses_of_user.zip + ' ' + data._user_addresses_of_user.city + ','
     country.innerHTML = data._user_addresses_of_user.state + ', ' + data._user_addresses_of_user.country
     email.innerHTML = data.email
-    phone.innerHTML = data.phone_number
+    phone.innerHTML = "+" + iti.getSelectedCountryData().dialCode + data.phone_number
     const createdAt = new Date(data.created_at);
     since.innerHTML = createdAt.toLocaleString()
 
