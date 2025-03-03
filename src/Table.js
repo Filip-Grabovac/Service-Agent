@@ -94,6 +94,15 @@ Array.from(searchInputs).forEach(input => {
     });
 });
 
+Array.from(searchInputs).forEach(input => {
+    const form = input.closest('form');
+    if (form) {
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+        });
+    }
+});
+
 export function resetSearchInput() {
     Array.from(searchInputs).forEach(input => {
         input.value = '';
