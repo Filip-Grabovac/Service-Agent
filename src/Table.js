@@ -96,6 +96,8 @@ Array.from(searchInputs).forEach(input => {
 
 Array.from(searchInputs).forEach(input => {
     const form = input.closest('form');
+    console.log(input)
+    console.log(form)
     if (form) {
         form.addEventListener('submit', (event) => {
             event.preventDefault();
