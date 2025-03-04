@@ -49,7 +49,7 @@ if (urlParams.has('hash')) {
             window.history.replaceState({}, document.title, url.pathname + url.search);
         };
 
-        removeQueryParam('hash');
+        // removeQueryParam('hash');
 
         if (!prepopulatedUser || prepopulatedUser.signed_up) {
             return;
