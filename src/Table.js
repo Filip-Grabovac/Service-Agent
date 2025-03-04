@@ -680,7 +680,16 @@ export function setModals(menu) {
                         });
 
                         addDocumentCertificateErrorLink.addEventListener("click", function() {
-                            console.log(selectedCertificate)
+                            certificate.sendReminder(selectedCertificate).then((success) => {
+                                if (success) {
+                                    successMessage.innerHTML = 'Payment reminder has been successfully sent!';
+                                    successWrapper.classList.remove('hide');
+
+                                    setTimeout(function () {
+                                        successWrapper.classList.add('hide');
+                                    }, 3000);
+                                }
+                            })
                         });
                     });
                 }

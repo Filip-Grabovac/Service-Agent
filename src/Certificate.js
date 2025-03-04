@@ -146,6 +146,33 @@ export default class Certificate {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
+    sendReminder(certificateId) {
+        const authToken =  localStorage.getItem('authToken');
+
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/send-reminder/` + certificateId;
+
+        // Call the Xano API
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+
+                    return false;
+                }
+
+                return true;
+            })
+            .catch((error) => {
+                this.showError('Server Error! Please, try again or contact support.');
+            });
+    }
     callMethod(methodName, ...args) {
         if (typeof this[methodName] === 'function') {
             return this[methodName](...args);
