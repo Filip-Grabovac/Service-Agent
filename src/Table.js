@@ -636,6 +636,7 @@ export function setModals(menu) {
                                 data.items.forEach(cert => {
                                     const option = document.createElement('option');
                                     option.value = cert.id;
+                                    option.setAttribute('data-active', cert.is_active)
 
                                     let type = cert.type.split('_')[0]
                                     let typeFormated = type.charAt(0).toUpperCase() + type.slice(1);
@@ -651,6 +652,12 @@ export function setModals(menu) {
                                     selectCertificateElement.appendChild(option);
                                 });
                             })
+                        });
+
+                        const certificatesSelect = document.getElementById('certificates_id');
+
+                        certificatesSelect.addEventListener("change", function() {
+                            console.log("Izabrana opcija:", this.getAttribute('data-active'));
                         });
                     });
                 }
