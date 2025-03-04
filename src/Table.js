@@ -659,9 +659,12 @@ export function setModals(menu) {
                         const addDocumentCertificateError = document.getElementById('add-document-certificate-error');
                         const addDocumentCertificateErrorLink = document.getElementById('add-document-certificate-error-link');
 
+                        addDocumentButton.style.pointerEvents = "auto";
+                        addDocumentButton.style.opacity = "1";
+                        addDocumentCertificateError.style.display = "none";
+
                         certificatesSelect.addEventListener("change", function() {
                             let selectedOption = this.options[this.selectedIndex];
-                            console.log("Izabrana opcija:", selectedOption.getAttribute('data-active'));
 
                             if (selectedOption.getAttribute('data-active') === 'false') {
                                 addDocumentButton.style.pointerEvents = "none";
