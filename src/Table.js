@@ -656,6 +656,8 @@ export function setModals(menu) {
 
                         const certificatesSelect = document.getElementById('certificates_id');
                         const addDocumentButton = document.getElementById('create-document-btn');
+                        const addDocumentCertificateError = document.getElementById('add-document-certificate-error');
+                        const addDocumentCertificateErrorLink = document.getElementById('add-document-certificate-error-link');
 
                         certificatesSelect.addEventListener("change", function() {
                             let selectedOption = this.options[this.selectedIndex];
@@ -664,9 +666,11 @@ export function setModals(menu) {
                             if (selectedOption.getAttribute('data-active') === 'false') {
                                 addDocumentButton.style.pointerEvents = "none";
                                 addDocumentButton.style.opacity = "0.5";
+                                addDocumentCertificateError.style.display = "block";
                             } else {
                                 addDocumentButton.style.pointerEvents = "auto";
                                 addDocumentButton.style.opacity = "1";
+                                addDocumentCertificateError.style.display = "none";
                             }
                         });
                     });
