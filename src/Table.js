@@ -633,7 +633,7 @@ export function setModals(menu) {
                                 option.textContent = 'Choose certificate';
                                 selectCertificateElement.appendChild(option);
 
-                                data.forEach(cert => {
+                                data.items.forEach(cert => {
                                     const option = document.createElement('option');
                                     option.value = cert.id;
 
