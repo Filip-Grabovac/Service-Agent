@@ -655,10 +655,19 @@ export function setModals(menu) {
                         });
 
                         const certificatesSelect = document.getElementById('certificates_id');
+                        const addDocumentButton = document.getElementById('create-document-btn');
 
                         certificatesSelect.addEventListener("change", function() {
                             let selectedOption = this.options[this.selectedIndex];
                             console.log("Izabrana opcija:", selectedOption.getAttribute('data-active'));
+
+                            if (selectedOption.getAttribute('data-active') === 'false') {
+                                addDocumentButton.style.pointerEvents = "none";
+                                addDocumentButton.style.opacity = "0.5";
+                            } else {
+                                addDocumentButton.style.pointerEvents = "auto";
+                                addDocumentButton.style.opacity = "1";
+                            }
                         });
                     });
                 }
