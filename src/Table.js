@@ -627,7 +627,7 @@ export function setModals(menu) {
 
                             const selectedValue = e.params.data.id;
 
-                            certificate.getAllActive(selectedValue).then((data) => {
+                            certificate.getAllByUser(1, 9999, '', '', null, selectedValue).then((data) => {
                                 const option = document.createElement('option');
                                 option.value = '';
                                 option.textContent = 'Choose certificate';
