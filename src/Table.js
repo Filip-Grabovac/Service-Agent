@@ -662,8 +662,10 @@ export function setModals(menu) {
                         addDocumentButton.style.pointerEvents = "auto";
                         addDocumentButton.style.opacity = "1";
                         addDocumentCertificateError.style.display = "none";
+                        let selectedCertificate;
 
                         certificatesSelect.addEventListener("change", function() {
+                            selectedCertificate = this.value
                             let selectedOption = this.options[this.selectedIndex];
 
                             if (selectedOption.getAttribute('data-active') === 'false') {
@@ -675,6 +677,10 @@ export function setModals(menu) {
                                 addDocumentButton.style.opacity = "1";
                                 addDocumentCertificateError.style.display = "none";
                             }
+                        });
+
+                        addDocumentCertificateErrorLink.addEventListener("click", function() {
+                            console.log(selectedCertificate)
                         });
                     });
                 }
