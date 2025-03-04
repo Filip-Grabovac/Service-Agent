@@ -657,7 +657,8 @@ export function setModals(menu) {
                         const certificatesSelect = document.getElementById('certificates_id');
 
                         certificatesSelect.addEventListener("change", function() {
-                            console.log("Izabrana opcija:", this.getAttribute('data-active'));
+                            let selectedOption = this.options[this.selectedIndex];
+                            console.log("Izabrana opcija:", selectedOption.getAttribute('data-active'));
                         });
                     });
                 }
