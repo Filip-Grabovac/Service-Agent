@@ -1946,9 +1946,13 @@ function fillUsersDetails(data) {
 
     const iti = window.intlTelInput(hiddenInput, {
         initialCountry: data.phone_country,
-        containerClass: "hidden-iti",
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
     });
+
+    const itiWrapper = hiddenInput.closest('.iti');
+    if (itiWrapper) {
+        itiWrapper.classList.add("hidden-iti");
+    }
 
     name.innerText = data.first_name + ' ' + data.last_name;
     id.innerHTML = '#' + data.id;
