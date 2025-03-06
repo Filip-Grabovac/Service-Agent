@@ -671,7 +671,7 @@ export function setModals(menu) {
                             if (selectedOption.getAttribute('data-active') === 'false') {
                                 addDocumentButton.style.pointerEvents = "none";
                                 addDocumentButton.style.opacity = "0.5";
-                                //addDocumentCertificateError.style.display = "block";
+                                addDocumentCertificateError.style.display = "block";
                             } else {
                                 addDocumentButton.style.pointerEvents = "auto";
                                 addDocumentButton.style.opacity = "1";
