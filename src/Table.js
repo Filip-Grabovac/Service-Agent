@@ -1705,6 +1705,7 @@ const countriesText = `
   Antigua & Deps
   Argentina
   Armenia
+  Aruba
   Australia
   Austria
   Azerbaijan
@@ -1741,6 +1742,7 @@ const countriesText = `
   Costa Rica
   Croatia
   Cuba
+  Curaçao
   Cyprus
   Czech Republic
   Denmark
