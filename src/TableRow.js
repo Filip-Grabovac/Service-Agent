@@ -59,7 +59,7 @@ export default class TableRow {
                 </div>
             `,
                 email: () => `
-                <div class="row-inside txt-lowercase">
+                <div class="row-inside txt-lowercase" style="overflow-wrap: anywhere">
                     <div>${item.email}</div>
                 </div>
             `,
