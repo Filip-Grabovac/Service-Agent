@@ -1,13 +1,11 @@
-// import User from '../User';
-// import { fillTable, updateActiveElement, updateActiveRole } from '../Table.js';
-import User from 'https://service-agent.pages.dev/src/User.js';
-import Certificate from 'https://service-agent.pages.dev/src/Certificate.js';
+import User from '../User.js';
+import Certificate from '../Certificate.js';
 import {
     fillTable,
     updateActiveElement,
     updateActiveRole,
     setModals
-} from 'https://service-agent.pages.dev/src/Table.js';
+} from '../Table.js';
 
 const user = new User();
 const certificate = new Certificate();

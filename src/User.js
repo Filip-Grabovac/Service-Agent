@@ -197,10 +197,11 @@ export default class User {
     }
     login(data) {
         // Call the Xano API
-        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/login', {
+        fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa${this.branch}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
             },
             body: JSON.stringify(data),
         })

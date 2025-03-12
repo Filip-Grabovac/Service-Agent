@@ -1,5 +1,4 @@
-// import User from '../User';
-import User from 'https://service-agent.pages.dev/src/User.js';
+import User from '../User.js';
 
 const user = new User();
 //test

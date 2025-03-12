@@ -1,13 +1,8 @@
-// import User from './User';
-// import Document from './Document';
-// import ShippingTariff from './ShippingTariff';
-// import TableRow from './TableRow';
-// import User from 'https://service-agent.pages.dev/src/User.js';
 import User from './User.js';
-import Document from 'https://service-agent.pages.dev/src/Document.js';
-import ShippingTariff from 'https://service-agent.pages.dev/src/ShippingTariff.js';
-import Certificate from 'https://service-agent.pages.dev/src/Certificate.js';
-import TableRow from 'https://service-agent.pages.dev/src/TableRow.js';
+import Document from './Document.js';
+import ShippingTariff from './ShippingTariff.js';
+import Certificate from './Certificate.js';
+import TableRow from './TableRow.js';
 
 const user = new User();
 const documentFile = new Document();
