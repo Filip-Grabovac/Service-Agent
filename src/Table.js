@@ -2,7 +2,8 @@
 // import Document from './Document';
 // import ShippingTariff from './ShippingTariff';
 // import TableRow from './TableRow';
-import User from 'https://service-agent.pages.dev/src/User.js';
+// import User from 'https://service-agent.pages.dev/src/User.js';
+import User from './User';
 import Document from 'https://service-agent.pages.dev/src/Document.js';
 import ShippingTariff from 'https://service-agent.pages.dev/src/ShippingTariff.js';
 import Certificate from 'https://service-agent.pages.dev/src/Certificate.js';

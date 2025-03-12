@@ -17,6 +17,16 @@ export default class User {
                 this.successWrapper.classList.add('hide');
             })
         }
+
+        const currentDomain = window.location.hostname;
+
+        if (currentDomain.includes('webflow.io')) {
+            this.branch = ':stage';
+            this.dataSource = 'stage';
+        } else {
+            this.branch = '';
+            this.dataSource = 'live';
+        }
     }
     showError(message) {
         this.errorMessage.innerHTML = message;
@@ -259,7 +269,7 @@ export default class User {
     getAll(page = 1, perPage = 10, search = '') {
         const authToken =  localStorage.getItem('authToken');
 
-        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user?page=${page}&per_page=${perPage}`;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${this.branch}/user?page=${page}&per_page=${perPage}`;
         if (search !== '') {
             url += `&search=${encodeURIComponent(search)}`
         }
@@ -270,6 +280,7 @@ export default class User {
             headers: {
                 'Authorization': `Bearer ${authToken}`,
                 'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
             },
         })
             .then((response) => response.json())
