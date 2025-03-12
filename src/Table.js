@@ -279,18 +279,32 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
 }
 
 function certificatePayment(id, type) {
+    const currentDomain = window.location.hostname;
+
     let price = "";
     let certificate = "";
     if (type === 'aircraft') {
         certificate = "aircraft_75";
-        price = "price_1Qrbi9CA20rcDWGhZg72KAVO";
+        if (currentDomain.includes('webflow.io')) {
+            price = "price_1QfGqbCA20rcDWGhGrIUBQVr";
+        } else {
+            price = "price_1Qrbi9CA20rcDWGhZg72KAVO";
+        }
     } else if (type === 'airman') {
         if (hasActiveCertificate) {
             certificate = "airman_35";
-            price = "price_1Qrbi2CA20rcDWGhJFtiXTwu";
+            if (currentDomain.includes('webflow.io')) {
+                price = "price_1QfGwoCA20rcDWGh4qFwuPTJ";
+            } else {
+                price = "price_1Qrbi2CA20rcDWGhJFtiXTwu";
+            }
         } else {
             certificate = "airman_75";
-            price = "price_1Qrbi2CA20rcDWGhoyhcf8hs";
+            if (currentDomain.includes('webflow.io')) {
+                price = "price_1QfGuICA20rcDWGhM3Y5GQb7";
+            } else {
+                price = "price_1Qrbi2CA20rcDWGhoyhcf8hs";
+            }
         }
     }
 
