@@ -364,7 +364,20 @@ function createPaginationButton(menu, tab, statusIds, label, page = null, isNumb
     `;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+let paginationFunctionRun = false;
+document.addEventListener('DOMContentLoaded', function () {
+    if (paginationFunctionRun === false) {
+        paginationClick();
+        paginationFunctionRun = true;
+    }
+});
+
+if ((document.readyState === 'complete' || document.readyState === 'interactive') && paginationFunctionRun === false) {
+    paginationClick();
+    paginationFunctionRun = true;
+}
+
+function paginationClick() {
     document.body.addEventListener('click', function(event) {
         let button;
         if (event.target.classList.contains('pagination-btn')) {
@@ -386,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
             Number(button.getAttribute('data-page'))
         );
     });
-});
+}
 
 export function getTabTitle(menu, tab) {
     const tabTitles = {

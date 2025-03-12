@@ -216,17 +216,17 @@ function isValidEmail(email) {
     return emailPattern.test(email);
 }
 
-let domEventFunctionsRun = false;
+let countriesFunctionsRun = false;
 document.addEventListener('DOMContentLoaded', function () {
-    if (domEventFunctionsRun === false) {
+    if (countriesFunctionsRun === false) {
         populateCountries();
-        domEventFunctionsRun = true;
+        countriesFunctionsRun = true;
     }
 });
 
-if ((document.readyState === 'complete' || document.readyState === 'interactive') && domEventFunctionsRun === false) {
+if ((document.readyState === 'complete' || document.readyState === 'interactive') && countriesFunctionsRun === false) {
     populateCountries();
-    domEventFunctionsRun = true;
+    countriesFunctionsRun = true;
 }
 
 function populateCountries() {
