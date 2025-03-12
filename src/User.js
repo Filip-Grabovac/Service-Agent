@@ -62,11 +62,12 @@ export default class User {
         }
 
         // If there is a token, verify it with the API
-        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/me', {
+        fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa${this.branch}/auth/me`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${authToken}`,
                 'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
             },
         })
             .then((response) => response.json())
@@ -110,11 +111,12 @@ export default class User {
     }
     me () {
         const authToken = localStorage.getItem('authToken');
-        return fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/me', {
+        return fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa${this.branch}/auth/me`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${authToken}`,
                 'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
             },
         })
             .then((response) => response.json())
@@ -133,10 +135,11 @@ export default class User {
     }
     register(data) {
         // Call the Xano API
-        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/signup', {
+        fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa${this.branch}/auth/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
             },
             body: JSON.stringify(data),
         })
@@ -166,10 +169,11 @@ export default class User {
     }
     confirmCode(data) {
         // Call the Xano API
-        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/register/confirm-email', {
+        fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${this.branch}/register/confirm-email`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
             },
             body: JSON.stringify(data),
         })
@@ -231,10 +235,11 @@ export default class User {
     }
     loginWithHash(data) {
         // Call the Xano API
-        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/auth/login-with-hash', {
+        fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa${this.branch}/auth/login-with-hash`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
             },
             body: JSON.stringify(data),
         })
@@ -299,13 +304,14 @@ export default class User {
             });
     }
     getPrepopulatedUSer(hash) {
-        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/prepopulated_users/${hash}`;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${this.branch}/prepopulated_users/${hash}`;
 
         // Call the Xano API
         return fetch(url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
             },
         })
             .then((response) => response.json())
@@ -324,11 +330,12 @@ export default class User {
         const authToken =  localStorage.getItem('authToken');
 
         // Call the Xano API
-        return fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx/sessions', {
+        return fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx${this.branch}/sessions`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${authToken}`,
                 'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
             },
             body: JSON.stringify(data),
         })
@@ -348,10 +355,11 @@ export default class User {
     }
     forgot(data) {
         // Call the Xano API
-        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/password/forgot', {
+        fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa${this.branch}/password/forgot`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
             },
             body: JSON.stringify(data),
         })
@@ -375,10 +383,11 @@ export default class User {
     }
     reset(data) {
         // Call the Xano API
-        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa/password/reset', {
+        fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:2vP05bpa${this.branch}/password/reset`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
             },
             body: JSON.stringify(data),
         })
@@ -403,11 +412,12 @@ export default class User {
     resendCode(data) {
         const authToken =  localStorage.getItem('authToken');
         // Call the Xano API
-        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/register/resend-code', {
+        fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${this.branch}/register/resend-code`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${authToken}`,
                 'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
             },
             body: JSON.stringify(data),
         })
@@ -435,11 +445,12 @@ export default class User {
             tutorial_shown: true
         }
         // Call the Xano API
-        fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/' + userId, {
+        fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${this.branch}/user/` + userId, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${authToken}`,
                 'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
             },
             body: JSON.stringify(data),
         })

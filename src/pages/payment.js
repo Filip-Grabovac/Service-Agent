@@ -12,10 +12,20 @@ errorClose.addEventListener('click', (e) => {
     errorWrapper.classList.add('hide');
 })
 
-fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx/sessions/' + sessionId, {
+const currentDomain = window.location.hostname;
+
+let branch = '';
+let dataSource = 'live';
+if (currentDomain.includes('webflow.io')) {
+    branch = ':stage';
+    dataSource = 'stage';
+}
+
+fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx${branch}/sessions/` + sessionId, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
+        'X-Data-Source': dataSource,
     },
 })
     .then((response) => response.json())

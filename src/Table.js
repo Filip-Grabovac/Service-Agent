@@ -1992,11 +1992,21 @@ function setBillingLinks() {
         element.addEventListener('click', () => {
             const certificateId = element.getAttribute('data-billing-open');
 
-            fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx/portal-sessions', {
+            const currentDomain = window.location.hostname;
+
+            let branch = '';
+            let dataSource = 'live';
+            if (currentDomain.includes('webflow.io')) {
+                branch = ':stage';
+                dataSource = 'stage';
+            }
+
+            fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx${branch}/portal-sessions`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${authToken}`,
                     'Content-Type': 'application/json',
+                    'X-Data-Source': dataSource,
                 },
                 body: JSON.stringify({
                     return_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",

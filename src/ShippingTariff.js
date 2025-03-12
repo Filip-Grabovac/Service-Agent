@@ -7,6 +7,16 @@ export default class ShippingTariff {
         this.errorClose.addEventListener('click', (e) => {
             this.errorWrapper.classList.add('hide');
         });
+
+        const currentDomain = window.location.hostname;
+
+        if (currentDomain.includes('webflow.io')) {
+            this.branch = ':stage';
+            this.dataSource = 'stage';
+        } else {
+            this.branch = '';
+            this.dataSource = 'live';
+        }
     }
     showError(error) {
         this.errorMessage.innerHTML = error;
@@ -32,6 +42,7 @@ export default class ShippingTariff {
             headers: {
                 'Authorization': `Bearer ${authToken}`,
                 'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
             },
         })
             .then((response) => response.json())
