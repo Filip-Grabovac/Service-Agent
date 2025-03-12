@@ -31,7 +31,7 @@ export default class Certificate {
     getAll(page = 1, perPage = 10, search = '', type = '') {
         const authToken =  localStorage.getItem('authToken');
 
-        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates?page=${page}&per_page=${perPage}`;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1${this.branch}/certificates?page=${page}&per_page=${perPage}`;
         if (type !== '') {
             url += `&type=${type}`
         }
@@ -65,7 +65,7 @@ export default class Certificate {
     getAllByUser(page = 1, perPage = 10, search = '', type = '', notUsed = null, userId) {
         const authToken =  localStorage.getItem('authToken');
 
-        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates?page=${page}&per_page=${perPage}&user_id=${userId}`;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1${this.branch}/certificates?page=${page}&per_page=${perPage}&user_id=${userId}`;
         if (type !== '') {
             url += `&type=${type}`
         }
@@ -99,7 +99,7 @@ export default class Certificate {
     getAllActive(userId = null) {
         const authToken =  localStorage.getItem('authToken');
 
-        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/active-certificates`;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1${this.branch}/active-certificates`;
 
         if (userId !== null) {
             url += `?user_id=${userId}`;
@@ -131,7 +131,7 @@ export default class Certificate {
     getAllInactive(userId = null) {
         const authToken =  localStorage.getItem('authToken');
 
-        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/inactive-certificates`;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1${this.branch}/inactive-certificates`;
 
         if (userId !== null) {
             url += `?user_id=${userId}`;
@@ -163,7 +163,7 @@ export default class Certificate {
     sendReminder(certificateId) {
         const authToken =  localStorage.getItem('authToken');
 
-        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/send-reminder/` + certificateId;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1${this.branch}/send-reminder/` + certificateId;
 
         // Call the Xano API
         return fetch(url, {

@@ -31,7 +31,7 @@ export default class Document {
     getAll( page = 1, perPage = 10, search = '', statusIds = '1,2,3,4,5,6,7,8') {
         const authToken =  localStorage.getItem('authToken');
 
-        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents?page=${page}&per_page=${perPage}&document_status_ids=${statusIds}`;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${this.branch}/documents?page=${page}&per_page=${perPage}&document_status_ids=${statusIds}`;
         if (search !== '') {
             url += `&search=${encodeURIComponent(search)}`
         }
@@ -62,7 +62,7 @@ export default class Document {
     getAllByUser( page = 1, perPage = 10, search = '', statusIds = '1,2,3,4,5,6,7,8', archived, userId = null) {
         const authToken =  localStorage.getItem('authToken');
 
-        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/users/${userId}?page=${page}&per_page=${perPage}&document_status_ids=${statusIds}`;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${this.branch}/documents/users/${userId}?page=${page}&per_page=${perPage}&document_status_ids=${statusIds}`;
         if (search !== '') {
             url += `&search=${encodeURIComponent(search)}`
         }
@@ -94,7 +94,7 @@ export default class Document {
     getAllByAuthUser( page = 1, perPage = 10, search = '', statusIds = '1,2,3,4,5,6,7,8', archived) {
         const authToken =  localStorage.getItem('authToken');
 
-        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents-user?page=${page}&per_page=${perPage}&document_status_ids=${statusIds}`;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${this.branch}/documents-user?page=${page}&per_page=${perPage}&document_status_ids=${statusIds}`;
         if (search !== '') {
             url += `&search=${encodeURIComponent(search)}`
         }
@@ -127,7 +127,7 @@ export default class Document {
         const authToken =  localStorage.getItem('authToken');
 
         // Call the Xano API
-        return fetch('https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/count/by-status', {
+        return fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${this.branch}/documents/count/by-status`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${authToken}`,
