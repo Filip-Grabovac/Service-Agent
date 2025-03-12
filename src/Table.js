@@ -889,6 +889,13 @@ export function setModals(menu) {
                 }
             }
 
+            const currentDomain = window.location.hostname;
+
+            let dataSource = 'live';
+            if (currentDomain.includes('webflow.io')) {
+                dataSource = 'stage';
+            }
+
             if (Object.keys(item.files).length !== 0) {
                 Object.keys(item.files).forEach((fileName) => {
                     const fileArray = item.files[fileName];
@@ -901,6 +908,7 @@ export function setModals(menu) {
 
                 requestData.headers = {
                     'Authorization': `Bearer ${authToken}`,
+                    'X-Data-Source': dataSource,
                 }
             } else {
                 if (modalName === 'add-document-popup') {
@@ -925,6 +933,7 @@ export function setModals(menu) {
                 requestData.headers = {
                     'Authorization': `Bearer ${authToken}`,
                     'Content-Type': 'application/json',
+                    'X-Data-Source': dataSource,
                 }
             }
 
@@ -1067,25 +1076,32 @@ export function setModals(menu) {
 }
 
 function getModals(menu) {
+    const currentDomain = window.location.hostname;
+
+    let branch = '';
+    if (currentDomain.includes('webflow.io')) {
+        branch = ':stage';
+    }
+
     const modals = {
         'initial-admin': {
             1: {
                 modal: 'add-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents`,
                 method: 'POST',
                 files: [],
                 success_message: 'The document has been successfully uploaded and assigned to a user.',
             },
             2: {
                 modal: 'add-tariff-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX/shipping_tariffs',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX${branch}/shipping_tariffs`,
                 method: 'POST',
                 files: [],
                 success_message: 'The tariff has been successfully created.',
             },
             3: {
                 modal: 'edit-user-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/{user_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${branch}/user/{user_id}`,
                 method: 'PUT',
                 files: [],
                 success_message: 'The user has been successfully updated.',
@@ -1094,21 +1110,21 @@ function getModals(menu) {
         'initial-user': {
             1: {
                 modal: 'edit-user-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/{user_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${branch}/user/{user_id}`,
                 method: 'PUT',
                 files: [],
                 success_message: 'Your profile has been successfully updated.',
             },
             2: {
                 modal: 'delete-user-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/{user_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${branch}/user/{user_id}`,
                 method: 'DELETE',
                 files: [],
                 success_message: 'The user has been successfully deleted.',
             },
             3: {
                 modal: 'add-certificate-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1${branch}/certificates`,
                 method: 'POST',
                 files: [],
                 success_message: 'The certificate has been successfully created.',
@@ -1117,35 +1133,35 @@ function getModals(menu) {
         1: {
             1: {
                 modal: 'shred-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
                 method: 'PATCH',
                 files: [],
                 success_message: 'The document has been successfully shredded.',
             },
             2: {
                 modal: 'delete-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
                 method: 'DELETE',
                 files: [],
                 success_message: 'The document has been successfully deleted.',
             },
             3: {
                 modal: 'edit-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
                 method: 'PATCH',
                 files: [],
                 success_message: 'The document has been successfully updated.',
             },
             4: {
                 modal: 'forward-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
                 method: 'PATCH',
                 files: [],
                 success_message: 'The document has been successfully updated.',
             },
             5: {
                 modal: 'payment-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
                 method: 'PATCH',
                 files: [],
                 success_message: 'The document has been successfully updated.',
@@ -1154,28 +1170,28 @@ function getModals(menu) {
         2: {
             1: {
                 modal: 'edit-user-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/{user_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${branch}/user/{user_id}`,
                 method: 'PUT',
                 files: [],
                 success_message: 'The user has been successfully updated.',
             },
             2: {
                 modal: 'delete-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
                 method: 'DELETE',
                 files: [],
                 success_message: 'The document has been successfully deleted.',
             },
             3: {
                 modal: 'delete-user-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ/user/{user_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${branch}/user/{user_id}`,
                 method: 'DELETE',
                 files: [],
                 success_message: 'The user has been successfully deleted.',
             },
             4: {
                 modal: 'delete-certificate-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates/{certificates_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1${branch}/certificates/{certificates_id}`,
                 method: 'DELETE',
                 files: [],
                 success_message: 'The certificate has been successfully deleted.',
@@ -1184,14 +1200,14 @@ function getModals(menu) {
         3: {
             1: {
                 modal: 'shred-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
                 method: 'PATCH',
                 files: [],
                 success_message: 'The document has been successfully shredded.',
             },
             2: {
                 modal: 'delete-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
                 method: 'DELETE',
                 files: [],
                 success_message: 'The document has been successfully deleted.',
@@ -1200,14 +1216,14 @@ function getModals(menu) {
         4: {
             1: {
                 modal: 'edit-tariff-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX/shipping_tariffs/{shipping_tariffs_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX${branch}/shipping_tariffs/{shipping_tariffs_id}`,
                 method: 'PATCH',
                 files: [],
                 success_message: 'The tariff has been successfully updated.',
             },
             2: {
                 modal: 'delete-tariff-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX/shipping_tariffs/{shipping_tariffs_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX${branch}/shipping_tariffs/{shipping_tariffs_id}`,
                 method: 'DELETE',
                 files: [],
                 success_message: 'The tariff has been successfully deleted.',
@@ -1222,35 +1238,35 @@ function getModals(menu) {
             },
             2: {
                 modal: 'request-forward-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
                 method: 'PATCH',
                 files: [],
                 success_message: 'The forwarding has been successfully requested.',
             },
             3: {
                 modal: 'request-shred-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
                 method: 'PATCH',
                 files: [],
                 success_message: 'The shredding has been successfully requested.',
             },
             4: {
                 modal: 'delete-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
                 method: 'DELETE',
                 files: [],
                 success_message: 'The document has been successfully deleted.',
             },
             5: {
                 modal: 'archive-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
                 method: 'PATCH',
                 files: [],
                 success_message: 'The document has been successfully archived.',
             },
             6: {
                 modal: 'edit-document-address-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/document_addresses/{document_addresses_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/document_addresses/{document_addresses_id}`,
                 method: 'PUT',
                 files: [],
                 success_message: 'The document address has been successfully updated.',
@@ -1265,7 +1281,7 @@ function getModals(menu) {
             },
             2: {
                 modal: 'delete-document-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2/documents/{documents_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
                 method: 'DELETE',
                 files: [],
                 success_message: 'The document has been successfully deleted.',
@@ -1274,21 +1290,21 @@ function getModals(menu) {
         7: {
             1: {
                 modal: 'edit-aircraft-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates/{certificates_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1${branch}/certificates/{certificates_id}`,
                 method: 'PATCH',
                 files: [],
                 success_message: 'The certificate has been successfully updated.',
             },
             2: {
                 modal: 'edit-airman-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates/{certificates_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1${branch}/certificates/{certificates_id}`,
                 method: 'PATCH',
                 files: [],
                 success_message: 'The certificate has been successfully updated.',
             },
             3: {
                 modal: 'delete-certificate-popup',
-                action: 'https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1/certificates/{certificates_id}',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1${branch}/certificates/{certificates_id}`,
                 method: 'DELETE',
                 files: [],
                 success_message: 'The certificate has been successfully deleted.',
