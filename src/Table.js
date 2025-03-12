@@ -1719,6 +1719,7 @@ const countriesText = `
   Benin
   Bhutan
   Bolivia
+  Bonaire, Sint Eustatius and Saba
   Bosnia Herzegovina
   Botswana
   Brazil
@@ -1857,6 +1858,7 @@ const countriesText = `
   Seychelles
   Sierra Leone
   Singapore
+  Sint Maarten
   Slovakia
   Slovenia
   Solomon Islands
