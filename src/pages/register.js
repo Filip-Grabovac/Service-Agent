@@ -2,7 +2,7 @@
 import User from 'https://service-agent.pages.dev/src/User.js';
 
 const user = new User();
-
+//test
 const nextBtn = document.getElementById('next-btn');
 const secondStepInputs = document.getElementById('second-step-inputs');
 const companyRadio = document.getElementById('company');
