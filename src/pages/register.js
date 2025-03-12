@@ -216,7 +216,20 @@ function isValidEmail(email) {
     return emailPattern.test(email);
 }
 
+let domEventFunctionsRun = false;
 document.addEventListener('DOMContentLoaded', function () {
+    if (domEventFunctionsRun === false) {
+        populateCountries();
+        domEventFunctionsRun = true;
+    }
+});
+
+if ((document.readyState === 'complete' || document.readyState === 'interactive') && domEventFunctionsRun === false) {
+    populateCountries();
+    domEventFunctionsRun = true;
+}
+
+function populateCountries() {
     const countries = [
         { name: "Afghanistan", code: "AF" },
         { name: "Albania", code: "AL" },
@@ -436,4 +449,4 @@ document.addEventListener('DOMContentLoaded', function () {
             iti.setCountry(selectedOption.dataset.code);
         }
     });
-});
+}
