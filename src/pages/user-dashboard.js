@@ -325,6 +325,9 @@ newCertificate.addEventListener('click', function (event) {
     if (nonMedical.checked) {
         trackingNumberWrapper.classList.remove('hidden');
         ffaCertificateNumberWrapper.classList.remove('hidden');
+        if (!applicantIdWrapper.classList.contains('hidden')) {
+            applicantIdWrapper.classList.add('hidden');
+        }
     }
     if (isMedical.checked) {
         applicantIdWrapper.classList.remove('hidden');
