@@ -859,10 +859,6 @@ export function setModals(menu) {
 
                 const entries = Array.from(formData.entries());
                 for (const [key, value] of entries) {
-                    if (key === 'ffa_certificate_number') {
-                        return;
-                    }
-
                     if (key.includes('.')) {
                         let modifiedKey = key.split('.').pop();
 
@@ -894,7 +890,7 @@ export function setModals(menu) {
                                 formData.delete('description');
                                 formData.append('description', '');
                             }
-                        } else if (key !== 'middle_name' && key !== 'user_addresses_of_user.address_additional' && key !== 'document_addresses_of_documents.address_additional') {
+                        } else if (key !== 'middle_name' && key !== 'user_addresses_of_user.address_additional' && key !== 'document_addresses_of_documents.address_additional' && key !== 'ffa_certificate_number') {
                             errorMessage.innerHTML = 'Please, fill in all fields.';
                             errorWrapper.classList.remove('hide');
 
