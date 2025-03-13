@@ -591,10 +591,10 @@ export function setModals(menu) {
                             if (element.getAttribute('type') === 'radio') {
                                 console.log(element.getAttribute('name'))
                                 console.log(fillData[element.getAttribute('name')])
-                                console.log(element.value)
+                                console.log(element.getAttribute('data-choice-value'))
                                 element.checked = false;
-                                if (fillData[element.getAttribute('name')] !== '' && element.value === fillData[element.getAttribute('name')]) {
-                                    console.log(element.value)
+                                if (fillData[element.getAttribute('name')] !== '' && element.getAttribute('data-choice-value') === fillData[element.getAttribute('name')]) {
+                                    console.log(element.getAttribute('data-choice-value'))
                                     element.checked = true;
                                 }
                             }
