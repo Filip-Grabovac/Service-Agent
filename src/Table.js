@@ -672,7 +672,15 @@ export function setModals(menu) {
 
                                     let secondString;
                                     if (type === 'airman') {
-                                        secondString = cert.ffa_certificate_number;
+                                        if (cert.is_existing) {
+                                            if (cert.applicant_id_number) {
+                                                secondString = cert.applicant_id_number;
+                                            } else if (cert.iarca_tracking_number) {
+                                                secondString = cert.iarca_tracking_number;
+                                            } else {
+                                                secondString = cert.ffa_certificate_number;
+                                            }
+                                        }
                                     } else if (type === 'aircraft') {
                                         secondString = cert.aircraft_serial_number;
                                     }
