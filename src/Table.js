@@ -859,6 +859,10 @@ export function setModals(menu) {
 
                 const entries = Array.from(formData.entries());
                 for (const [key, value] of entries) {
+                    if (key === 'ffa_certificate_number') {
+                        return;
+                    }
+
                     if (key.includes('.')) {
                         let modifiedKey = key.split('.').pop();
 
