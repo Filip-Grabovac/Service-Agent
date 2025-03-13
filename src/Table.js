@@ -851,7 +851,6 @@ export function setModals(menu) {
                             }
                         } else {
                             formData.delete('is_medical');
-                            formData.delete('applicant_id_number');
                             formData.delete('iarca_tracking_number');
                         }
                     }
