@@ -656,10 +656,11 @@ export function setModals(menu) {
                             const selectedValue = e.params.data.id;
 
                             certificate.getAllByUser(1, 9999, '', '', null, selectedValue).then((data) => {
-                                const option = document.createElement('option');
-                                option.value = '';
-                                option.textContent = 'Choose certificate';
-                                selectCertificateElement.appendChild(option);
+                                const options = [];
+                                const defaultOption = document.createElement('option');
+                                defaultOption.value = '';
+                                defaultOption.textContent = 'Choose certificate';
+                                options.push(defaultOption);
 
                                 data.items.forEach(cert => {
                                     const option = document.createElement('option');
@@ -677,8 +678,11 @@ export function setModals(menu) {
                                     }
 
                                     option.textContent = typeFormated + ' ' + secondString;
-                                    selectCertificateElement.appendChild(option);
+                                    options.push(option);
                                 });
+
+                                selectCertificateElement.innerHTML = '';
+                                selectCertificateElement.append(...options);
                             })
                         });
 
