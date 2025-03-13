@@ -594,6 +594,7 @@ export function setModals(menu) {
                                 console.log(element.value)
                                 element.checked = false;
                                 if (fillData[element.getAttribute('name')] !== '' && element.value === fillData[element.getAttribute('name')]) {
+                                    console.log(element.value)
                                     element.checked = true;
                                 }
                             }
