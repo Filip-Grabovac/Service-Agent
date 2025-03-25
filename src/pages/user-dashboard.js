@@ -350,6 +350,17 @@ existingCertificate.addEventListener('click', function (event) {
     if (!applicantIdWrapper.classList.contains('hidden')) {
         applicantIdWrapper.classList.add('hidden');
     }
+    if (airmanExistingCertificate.value === 'part_67') {
+        if (!ffaCertificateNumberWrapper.classList.contains('hidden')) {
+            ffaCertificateNumberWrapper.classList.add('hidden');
+        }
+        applicantIdWrapper.classList.remove('hidden');
+    } else {
+        if (!applicantIdWrapper.classList.contains('hidden')) {
+            applicantIdWrapper.classList.add('hidden');
+        }
+        ffaCertificateNumberWrapper.classList.remove('hidden');
+    }
 })
 nonMedical.addEventListener('click', function (event) {
     trackingNumberWrapper.classList.remove('hidden');
@@ -361,5 +372,20 @@ isMedical.addEventListener('click', function (event) {
     applicantIdWrapper.classList.remove('hidden');
     if (!trackingNumberWrapper.classList.contains('hidden')) {
         trackingNumberWrapper.classList.add('hidden');
+    }
+})
+airmanExistingCertificate.addEventListener('change', function (event) {
+    const selectedValue = this.value;
+
+    if (selectedValue === 'part_67') {
+        if (!ffaCertificateNumberWrapper.classList.contains('hidden')) {
+            ffaCertificateNumberWrapper.classList.add('hidden');
+        }
+        applicantIdWrapper.classList.remove('hidden');
+    } else {
+        if (!applicantIdWrapper.classList.contains('hidden')) {
+            applicantIdWrapper.classList.add('hidden');
+        }
+        ffaCertificateNumberWrapper.classList.remove('hidden');
     }
 })
