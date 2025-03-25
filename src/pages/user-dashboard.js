@@ -319,6 +319,9 @@ newCertificate.addEventListener('click', function (event) {
     if (!existingCertificateWrapper.classList.contains('hidden')) {
         existingCertificateWrapper.classList.add('hidden');
     }
+    if (!ffaCertificateNumberWrapper.classList.contains('hidden')) {
+        ffaCertificateNumberWrapper.classList.add('hidden');
+    }
     if (!applicantIdWrapper.classList.contains('hidden')) {
         applicantIdWrapper.classList.add('hidden');
     }
