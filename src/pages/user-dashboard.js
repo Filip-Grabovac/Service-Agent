@@ -319,24 +319,24 @@ newCertificate.addEventListener('click', function (event) {
     if (!existingCertificateWrapper.classList.contains('hidden')) {
         existingCertificateWrapper.classList.add('hidden');
     }
-    if (!ffaCertificateNumberWrapper.classList.contains('hidden')) {
-        ffaCertificateNumberWrapper.classList.add('hidden');
+    if (!applicantIdWrapper.classList.contains('hidden')) {
+        applicantIdWrapper.classList.add('hidden');
     }
     if (nonMedical.checked) {
         trackingNumberWrapper.classList.remove('hidden');
-        ffaCertificateNumberWrapper.classList.remove('hidden');
         if (!applicantIdWrapper.classList.contains('hidden')) {
             applicantIdWrapper.classList.add('hidden');
         }
     }
     if (isMedical.checked) {
         applicantIdWrapper.classList.remove('hidden');
-        ffaCertificateNumberWrapper.classList.remove('hidden');
+        if (!trackingNumberWrapper.classList.contains('hidden')) {
+            trackingNumberWrapper.classList.add('hidden');
+        }
     }
 })
 existingCertificate.addEventListener('click', function (event) {
     existingCertificateWrapper.classList.remove('hidden');
-    ffaCertificateNumberWrapper.classList.remove('hidden');
     applicantIdWrapper.classList.remove('hidden');
     if (!chooseMedicalWrapper.classList.contains('hidden')) {
         chooseMedicalWrapper.classList.add('hidden');
@@ -344,16 +344,17 @@ existingCertificate.addEventListener('click', function (event) {
     if (!trackingNumberWrapper.classList.contains('hidden')) {
         trackingNumberWrapper.classList.add('hidden');
     }
+    if (!applicantIdWrapper.classList.contains('hidden')) {
+        applicantIdWrapper.classList.add('hidden');
+    }
 })
 nonMedical.addEventListener('click', function (event) {
-    ffaCertificateNumberWrapper.classList.remove('hidden');
     trackingNumberWrapper.classList.remove('hidden');
     if (!applicantIdWrapper.classList.contains('hidden')) {
         applicantIdWrapper.classList.add('hidden');
     }
 })
 isMedical.addEventListener('click', function (event) {
-    ffaCertificateNumberWrapper.classList.remove('hidden');
     applicantIdWrapper.classList.remove('hidden');
     if (!trackingNumberWrapper.classList.contains('hidden')) {
         trackingNumberWrapper.classList.add('hidden');
