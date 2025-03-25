@@ -847,6 +847,7 @@ export function setModals(menu) {
 
                         if (existingValue === 'false') {
                             formData.delete('existing_certificate');
+                            formData.delete('ffa_certificate_number');
 
                             const medicalValue = entries.find(item => item[0] === 'is_medical')?.[1];
 
@@ -858,6 +859,12 @@ export function setModals(menu) {
                         } else {
                             formData.delete('is_medical');
                             formData.delete('iarca_tracking_number');
+                            const existingCertificate = entries.find(item => item[0] === 'existing_certificate')?.[1];
+                            if (existingCertificate === 'part_67') {
+                                formData.delete('ffa_certificate_number');
+                            } else {
+                                formData.delete('applicant_id_number');
+                            }
                         }
                     }
                 }
