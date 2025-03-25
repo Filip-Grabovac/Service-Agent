@@ -337,7 +337,7 @@ newCertificate.addEventListener('click', function (event) {
 })
 existingCertificate.addEventListener('click', function (event) {
     existingCertificateWrapper.classList.remove('hidden');
-    applicantIdWrapper.classList.remove('hidden');
+    ffaCertificateNumberWrapper.classList.remove('hidden');
     if (!chooseMedicalWrapper.classList.contains('hidden')) {
         chooseMedicalWrapper.classList.add('hidden');
     }
