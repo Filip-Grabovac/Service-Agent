@@ -289,12 +289,6 @@ function certificatePayment(id, type, certificateData = null) {
     if (hasAnyActiveCertificate && type === 'airman') {
         if (certificateData && (certificateData.is_medical || (certificateData.is_existing && certificateData.existing_certificate === 'part_67'))) {
             isFreeMedical = true;
-        } else {
-            certificate.getById(id).then((data) => {
-                if (data.is_medical || (data.is_existing && data.existing_certificate === 'part_67')) {
-                    isFreeMedical = true;
-                }
-            });
         }
     }
 
