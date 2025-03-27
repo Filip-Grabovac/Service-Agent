@@ -217,8 +217,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
             if (menu === 7 && item.is_active === true && item.is_free === false && item.type === 'airman_certificate') {
                 hasActiveCertificate = true;
             }
-            if (menu === 7 && item.is_active === true && item.is_medical === false && item.exisiting_certificate !== 'part_67') {
-                console.log(item)
+            if (menu === 7 && item.is_active === true && item.is_medical === false && item.existing_certificate !== 'part_67') {
                 hasAnyActiveNonMedicalCertificate = true;
             }
             status = item._document_status?.status_label;
@@ -286,7 +285,6 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
 function certificatePayment(id, type, certificateData = null) {
     const currentDomain = window.location.hostname;
 
-    console.log(hasAnyActiveNonMedicalCertificate)
     let isFreeMedical = false;
     if (hasAnyActiveNonMedicalCertificate && type === 'airman') {
         if (certificateData && (certificateData.is_medical || certificateData.existing_certificate === 'part_67')) {
