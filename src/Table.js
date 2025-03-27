@@ -20,6 +20,7 @@ let activeRole;
 let activeUserDetailsElement;
 let selectedUserId = null;
 let hasActiveCertificate;
+let hasAnyActiveCertificate;
 
 let iti = null;
 
@@ -216,6 +217,9 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
             if (menu === 7 && item.is_active === true && item.type === 'airman_certificate') {
                 hasActiveCertificate = true;
             }
+            if (menu === 7 && item.is_active === true) {
+                hasAnyActiveCertificate = true;
+            }
             status = item._document_status?.status_label;
             if (status) {
                 if (status === 'paid' || status === 'delivered') {
@@ -278,8 +282,25 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
     })
 }
 
-function certificatePayment(id, type) {
+function certificatePayment(id, type, certificateData = null) {
     const currentDomain = window.location.hostname;
+
+    let isFreeMedical = false;
+    if (hasAnyActiveCertificate && type === 'airman') {
+        if (certificateData && (certificateData.is_medical || (certificateData.is_existing && certificateData.existing_certificate === 'part_67'))) {
+            isFreeMedical = true;
+        } else {
+            certificate.getById(id).then((data) => {
+                if (data.is_medical || (data.is_existing && data.existing_certificate === 'part_67')) {
+                    isFreeMedical = true;
+                }
+            });
+        }
+    }
+
+    if (isFreeMedical) {
+        return;
+    }
 
     let price = "";
     let certificate = "";
@@ -1089,7 +1110,7 @@ export function setModals(menu) {
 
                         certificatesTable.classList.remove('hide');
 
-                        certificatePayment(data.id, data.type.split('_')[0])
+                        certificatePayment(data.id, data.type.split('_')[0], data)
                     }
 
                     if (emailChanged) {
