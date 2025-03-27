@@ -285,6 +285,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
 function certificatePayment(id, type, certificateData = null) {
     const currentDomain = window.location.hostname;
 
+    console.log(hasAnyActiveNonMedicalCertificate)
     let isFreeMedical = false;
     if (hasAnyActiveNonMedicalCertificate && type === 'airman') {
         if (certificateData && (certificateData.is_medical || certificateData.existing_certificate === 'part_67')) {
