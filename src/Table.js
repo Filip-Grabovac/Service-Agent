@@ -218,6 +218,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
                 hasActiveCertificate = true;
             }
             if (menu === 7 && item.is_active === true && item.is_medical === false && item.exisiting_certificate !== 'part_67') {
+                console.log(item)
                 hasAnyActiveNonMedicalCertificate = true;
             }
             status = item._document_status?.status_label;
