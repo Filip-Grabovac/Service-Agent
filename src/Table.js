@@ -20,7 +20,7 @@ let activeRole;
 let activeUserDetailsElement;
 let selectedUserId = null;
 let hasActiveCertificate;
-let hasAnyActiveCertificate;
+let hasAnyActiveNonMedicalCertificate;
 
 let iti = null;
 
@@ -217,8 +217,8 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
             if (menu === 7 && item.is_active === true && item.type === 'airman_certificate') {
                 hasActiveCertificate = true;
             }
-            if (menu === 7 && item.is_active === true && item.is_free === false) {
-                hasAnyActiveCertificate = true;
+            if (menu === 7 && item.is_active === true && item.is_medical === false && item.exisiting_certificate !== 'part_67') {
+                hasAnyActiveNonMedicalCertificate = true;
             }
             status = item._document_status?.status_label;
             if (status) {
@@ -286,8 +286,8 @@ function certificatePayment(id, type, certificateData = null) {
     const currentDomain = window.location.hostname;
 
     let isFreeMedical = false;
-    if (hasAnyActiveCertificate && type === 'airman') {
-        if (certificateData && (certificateData.is_medical || (certificateData.is_existing && certificateData.existing_certificate === 'part_67'))) {
+    if (hasAnyActiveNonMedicalCertificate && type === 'airman') {
+        if (certificateData && (certificateData.is_medical || certificateData.existing_certificate === 'part_67')) {
             isFreeMedical = true;
         }
     }
