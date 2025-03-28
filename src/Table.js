@@ -21,6 +21,7 @@ let activeUserDetailsElement;
 let selectedUserId = null;
 let hasActiveCertificate;
 let hasAnyActiveNonMedicalCertificate;
+let isReminderEventAttached = false;
 
 let iti = null;
 
@@ -736,27 +737,22 @@ export function setModals(menu) {
                                 }
                             });
 
-                            let isSending = false;
-                            addDocumentCertificateErrorLink.addEventListener("click", function() {
-                                if (isSending) {
-                                    return;
-                                }
+                            if (!isReminderEventAttached) {
+                                isReminderEventAttached = true;
 
-                                isSending = true;
+                                addDocumentCertificateErrorLink.addEventListener("click", function() {
+                                    certificate.sendReminder(selectedCertificate).then((success) => {
+                                        if (success) {
+                                            successMessage.innerHTML = 'Payment reminder has been successfully sent!';
+                                            successWrapper.classList.remove('hide');
 
-                                certificate.sendReminder(selectedCertificate).then((success) => {
-                                    if (success) {
-                                        successMessage.innerHTML = 'Payment reminder has been successfully sent!';
-                                        successWrapper.classList.remove('hide');
-
-                                        setTimeout(function () {
-                                            successWrapper.classList.add('hide');
-                                        }, 3000);
-                                    }
-                                }).finally(() => {
-                                    isSending = false;
-                                })
-                            });
+                                            setTimeout(function () {
+                                                successWrapper.classList.add('hide');
+                                            }, 3000);
+                                        }
+                                    })
+                                });
+                            }
                         }
                     });
                 }
