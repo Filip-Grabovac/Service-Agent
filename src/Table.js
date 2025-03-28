@@ -1268,7 +1268,21 @@ function getModals(menu) {
                 method: 'DELETE',
                 files: [],
                 success_message: 'The certificate has been successfully deleted.',
-            }
+            },
+            5: {
+                modal: 'edit-aircraft-popup',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1${branch}/certificates/{certificates_id}`,
+                method: 'PATCH',
+                files: [],
+                success_message: 'The certificate has been successfully updated.',
+            },
+            6: {
+                modal: 'edit-airman-popup',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1${branch}/certificates/{certificates_id}`,
+                method: 'PATCH',
+                files: [],
+                success_message: 'The certificate has been successfully updated.',
+            },
         },
         3: {
             1: {
