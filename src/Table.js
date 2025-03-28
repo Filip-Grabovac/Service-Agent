@@ -1283,6 +1283,34 @@ function getModals(menu) {
                 files: [],
                 success_message: 'The certificate has been successfully updated.',
             },
+            7: {
+                modal: 'shred-document-popup',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
+                method: 'PATCH',
+                files: [],
+                success_message: 'The document has been successfully shredded.',
+            },
+            8: {
+                modal: 'edit-document-popup',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
+                method: 'PATCH',
+                files: [],
+                success_message: 'The document has been successfully updated.',
+            },
+            9: {
+                modal: 'forward-document-popup',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
+                method: 'PATCH',
+                files: [],
+                success_message: 'The document has been successfully updated.',
+            },
+            10: {
+                modal: 'payment-document-popup',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
+                method: 'PATCH',
+                files: [],
+                success_message: 'The document has been successfully updated.',
+            }
         },
         3: {
             1: {
