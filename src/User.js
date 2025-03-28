@@ -269,6 +269,7 @@ export default class User {
     }
     logOut() {
         localStorage.removeItem('authToken');
+        localStorage.removeItem('tourStage');
 
         window.location.href = '/log-in';
     }
