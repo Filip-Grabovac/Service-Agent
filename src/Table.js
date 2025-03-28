@@ -660,90 +660,95 @@ export function setModals(menu) {
                 }
 
                 if (modalName === 'add-document-popup') {
+                    let addDocumentPopupIn = false;
                     $(document).ready(function() {
-                        const selectCertificateElement = document.getElementById('certificates_id');
-                        selectCertificateElement.innerHTML = '';
+                        if (addDocumentPopupIn === false) {
+                            addDocumentPopupIn = true;
 
-                        $('#create-document-user').on('select2:select', function (e) {
-                            // $('#create-document-user').off('select2:select');
+                            const selectCertificateElement = document.getElementById('certificates_id');
                             selectCertificateElement.innerHTML = '';
 
-                            const selectedValue = e.params.data.id;
-
-                            certificate.getAllByUser(1, 9999, '', '', null, selectedValue).then((data) => {
-                                const options = [];
-                                const defaultOption = document.createElement('option');
-                                defaultOption.value = '';
-                                defaultOption.textContent = 'Choose certificate';
-                                options.push(defaultOption);
-
-                                data.items.forEach(cert => {
-                                    const option = document.createElement('option');
-                                    option.value = cert.id;
-                                    option.setAttribute('data-active', cert.is_active)
-
-                                    let type = cert.type.split('_')[0]
-                                    let typeFormated = type.charAt(0).toUpperCase() + type.slice(1);
-
-                                    let secondString;
-                                    if (type === 'airman') {
-                                        if (cert.applicant_id_number) {
-                                            secondString = cert.applicant_id_number;
-                                        } else if (cert.iarca_tracking_number) {
-                                            secondString = cert.iarca_tracking_number;
-                                        } else {
-                                            secondString = cert.ffa_certificate_number;
-                                        }
-                                    } else if (type === 'aircraft') {
-                                        secondString = cert.aircraft_serial_number;
-                                    }
-
-                                    option.textContent = typeFormated + ' ' + secondString;
-                                    options.push(option);
-                                });
-
+                            $('#create-document-user').on('select2:select', function (e) {
+                                // $('#create-document-user').off('select2:select');
                                 selectCertificateElement.innerHTML = '';
-                                selectCertificateElement.append(...options);
-                            })
-                        });
 
-                        const certificatesSelect = document.getElementById('certificates_id');
-                        const addDocumentButton = document.getElementById('create-document-btn');
-                        const addDocumentCertificateError = document.getElementById('add-document-certificate-error');
-                        const addDocumentCertificateErrorLink = document.getElementById('add-document-certificate-error-link');
+                                const selectedValue = e.params.data.id;
 
-                        addDocumentButton.style.pointerEvents = "auto";
-                        addDocumentButton.style.opacity = "1";
-                        addDocumentCertificateError.style.display = "none";
-                        let selectedCertificate;
+                                certificate.getAllByUser(1, 9999, '', '', null, selectedValue).then((data) => {
+                                    const options = [];
+                                    const defaultOption = document.createElement('option');
+                                    defaultOption.value = '';
+                                    defaultOption.textContent = 'Choose certificate';
+                                    options.push(defaultOption);
 
-                        certificatesSelect.addEventListener("change", function() {
-                            selectedCertificate = this.value
-                            let selectedOption = this.options[this.selectedIndex];
+                                    data.items.forEach(cert => {
+                                        const option = document.createElement('option');
+                                        option.value = cert.id;
+                                        option.setAttribute('data-active', cert.is_active)
 
-                            if (selectedOption.getAttribute('data-active') === 'false') {
-                                addDocumentButton.style.pointerEvents = "none";
-                                addDocumentButton.style.opacity = "0.5";
-                                addDocumentCertificateError.style.display = "block";
-                            } else {
-                                addDocumentButton.style.pointerEvents = "auto";
-                                addDocumentButton.style.opacity = "1";
-                                addDocumentCertificateError.style.display = "none";
-                            }
-                        });
+                                        let type = cert.type.split('_')[0]
+                                        let typeFormated = type.charAt(0).toUpperCase() + type.slice(1);
 
-                        addDocumentCertificateErrorLink.addEventListener("click", function() {
-                            certificate.sendReminder(selectedCertificate).then((success) => {
-                                if (success) {
-                                    successMessage.innerHTML = 'Payment reminder has been successfully sent!';
-                                    successWrapper.classList.remove('hide');
+                                        let secondString;
+                                        if (type === 'airman') {
+                                            if (cert.applicant_id_number) {
+                                                secondString = cert.applicant_id_number;
+                                            } else if (cert.iarca_tracking_number) {
+                                                secondString = cert.iarca_tracking_number;
+                                            } else {
+                                                secondString = cert.ffa_certificate_number;
+                                            }
+                                        } else if (type === 'aircraft') {
+                                            secondString = cert.aircraft_serial_number;
+                                        }
 
-                                    setTimeout(function () {
-                                        successWrapper.classList.add('hide');
-                                    }, 3000);
+                                        option.textContent = typeFormated + ' ' + secondString;
+                                        options.push(option);
+                                    });
+
+                                    selectCertificateElement.innerHTML = '';
+                                    selectCertificateElement.append(...options);
+                                })
+                            });
+
+                            const certificatesSelect = document.getElementById('certificates_id');
+                            const addDocumentButton = document.getElementById('create-document-btn');
+                            const addDocumentCertificateError = document.getElementById('add-document-certificate-error');
+                            const addDocumentCertificateErrorLink = document.getElementById('add-document-certificate-error-link');
+
+                            addDocumentButton.style.pointerEvents = "auto";
+                            addDocumentButton.style.opacity = "1";
+                            addDocumentCertificateError.style.display = "none";
+                            let selectedCertificate;
+
+                            certificatesSelect.addEventListener("change", function() {
+                                selectedCertificate = this.value
+                                let selectedOption = this.options[this.selectedIndex];
+
+                                if (selectedOption.getAttribute('data-active') === 'false') {
+                                    addDocumentButton.style.pointerEvents = "none";
+                                    addDocumentButton.style.opacity = "0.5";
+                                    addDocumentCertificateError.style.display = "block";
+                                } else {
+                                    addDocumentButton.style.pointerEvents = "auto";
+                                    addDocumentButton.style.opacity = "1";
+                                    addDocumentCertificateError.style.display = "none";
                                 }
-                            })
-                        });
+                            });
+
+                            addDocumentCertificateErrorLink.addEventListener("click", function() {
+                                certificate.sendReminder(selectedCertificate).then((success) => {
+                                    if (success) {
+                                        successMessage.innerHTML = 'Payment reminder has been successfully sent!';
+                                        successWrapper.classList.remove('hide');
+
+                                        setTimeout(function () {
+                                            successWrapper.classList.add('hide');
+                                        }, 3000);
+                                    }
+                                })
+                            });
+                        }
                     });
                 }
             });
