@@ -665,7 +665,7 @@ export function setModals(menu) {
                         selectCertificateElement.innerHTML = '';
 
                         $('#create-document-user').on('select2:select', function (e) {
-                            $('#create-document-user').off('select2:select');
+                            // $('#create-document-user').off('select2:select');
                             selectCertificateElement.innerHTML = '';
 
                             const selectedValue = e.params.data.id;
