@@ -736,7 +736,14 @@ export function setModals(menu) {
                                 }
                             });
 
+                            let isSending = false;
                             addDocumentCertificateErrorLink.addEventListener("click", function() {
+                                if (isSending) {
+                                    return;
+                                }
+
+                                isSending = true;
+
                                 certificate.sendReminder(selectedCertificate).then((success) => {
                                     if (success) {
                                         successMessage.innerHTML = 'Payment reminder has been successfully sent!';
@@ -746,8 +753,10 @@ export function setModals(menu) {
                                             successWrapper.classList.add('hide');
                                         }, 3000);
                                     }
+                                }).finally(() => {
+                                    isSending = false;
                                 })
-                            }, { once: true });
+                            });
                         }
                     });
                 }
