@@ -747,7 +747,7 @@ export function setModals(menu) {
                                         }, 3000);
                                     }
                                 })
-                            });
+                            }, { once: true });
                         }
                     });
                 }
