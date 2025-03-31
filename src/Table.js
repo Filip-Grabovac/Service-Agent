@@ -1042,9 +1042,9 @@ export function setModals(menu) {
                         activeUserDetailsElement.click()
                     }
 
-                    user.me().then((data) => {
-                        authUserData = data;
-                    });
+                    // user.me().then((data) => {
+                    //     authUserData = data;
+                    // });
 
                     // if (form) {
                     //     form.reset();
