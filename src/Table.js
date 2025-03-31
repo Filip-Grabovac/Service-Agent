@@ -1037,13 +1037,11 @@ export function setModals(menu) {
                         $('#create-document-user').off('select2:select');
                     }
 
-                    // if (!activeUserDetailsElement || modalName === 'edit-user-popup') {
-                        activeElement.click()
-                    // }
-
                     if (activeUserDetailsElement) {
                         activeUserDetailsElement.click()
                     }
+
+                    activeElement.click()
 
                     user.me().then((data) => {
                         authUserData = data;
@@ -2049,9 +2047,6 @@ function setUserDetails() {
         element.addEventListener("click", e => {
             let data = Array.from(allData[2][1]).find(item => item.id.toString().match(element.getAttribute("data-users-details")));
 
-            console.log(allData[2][1])
-            console.log(element.getAttribute("data-users-details"))
-            console.log(data)
             fillUsersDetails(data);
 
             usersDetails.classList.remove("hide");
