@@ -1041,12 +1041,9 @@ export function setModals(menu) {
                         localStorage.setItem('noFill', '1');
                     }
 
-                    console.log(activeUserDetailsElement)
                     if (activeUserDetailsElement) {
-                        console.log(1)
                         activeUserDetailsElement.click()
                     } else {
-                        console.log(activeElement)
                         activeElement.click()
                     }
 
