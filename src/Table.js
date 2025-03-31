@@ -2047,6 +2047,7 @@ function setUserDetails() {
 
     usersDetailsElements.forEach(element => {
         element.addEventListener("click", e => {
+            console.log(element)
             let data = Array.from(allData[2][1]).find(item => item.id.toString().match(element.getAttribute("data-users-details")));
 
             fillUsersDetails(data);
