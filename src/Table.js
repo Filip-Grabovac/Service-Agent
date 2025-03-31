@@ -1037,7 +1037,10 @@ export function setModals(menu) {
                         $('#create-document-user').off('select2:select');
                     }
 
-                    activeElement.click()
+                    if (!activeUserDetailsElement || modalName === 'edit-user-popup') {
+                        activeElement.click()
+                    }
+
                     if (activeUserDetailsElement) {
                         activeUserDetailsElement.click()
                     }
