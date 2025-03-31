@@ -1037,8 +1037,10 @@ export function setModals(menu) {
                         $('#create-document-user').off('select2:select');
                     }
 
+                    console.log(activeElement)
                     activeElement.click()
                     if (activeUserDetailsElement) {
+                        console.log(activeUserDetailsElement)
                         activeUserDetailsElement.click()
                     }
 
