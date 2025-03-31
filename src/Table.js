@@ -1043,8 +1043,10 @@ export function setModals(menu) {
 
                     console.log(activeUserDetailsElement)
                     if (activeUserDetailsElement) {
+                        console.log(1)
                         activeUserDetailsElement.click()
                     } else {
+                        console.log(activeElement)
                         activeElement.click()
                     }
 
