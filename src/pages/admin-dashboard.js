@@ -111,8 +111,8 @@ adminMenu2.addEventListener('click', function (event) {
 
     if (!localStorage.getItem('noFill')) {
         fillTable(2, 1)
-        localStorage.removeItem('noFill')
     }
+    localStorage.removeItem('noFill')
 
     // history.pushState({ page: 2 }, "shreaded documents", "?page=shreaded-documents");
 })
