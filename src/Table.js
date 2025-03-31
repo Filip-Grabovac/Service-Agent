@@ -1037,6 +1037,10 @@ export function setModals(menu) {
                         $('#create-document-user').off('select2:select');
                     }
 
+                    if (activeUserDetailsElement) {
+                        localStorage.setItem('noFill', '1');
+                    }
+
                     activeElement.click()
 
                     if (activeUserDetailsElement) {
