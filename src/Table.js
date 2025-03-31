@@ -1042,84 +1042,84 @@ export function setModals(menu) {
                     //     activeUserDetailsElement.click()
                     // }
 
-                    // user.me().then((data) => {
-                    //     authUserData = data;
-                    // });
+                    user.me().then((data) => {
+                        authUserData = data;
+                    });
 
-                    // if (form) {
-                    //     form.reset();
-                    //
-                    //     dropZones.forEach(dropZone => {
-                    //         const outputDivs = dropZone.querySelectorAll(".output");
-                    //         outputDivs.forEach(div => div.remove());
-                    //         dropZone.firstElementChild.style.display = 'flex';
-                    //     });
-                    //
-                    //     const select2Element = document.getElementById('create-document-user');
-                    //     if (select2Element) {
-                    //         select2Element.value = '';
-                    //         const event = new Event('change', {bubbles: true});
-                    //         select2Element.dispatchEvent(event);
-                    //     }
-                    //
-                    //     document.querySelectorAll('.w--redirected-checked').forEach(el => {
-                    //         el.classList.remove('w--redirected-checked');
-                    //     });
-                    // }
-                    //
-                    // if (modalName === 'add-certificate-popup') {
-                    //     const radioOption1 = document.getElementById('radio-option-1');
-                    //     const radioOption2 = document.getElementById('radio-option-2');
-                    //     const chooseMedicalWrapper = document.getElementById('choose-medical-wrapper');
-                    //     const applicantIdWrapper = document.getElementById('applicant_id_wrapper');
-                    //     const trackingNumberWrapper = document.getElementById('tracking_number_wrapper');
-                    //     const existingCertificateWrapper = document.getElementById('existing_certificate_wrapper');
-                    //     const ffaCertificateNumberWrapper = document.getElementById('ffa_certificate_number_wrapper');
-                    //
-                    //     radioOption1.classList.add('hidden');
-                    //     radioOption2.classList.add('hidden');
-                    //     chooseMedicalWrapper.classList.add('hidden');
-                    //     applicantIdWrapper.classList.add('hidden');
-                    //     trackingNumberWrapper.classList.add('hidden');
-                    //     existingCertificateWrapper.classList.add('hidden');
-                    //     ffaCertificateNumberWrapper.classList.add('hidden');
-                    // }
-                    //
-                    // successMessage.innerHTML = item.success_message;
-                    // successWrapper.classList.remove('hide');
-                    //
-                    // setTimeout(function() {
-                    //     successWrapper.classList.add('hide');
-                    // }, 3000);
-                    //
-                    // loader.style.display = 'none'
-                    //
-                    // if (usersTable && usersTable.classList.contains('hide') && (modalName === 'delete-user-popup' || modalName === 'edit-user-popup')) {
-                    //     usersDetails.classList.add("hide");
-                    //     usersTable.classList.remove("hide");
-                    // }
-                    //
-                    // if (menu === 4 || menu === 'initial-admin') {
-                    //     populateSelectWithShippingTariffs()
-                    // }
-                    // if (menu === 2) {
-                    //     populateSelectWithUsers()
-                    // }
-                    // if (menu === 1 || menu === 3) {
-                    //     getTabCount()
-                    // }
-                    //
-                    // if (modalName === 'add-certificate-popup') {
-                    //     const certificatesTable = document.getElementById('certificate-tables');
-                    //
-                    //     certificatesTable.classList.remove('hide');
-                    //
-                    //     certificatePayment(data.id, data.type.split('_')[0], data)
-                    // }
-                    //
-                    // if (emailChanged) {
-                    //     window.location.href = '/email-verification';
-                    // }
+                    if (form) {
+                        form.reset();
+
+                        dropZones.forEach(dropZone => {
+                            const outputDivs = dropZone.querySelectorAll(".output");
+                            outputDivs.forEach(div => div.remove());
+                            dropZone.firstElementChild.style.display = 'flex';
+                        });
+
+                        const select2Element = document.getElementById('create-document-user');
+                        if (select2Element) {
+                            select2Element.value = '';
+                            const event = new Event('change', {bubbles: true});
+                            select2Element.dispatchEvent(event);
+                        }
+
+                        document.querySelectorAll('.w--redirected-checked').forEach(el => {
+                            el.classList.remove('w--redirected-checked');
+                        });
+                    }
+
+                    if (modalName === 'add-certificate-popup') {
+                        const radioOption1 = document.getElementById('radio-option-1');
+                        const radioOption2 = document.getElementById('radio-option-2');
+                        const chooseMedicalWrapper = document.getElementById('choose-medical-wrapper');
+                        const applicantIdWrapper = document.getElementById('applicant_id_wrapper');
+                        const trackingNumberWrapper = document.getElementById('tracking_number_wrapper');
+                        const existingCertificateWrapper = document.getElementById('existing_certificate_wrapper');
+                        const ffaCertificateNumberWrapper = document.getElementById('ffa_certificate_number_wrapper');
+
+                        radioOption1.classList.add('hidden');
+                        radioOption2.classList.add('hidden');
+                        chooseMedicalWrapper.classList.add('hidden');
+                        applicantIdWrapper.classList.add('hidden');
+                        trackingNumberWrapper.classList.add('hidden');
+                        existingCertificateWrapper.classList.add('hidden');
+                        ffaCertificateNumberWrapper.classList.add('hidden');
+                    }
+
+                    successMessage.innerHTML = item.success_message;
+                    successWrapper.classList.remove('hide');
+
+                    setTimeout(function() {
+                        successWrapper.classList.add('hide');
+                    }, 3000);
+
+                    loader.style.display = 'none'
+
+                    if (usersTable && usersTable.classList.contains('hide') && (modalName === 'delete-user-popup' || modalName === 'edit-user-popup')) {
+                        usersDetails.classList.add("hide");
+                        usersTable.classList.remove("hide");
+                    }
+
+                    if (menu === 4 || menu === 'initial-admin') {
+                        populateSelectWithShippingTariffs()
+                    }
+                    if (menu === 2) {
+                        populateSelectWithUsers()
+                    }
+                    if (menu === 1 || menu === 3) {
+                        getTabCount()
+                    }
+
+                    if (modalName === 'add-certificate-popup') {
+                        const certificatesTable = document.getElementById('certificate-tables');
+
+                        certificatesTable.classList.remove('hide');
+
+                        certificatePayment(data.id, data.type.split('_')[0], data)
+                    }
+
+                    if (emailChanged) {
+                        window.location.href = '/email-verification';
+                    }
                 })
                 .catch((error) => {
                     if (emailChanged) {
