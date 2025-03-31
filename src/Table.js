@@ -1038,9 +1038,9 @@ export function setModals(menu) {
                     }
 
                     // activeElement.click()
-                    // if (activeUserDetailsElement) {
-                    //     activeUserDetailsElement.click()
-                    // }
+                    if (activeUserDetailsElement) {
+                        activeUserDetailsElement.click()
+                    }
 
                     user.me().then((data) => {
                         authUserData = data;
