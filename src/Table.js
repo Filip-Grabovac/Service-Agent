@@ -2048,17 +2048,21 @@ function setUserDetails() {
     const usersDetailsElements = document.querySelectorAll('[data-users-details]');
 
     usersDetailsElements.forEach(element => {
-        element.addEventListener("click", e => {
-            console.log('in')
-            let data = Array.from(allData[2][1]).find(item => item.id.toString().match(element.getAttribute("data-users-details")));
+        if (!element.hasAttribute("data-click-listener-added")) {
+            element.addEventListener("click", e => {
+                console.log('in')
+                let data = Array.from(allData[2][1]).find(item => item.id.toString().match(element.getAttribute("data-users-details")));
 
-            fillUsersDetails(data);
+                fillUsersDetails(data);
 
-            usersDetails.classList.remove("hide");
-            usersTable.classList.add("hide");
+                usersDetails.classList.remove("hide");
+                usersTable.classList.add("hide");
 
-            activeUserDetailsElement = element;
-        })
+                activeUserDetailsElement = element;
+            })
+
+            element.setAttribute("data-click-listener-added", "true");
+        }
     })
 }
 
