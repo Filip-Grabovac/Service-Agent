@@ -1021,31 +1021,31 @@ export function setModals(menu) {
                     return response.json();
                 })
                 .then((data) => {
-                    // if (modalName === 'delete-certificate-popup' && menu !== 2) {
-                    //     window.location.href = window.location.pathname + "?certificate-deleted=1"
-                    // }
-                    //
-                    // if (modalName === 'delete-user-popup' && activeRole === 'user') {
-                    //     user.logOut()
-                    // }
-                    //
-                    // modal.classList.add('hide');
-                    //
-                    // item.files = [];
-                    //
-                    // if (modalName === 'add-document-popup') {
-                    //     $('#create-document-user').off('select2:select');
-                    // }
-                    //
-                    // activeElement.click()
-                    // if (activeUserDetailsElement) {
-                    //     activeUserDetailsElement.click()
-                    // }
-                    //
-                    // user.me().then((data) => {
-                    //     authUserData = data;
-                    // });
-                    //
+                    if (modalName === 'delete-certificate-popup' && menu !== 2) {
+                        window.location.href = window.location.pathname + "?certificate-deleted=1"
+                    }
+
+                    if (modalName === 'delete-user-popup' && activeRole === 'user') {
+                        user.logOut()
+                    }
+
+                    modal.classList.add('hide');
+
+                    item.files = [];
+
+                    if (modalName === 'add-document-popup') {
+                        $('#create-document-user').off('select2:select');
+                    }
+
+                    activeElement.click()
+                    if (activeUserDetailsElement) {
+                        activeUserDetailsElement.click()
+                    }
+
+                    user.me().then((data) => {
+                        authUserData = data;
+                    });
+
                     // if (form) {
                     //     form.reset();
                     //
