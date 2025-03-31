@@ -1041,10 +1041,10 @@ export function setModals(menu) {
                         localStorage.setItem('noFill', '1');
                     }
 
-                    activeElement.click()
-
                     if (activeUserDetailsElement) {
                         activeUserDetailsElement.click()
+                    } else {
+                        activeElement.click()
                     }
 
                     user.me().then((data) => {
@@ -2049,6 +2049,7 @@ function setUserDetails() {
 
     usersDetailsElements.forEach(element => {
         element.addEventListener("click", e => {
+            console.log('in')
             let data = Array.from(allData[2][1]).find(item => item.id.toString().match(element.getAttribute("data-users-details")));
 
             fillUsersDetails(data);
