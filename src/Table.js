@@ -2047,9 +2047,11 @@ function setUserDetails() {
 
     usersDetailsElements.forEach(element => {
         element.addEventListener("click", e => {
-            console.log(element)
             let data = Array.from(allData[2][1]).find(item => item.id.toString().match(element.getAttribute("data-users-details")));
 
+            console.log(allData[2][1])
+            console.log(element.getAttribute("data-users-details"))
+            console.log(data)
             fillUsersDetails(data);
 
             usersDetails.classList.remove("hide");
