@@ -1037,10 +1037,10 @@ export function setModals(menu) {
                         $('#create-document-user').off('select2:select');
                     }
 
-                    activeElement.click()
-                    if (activeUserDetailsElement) {
-                        activeUserDetailsElement.click()
-                    }
+                    // activeElement.click()
+                    // if (activeUserDetailsElement) {
+                    //     activeUserDetailsElement.click()
+                    // }
 
                     // user.me().then((data) => {
                     //     authUserData = data;
