@@ -149,7 +149,21 @@ user.me().then((data) => {
 
     if (urlParams.has('certificate') && data.tutorial_shown === false) {
         showTutorial = true;
-        user.tutorialShown(data.id);
+        const patchData = {
+            tutorial_shown: true
+        }
+        user.patchUser(data.id, patchData);
+    }
+
+    if (data.welcome_message_hidden === false) {
+        document.querySelector('#welcome-message').style.display = 'flex';
+        document.querySelector('#welcome-message-hide').addEventListener('click', () => {
+            document.querySelector('#welcome-message').style.display = 'none';
+            const patchData = {
+                welcome_message_hidden: true
+            }
+            user.patchUser(data.id, patchData);
+        })
     }
 });
 

@@ -440,11 +440,8 @@ export default class User {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
-    tutorialShown(userId) {
+    patchUser(userId, data) {
         const authToken =  localStorage.getItem('authToken');
-        const data = {
-            tutorial_shown: true
-        }
         // Call the Xano API
         fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${this.branch}/user/` + userId, {
             method: 'PATCH',
