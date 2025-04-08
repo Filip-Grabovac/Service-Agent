@@ -1906,6 +1906,7 @@ const countriesText = `
   Guyana
   Haiti
   Honduras
+  Hong Kong
   Hungary
   Iceland
   India
@@ -1936,6 +1937,7 @@ const countriesText = `
   Liechtenstein
   Lithuania
   Luxembourg
+  Macau
   Macedonia
   Madagascar
   Malawi
