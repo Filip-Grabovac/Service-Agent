@@ -85,7 +85,7 @@ dateOfBirthInput.setAttribute('max', today);
 companyRadio.addEventListener('click', function (event) {
     const nameRow1 = document.getElementById('name-row-1');
     const nameRow2 = document.getElementById('name-row-2');
-    const emailRow = document.getElementById('email-input');
+    const emailRow = document.getElementById('email-row');
     const hrRow = document.getElementById('hr-row');
 
     secondStepInputs.insertBefore(nameRow1, emailRow);
