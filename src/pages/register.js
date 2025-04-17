@@ -28,7 +28,6 @@ const terms = document.getElementById('terms');
 const nameRow1 = document.getElementById('name-row-1');
 const nameRow2 = document.getElementById('name-row-2');
 const emailRow = document.getElementById('email-row');
-const birthdayRow = document.getElementById('birthday-row');
 const hrRow = document.getElementById('hr-row');
 
 const errorWrapper = document.getElementById('error-wrapper');
@@ -105,8 +104,8 @@ companyRadio.addEventListener('click', function (event) {
 })
 
 individualRadio.addEventListener('click', function (event) {
-    secondStepInputs.insertBefore(nameRow1, birthdayRow);
-    secondStepInputs.insertBefore(nameRow2, birthdayRow);
+    secondStepInputs.insertBefore(nameRow1, dateOfBirthWrapper);
+    secondStepInputs.insertBefore(nameRow2, dateOfBirthWrapper);
     hrRow.style.display = 'none';
 
     companyNameWrapper.style.display = 'none';
