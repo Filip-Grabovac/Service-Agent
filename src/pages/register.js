@@ -25,6 +25,12 @@ const middleName = document.getElementById('middle_name');
 const addressAdditional = document.getElementById('address_additional');
 const terms = document.getElementById('terms');
 
+const nameRow1 = document.getElementById('name-row-1');
+const nameRow2 = document.getElementById('name-row-2');
+const emailRow = document.getElementById('email-row');
+const birthdayRow = document.getElementById('birthday-row');
+const hrRow = document.getElementById('hr-row');
+
 const errorWrapper = document.getElementById('error-wrapper');
 const errorMessage = document.getElementById('error-message');
 const errorClose = document.getElementById('error-close');
@@ -82,12 +88,8 @@ const iti = window.intlTelInput(phoneInput, {
 const today = new Date().toISOString().split('T')[0];
 dateOfBirthInput.setAttribute('max', today);
 
+hrRow.style.display = 'none';
 companyRadio.addEventListener('click', function (event) {
-    const nameRow1 = document.getElementById('name-row-1');
-    const nameRow2 = document.getElementById('name-row-2');
-    const emailRow = document.getElementById('email-row');
-    const hrRow = document.getElementById('hr-row');
-
     secondStepInputs.insertBefore(nameRow1, emailRow);
     secondStepInputs.insertBefore(nameRow2, emailRow);
     hrRow.style.display = 'flex';
@@ -103,6 +105,10 @@ companyRadio.addEventListener('click', function (event) {
 })
 
 individualRadio.addEventListener('click', function (event) {
+    secondStepInputs.insertBefore(nameRow1, birthdayRow);
+    secondStepInputs.insertBefore(nameRow2, birthdayRow);
+    hrRow.style.display = 'none';
+
     companyNameWrapper.style.display = 'none';
     dateOfBirthWrapper.style.display = 'flex';
 
