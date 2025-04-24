@@ -902,6 +902,7 @@ export function setModals(menu) {
                     });
                 }
 
+                let hasErrors = false;
                 const entries = Array.from(formData.entries());
                 for (const [key, value] of entries) {
                     if (key.includes('.')) {
@@ -923,7 +924,7 @@ export function setModals(menu) {
                             // }, 3000);
                             modal.querySelector('[data-error=' + key + ']').style.display = 'block';
 
-                            return;
+                            hasErrors = true;
                         }
                     }
 
@@ -939,6 +940,8 @@ export function setModals(menu) {
                         } else if (key !== 'middle_name' && key !== 'user_addresses_of_user.address_additional' && key !== 'document_addresses_of_documents.address_additional') {
                             if (modalName === 'add-certificate-popup') {
                                 modal.querySelector('[data-error=' + key + ']').style.display = 'block';
+
+                                hasErrors = true;
                             } else {
                                 errorMessage.innerHTML = 'Please, fill in all fields.';
                                 errorWrapper.classList.remove('hide');
@@ -946,9 +949,9 @@ export function setModals(menu) {
                                 setTimeout(function () {
                                     errorWrapper.classList.add('hide');
                                 }, 3000);
-                            }
 
-                            return;
+                                return;
+                            }
                         }
                     }
 
@@ -972,6 +975,10 @@ export function setModals(menu) {
 
                         return;
                     }
+                }
+
+                if (hasErrors) {
+                    return;
                 }
             }
 
