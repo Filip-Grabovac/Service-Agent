@@ -929,7 +929,7 @@ export function setModals(menu) {
                             }
                         } else if (key !== 'middle_name' && key !== 'user_addresses_of_user.address_additional' && key !== 'document_addresses_of_documents.address_additional' && key !== 'ffa_certificate_number') {
                             if (modalName === 'add-certificate-popup') {
-                                modal.querySelector('[data-error=' + key + ']')
+                                modal.querySelector('[data-error=' + key + ']').style.display = 'block';
                             } else {
                                 errorMessage.innerHTML = 'Please, fill in all fields.';
                                 errorWrapper.classList.remove('hide');
