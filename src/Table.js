@@ -894,6 +894,14 @@ export function setModals(menu) {
                     }
                 }
 
+                if (modalName === 'add-certificate-popup') {
+                    const errorElements = modal.querySelectorAll('[data-error]');
+
+                    errorElements.forEach(el => {
+                        el.style.display = 'none';
+                    });
+                }
+
                 const entries = Array.from(formData.entries());
                 for (const [key, value] of entries) {
                     if (key.includes('.')) {
