@@ -936,7 +936,7 @@ export function setModals(menu) {
                                 formData.delete('description');
                                 formData.append('description', '');
                             }
-                        } else if (key !== 'middle_name' && key !== 'user_addresses_of_user.address_additional' && key !== 'document_addresses_of_documents.address_additional' && key !== 'ffa_certificate_number') {
+                        } else if (key !== 'middle_name' && key !== 'user_addresses_of_user.address_additional' && key !== 'document_addresses_of_documents.address_additional') {
                             if (modalName === 'add-certificate-popup') {
                                 modal.querySelector('[data-error=' + key + ']').style.display = 'block';
                             } else {
