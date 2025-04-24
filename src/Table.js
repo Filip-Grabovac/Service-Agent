@@ -915,12 +915,13 @@ export function setModals(menu) {
                         const regex = /^N.{2,5}$/;
 
                         if (!regex.test(value)) {
-                            errorMessage.innerHTML = 'Aircraft Detail must start with "N" and have between 3 and 6 characters in total.';
-                            errorWrapper.classList.remove('hide');
-
-                            setTimeout(function () {
-                                errorWrapper.classList.add('hide');
-                            }, 3000);
+                            // errorMessage.innerHTML = 'Aircraft Detail must start with "N" and have between 3 and 6 characters in total.';
+                            // errorWrapper.classList.remove('hide');
+                            //
+                            // setTimeout(function () {
+                            //     errorWrapper.classList.add('hide');
+                            // }, 3000);
+                            modal.querySelector('[data-error=' + key + ']').style.display = 'block';
 
                             return;
                         }
