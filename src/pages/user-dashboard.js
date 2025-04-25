@@ -418,6 +418,7 @@ airmanExistingCertificate.addEventListener('change', function (event) {
 })
 
 document.addEventListener("DOMContentLoaded", function () {
+    console.log('DOM fully loaded and parsed');
     const certificateModal = document.querySelector('#add-certificate-popup');
     const certificateSubmitButton = certificateModal.querySelector('[data-modal-action=submit]');
     const certificateForm = certificateModal.querySelector('form');
