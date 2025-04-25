@@ -133,13 +133,16 @@ function capitalizeWords(str) {
 nextBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
+    const termsLabel = document.getElementById('terms-label');
+    termsLabel.style.color = '#475467';
     if (!terms.checked) {
-        errorMessage.innerHTML = 'You must agree to the Terms & Conditions.';
-        errorWrapper.classList.remove('hide');
-
-        setTimeout(function() {
-            errorWrapper.classList.add('hide');
-        }, 3000);
+        termsLabel.style.color = '#ce0003';
+        // errorMessage.innerHTML = 'You must agree to the Terms & Conditions.';
+        // errorWrapper.classList.remove('hide');
+        //
+        // setTimeout(function() {
+        //     errorWrapper.classList.add('hide');
+        // }, 3000);
 
         return;
     }
@@ -185,12 +188,12 @@ nextBtn.addEventListener('click', function (event) {
     }
 
     if (validateData(dataForValidation) === 1) {
-        errorMessage.innerHTML = 'Please, fill in all fields.';
-        errorWrapper.classList.remove('hide');
-
-        setTimeout(function() {
-            errorWrapper.classList.add('hide');
-        }, 3000);
+        // errorMessage.innerHTML = 'Please, fill in all fields.';
+        // errorWrapper.classList.remove('hide');
+        //
+        // setTimeout(function() {
+        //     errorWrapper.classList.add('hide');
+        // }, 3000);
 
         return;
     }
