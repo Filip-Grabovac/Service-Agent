@@ -34,9 +34,11 @@ const successWrapper = document.getElementById('success-wrapper');
 const successMessage = document.getElementById('success-message');
 const successClose = document.getElementById('success-close');
 
-const loader = document.getElementById('loader-new');
+const loader = document.getElementById('loader-user');
 loader.style.display = 'flex';
-console.log(loader);
+setTimeout(() => {
+    loader.style.display = 'none';
+}, 2000);
 
 let showTutorial = false;
 
@@ -406,7 +408,3 @@ airmanExistingCertificate.addEventListener('change', function (event) {
         ffaCertificateNumberWrapper.classList.remove('hidden');
     }
 })
-
-setTimeout(() => {
-    loader.style.display = 'none';
-}, 2000);
