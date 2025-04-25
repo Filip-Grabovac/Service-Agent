@@ -474,12 +474,12 @@ function setupFormValidation(certificateModal) {
                 if (medicalValue === 'false') {
                     requiredFields = ['iarca_tracking_number'];
                 } else {
-                    requiredFields = ['applicant_id'];
+                    requiredFields = ['applicant_id_number'];
                 }
             } else {
                 const existingCertificate = entries.find(item => item[0] === 'existing_certificate')?.[1];
                 if (existingCertificate === 'part_67') {
-                    requiredFields = ['existing_certificate', 'applicant_id'];
+                    requiredFields = ['existing_certificate', 'applicant_id_number'];
                 } else {
                     requiredFields = ['existing_certificate', 'ffa_certificate_number'];
                 }
