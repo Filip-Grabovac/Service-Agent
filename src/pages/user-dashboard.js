@@ -454,9 +454,9 @@ function setupFormValidation(certificateModal) {
         console.log(certificateSubmitButton);
 
         if (allFilled) {
-            certificateSubmitButton.classList.remove('a-disabled');
+            certificateSubmitButton.classList.remove('is-disabled');
         } else {
-            certificateSubmitButton.classList.add('a-disabled');
+            certificateSubmitButton.classList.add('is-disabled');
         }
     }
 
