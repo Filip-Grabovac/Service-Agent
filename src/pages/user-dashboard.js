@@ -416,3 +416,66 @@ airmanExistingCertificate.addEventListener('change', function (event) {
         ffaCertificateNumberWrapper.classList.remove('hidden');
     }
 })
+
+document.addEventListener("DOMContentLoaded", function () {
+    const certificateModal = document.querySelector('#add-certificate-popup');
+
+    const button = certificateModal.querySelector('[data-modal-action=submit]');
+
+    const form = certificateModal.querySelector('form');
+
+    const inputs = form.querySelectorAll("input[required]");
+
+    const formData = new FormData(form);
+
+    const entries = Array.from(formData.entries());
+
+    inputs.forEach(input => {
+        input.addEventListener("input", checkInputs);
+    });
+
+    checkInputs();
+
+    const checkInputs = () => {
+        let allFilled = true;
+
+        const requiredFields = getRequiredFields(entries);
+        requiredFields.forEach(fieldName => {
+            const field = document.querySelector('[name="' + fieldName + '"]');
+            if (!field || !field.value.trim()) {
+                allFilled = false;
+            }
+        });
+
+        button.disabled = !allFilled;
+    };
+
+    const getRequiredFields = (entries) => {
+        let requiredFields;
+
+        const typeValue = entries.find(item => item[0] === 'type')?.[1];
+        if (typeValue === 'aircraft_registration_certificate') {
+            requiredFields = ['aircraft_details', 'aircraft_make', 'aircraft_model', 'aircraft_serial_number'];
+        } else {
+            const existingValue = entries.find(item => item[0] === 'is_existing')?.[1];
+            if (existingValue === 'false') {
+                const medicalValue = entries.find(item => item[0] === 'is_medical')?.[1];
+
+                if (medicalValue === 'false') {
+                    requiredFields = ['iarca_tracking_number'];
+                } else {
+                    requiredFields = ['applicant_id'];
+                }
+            } else {
+                const existingCertificate = entries.find(item => item[0] === 'existing_certificate')?.[1];
+                if (existingCertificate === 'part_67') {
+                    requiredFields = ['existing_certificate', 'applicant_id'];
+                } else {
+                    requiredFields = ['existing_certificate', 'ffa_certificate_number'];
+                }
+            }
+        }
+
+        return requiredFields;
+    }
+});
