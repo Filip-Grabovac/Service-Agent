@@ -36,6 +36,7 @@ const successClose = document.getElementById('success-close');
 
 const loader = document.getElementById('loader');
 loader.style.display = 'flex';
+console.log(loader);
 
 let showTutorial = false;
 
@@ -203,22 +204,24 @@ certificate.getAllActive().then((data) => {
                 const closeElement = document.querySelector('[data-modal-action="close"]');
                 closeElement.style.display = 'none';
 
-                user.getPrepopulatedUser(prepopulatedUserId).then((prepopulatedUser) => {
-                    if (prepopulatedUser && !prepopulatedUser.certificate_created && prepopulatedUser.have_aircraft === 'Yes') {
-                        aircraft.click();
-                        aircraftDetails.value = prepopulatedUser.aircraft_details;
-                        aircraftMake.value = prepopulatedUser.aircraft_make;
-                        aircraftModel.value = prepopulatedUser.aircraft_model;
-                        aircraftSerialNumber.value = prepopulatedUser.aircraft_serial_number;
-                    } else if (prepopulatedUser && !prepopulatedUser.certificate_created && prepopulatedUser.have_airman === 'Yes') {
-                        airman.click();
-                        airmanCertificateNumber.value = prepopulatedUser.ffa_certificate_number;
-                        if (prepopulatedUser.existing_certificate !== '') {
-                            existingCertificate.click();
-                            airmanExistingCertificate.value = prepopulatedUser.existing_certificate;
+                if (prepopulatedUserId) {
+                    user.getPrepopulatedUser(prepopulatedUserId).then((prepopulatedUser) => {
+                        if (prepopulatedUser && !prepopulatedUser.certificate_created && prepopulatedUser.have_aircraft === 'Yes') {
+                            aircraft.click();
+                            aircraftDetails.value = prepopulatedUser.aircraft_details;
+                            aircraftMake.value = prepopulatedUser.aircraft_make;
+                            aircraftModel.value = prepopulatedUser.aircraft_model;
+                            aircraftSerialNumber.value = prepopulatedUser.aircraft_serial_number;
+                        } else if (prepopulatedUser && !prepopulatedUser.certificate_created && prepopulatedUser.have_airman === 'Yes') {
+                            airman.click();
+                            airmanCertificateNumber.value = prepopulatedUser.ffa_certificate_number;
+                            if (prepopulatedUser.existing_certificate !== '') {
+                                existingCertificate.click();
+                                airmanExistingCertificate.value = prepopulatedUser.existing_certificate;
+                            }
                         }
-                    }
-                })
+                    })
+                }
             }
         });
 
