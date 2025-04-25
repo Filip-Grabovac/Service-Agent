@@ -430,26 +430,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const entries = Array.from(formData.entries());
 
-    inputs.forEach(input => {
-        input.addEventListener("input", checkInputs);
-    });
-
-    checkInputs();
-
-    const checkInputs = () => {
-        let allFilled = true;
-
-        const requiredFields = getRequiredFields(entries);
-        requiredFields.forEach(fieldName => {
-            const field = document.querySelector('[name="' + fieldName + '"]');
-            if (!field || !field.value.trim()) {
-                allFilled = false;
-            }
-        });
-
-        button.disabled = !allFilled;
-    };
-
     const getRequiredFields = (entries) => {
         let requiredFields;
 
@@ -478,4 +458,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return requiredFields;
     }
+
+    const checkInputs = () => {
+        let allFilled = true;
+
+        const requiredFields = getRequiredFields(entries);
+        requiredFields.forEach(fieldName => {
+            const field = document.querySelector('[name="' + fieldName + '"]');
+            if (!field || !field.value.trim()) {
+                allFilled = false;
+            }
+        });
+
+        button.disabled = !allFilled;
+    };
+
+    inputs.forEach(input => {
+        input.addEventListener("input", checkInputs);
+    });
+
+    checkInputs();
 });
