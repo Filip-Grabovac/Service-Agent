@@ -210,14 +210,17 @@ function validateData(dataForValidation) {
             errorElement = element.parentElement.parentElement.querySelector('.register-input-error')
         }
 
+        element.style.borderColor = '#d3d6da';
         errorElement.style.display = 'none';
         if (element.value.length === 0) {
             errorElement.style.display = 'block';
+            element.style.borderColor = '#ce0003';
             hasErrors = 1;
         }
 
         if (key === 'email' && !isValidEmail(element.value)) {
             errorElement.style.display = 'block';
+            element.style.borderColor = '#ce0003';
             hasErrors = 1;
         }
     });
