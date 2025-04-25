@@ -450,6 +450,8 @@ function setupFormValidation(certificateModal) {
                 allFilled = false;
             }
         });
+        console.log("All filled:", allFilled);
+        console.log(certificateSubmitButton);
 
         certificateSubmitButton.disabled = !allFilled;
     }
