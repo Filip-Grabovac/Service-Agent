@@ -34,6 +34,9 @@ const successWrapper = document.getElementById('success-wrapper');
 const successMessage = document.getElementById('success-message');
 const successClose = document.getElementById('success-close');
 
+const loader = document.getElementById('loader');
+loader.style.display = 'flex';
+
 let showTutorial = false;
 
 successClose.addEventListener('click', (e) => {
@@ -200,7 +203,7 @@ certificate.getAllActive().then((data) => {
                 const closeElement = document.querySelector('[data-modal-action="close"]');
                 closeElement.style.display = 'none';
 
-                user.getPrepopulatedUSer(prepopulatedUserId).then((prepopulatedUser) => {
+                user.getPrepopulatedUser(prepopulatedUserId).then((prepopulatedUser) => {
                     if (prepopulatedUser && !prepopulatedUser.certificate_created && prepopulatedUser.have_aircraft === 'Yes') {
                         aircraft.click();
                         aircraftDetails.value = prepopulatedUser.aircraft_details;
@@ -231,9 +234,6 @@ certificate.getAllActive().then((data) => {
             const dashboardLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 2"]`);
             dashboardLink.click();
         })
-
-        const certificateText = document.querySelector('.certificate-text-wrap');
-        certificateText.style.display = 'none';
     }
 })
 
@@ -403,3 +403,5 @@ airmanExistingCertificate.addEventListener('change', function (event) {
         ffaCertificateNumberWrapper.classList.remove('hidden');
     }
 })
+
+loader.style.display = 'none';

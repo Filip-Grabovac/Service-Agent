@@ -304,7 +304,7 @@ export default class User {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
-    getPrepopulatedUSer(hash) {
+    getPrepopulatedUser(hash) {
         let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${this.branch}/prepopulated_users/${hash}`;
 
         // Call the Xano API
