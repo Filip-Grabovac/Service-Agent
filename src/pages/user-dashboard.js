@@ -407,4 +407,6 @@ airmanExistingCertificate.addEventListener('change', function (event) {
     }
 })
 
-// loader.style.display = 'none';
+setTimeout(() => {
+    loader.style.display = 'none';
+}, 1000);
