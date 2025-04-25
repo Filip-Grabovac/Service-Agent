@@ -134,9 +134,12 @@ nextBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
     const termsLabel = document.getElementById('terms-label');
+    const termsLabelLink = termsLabel.querySelector('a');
     termsLabel.style.color = '#475467';
+    termsLabelLink.style.color = '#475467';
     if (!terms.checked) {
         termsLabel.style.color = '#ce0003';
+        termsLabelLink.style.color = '#ce0003';
         // errorMessage.innerHTML = 'You must agree to the Terms & Conditions.';
         // errorWrapper.classList.remove('hide');
         //
