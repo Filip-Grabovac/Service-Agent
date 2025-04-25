@@ -36,9 +36,9 @@ const successClose = document.getElementById('success-close');
 
 const loader = document.getElementById('loader-user');
 loader.style.display = 'flex';
-setTimeout(() => {
-    loader.style.display = 'none';
-}, 2000);
+// setTimeout(() => {
+//     loader.style.display = 'none';
+// }, 2000);
 
 let showTutorial = false;
 
