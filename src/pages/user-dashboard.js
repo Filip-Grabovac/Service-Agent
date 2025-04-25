@@ -429,8 +429,6 @@ function setupFormValidation(certificateModal) {
     const certificateSubmitButton = certificateModal.querySelector('[data-modal-action=submit]');
     const certificateForm = certificateModal.querySelector('form');
 
-    console.log("Form found:", certificateForm);
-
     certificateForm.querySelectorAll("input, select").forEach(el => {
         el.addEventListener("input", checkInputs);
         el.addEventListener("change", checkInputs);
@@ -443,15 +441,19 @@ function setupFormValidation(certificateModal) {
         const entries = Array.from(formData.entries());
         const requiredFields = getRequiredFields(entries);
 
-        console.log("Required fields:", requiredFields);
         requiredFields.forEach(fieldName => {
             const field = certificateForm.querySelector('[name="' + fieldName + '"]');
-            if (!field || !field.value.trim()) {
-                allFilled = false;
+            if (fieldName === 'aircraft_details') {
+                const regex = /^N.{2,5}$/;
+                if (!field || !regex.test(field.value.trim())) {
+                    allFilled = false;
+                }
+            } else {
+                if (!field || !field.value.trim()) {
+                    allFilled = false;
+                }
             }
         });
-        console.log("All filled:", allFilled);
-        console.log(certificateSubmitButton);
 
         if (allFilled) {
             certificateSubmitButton.classList.remove('is-disabled');
