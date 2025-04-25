@@ -453,7 +453,11 @@ function setupFormValidation(certificateModal) {
         console.log("All filled:", allFilled);
         console.log(certificateSubmitButton);
 
-        certificateSubmitButton.disabled = !allFilled;
+        if (allFilled) {
+            certificateSubmitButton.classList.remove('a-disabled');
+        } else {
+            certificateSubmitButton.classList.add('a-disabled');
+        }
     }
 
     function getRequiredFields(entries) {
