@@ -34,9 +34,8 @@ const successWrapper = document.getElementById('success-wrapper');
 const successMessage = document.getElementById('success-message');
 const successClose = document.getElementById('success-close');
 
-const loader = document.getElementById('loader');
+const loader = document.getElementById('loader-new');
 loader.style.display = 'flex';
-console.log(loader);
 
 let showTutorial = false;
 
@@ -407,4 +406,4 @@ airmanExistingCertificate.addEventListener('change', function (event) {
     }
 })
 
-// loader.style.display = 'none';
+loader.style.display = 'none';
