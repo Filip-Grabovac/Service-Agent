@@ -417,26 +417,33 @@ airmanExistingCertificate.addEventListener('change', function (event) {
     }
 })
 
-document.addEventListener("DOMContentLoaded", function () {
-    console.log('DOM fully loaded and parsed');
+const waitForModal = setInterval(() => {
     const certificateModal = document.querySelector('#add-certificate-popup');
+    if (certificateModal) {
+        clearInterval(waitForModal);
+        setupFormValidation(certificateModal);
+    }
+}, 100);
+
+function setupFormValidation(certificateModal) {
     const certificateSubmitButton = certificateModal.querySelector('[data-modal-action=submit]');
     const certificateForm = certificateModal.querySelector('form');
 
-    console.log(certificateForm);
+    console.log("Form found:", certificateForm);
+
     certificateForm.querySelectorAll("input, select").forEach(el => {
         el.addEventListener("input", checkInputs);
         el.addEventListener("change", checkInputs);
     });
 
-    const checkInputs = () => {
+    function checkInputs() {
         let allFilled = true;
 
         const formData = new FormData(certificateForm);
         const entries = Array.from(formData.entries());
         const requiredFields = getRequiredFields(entries);
 
-        console.log(requiredFields);
+        console.log("Required fields:", requiredFields);
         requiredFields.forEach(fieldName => {
             const field = certificateForm.querySelector('[name="' + fieldName + '"]');
             if (!field || !field.value.trim()) {
@@ -445,9 +452,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         certificateSubmitButton.disabled = !allFilled;
-    };
+    }
 
-    const getRequiredFields = (entries) => {
+    function getRequiredFields(entries) {
         let requiredFields;
 
         const typeValue = entries.find(item => item[0] === 'type')?.[1];
@@ -474,7 +481,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         return requiredFields;
-    };
+    }
 
     checkInputs();
-});
+}
