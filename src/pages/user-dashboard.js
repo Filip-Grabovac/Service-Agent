@@ -36,6 +36,7 @@ const successClose = document.getElementById('success-close');
 
 const loader = document.getElementById('loader-new');
 loader.style.display = 'flex';
+console.log(loader);
 
 let showTutorial = false;
 
