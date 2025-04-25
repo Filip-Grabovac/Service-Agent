@@ -222,8 +222,14 @@ certificate.getAllActive().then((data) => {
                                 airmanExistingCertificate.value = prepopulatedUser.existing_certificate;
                             }
                         }
+
+                        loader.style.display = 'none';
                     })
+                } else {
+                    loader.style.display = 'none';
                 }
+            } else {
+                loader.style.display = 'none';
             }
         });
 
@@ -239,6 +245,8 @@ certificate.getAllActive().then((data) => {
             const dashboardLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 2"]`);
             dashboardLink.click();
         })
+
+        loader.style.display = 'none';
     }
 })
 
