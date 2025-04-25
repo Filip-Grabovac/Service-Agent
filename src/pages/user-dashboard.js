@@ -421,10 +421,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const certificateModal = document.querySelector('#add-certificate-popup');
     const button = certificateModal.querySelector('[data-modal-action=submit]');
     const form = certificateModal.querySelector('form');
-    const inputs = form.querySelectorAll("input[required]");
 
-    inputs.forEach(input => {
-        input.addEventListener("input", checkInputs);
+    console.log(form);
+    form.querySelectorAll("input, select").forEach(el => {
+        el.addEventListener("input", checkInputs);
+        el.addEventListener("change", checkInputs);
     });
 
     const checkInputs = () => {
