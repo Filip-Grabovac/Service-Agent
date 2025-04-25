@@ -185,12 +185,12 @@ nextBtn.addEventListener('click', function (event) {
     }
 
     if (validateData(dataForValidation) === 1) {
-        errorMessage.innerHTML = 'Please, fill in all fields.';
-        errorWrapper.classList.remove('hide');
-
-        setTimeout(function() {
-            errorWrapper.classList.add('hide');
-        }, 3000);
+        // errorMessage.innerHTML = 'Please, fill in all fields.';
+        // errorWrapper.classList.remove('hide');
+        //
+        // setTimeout(function() {
+        //     errorWrapper.classList.add('hide');
+        // }, 3000);
 
         return;
     }
