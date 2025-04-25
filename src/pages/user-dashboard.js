@@ -419,16 +419,31 @@ airmanExistingCertificate.addEventListener('change', function (event) {
 
 document.addEventListener("DOMContentLoaded", function () {
     const certificateModal = document.querySelector('#add-certificate-popup');
-
     const button = certificateModal.querySelector('[data-modal-action=submit]');
-
     const form = certificateModal.querySelector('form');
-
     const inputs = form.querySelectorAll("input[required]");
 
-    const formData = new FormData(form);
+    inputs.forEach(input => {
+        input.addEventListener("input", checkInputs);
+    });
 
-    const entries = Array.from(formData.entries());
+    const checkInputs = () => {
+        let allFilled = true;
+
+        const formData = new FormData(form);
+        const entries = Array.from(formData.entries());
+        const requiredFields = getRequiredFields(entries);
+
+        console.log(requiredFields);
+        requiredFields.forEach(fieldName => {
+            const field = form.querySelector('[name="' + fieldName + '"]');
+            if (!field || !field.value.trim()) {
+                allFilled = false;
+            }
+        });
+
+        button.disabled = !allFilled;
+    };
 
     const getRequiredFields = (entries) => {
         let requiredFields;
@@ -457,25 +472,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         return requiredFields;
-    }
-
-    const checkInputs = () => {
-        let allFilled = true;
-
-        const requiredFields = getRequiredFields(entries);
-        requiredFields.forEach(fieldName => {
-            const field = document.querySelector('[name="' + fieldName + '"]');
-            if (!field || !field.value.trim()) {
-                allFilled = false;
-            }
-        });
-
-        button.disabled = !allFilled;
     };
-
-    inputs.forEach(input => {
-        input.addEventListener("input", checkInputs);
-    });
 
     checkInputs();
 });
