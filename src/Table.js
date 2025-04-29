@@ -631,10 +631,11 @@ export function setModals(menu) {
                                     element.removeAttribute("disabled");
                                 }
 
-                                modal.querySelector('[name=existing_certificate]').addEventListener('change', () => {
+                                modal.querySelector('[name=existing_certificate]').addEventListener('change', (event) => {
                                     const applicantIdNumber = modal.querySelector('[name=applicant_id_number]');
                                     const ffaCertificateNumber = modal.querySelector('[name=ffa_certificate_number]');
-                                    if (this.value === 'part_67') {
+                                    console.log(event.target.value);
+                                    if (event.target.value === 'part_67') {
                                         ffaCertificateNumber.setAttribute("data-disabled", true);
                                         ffaCertificateNumber.setAttribute("disabled", true);
                                         ffaCertificateNumber.value = '';
