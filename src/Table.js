@@ -927,6 +927,8 @@ export function setModals(menu) {
                                 setTimeout(function () {
                                     errorWrapper.classList.add('hide');
                                 }, 3000);
+
+                                return;
                             }
                         }
                     }
