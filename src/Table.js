@@ -630,6 +630,26 @@ export function setModals(menu) {
                                     element.removeAttribute("data-disabled");
                                     element.removeAttribute("disabled");
                                 }
+
+                                modal.querySelector('[name=existing_certificate]').addEventListener('change', () => {
+                                    const applicantIdNumber = modal.querySelector('[name=applicant_id_number]');
+                                    const ffaCertificateNumber = modal.querySelector('[name=ffa_certificate_number]');
+                                    if (this.value === 'part_67') {
+                                        ffaCertificateNumber.setAttribute("data-disabled", true);
+                                        ffaCertificateNumber.setAttribute("disabled", true);
+                                        ffaCertificateNumber.value = '';
+
+                                        applicantIdNumber.removeAttribute("data-disabled");
+                                        applicantIdNumber.removeAttribute("disabled");
+                                    } else {
+                                        applicantIdNumber.setAttribute("data-disabled", true);
+                                        applicantIdNumber.setAttribute("disabled", true);
+                                        applicantIdNumber.value = '';
+
+                                        ffaCertificateNumber.removeAttribute("data-disabled");
+                                        ffaCertificateNumber.removeAttribute("disabled");
+                                    }
+                                })
                             }
 
                             if (modalName === 'edit-user-popup' && element.getAttribute('name').includes("phone_number")) {
