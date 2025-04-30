@@ -630,6 +630,27 @@ export function setModals(menu) {
                                     element.removeAttribute("data-disabled");
                                     element.removeAttribute("disabled");
                                 }
+
+                                modal.querySelector('[name=existing_certificate]').addEventListener('change', (event) => {
+                                    const applicantIdNumber = modal.querySelector('[name=applicant_id_number]');
+                                    const ffaCertificateNumber = modal.querySelector('[name=ffa_certificate_number]');
+                                    console.log(event.target.value);
+                                    if (event.target.value === 'part_67') {
+                                        ffaCertificateNumber.setAttribute("data-disabled", true);
+                                        ffaCertificateNumber.setAttribute("disabled", true);
+                                        ffaCertificateNumber.value = '';
+
+                                        applicantIdNumber.removeAttribute("data-disabled");
+                                        applicantIdNumber.removeAttribute("disabled");
+                                    } else {
+                                        applicantIdNumber.setAttribute("data-disabled", true);
+                                        applicantIdNumber.setAttribute("disabled", true);
+                                        applicantIdNumber.value = '';
+
+                                        ffaCertificateNumber.removeAttribute("data-disabled");
+                                        ffaCertificateNumber.removeAttribute("disabled");
+                                    }
+                                })
                             }
 
                             if (modalName === 'edit-user-popup' && element.getAttribute('name').includes("phone_number")) {
@@ -916,15 +937,20 @@ export function setModals(menu) {
                         const regex = /^N.{2,5}$/;
 
                         if (!regex.test(value)) {
-                            // errorMessage.innerHTML = 'Aircraft Detail must start with "N" and have between 3 and 6 characters in total.';
-                            // errorWrapper.classList.remove('hide');
-                            //
-                            // setTimeout(function () {
-                            //     errorWrapper.classList.add('hide');
-                            // }, 3000);
-                            modal.querySelector('[data-error=' + key + ']').style.display = 'block';
+                            if (modalName === 'add-certificate-popup') {
+                                modal.querySelector('[data-error=' + key + ']').style.display = 'block';
 
-                            hasErrors = true;
+                                hasErrors = true;
+                            } else {
+                                errorMessage.innerHTML = 'Aircraft Detail must start with "N" and have between 3 and 6 characters in total.';
+                                errorWrapper.classList.remove('hide');
+
+                                setTimeout(function () {
+                                    errorWrapper.classList.add('hide');
+                                }, 3000);
+
+                                return;
+                            }
                         }
                     }
 
