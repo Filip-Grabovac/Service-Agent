@@ -342,6 +342,8 @@ function certificatePayment(id, type, certificateData = null) {
         ]
     };
 
+    console.log(authUserData);
+
     user.initialPayment(data).then(result => {
         loader.style.display = 'none';
         window.location.href = result.url
