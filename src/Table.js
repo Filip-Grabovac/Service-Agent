@@ -61,7 +61,6 @@ let lastSearchInput = '';
 let authUserData;
 user.me().then((data) => {
     authUserData = data;
-    console.log(authUserData);
 });
 
 
@@ -344,7 +343,12 @@ function certificatePayment(id, type, certificateData = null) {
         ]
     };
 
-    console.log(authUserData);
+    if(authUserData.is_active){
+        console.log("Skipping payment as the user is active!");
+        return;
+    }else{
+        throw new Error("User is inactive, he has to finish his registration process first!");
+    }
 
     user.initialPayment(data).then(result => {
         loader.style.display = 'none';
