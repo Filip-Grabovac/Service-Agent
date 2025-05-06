@@ -61,8 +61,9 @@ let lastSearchInput = '';
 let authUserData;
 user.me().then((data) => {
     authUserData = data;
+    console.log(authUserData);
 });
-console.log(authUserData);
+
 
 export function updateActiveElement(element) {
     activeElement = element
