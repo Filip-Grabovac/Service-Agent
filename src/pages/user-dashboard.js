@@ -191,6 +191,7 @@ certificate.getAllActive().then((data) => {
         activeTabLink.click();
 
         certificate.getAll().then((data) => {
+            console.log(data.items.length);
             if (data.items && data.items.length === 0) {
                 const addCertificateButton = document.querySelector(`[data-modal-open="add-certificate-popup"]`);
                 addCertificateButton.click();
