@@ -8,8 +8,8 @@ payBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
     let data = {
-        success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
-        cancel_url: "https://agent-for-service-cbd62c.webflow.io/registration-4-4",
+        success_url: "https://" + window.location.hostname + "/user-dashboard?registration=successful",
+        cancel_url: "https://" + window.location.hostname + "/registration-4-4",
         line_items: [
             {
                 price: "price_1QXMupCA20rcDWGhemNihUF8",
