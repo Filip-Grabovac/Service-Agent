@@ -294,9 +294,9 @@ function certificatePayment(id, type, certificateData = null) {
         }
     }
 
-    if (isFreeMedical) {
-        return;
-    }
+    // if (isFreeMedical) {
+    //     return;
+    // }
 
     let price = "";
     let certificate = "";
