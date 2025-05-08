@@ -16,6 +16,7 @@ const logout = document.getElementsByClassName('logout');
 const gearWrapper = document.getElementById('gear-wrapper');
 const gear = document.getElementById('gear');
 const deleteAccount = document.getElementById('delete-account');
+const billingOpen = document.getElementById('billing-open');
 const tour1Next = document.getElementById('tour-1-next');
 const tour2Next = document.getElementById('tour-2-next');
 const tour3Next = document.getElementById('tour-3-next');
@@ -150,6 +151,8 @@ user.me().then((data) => {
     deleteAccount.addEventListener('click', () => {
         document.querySelector('#edit-user-popup').querySelector('[data-modal-action="close"]').click();
     });
+    billingOpen.setAttribute('data-id-user-id', data.id);
+    setBillingLink()
 
     setModals('initial-user');
 
@@ -491,4 +494,42 @@ function setupFormValidation(certificateModal) {
     }
 
     checkInputs();
+}
+
+function setBillingLink() {
+    const authToken =  localStorage.getItem('authToken');
+
+    billingOpen.addEventListener('click', () => {
+        const currentDomain = window.location.hostname;
+
+        let branch = '';
+        let dataSource = 'live';
+        if (currentDomain.includes('webflow.io')) {
+            branch = ':stage';
+            dataSource = 'stage';
+        }
+
+        fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx${branch}/portal-sessions`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json',
+                'X-Data-Source': dataSource,
+            },
+            body: JSON.stringify({
+                return_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
+                user_id: billingOpen.getAttribute('data-id-user-id'),
+            }),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    return;
+                }
+
+                window.open(result, "_blank");
+            })
+            .catch((error) => {
+            });
+    }, { once: true });
 }

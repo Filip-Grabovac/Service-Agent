@@ -2183,49 +2183,6 @@ function fillUsersDetails(data) {
     fillTable(2, 4, 'airman_certificate')
 }
 
-function setBillingLinks() {
-    const billingIcons = document.querySelectorAll('[data-billing-open]')
-    const authToken =  localStorage.getItem('authToken');
-
-    billingIcons.forEach(element => {
-        element.addEventListener('click', () => {
-            const certificateId = element.getAttribute('data-billing-open');
-
-            const currentDomain = window.location.hostname;
-
-            let branch = '';
-            let dataSource = 'live';
-            if (currentDomain.includes('webflow.io')) {
-                branch = ':stage';
-                dataSource = 'stage';
-            }
-
-            fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx${branch}/portal-sessions`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${authToken}`,
-                    'Content-Type': 'application/json',
-                    'X-Data-Source': dataSource,
-                },
-                body: JSON.stringify({
-                    return_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
-                    certificate_id: certificateId,
-                }),
-            })
-                .then((response) => response.json())
-                .then((result) => {
-                    if (result.code) {
-                        return;
-                    }
-
-                    window.open(result, "_blank");
-                })
-                .catch((error) => {
-                });
-        }, { once: true });
-    });
-}
-
 export function getTabCount() {
     const menu1tab2 = document.getElementById('admin-menu1-tab2-text');
     const menu1tab3 = document.getElementById('admin-menu1-tab3-text');
