@@ -480,7 +480,7 @@ export default class TableRow {
                 1:`
                     <div class="row-inside right">
                         ${item.is_active === false ? `
-                            <div data-payment-open="aircraft" data-id-certificates-id="${item.id}" class="actions-svg-wrap pay-btn-cert">Pay Now</div>
+<!--                            <div data-payment-open="aircraft" data-id-certificates-id="item.id" class="actions-svg-wrap pay-btn-cert">Pay Now</div>-->
                         ` : ''}
                         ${(item.is_active === true && item.is_free === false) ? `
                             <div data-billing-open="${item.id}" class="billing-icon-wrap">Billing
