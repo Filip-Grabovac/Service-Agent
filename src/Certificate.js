@@ -188,10 +188,10 @@ export default class Certificate {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
-    sendReminder() {
+    sendReminder(certificateId) {
         const authToken =  localStorage.getItem('authToken');
 
-        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1${this.branch}/send-reminder`;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:HHssTwG1${this.branch}/send-reminder/` + certificateId;
 
         // Call the Xano API
         return fetch(url, {
