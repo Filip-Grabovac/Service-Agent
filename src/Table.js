@@ -265,9 +265,9 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         if (menu === 2) {
             setUserDetails();
         }
-        if (menu === 7) {
-            setBillingLinks()
-        }
+        // if (menu === 7) {
+        //     setBillingLinks()
+        // }
 
         if (menu === 7) {
             const payment = document.querySelectorAll('[data-payment-open]');
