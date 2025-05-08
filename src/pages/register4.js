@@ -13,7 +13,7 @@ payBtn.addEventListener('click', function (event) {
         email: localStorage.getItem('email'),
         line_items: [
             {
-                price: "price_1QXMupCA20rcDWGhemNihUF8",
+                price: "price_1RMP02CA20rcDWGhxzfDkq3k",
                 quantity: "1",
             }
         ]
