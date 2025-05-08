@@ -220,6 +220,11 @@ certificate.getAllActive().then((data) => {
                 } else {
                     loader.style.display = 'none';
                 }
+            } else if (data.items && data.items.length >= 5) {
+                const addCertificateButton = document.querySelector(`[data-modal-open="add-certificate-popup"]`);
+                addCertificateButton.style.display = 'none';
+
+                loader.style.display = 'none';
             } else {
                 loader.style.display = 'none';
             }
@@ -252,7 +257,7 @@ if (urlParams.has('certificate')) {
 
         removeQueryParam('certificate');
 
-        successMessage.innerHTML = 'Certificate has been successfully paid.';
+        successMessage.innerHTML = 'Certificate has been successfully created.';
         successWrapper.classList.remove('hide');
 
         if (showTutorial) {

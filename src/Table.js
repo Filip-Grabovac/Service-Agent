@@ -345,6 +345,9 @@ function certificatePayment(id, type, certificateData = null) {
 
     if(authUserData.is_active){
         console.log("Skipping payment as the user is active!");
+
+        window.location.href = window.location.pathname + "?certificate=" + certificate
+
         return;
     }else{
         throw new Error("User is inactive, he has to finish his registration process first!");
