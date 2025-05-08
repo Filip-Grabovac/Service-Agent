@@ -20,8 +20,6 @@ let userEmail = '';
 user.me().then((data) => {
     userEmail = data.email;
 
-    localStorage.setItem('email', data.email);
-
     regCodeText.innerHTML = regCodeText.innerHTML.replace('{email}', data.email);
 })
 
