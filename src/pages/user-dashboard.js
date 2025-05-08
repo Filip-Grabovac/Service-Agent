@@ -181,6 +181,13 @@ certificate.getAllActive().then((data) => {
         userMenu2.style.display = 'none';
     }
 
+    if (data && data.length >= 5) {
+        const addCertificateButton = document.querySelector(`[data-modal-open="add-certificate-popup"]`);
+        addCertificateButton.style.display = 'none';
+
+        loader.style.display = 'none';
+    }
+
     if (urlParams.has('certificate')) {
         const activeTabLink = document.querySelector(`.w-tab-link[data-w-tab="Tab 4"]`);
         activeTabLink.click();
@@ -191,7 +198,6 @@ certificate.getAllActive().then((data) => {
         activeTabLink.click();
 
         certificate.getAll().then((data) => {
-            console.log(data.items.length);
             if (data.items && data.items.length === 0) {
                 const addCertificateButton = document.querySelector(`[data-modal-open="add-certificate-popup"]`);
                 addCertificateButton.click();
@@ -221,11 +227,6 @@ certificate.getAllActive().then((data) => {
                 } else {
                     loader.style.display = 'none';
                 }
-            } else if (data.items && data.items.length >= 5) {
-                const addCertificateButton = document.querySelector(`[data-modal-open="add-certificate-popup"]`);
-                addCertificateButton.style.display = 'none';
-
-                loader.style.display = 'none';
             } else {
                 loader.style.display = 'none';
             }
