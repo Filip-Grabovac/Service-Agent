@@ -10,6 +10,7 @@ payBtn.addEventListener('click', function (event) {
     let data = {
         success_url: "https://" + window.location.hostname + "/user-dashboard?registration=successful",
         cancel_url: "https://" + window.location.hostname + "/registration-4-4",
+        email: localStorage.getItem('email'),
         line_items: [
             {
                 price: "price_1QXMupCA20rcDWGhemNihUF8",
@@ -17,6 +18,8 @@ payBtn.addEventListener('click', function (event) {
             }
         ]
     };
+
+    localStorage.removeItem('email');
 
     user.initialPayment(data).then(result => {
         window.location.href = result.url
