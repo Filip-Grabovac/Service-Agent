@@ -701,11 +701,22 @@ export function setModals(menu) {
                             const selectCertificateElement = document.getElementById('certificates_id');
                             selectCertificateElement.innerHTML = '';
 
+                            const addDocumentButton = document.getElementById('create-document-btn');
+                            const addDocumentUserError = document.getElementById('add-document-user-error');
+                            const addDocumentUserErrorLink = document.getElementById('add-document-user-error-link');
+
+                            addDocumentButton.style.pointerEvents = "auto";
+                            addDocumentButton.style.opacity = "1";
+                            addDocumentUserError.style.display = "none";
+                            let selectedUser;
+
                             $('#create-document-user').on('select2:select', function (e) {
                                 // $('#create-document-user').off('select2:select');
                                 selectCertificateElement.innerHTML = '';
 
                                 const selectedValue = e.params.data.id;
+                                console.log(e.params.data);
+                                console.log(selectedValue);
 
                                 certificate.getAllByUser(1, 9999, '', '', null, selectedValue).then((data) => {
                                     const options = [];
@@ -742,47 +753,36 @@ export function setModals(menu) {
                                     selectCertificateElement.innerHTML = '';
                                     selectCertificateElement.append(...options);
                                 })
-                            });
 
-                            const certificatesSelect = document.getElementById('certificates_id');
-                            const addDocumentButton = document.getElementById('create-document-btn');
-                            const addDocumentCertificateError = document.getElementById('add-document-certificate-error');
-                            const addDocumentCertificateErrorLink = document.getElementById('add-document-certificate-error-link');
-
-                            addDocumentButton.style.pointerEvents = "auto";
-                            addDocumentButton.style.opacity = "1";
-                            addDocumentCertificateError.style.display = "none";
-                            let selectedCertificate;
-
-                            certificatesSelect.addEventListener("change", function() {
-                                selectedCertificate = this.value
-                                let selectedOption = this.options[this.selectedIndex];
-
-                                if (selectedOption.getAttribute('data-active') === 'false') {
-                                    addDocumentButton.style.pointerEvents = "none";
-                                    addDocumentButton.style.opacity = "0.5";
-                                    addDocumentCertificateError.style.display = "block";
-                                } else {
-                                    addDocumentButton.style.pointerEvents = "auto";
-                                    addDocumentButton.style.opacity = "1";
-                                    addDocumentCertificateError.style.display = "none";
-                                }
+                                // selectedUser = selectedValue;
+                                // let selectedOption = this.options[this.selectedIndex];
+                                //
+                                // if (selectedOption.getAttribute('data-active') === 'false') {
+                                //     addDocumentButton.style.pointerEvents = "none";
+                                //     addDocumentButton.style.opacity = "0.5";
+                                //     addDocumentUserError.style.display = "block";
+                                // } else {
+                                //     addDocumentButton.style.pointerEvents = "auto";
+                                //     addDocumentButton.style.opacity = "1";
+                                //     addDocumentUserError.style.display = "none";
+                                // }
                             });
 
                             if (!isReminderEventAttached) {
                                 isReminderEventAttached = true;
 
-                                addDocumentCertificateErrorLink.addEventListener("click", function() {
-                                    certificate.sendReminder(selectedCertificate).then((success) => {
-                                        if (success) {
-                                            successMessage.innerHTML = 'Payment reminder has been successfully sent!';
-                                            successWrapper.classList.remove('hide');
-
-                                            setTimeout(function () {
-                                                successWrapper.classList.add('hide');
-                                            }, 3000);
-                                        }
-                                    })
+                                addDocumentUserErrorLink.addEventListener("click", function() {
+                                    console.log("Sending reminder to user!");
+                                    // user.sendReminder(selectedUser).then((success) => {
+                                    //     if (success) {
+                                    //         successMessage.innerHTML = 'Payment reminder has been successfully sent!';
+                                    //         successWrapper.classList.remove('hide');
+                                    //
+                                    //         setTimeout(function () {
+                                    //             successWrapper.classList.add('hide');
+                                    //         }, 3000);
+                                    //     }
+                                    // })
                                 });
                             }
                         }
