@@ -770,7 +770,6 @@ export function setModals(menu) {
                                 isReminderEventAttached = true;
 
                                 addDocumentUserErrorLink.addEventListener("click", function() {
-                                    console.log("Sending reminder to user!");
                                     user.sendReminder(selectedUser).then((success) => {
                                         if (success) {
                                             successMessage.innerHTML = 'Payment reminder has been successfully sent!';
