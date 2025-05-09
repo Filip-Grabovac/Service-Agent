@@ -754,18 +754,18 @@ export function setModals(menu) {
                                     selectCertificateElement.append(...options);
                                 })
 
-                                // selectedUser = selectedValue;
-                                // let selectedOption = this.options[this.selectedIndex];
-                                //
-                                // if (selectedOption.getAttribute('data-active') === 'false') {
-                                //     addDocumentButton.style.pointerEvents = "none";
-                                //     addDocumentButton.style.opacity = "0.5";
-                                //     addDocumentUserError.style.display = "block";
-                                // } else {
-                                //     addDocumentButton.style.pointerEvents = "auto";
-                                //     addDocumentButton.style.opacity = "1";
-                                //     addDocumentUserError.style.display = "none";
-                                // }
+                                selectedUser = selectedValue;
+                                let selectedOption = this.options[this.selectedIndex];
+
+                                if (selectedOption.getAttribute('data-active') === 'false') {
+                                    addDocumentButton.style.pointerEvents = "none";
+                                    addDocumentButton.style.opacity = "0.5";
+                                    addDocumentUserError.style.display = "block";
+                                } else {
+                                    addDocumentButton.style.pointerEvents = "auto";
+                                    addDocumentButton.style.opacity = "1";
+                                    addDocumentUserError.style.display = "none";
+                                }
                             });
 
                             if (!isReminderEventAttached) {
@@ -1589,7 +1589,7 @@ export function populateSelectWithUsers() {
         if (users.items.length) {
             let userOptions = '';
             users.items.forEach((user) => {
-                userOptions += `<option value="${user.id}">${user.first_name} ${user.last_name}</option>`
+                userOptions += `<option data-active="${user.is_active}" value="${user.id}">${user.first_name} ${user.last_name}</option>`
             })
 
             createDocumentUser.innerHTML += userOptions;
