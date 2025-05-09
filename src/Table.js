@@ -254,6 +254,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
 
                     item.number = number;
                 }
+                console.log(item)
 
                 if (column === 'actions') {
                     rowHTML[column].push(tableRow.getActionRow(menu, tab, item));
@@ -815,8 +816,11 @@ export function setModals(menu) {
 
                 if (modalName === 'delete-certificate-popup' && menu !== 2) {
                     const certificateNumber = document.querySelector('#delete-certificate-number');
+                    const number = Array.from(button.attributes).find(attr => attr.name.startsWith('data-certificate-number'))
+                    console.log('attr')
+                    console.log(number)
 
-                    certificateNumber.textContent = Array.from(button.attributes).find(attr => attr.name.startsWith('data-certificate-number')).value;
+                    certificateNumber.textContent = number.value;
                 }
             });
         });
