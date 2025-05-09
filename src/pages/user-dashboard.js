@@ -202,11 +202,11 @@ certificate.getAllActive().then((data) => {
 
         certificate.getAll().then((data) => {
             if (data.items && data.items.length === 0) {
-                const addCertificateButton = document.querySelector(`[data-modal-open="add-certificate-popup"]`);
-                addCertificateButton.click();
+                const certificateTable = document.querySelector(`#certificate-tables`);
+                const afterRegisterSection = document.querySelector(`#after-register-section`);
 
-                const closeElement = document.querySelector('[data-modal-action="close"]');
-                closeElement.style.display = 'none';
+                certificateTable.style.display = 'none';
+                afterRegisterSection.style.display = 'flex'
 
                 if (prepopulatedUserId) {
                     user.getPrepopulatedUser(prepopulatedUserId).then((prepopulatedUser) => {
