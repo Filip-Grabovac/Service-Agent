@@ -428,7 +428,7 @@ const waitForModal = setInterval(() => {
 }, 100);
 
 function setupFormValidation(certificateModal) {
-    const certificateSubmitButton = certificateModal.querySelector('[data-modal-action=submit]');
+    const certificateSubmitButton = certificateModal.querySelector('#certificate-next');
     const certificateForm = certificateModal.querySelector('form');
 
     certificateForm.querySelectorAll("input, select").forEach(el => {

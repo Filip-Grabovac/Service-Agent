@@ -689,9 +689,17 @@ export function setModals(menu) {
                 if (modalName === 'add-certificate-popup') {
                     const certificatesTable = document.getElementById('certificate-tables');
                     const afterRegisterSection = document.querySelector(`#after-register-section`);
+                    const certificateNext = document.querySelector(`#certificate-next`);
+                    const certificateStep1 = document.querySelector(`#certificate-step-1`);
+                    const certificateStep2 = document.querySelector(`#certificate-step-2`);
 
                     certificatesTable.classList.add('hide');
                     afterRegisterSection.classList.add('hide');
+
+                    certificateNext.addEventListener('click', () => {
+                        certificateStep1.classList.add('hide');
+                        certificateStep2.classList.remove('hide');
+                    })
                 }
 
                 if (modalName === 'add-document-popup') {
