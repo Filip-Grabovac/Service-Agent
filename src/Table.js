@@ -715,8 +715,6 @@ export function setModals(menu) {
                                 selectCertificateElement.innerHTML = '';
 
                                 const selectedValue = e.params.data.id;
-                                console.log(e.params.data);
-                                console.log(selectedValue);
 
                                 certificate.getAllByUser(1, 9999, '', '', null, selectedValue).then((data) => {
                                     const options = [];
@@ -756,8 +754,6 @@ export function setModals(menu) {
 
                                 selectedUser = selectedValue;
                                 let isActive = $(e.params.data.element).data('active');
-
-                                console.log(isActive);
 
                                 if (!isActive) {
                                     addDocumentButton.style.pointerEvents = "none";
