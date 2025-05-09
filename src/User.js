@@ -112,10 +112,6 @@ export default class User {
               if (window.location.pathname !== "/registration-3-4") {
                 window.location.href = "/registration-3-4";
               }
-            } else if (!result.is_active) {
-              if (window.location.pathname !== "/registration-4-4") {
-                window.location.href = "/registration-4-4";
-              }
             } else {
               if (window.location.pathname !== "/user-dashboard") {
                 window.location.href = "/user-dashboard";
