@@ -688,8 +688,10 @@ export function setModals(menu) {
                 modal.classList.remove('hide');
                 if (modalName === 'add-certificate-popup') {
                     const certificatesTable = document.getElementById('certificate-tables');
+                    const afterRegisterSection = document.querySelector(`#after-register-section`);
 
                     certificatesTable.classList.add('hide');
+                    afterRegisterSection.classList.add('hide');
                 }
 
                 if (modalName === 'add-document-popup') {

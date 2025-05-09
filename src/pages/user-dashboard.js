@@ -205,8 +205,8 @@ certificate.getAllActive().then((data) => {
                 const certificateTable = document.querySelector(`#certificate-tables`);
                 const afterRegisterSection = document.querySelector(`#after-register-section`);
 
-                certificateTable.style.display = 'none';
-                afterRegisterSection.style.display = 'flex'
+                certificateTable.classList.add('hide');
+                afterRegisterSection.classList.remove('hide');
 
                 if (prepopulatedUserId) {
                     user.getPrepopulatedUser(prepopulatedUserId).then((prepopulatedUser) => {
