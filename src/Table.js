@@ -756,6 +756,8 @@ export function setModals(menu) {
 
                                 selectedUser = selectedValue;
                                 let isActive = $(this).find('option:selected').data('active');
+                                console.log(isActive);
+                                console.log($(this).find('option:selected'));
 
                                 if (isActive === 'false') {
                                     addDocumentButton.style.pointerEvents = "none";
