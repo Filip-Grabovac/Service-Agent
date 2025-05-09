@@ -240,7 +240,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
 
                 let number;
                 if (menu === 7) {
-                    if (item.type === 'airman') {
+                    if (item.type === 'airman_certificate') {
                         if (item.applicant_id_number) {
                             number = item.applicant_id_number;
                         } else if (item.iarca_tracking_number) {
@@ -248,7 +248,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
                         } else {
                             number = item.ffa_certificate_number;
                         }
-                    } else if (item.type === 'aircraft') {
+                    } else if (item.type === 'aircraft_certificate') {
                         number = item.aircraft_serial_number;
                     }
 
@@ -817,8 +817,6 @@ export function setModals(menu) {
                 if (modalName === 'delete-certificate-popup' && menu !== 2) {
                     const certificateNumber = document.querySelector('#delete-certificate-number');
                     const number = Array.from(button.attributes).find(attr => attr.name.startsWith('data-certificate-number'))
-                    console.log('attr')
-                    console.log(number)
 
                     certificateNumber.textContent = number.value;
                 }
