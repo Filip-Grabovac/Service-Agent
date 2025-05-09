@@ -755,7 +755,11 @@ export function setModals(menu) {
                                 })
 
                                 selectedUser = selectedValue;
-                                let isActive = $(this).find('option:selected').data('active');
+                                let isActive = $(e.params.data.element).data('active');
+
+                                console.log($(e.params.data.element).data('active'))
+                                console.log(e.params.data.element.getAttribute('data-active'))
+
                                 console.log(isActive);
                                 console.log($(this).find('option:selected'));
 
