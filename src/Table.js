@@ -755,9 +755,9 @@ export function setModals(menu) {
                                 })
 
                                 selectedUser = selectedValue;
-                                let selectedOption = this.options[this.selectedIndex];
+                                let isActive = $(this).find('option:selected').data('active');
 
-                                if (selectedOption.getAttribute('data-active') === 'false') {
+                                if (isActive === 'false') {
                                     addDocumentButton.style.pointerEvents = "none";
                                     addDocumentButton.style.opacity = "0.5";
                                     addDocumentUserError.style.display = "block";
