@@ -238,6 +238,23 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
                     rowHTML[column] = [];
                 }
 
+                let number;
+                if (menu === 7) {
+                    if (item.type === 'airman') {
+                        if (item.applicant_id_number) {
+                            number = item.applicant_id_number;
+                        } else if (item.iarca_tracking_number) {
+                            number = item.iarca_tracking_number;
+                        } else {
+                            number = item.ffa_certificate_number;
+                        }
+                    } else if (item.type === 'aircraft') {
+                        number = item.aircraft_serial_number;
+                    }
+
+                    item.number = number;
+                }
+
                 if (column === 'actions') {
                     rowHTML[column].push(tableRow.getActionRow(menu, tab, item));
                 } else {
@@ -794,6 +811,12 @@ export function setModals(menu) {
                             }
                         }
                     });
+                }
+
+                if (modalName === 'delete-certificate-popup' && menu !== 2) {
+                    const certificateNumber = document.querySelector('#delete-certificate-number');
+
+                    certificateNumber.textContent = Array.from(button.attributes).find(attr => attr.name.startsWith('data-certificate-number')).value;
                 }
             });
         });
