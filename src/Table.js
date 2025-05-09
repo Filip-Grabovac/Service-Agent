@@ -757,13 +757,9 @@ export function setModals(menu) {
                                 selectedUser = selectedValue;
                                 let isActive = $(e.params.data.element).data('active');
 
-                                console.log($(e.params.data.element).data('active'))
-                                console.log(e.params.data.element.getAttribute('data-active'))
-
                                 console.log(isActive);
-                                console.log($(this).find('option:selected'));
 
-                                if (isActive === 'false') {
+                                if (!isActive) {
                                     addDocumentButton.style.pointerEvents = "none";
                                     addDocumentButton.style.opacity = "0.5";
                                     addDocumentUserError.style.display = "block";
