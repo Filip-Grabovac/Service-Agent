@@ -771,16 +771,16 @@ export function setModals(menu) {
 
                                 addDocumentUserErrorLink.addEventListener("click", function() {
                                     console.log("Sending reminder to user!");
-                                    // user.sendReminder(selectedUser).then((success) => {
-                                    //     if (success) {
-                                    //         successMessage.innerHTML = 'Payment reminder has been successfully sent!';
-                                    //         successWrapper.classList.remove('hide');
-                                    //
-                                    //         setTimeout(function () {
-                                    //             successWrapper.classList.add('hide');
-                                    //         }, 3000);
-                                    //     }
-                                    // })
+                                    user.sendReminder(selectedUser).then((success) => {
+                                        if (success) {
+                                            successMessage.innerHTML = 'Payment reminder has been successfully sent!';
+                                            successWrapper.classList.remove('hide');
+
+                                            setTimeout(function () {
+                                                successWrapper.classList.add('hide');
+                                            }, 3000);
+                                        }
+                                    })
                                 });
                             }
                         }
