@@ -156,6 +156,14 @@ user.me().then((data) => {
         setBillingLink()
     } else {
         billingOpen.style.display = 'none';
+        const addCertificateButtons = document.querySelectorAll('[data-modal-open=add-certificate-popup]')
+
+        addCertificateButtons.forEach(button => {
+            button.style.pointerEvents = "none";
+            button.style.opacity = "0.5";
+        })
+
+
     }
 
     setModals('initial-user');
