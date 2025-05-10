@@ -154,6 +154,20 @@ user.me().then((data) => {
     if (data.is_active) {
         billingOpen.setAttribute('data-id-user-id', data.id);
         setBillingLink()
+
+        if (data.subscription_end) {
+            const expiringSubscriptionBoxes = document.querySelectorAll('.expiring-subscription-text-wrap')
+
+            expiringSubscriptionBoxes.forEach(box => {
+                box.style.display = "flex";
+
+                const date = box.querySelector('.subscription_end_date');
+
+                const subscriptionEnd = new Date(data.subscription_end);
+
+                date.textContent = subscriptionEnd.toISOString().split('T')[0];
+            });
+        }
     } else {
         billingOpen.style.display = 'none';
         const addCertificateButtons = document.querySelectorAll('[data-modal-open=add-certificate-popup]')

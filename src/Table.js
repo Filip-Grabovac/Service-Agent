@@ -254,7 +254,6 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
 
                     item.number = number;
                 }
-                console.log(item)
 
                 if (column === 'actions') {
                     rowHTML[column].push(tableRow.getActionRow(menu, tab, item));
@@ -634,12 +633,8 @@ export function setModals(menu) {
                             }
 
                             if (element.getAttribute('type') === 'radio') {
-                                console.log(element.getAttribute('name'))
-                                console.log(fillData[element.getAttribute('name')])
-                                console.log(element.getAttribute('data-choice-value'))
                                 element.checked = false;
                                 if (fillData[element.getAttribute('name')] !== '' && element.getAttribute('data-choice-value') === fillData[element.getAttribute('name')]) {
-                                    console.log(element.getAttribute('data-choice-value'))
                                     element.checked = true;
                                 }
                             }
@@ -663,7 +658,7 @@ export function setModals(menu) {
                                 modal.querySelector('[name=existing_certificate]').addEventListener('change', (event) => {
                                     const applicantIdNumber = modal.querySelector('[name=applicant_id_number]');
                                     const ffaCertificateNumber = modal.querySelector('[name=ffa_certificate_number]');
-                                    console.log(event.target.value);
+
                                     if (event.target.value === 'part_67') {
                                         ffaCertificateNumber.setAttribute("data-disabled", true);
                                         ffaCertificateNumber.setAttribute("disabled", true);
