@@ -172,7 +172,6 @@ user.me().then((data) => {
             const subscriptionEnd = new Date(data.subscription_end);
 
             date.textContent = subscriptionEnd.toISOString().split('T')[0];
-            date.style.fontWeight = 'bold';
 
             const link = box.querySelector('a');
 
