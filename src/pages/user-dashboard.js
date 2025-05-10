@@ -167,6 +167,10 @@ user.me().then((data) => {
         expiredSubscriptionBoxes.forEach(box => {
             box.style.display = "flex";
 
+            const date = box.querySelector('.subscription_end_date');
+
+            date.textContent = data.subscription_end;
+
             const link = box.querySelector('a');
 
             link.addEventListener('click', () => {
