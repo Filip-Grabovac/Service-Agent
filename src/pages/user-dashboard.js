@@ -176,6 +176,16 @@ user.me().then((data) => {
         addCertificateButtons.forEach(button => {
             button.style.pointerEvents = "none";
             button.style.opacity = "0.5";
+
+            button.addEventListener('mouseover', () => {
+                const tooltip = button.querySelector('.certificate-tooltip');
+                tooltip.style.display = 'flex';
+            });
+
+            button.addEventListener('mouseout', () => {
+                const tooltip = button.querySelector('.certificate-tooltip');
+                tooltip.style.display = 'none';
+            });
         })
 
         expiredSubscriptionBoxes.forEach(box => {
