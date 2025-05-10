@@ -157,13 +157,43 @@ user.me().then((data) => {
     } else {
         billingOpen.style.display = 'none';
         const addCertificateButtons = document.querySelectorAll('[data-modal-open=add-certificate-popup]')
+        const expiredSubscriptionBoxes = document.querySelectorAll('.expired-subscription-text-wrap')
 
         addCertificateButtons.forEach(button => {
             button.style.pointerEvents = "none";
             button.style.opacity = "0.5";
         })
 
+        expiredSubscriptionBoxes.forEach(box => {
+            box.style.display = "flex";
 
+            const link = box.querySelector('a');
+
+            link.addEventListener('click', () => {
+                let price;
+                if (currentDomain.includes('webflow.io')) {
+                    price = "price_1QfGqbCA20rcDWGhGrIUBQVr";
+                } else {
+                    price = "price_1Qrbi9CA20rcDWGhZg72KAVO";
+                }
+
+                let paymentData = {
+                    success_url: "https://" + window.location.hostname + "/user-dashboard",
+                    cancel_url: "https://" + window.location.hostname + "/user-dashboard",
+                    email: data.email,
+                    line_items: [
+                        {
+                            price: price,
+                            quantity: "1",
+                        }
+                    ]
+                };
+
+                user.initialPayment(paymentData).then(result => {
+                    window.location.href = result.url
+                });
+            })
+        })
     }
 
     setModals('initial-user');
