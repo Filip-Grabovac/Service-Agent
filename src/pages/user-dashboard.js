@@ -174,16 +174,16 @@ user.me().then((data) => {
         const expiredSubscriptionBoxes = document.querySelectorAll('.expired-subscription-text-wrap')
 
         addCertificateButtons.forEach(button => {
+            button.style.pointerEvents = "none";
             button.style.opacity = "0.5";
-            button.disabled = true;
 
-            button.addEventListener('mouseover', () => {
-                const tooltip = button.querySelector('.certificate-tooltip');
+            button.parentElement.addEventListener('mouseover', () => {
+                const tooltip = button.parentElement.querySelector('.certificate-tooltip');
                 tooltip.style.display = 'flex';
             });
 
-            button.addEventListener('mouseout', () => {
-                const tooltip = button.querySelector('.certificate-tooltip');
+            button.parentElement.addEventListener('mouseout', () => {
+                const tooltip = button.parentElement.querySelector('.certificate-tooltip');
                 tooltip.style.display = 'none';
             });
         })
