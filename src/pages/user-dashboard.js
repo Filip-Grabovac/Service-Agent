@@ -151,7 +151,7 @@ user.me().then((data) => {
     deleteAccount.addEventListener('click', () => {
         document.querySelector('#edit-user-popup').querySelector('[data-modal-action="close"]').click();
     });
-    if (user.is_active) {
+    if (data.is_active) {
         billingOpen.setAttribute('data-id-user-id', data.id);
         setBillingLink()
     } else {
