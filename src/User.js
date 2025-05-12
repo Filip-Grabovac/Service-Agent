@@ -119,7 +119,7 @@ export default class User {
             } else if (!result.is_active) {
                 const certificates = this.certificate.getAllByUser(1, 9999, '', '', null, result.id)
 
-                if (certificates.length > 0) {
+                if (certificates.items.length > 0) {
                     console.log('ima')
                     // window.location.href = "/user-dashboard";
                 } else {
