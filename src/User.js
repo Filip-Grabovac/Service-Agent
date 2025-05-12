@@ -120,13 +120,13 @@ export default class User {
                 const certificates = this.certificate.getAllByUser(1, 9999, '', '', null, result.id)
 
                 console.log(certificates)
-                // if (certificates.items.length > 0) {
-                //     console.log('ima')
-                //     // window.location.href = "/user-dashboard";
-                // } else {
-                //     console.log('nema')
-                //     // window.location.href = "/registration-4-4";
-                // }
+                if (certificates.data.items.length > 0) {
+                    console.log('ima')
+                    // window.location.href = "/user-dashboard";
+                } else {
+                    console.log('nema')
+                    // window.location.href = "/registration-4-4";
+                }
             } else {
               if (window.location.pathname !== "/user-dashboard") {
                 window.location.href = "/user-dashboard";
