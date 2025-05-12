@@ -119,9 +119,13 @@ export default class User {
             } else if (!result.is_active) {
                 this.certificate.getAllByUser(1, 9999, '', '', null, result.id).then((data) => {
                     if (data.items.length > 0) {
-                        window.location.href = "/user-dashboard";
+                        if (window.location.pathname !== "/user-dashboard") {
+                            window.location.href = "/user-dashboard";
+                        }
                     } else {
-                        window.location.href = "/registration-4-4";
+                        if (window.location.pathname !== "/registration-4-4") {
+                            window.location.href = "/registration-4-4";
+                        }
                     }
                 })
             } else {
