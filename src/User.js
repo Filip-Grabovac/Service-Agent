@@ -1,4 +1,4 @@
-import Certificate from "./Certificate";
+import Certificate from "./Certificate.js";
 
 export default class User {
   constructor() {
