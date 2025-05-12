@@ -1,5 +1,9 @@
+import Certificate from "./Certificate";
+
 export default class User {
   constructor() {
+    this.certificate = new Certificate();
+
     this.loader = document.getElementById("loader");
 
     this.errorWrapper = document.getElementById("error-wrapper");
@@ -112,6 +116,14 @@ export default class User {
               if (window.location.pathname !== "/registration-3-4") {
                 window.location.href = "/registration-3-4";
               }
+            } else if (!result.is_active) {
+                const certificates = this.certificate.getAllByUser(1, 9999, '', '', null, result.id)
+
+                if (certificates.length > 0) {
+                    window.location.href = "/user-dashboard";
+                } else {
+                    window.location.href = "/registration-4-4";
+                }
             } else {
               if (window.location.pathname !== "/user-dashboard") {
                 window.location.href = "/user-dashboard";
