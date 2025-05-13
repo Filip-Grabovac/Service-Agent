@@ -117,7 +117,7 @@ export default class User {
                 window.location.href = "/registration-3-4";
               }
             } else if (!result.is_active) {
-                this.certificate.getAllByUser(1, 9999, '', '', null, result.id).then((data) => {
+                this.certificate.getAllActive().then((data) => {
                     if (data.items.length > 0) {
                         if (window.location.pathname !== "/user-dashboard") {
                             window.location.href = "/user-dashboard";
