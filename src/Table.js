@@ -832,6 +832,12 @@ export function setModals(menu) {
                     } else {
                         certificatesTable.classList.remove('hide');
                     }
+
+                    const certificateStep1 = document.querySelector(`#certificate-step-1`);
+                    const certificateStep2 = document.querySelector(`#certificate-step-2`);
+
+                    certificateStep1.classList.remove('hide');
+                    certificateStep2.classList.add('hide');
                 }
 
                 if (modalName === 'add-document-popup') {
