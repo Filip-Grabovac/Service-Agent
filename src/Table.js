@@ -856,6 +856,10 @@ export function setModals(menu) {
                     ffaCertificateNumberWrapper.classList.add('hidden');
 
                     form.reset();
+
+                    document.querySelectorAll('.w-form-formradioinput').forEach(el => {
+                        el.classList.remove('w--redirected-checked');
+                    });
                 }
 
                 if (modalName === 'add-document-popup') {
