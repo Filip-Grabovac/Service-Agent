@@ -279,6 +279,7 @@ certificate.getAllActive().then((data) => {
 
                 certificateTable.classList.add('hide');
                 afterRegisterSection.classList.remove('hide');
+                afterRegisterSection.setAttribute('data-show', true);
 
                 if (prepopulatedUserId) {
                     user.getPrepopulatedUser(prepopulatedUserId).then((prepopulatedUser) => {

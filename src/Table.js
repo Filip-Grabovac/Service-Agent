@@ -824,9 +824,14 @@ export function setModals(menu) {
 
                 modal.classList.add('hide');
                 if (modalName === 'add-certificate-popup') {
+                    const afterRegisterSection = document.querySelector(`#after-register-section`);
                     const certificatesTable = document.getElementById('certificate-tables');
 
-                    certificatesTable.classList.remove('hide');
+                    if (afterRegisterSection.hasAttribute('data-show')) {
+                        afterRegisterSection.classList.remove('hide');
+                    } else {
+                        certificatesTable.classList.remove('hide');
+                    }
                 }
 
                 if (modalName === 'add-document-popup') {
