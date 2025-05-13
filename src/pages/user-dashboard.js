@@ -179,7 +179,7 @@ certificate.getAllInactive().then((data) => {
     if (data && data.length > 0) {
         const noCertificateBox = document.querySelector('.no-certificate-text-wrap');
 
-        noCertificateBox.style.display = 'block';
+        // noCertificateBox.style.display = 'block';
     }
 });
 
