@@ -838,6 +838,24 @@ export function setModals(menu) {
 
                     certificateStep1.classList.remove('hide');
                     certificateStep2.classList.add('hide');
+
+                    const radioOption1 = document.getElementById('radio-option-1');
+                    const radioOption2 = document.getElementById('radio-option-2');
+                    const chooseMedicalWrapper = document.getElementById('choose-medical-wrapper');
+                    const applicantIdWrapper = document.getElementById('applicant_id_wrapper');
+                    const trackingNumberWrapper = document.getElementById('tracking_number_wrapper');
+                    const existingCertificateWrapper = document.getElementById('existing_certificate_wrapper');
+                    const ffaCertificateNumberWrapper = document.getElementById('ffa_certificate_number_wrapper');
+
+                    radioOption1.classList.add('hidden');
+                    radioOption2.classList.add('hidden');
+                    chooseMedicalWrapper.classList.add('hidden');
+                    applicantIdWrapper.classList.add('hidden');
+                    trackingNumberWrapper.classList.add('hidden');
+                    existingCertificateWrapper.classList.add('hidden');
+                    ffaCertificateNumberWrapper.classList.add('hidden');
+
+                    form.reset();
                 }
 
                 if (modalName === 'add-document-popup') {
