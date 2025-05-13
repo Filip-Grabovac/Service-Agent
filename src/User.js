@@ -118,7 +118,7 @@ export default class User {
               }
             } else if (!result.is_active) {
                 this.certificate.getAllActive().then((data) => {
-                    if (data.items.length > 0) {
+                    if (data.length > 0) {
                         if (window.location.pathname !== "/user-dashboard") {
                             window.location.href = "/user-dashboard";
                         }
