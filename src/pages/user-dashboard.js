@@ -195,7 +195,9 @@ user.me().then((data) => {
 
             const subscriptionEnd = new Date(data.subscription_end);
 
-            date.textContent = subscriptionEnd.toISOString().split('T')[0];
+            if (data.subscription_end) {
+                date.textContent = ' on ' + subscriptionEnd.toISOString().split('T')[0];
+            }
 
             const link = box.querySelector('a');
 
