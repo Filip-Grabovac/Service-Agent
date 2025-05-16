@@ -119,13 +119,13 @@ export default class User {
             } else if (!result.is_active) {
                 this.certificate.getAllActive().then((data) => {
                     if (data.length > 0) {
-                        if (result.ever_paid) {
-                            if (window.location.pathname !== "/user-dashboard") {
-                                window.location.href = "/user-dashboard";
-                            }
-                        } else {
+                        if (!result.ever_paid || result.id === 1152 || result.id === 849) {
                             if (window.location.pathname !== "/registration-4-4") {
                                 window.location.href = "/registration-4-4";
+                            }
+                        } else {
+                            if (window.location.pathname !== "/user-dashboard") {
+                                window.location.href = "/user-dashboard";
                             }
                         }
                     } else {
