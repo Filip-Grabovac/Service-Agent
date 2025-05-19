@@ -615,7 +615,13 @@ export function setModals(menu) {
                                 }
 
                                 if (address) {
-                                    element.value = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country
+                                    let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
+
+                                    if (address.address_additional) {
+                                        fullAddress = fullAddress + ', ' + address.address_additional
+                                    }
+
+                                    element.value = fullAddress
                                 }
                             }
 
@@ -2190,6 +2196,7 @@ function fillUsersDetails(data) {
     const city = document.getElementById('users-details-city');
     const street = document.getElementById('users-details-street');
     const country = document.getElementById('users-details-country');
+    const additional = document.getElementById('users-details-additional');
     const email = document.getElementById('users-details-email');
     const phone = document.getElementById('users-details-phone');
     const since = document.getElementById('users-details-since');
@@ -2218,6 +2225,12 @@ function fillUsersDetails(data) {
     city.innerHTML = data._user_addresses_of_user.street + ' ' + data._user_addresses_of_user.number + ','
     street.innerHTML = data._user_addresses_of_user.zip + ' ' + data._user_addresses_of_user.city + ','
     country.innerHTML = data._user_addresses_of_user.state + ', ' + data._user_addresses_of_user.country
+    if (data._user_addresses_of_user.address_additional) {
+        additional.innerHTML = data._user_addresses_of_user.address_additional
+        additional.style.display = 'block';
+    } else {
+        additional.style.display = 'none';
+    }
     email.innerHTML = data.email
     phone.innerHTML = "+" + iti.getSelectedCountryData().dialCode + data.phone_number
     const createdAt = new Date(data.created_at);
