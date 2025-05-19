@@ -477,7 +477,7 @@ export function getTabTitle(menu, tab) {
             2: 'Shredded',
         },
         4: {
-            1: 'All Tariffs',
+            1: 'All Rates',
         }
     };
 
@@ -1298,7 +1298,7 @@ function getModals(menu) {
                 action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX${branch}/shipping_tariffs`,
                 method: 'POST',
                 files: [],
-                success_message: 'The tariff has been successfully created.',
+                success_message: 'The rate has been successfully created.',
             },
             3: {
                 modal: 'edit-user-popup',
@@ -1462,14 +1462,14 @@ function getModals(menu) {
                 action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX${branch}/shipping_tariffs/{shipping_tariffs_id}`,
                 method: 'PATCH',
                 files: [],
-                success_message: 'The tariff has been successfully updated.',
+                success_message: 'The rate has been successfully updated.',
             },
             2: {
                 modal: 'delete-tariff-popup',
                 action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX${branch}/shipping_tariffs/{shipping_tariffs_id}`,
                 method: 'DELETE',
                 files: [],
-                success_message: 'The tariff has been successfully deleted.',
+                success_message: 'The rate has been successfully deleted.',
             },
         },
         5: {
@@ -1672,7 +1672,7 @@ export function populateSelectWithShippingTariffs() {
 
     editDocumentShippingTariff.innerHTML = '';
     paymentDocumentShippingTariff.innerHTML = '';
-    let shippingTariffsOptions = '<option value="0">Choose shipping tariff</option>';
+    let shippingTariffsOptions = '<option value="0">Choose shipping rate</option>';
     shippingTariff.getAll(1, 9999).then((shippingTariffs) => {
         if (shippingTariffs.items.length) {
             shippingTariffs.items.forEach((shippingTariff) => {
