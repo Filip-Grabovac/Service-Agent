@@ -617,7 +617,9 @@ export function setModals(menu) {
                                 if (address) {
                                     let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
 
+                                    console.log(address.address_additional)
                                     if (address.address_additional) {
+                                        console.log('in')
                                         fullAddress = fullAddress + ', ' + address.address_additional
                                     }
 
