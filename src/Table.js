@@ -1839,8 +1839,10 @@ function fillDocumentDetails(data, menu, modal) {
     if (data.tracking_code) {
         hideData = false;
         trackingNumber.innerHTML = data.tracking_code;
+        trackingNumber.parentElement.parentElement.href = data.tracking_code;
         trackingNumberBox.style.display = 'flex';
     } else {
+        trackingNumber.parentElement.parentElement.href = '#';
         trackingNumberBox.style.display = 'none';
     }
     if (hideData) {
