@@ -614,6 +614,7 @@ export function setModals(menu) {
                                     address = fillData?._user?._user_addresses_of_user;
                                 }
 
+                                console.log(address)
                                 if (address) {
                                     let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
 
