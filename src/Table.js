@@ -614,13 +614,10 @@ export function setModals(menu) {
                                     address = fillData?._user?._user_addresses_of_user;
                                 }
 
-                                console.log(address)
                                 if (address) {
                                     let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
 
-                                    console.log(address.address_additional)
                                     if (address.address_additional) {
-                                        console.log('in')
                                         fullAddress = fullAddress + ', ' + address.address_additional
                                     }
 
