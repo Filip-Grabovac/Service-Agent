@@ -491,5 +491,6 @@ function setupFormValidation(certificateModal) {
         return requiredFields;
     }
 
+
     checkInputs();
 }
