@@ -63,6 +63,7 @@ user.me().then((data) => {
     authUserData = data;
 });
 
+
 export function updateActiveElement(element) {
     activeElement = element
 }
@@ -237,6 +238,23 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
                     rowHTML[column] = [];
                 }
 
+                let number;
+                if (menu === 7) {
+                    if (item.type === 'airman_certificate') {
+                        if (item.applicant_id_number) {
+                            number = item.applicant_id_number;
+                        } else if (item.iarca_tracking_number) {
+                            number = item.iarca_tracking_number;
+                        } else {
+                            number = item.ffa_certificate_number;
+                        }
+                    } else if (item.type === 'aircraft_certificate') {
+                        number = item.aircraft_serial_number;
+                    }
+
+                    item.number = number;
+                }
+
                 if (column === 'actions') {
                     rowHTML[column].push(tableRow.getActionRow(menu, tab, item));
                 } else {
@@ -264,9 +282,9 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
         if (menu === 2) {
             setUserDetails();
         }
-        if (menu === 7) {
-            setBillingLinks()
-        }
+        // if (menu === 7) {
+        //     setBillingLinks()
+        // }
 
         if (menu === 7) {
             const payment = document.querySelectorAll('[data-payment-open]');
@@ -293,9 +311,9 @@ function certificatePayment(id, type, certificateData = null) {
         }
     }
 
-    if (isFreeMedical) {
-        return;
-    }
+    // if (isFreeMedical) {
+    //     return;
+    // }
 
     let price = "";
     let certificate = "";
@@ -341,6 +359,16 @@ function certificatePayment(id, type, certificateData = null) {
             }
         ]
     };
+
+    if(authUserData.is_active){
+        console.log("Skipping payment as the user is active!");
+
+        window.location.href = window.location.pathname + "?certificate=" + certificate
+
+        return;
+    }else{
+        throw new Error("User is inactive, he has to finish his registration process first!");
+    }
 
     user.initialPayment(data).then(result => {
         loader.style.display = 'none';
@@ -449,7 +477,7 @@ export function getTabTitle(menu, tab) {
             2: 'Shredded',
         },
         4: {
-            1: 'All Tariffs',
+            1: 'All Rates',
         }
     };
 
@@ -587,7 +615,13 @@ export function setModals(menu) {
                                 }
 
                                 if (address) {
-                                    element.value = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country
+                                    let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
+
+                                    if (address.address_additional) {
+                                        fullAddress = fullAddress + ', ' + address.address_additional
+                                    }
+
+                                    element.value = fullAddress
                                 }
                             }
 
@@ -605,12 +639,8 @@ export function setModals(menu) {
                             }
 
                             if (element.getAttribute('type') === 'radio') {
-                                console.log(element.getAttribute('name'))
-                                console.log(fillData[element.getAttribute('name')])
-                                console.log(element.getAttribute('data-choice-value'))
                                 element.checked = false;
                                 if (fillData[element.getAttribute('name')] !== '' && element.getAttribute('data-choice-value') === fillData[element.getAttribute('name')]) {
-                                    console.log(element.getAttribute('data-choice-value'))
                                     element.checked = true;
                                 }
                             }
@@ -634,7 +664,7 @@ export function setModals(menu) {
                                 modal.querySelector('[name=existing_certificate]').addEventListener('change', (event) => {
                                     const applicantIdNumber = modal.querySelector('[name=applicant_id_number]');
                                     const ffaCertificateNumber = modal.querySelector('[name=ffa_certificate_number]');
-                                    console.log(event.target.value);
+
                                     if (event.target.value === 'part_67') {
                                         ffaCertificateNumber.setAttribute("data-disabled", true);
                                         ffaCertificateNumber.setAttribute("disabled", true);
@@ -677,8 +707,18 @@ export function setModals(menu) {
                 modal.classList.remove('hide');
                 if (modalName === 'add-certificate-popup') {
                     const certificatesTable = document.getElementById('certificate-tables');
+                    const afterRegisterSection = document.querySelector(`#after-register-section`);
+                    const certificateNext = document.querySelector(`#certificate-next`);
+                    const certificateStep1 = document.querySelector(`#certificate-step-1`);
+                    const certificateStep2 = document.querySelector(`#certificate-step-2`);
 
                     certificatesTable.classList.add('hide');
+                    afterRegisterSection.classList.add('hide');
+
+                    certificateNext.addEventListener('click', () => {
+                        certificateStep1.classList.add('hide');
+                        certificateStep2.classList.remove('hide');
+                    })
                 }
 
                 if (modalName === 'add-document-popup') {
@@ -689,6 +729,15 @@ export function setModals(menu) {
 
                             const selectCertificateElement = document.getElementById('certificates_id');
                             selectCertificateElement.innerHTML = '';
+
+                            const addDocumentButton = document.getElementById('create-document-btn');
+                            const addDocumentUserError = document.getElementById('add-document-user-error');
+                            const addDocumentUserErrorLink = document.getElementById('add-document-user-error-link');
+
+                            addDocumentButton.style.pointerEvents = "auto";
+                            addDocumentButton.style.opacity = "1";
+                            addDocumentUserError.style.display = "none";
+                            let selectedUser;
 
                             $('#create-document-user').on('select2:select', function (e) {
                                 // $('#create-document-user').off('select2:select');
@@ -731,38 +780,26 @@ export function setModals(menu) {
                                     selectCertificateElement.innerHTML = '';
                                     selectCertificateElement.append(...options);
                                 })
-                            });
 
-                            const certificatesSelect = document.getElementById('certificates_id');
-                            const addDocumentButton = document.getElementById('create-document-btn');
-                            const addDocumentCertificateError = document.getElementById('add-document-certificate-error');
-                            const addDocumentCertificateErrorLink = document.getElementById('add-document-certificate-error-link');
+                                selectedUser = selectedValue;
+                                let isActive = $(e.params.data.element).data('active');
 
-                            addDocumentButton.style.pointerEvents = "auto";
-                            addDocumentButton.style.opacity = "1";
-                            addDocumentCertificateError.style.display = "none";
-                            let selectedCertificate;
-
-                            certificatesSelect.addEventListener("change", function() {
-                                selectedCertificate = this.value
-                                let selectedOption = this.options[this.selectedIndex];
-
-                                if (selectedOption.getAttribute('data-active') === 'false') {
+                                if (!isActive) {
                                     addDocumentButton.style.pointerEvents = "none";
                                     addDocumentButton.style.opacity = "0.5";
-                                    addDocumentCertificateError.style.display = "block";
+                                    addDocumentUserError.style.display = "block";
                                 } else {
                                     addDocumentButton.style.pointerEvents = "auto";
                                     addDocumentButton.style.opacity = "1";
-                                    addDocumentCertificateError.style.display = "none";
+                                    addDocumentUserError.style.display = "none";
                                 }
                             });
 
                             if (!isReminderEventAttached) {
                                 isReminderEventAttached = true;
 
-                                addDocumentCertificateErrorLink.addEventListener("click", function() {
-                                    certificate.sendReminder(selectedCertificate).then((success) => {
+                                addDocumentUserErrorLink.addEventListener("click", function() {
+                                    user.sendReminder(selectedUser).then((success) => {
                                         if (success) {
                                             successMessage.innerHTML = 'Payment reminder has been successfully sent!';
                                             successWrapper.classList.remove('hide');
@@ -777,6 +814,13 @@ export function setModals(menu) {
                         }
                     });
                 }
+
+                if (modalName === 'delete-certificate-popup' && menu !== 2) {
+                    const certificateNumber = document.querySelector('#delete-certificate-number');
+                    const number = Array.from(button.attributes).find(attr => attr.name.startsWith('data-certificate-number'))
+
+                    certificateNumber.textContent = number.value;
+                }
             });
         });
 
@@ -786,9 +830,42 @@ export function setModals(menu) {
 
                 modal.classList.add('hide');
                 if (modalName === 'add-certificate-popup') {
+                    const afterRegisterSection = document.querySelector(`#after-register-section`);
                     const certificatesTable = document.getElementById('certificate-tables');
 
-                    certificatesTable.classList.remove('hide');
+                    if (afterRegisterSection.hasAttribute('data-show')) {
+                        afterRegisterSection.classList.remove('hide');
+                    } else {
+                        certificatesTable.classList.remove('hide');
+                    }
+
+                    const certificateStep1 = document.querySelector(`#certificate-step-1`);
+                    const certificateStep2 = document.querySelector(`#certificate-step-2`);
+
+                    certificateStep1.classList.remove('hide');
+                    certificateStep2.classList.add('hide');
+
+                    const radioOption1 = document.getElementById('radio-option-1');
+                    const radioOption2 = document.getElementById('radio-option-2');
+                    const chooseMedicalWrapper = document.getElementById('choose-medical-wrapper');
+                    const applicantIdWrapper = document.getElementById('applicant_id_wrapper');
+                    const trackingNumberWrapper = document.getElementById('tracking_number_wrapper');
+                    const existingCertificateWrapper = document.getElementById('existing_certificate_wrapper');
+                    const ffaCertificateNumberWrapper = document.getElementById('ffa_certificate_number_wrapper');
+
+                    radioOption1.classList.add('hidden');
+                    radioOption2.classList.add('hidden');
+                    chooseMedicalWrapper.classList.add('hidden');
+                    applicantIdWrapper.classList.add('hidden');
+                    trackingNumberWrapper.classList.add('hidden');
+                    existingCertificateWrapper.classList.add('hidden');
+                    ffaCertificateNumberWrapper.classList.add('hidden');
+
+                    form.reset();
+
+                    document.querySelectorAll('.w-form-formradioinput').forEach(el => {
+                        el.classList.remove('w--redirected-checked');
+                    });
                 }
 
                 if (modalName === 'add-document-popup') {
@@ -1221,7 +1298,7 @@ function getModals(menu) {
                 action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX${branch}/shipping_tariffs`,
                 method: 'POST',
                 files: [],
-                success_message: 'The tariff has been successfully created.',
+                success_message: 'The rate has been successfully created.',
             },
             3: {
                 modal: 'edit-user-popup',
@@ -1385,14 +1462,14 @@ function getModals(menu) {
                 action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX${branch}/shipping_tariffs/{shipping_tariffs_id}`,
                 method: 'PATCH',
                 files: [],
-                success_message: 'The tariff has been successfully updated.',
+                success_message: 'The rate has been successfully updated.',
             },
             2: {
                 modal: 'delete-tariff-popup',
                 action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:SB0L29DX${branch}/shipping_tariffs/{shipping_tariffs_id}`,
                 method: 'DELETE',
                 files: [],
-                success_message: 'The tariff has been successfully deleted.',
+                success_message: 'The rate has been successfully deleted.',
             },
         },
         5: {
@@ -1578,7 +1655,7 @@ export function populateSelectWithUsers() {
         if (users.items.length) {
             let userOptions = '';
             users.items.forEach((user) => {
-                userOptions += `<option value="${user.id}">${user.first_name} ${user.last_name}</option>`
+                userOptions += `<option data-active="${user.is_active}" value="${user.id}">${user.first_name} ${user.last_name}</option>`
             })
 
             createDocumentUser.innerHTML += userOptions;
@@ -1595,7 +1672,7 @@ export function populateSelectWithShippingTariffs() {
 
     editDocumentShippingTariff.innerHTML = '';
     paymentDocumentShippingTariff.innerHTML = '';
-    let shippingTariffsOptions = '<option value="0">Choose shipping tariff</option>';
+    let shippingTariffsOptions = '<option value="0">Choose shipping rate</option>';
     shippingTariff.getAll(1, 9999).then((shippingTariffs) => {
         if (shippingTariffs.items.length) {
             shippingTariffs.items.forEach((shippingTariff) => {
@@ -1762,8 +1839,10 @@ function fillDocumentDetails(data, menu, modal) {
     if (data.tracking_code) {
         hideData = false;
         trackingNumber.innerHTML = data.tracking_code;
+        trackingNumber.parentElement.parentElement.href = data.tracking_code;
         trackingNumberBox.style.display = 'flex';
     } else {
+        trackingNumber.parentElement.parentElement.href = '#';
         trackingNumberBox.style.display = 'none';
     }
     if (hideData) {
@@ -2119,6 +2198,7 @@ function fillUsersDetails(data) {
     const city = document.getElementById('users-details-city');
     const street = document.getElementById('users-details-street');
     const country = document.getElementById('users-details-country');
+    const additional = document.getElementById('users-details-additional');
     const email = document.getElementById('users-details-email');
     const phone = document.getElementById('users-details-phone');
     const since = document.getElementById('users-details-since');
@@ -2147,6 +2227,12 @@ function fillUsersDetails(data) {
     city.innerHTML = data._user_addresses_of_user.street + ' ' + data._user_addresses_of_user.number + ','
     street.innerHTML = data._user_addresses_of_user.zip + ' ' + data._user_addresses_of_user.city + ','
     country.innerHTML = data._user_addresses_of_user.state + ', ' + data._user_addresses_of_user.country
+    if (data._user_addresses_of_user.address_additional) {
+        additional.innerHTML = data._user_addresses_of_user.address_additional
+        additional.style.display = 'block';
+    } else {
+        additional.style.display = 'none';
+    }
     email.innerHTML = data.email
     phone.innerHTML = "+" + iti.getSelectedCountryData().dialCode + data.phone_number
     const createdAt = new Date(data.created_at);
@@ -2170,49 +2256,6 @@ function fillUsersDetails(data) {
     fillTable(2, 2);
     fillTable(2, 3, 'aircraft_registration_certificate')
     fillTable(2, 4, 'airman_certificate')
-}
-
-function setBillingLinks() {
-    const billingIcons = document.querySelectorAll('[data-billing-open]')
-    const authToken =  localStorage.getItem('authToken');
-
-    billingIcons.forEach(element => {
-        element.addEventListener('click', () => {
-            const certificateId = element.getAttribute('data-billing-open');
-
-            const currentDomain = window.location.hostname;
-
-            let branch = '';
-            let dataSource = 'live';
-            if (currentDomain.includes('webflow.io')) {
-                branch = ':stage';
-                dataSource = 'stage';
-            }
-
-            fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx${branch}/portal-sessions`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${authToken}`,
-                    'Content-Type': 'application/json',
-                    'X-Data-Source': dataSource,
-                },
-                body: JSON.stringify({
-                    return_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
-                    certificate_id: certificateId,
-                }),
-            })
-                .then((response) => response.json())
-                .then((result) => {
-                    if (result.code) {
-                        return;
-                    }
-
-                    window.open(result, "_blank");
-                })
-                .catch((error) => {
-                });
-        }, { once: true });
-    });
 }
 
 export function getTabCount() {

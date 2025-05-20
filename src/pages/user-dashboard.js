@@ -16,6 +16,7 @@ const logout = document.getElementsByClassName('logout');
 const gearWrapper = document.getElementById('gear-wrapper');
 const gear = document.getElementById('gear');
 const deleteAccount = document.getElementById('delete-account');
+const billingOpen = document.getElementById('billing-open');
 const tour1Next = document.getElementById('tour-1-next');
 const tour2Next = document.getElementById('tour-2-next');
 const tour3Next = document.getElementById('tour-3-next');
@@ -150,6 +151,84 @@ user.me().then((data) => {
     deleteAccount.addEventListener('click', () => {
         document.querySelector('#edit-user-popup').querySelector('[data-modal-action="close"]').click();
     });
+    if (data.is_active) {
+        billingOpen.setAttribute('data-id-user-id', data.id);
+        setBillingLink()
+
+        if (data.subscription_end) {
+            const expiringSubscriptionBoxes = document.querySelectorAll('.expiring-subscription-text-wrap')
+
+            expiringSubscriptionBoxes.forEach(box => {
+                box.style.display = "flex";
+
+                const date = box.querySelector('.subscription_end_date');
+
+                const subscriptionEnd = new Date(data.subscription_end);
+
+                date.textContent = subscriptionEnd.toISOString().split('T')[0];
+            });
+        }
+    } else {
+        billingOpen.style.display = 'none';
+        const addCertificateButtons = document.querySelectorAll('[data-modal-open=add-certificate-popup]')
+        const expiredSubscriptionBoxes = document.querySelectorAll('.expired-subscription-text-wrap')
+
+        addCertificateButtons.forEach(button => {
+            button.style.pointerEvents = "none";
+            button.style.opacity = "0.5";
+
+            button.parentElement.addEventListener('mouseover', () => {
+                const tooltip = button.parentElement.querySelector('.certificate-tooltip');
+                tooltip.style.display = 'flex';
+            });
+
+            button.parentElement.addEventListener('mouseout', () => {
+                const tooltip = button.parentElement.querySelector('.certificate-tooltip');
+                tooltip.style.display = 'none';
+            });
+        })
+
+        expiredSubscriptionBoxes.forEach(box => {
+            box.style.display = "flex";
+
+            const date = box.querySelector('.subscription_end_date');
+
+            if (data.subscription_end) {
+                const subscriptionEnd = new Date(data.subscription_end);
+
+                date.textContent = ' on ' + subscriptionEnd.toISOString().split('T')[0];
+            } else {
+                date.textContent = '';
+            }
+
+            const link = box.querySelector('a');
+
+            link.addEventListener('click', () => {
+                let price;
+                if (currentDomain.includes('webflow.io')) {
+                    price = "price_1QfGqbCA20rcDWGhGrIUBQVr";
+                } else {
+                    price = "price_1Qrbi9CA20rcDWGhZg72KAVO";
+                }
+
+                let paymentData = {
+                    success_url: "https://" + window.location.hostname + "/user-dashboard",
+                    cancel_url: "https://" + window.location.hostname + "/user-dashboard",
+                    email: data.email,
+                    line_items: [
+                        {
+                            price: price,
+                            quantity: "1",
+                        }
+                    ]
+                };
+
+                user.initialPayment(paymentData).then(result => {
+                    window.location.href = result.url
+                });
+            })
+        })
+    }
 
     setModals('initial-user');
 
@@ -161,32 +240,31 @@ user.me().then((data) => {
         user.patchUser(data.id, patchData);
     }
 
-    if (data.welcome_message_hidden === false) {
-        document.querySelector('#welcome-message').style.display = 'flex';
-        document.querySelector('#welcome-message-hide').addEventListener('click', () => {
-            document.querySelector('#welcome-message').style.display = 'none';
-            const patchData = {
-                welcome_message_hidden: true
-            }
-            user.patchUser(data.id, patchData);
-        })
-    }
+    // if (data.welcome_message_hidden === false) {
+    //     document.querySelector('#welcome-message').style.display = 'flex';
+    //     document.querySelector('#welcome-message-hide').addEventListener('click', () => {
+    //         document.querySelector('#welcome-message').style.display = 'none';
+    //         const patchData = {
+    //             welcome_message_hidden: true
+    //         }
+    //         user.patchUser(data.id, patchData);
+    //     })
+    // }
 });
 
 const urlParams = new URLSearchParams(window.location.search);
-
-certificate.getAllInactive().then((data) => {
-    if (data && data.length > 0) {
-        const noCertificateBox = document.querySelector('.no-certificate-text-wrap');
-
-        // noCertificateBox.style.display = 'block';
-    }
-});
 
 certificate.getAllActive().then((data) => {
     if (data && data.length === 0) {
         userMenu1.style.display = 'none';
         userMenu2.style.display = 'none';
+    }
+
+    if (data && data.length >= 5) {
+        const addCertificateButton = document.querySelector(`[data-modal-open="add-certificate-popup"]`);
+        addCertificateButton.style.display = 'none';
+
+        loader.style.display = 'none';
     }
 
     if (urlParams.has('certificate')) {
@@ -200,11 +278,12 @@ certificate.getAllActive().then((data) => {
 
         certificate.getAll().then((data) => {
             if (data.items && data.items.length === 0) {
-                const addCertificateButton = document.querySelector(`[data-modal-open="add-certificate-popup"]`);
-                addCertificateButton.click();
+                const certificateTable = document.querySelector(`#certificate-tables`);
+                const afterRegisterSection = document.querySelector(`#after-register-section`);
 
-                const closeElement = document.querySelector('[data-modal-action="close"]');
-                closeElement.style.display = 'none';
+                certificateTable.classList.add('hide');
+                afterRegisterSection.classList.remove('hide');
+                afterRegisterSection.setAttribute('data-show', true);
 
                 if (prepopulatedUserId) {
                     user.getPrepopulatedUser(prepopulatedUserId).then((prepopulatedUser) => {
@@ -260,7 +339,7 @@ if (urlParams.has('certificate')) {
 
         removeQueryParam('certificate');
 
-        successMessage.innerHTML = 'Certificate has been successfully paid.';
+        successMessage.innerHTML = 'Certificate has been successfully created.';
         successWrapper.classList.remove('hide');
 
         if (showTutorial) {
@@ -426,7 +505,7 @@ const waitForModal = setInterval(() => {
 }, 100);
 
 function setupFormValidation(certificateModal) {
-    const certificateSubmitButton = certificateModal.querySelector('[data-modal-action=submit]');
+    const certificateSubmitButton = certificateModal.querySelector('#certificate-next');
     const certificateForm = certificateModal.querySelector('form');
 
     certificateForm.querySelectorAll("input, select").forEach(el => {
@@ -491,6 +570,43 @@ function setupFormValidation(certificateModal) {
         return requiredFields;
     }
 
-
     checkInputs();
+}
+
+function setBillingLink() {
+    const authToken =  localStorage.getItem('authToken');
+
+    billingOpen.addEventListener('click', () => {
+        const currentDomain = window.location.hostname;
+
+        let branch = '';
+        let dataSource = 'live';
+        if (currentDomain.includes('webflow.io')) {
+            branch = ':stage';
+            dataSource = 'stage';
+        }
+
+        fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx${branch}/portal-sessions`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json',
+                'X-Data-Source': dataSource,
+            },
+            body: JSON.stringify({
+                return_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
+                user_id: billingOpen.getAttribute('data-id-user-id'),
+            }),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    return;
+                }
+
+                window.open(result, "_blank");
+            })
+            .catch((error) => {
+            });
+    }, { once: true });
 }
