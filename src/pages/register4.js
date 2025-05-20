@@ -7,18 +7,30 @@ const payBtn = document.getElementById('pay-button');
 payBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
-    let data = {
-        success_url: "https://agent-for-service-cbd62c.webflow.io/user-dashboard",
-        cancel_url: "https://agent-for-service-cbd62c.webflow.io/registration-4-4",
-        line_items: [
-            {
-                price: "price_1QXMupCA20rcDWGhemNihUF8",
-                quantity: "1",
-            }
-        ]
-    };
+    let price;
+    if (currentDomain.includes('webflow.io')) {
+        price = "price_1QfGqbCA20rcDWGhGrIUBQVr";
+    } else {
+        price = "price_1Qrbi9CA20rcDWGhZg72KAVO";
+    }
 
-    user.initialPayment(data).then(result => {
-        window.location.href = result.url
-    });
+    user.me().then((data) => {
+        let paymentData = {
+            success_url: "https://" + window.location.hostname + "/user-dashboard?registration=successful",
+            cancel_url: "https://" + window.location.hostname + "/registration-4-4",
+            email: data.email,
+            line_items: [
+                {
+                    price: price,
+                    quantity: "1",
+                }
+            ]
+        };
+
+        user.initialPayment(paymentData).then(result => {
+            window.location.href = result.url
+        });
+    })
+
+
 });
