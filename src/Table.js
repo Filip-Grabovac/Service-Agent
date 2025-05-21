@@ -1987,6 +1987,7 @@ const countriesText = `
   Cambodia
   Cameroon
   Canada
+  Cayman Islands
   Cape Verde
   Central African Rep
   Chad

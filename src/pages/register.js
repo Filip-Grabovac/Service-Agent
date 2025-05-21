@@ -300,6 +300,7 @@ function populateCountries() {
     { name: "Cambodia", code: "KH" },
     { name: "Cameroon", code: "CM" },
     { name: "Canada", code: "CA" },
+    { name: "Cayman Islands", code: "KY" },
     { name: "Cape Verde", code: "CV" },
     { name: "Central African Rep", code: "CF" },
     { name: "Chad", code: "TD" },
