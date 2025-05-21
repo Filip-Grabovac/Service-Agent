@@ -1959,6 +1959,7 @@ const countriesText = `
   Algeria
   Andorra
   Angola
+  Anguilla
   Antigua & Deps
   Argentina
   Armenia
@@ -1974,6 +1975,7 @@ const countriesText = `
   Belgium
   Belize
   Benin
+  Bermuda
   Bhutan
   Bolivia
   Bonaire, Sint Eustatius and Saba
