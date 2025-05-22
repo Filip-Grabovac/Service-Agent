@@ -254,17 +254,19 @@ user.me().then((data) => {
 
 const urlParams = new URLSearchParams(window.location.search);
 
-certificate.getAllActive().then((data) => {
-    if (data && data.length === 0) {
-        userMenu1.style.display = 'none';
-        userMenu2.style.display = 'none';
-    }
-
+certificate.getAll().then((data) => {
     if (data && data.length >= 5) {
         const addCertificateButton = document.querySelector(`[data-modal-open="add-certificate-popup"]`);
         addCertificateButton.style.display = 'none';
 
         loader.style.display = 'none';
+    }
+});
+
+certificate.getAllActive().then((data) => {
+    if (data && data.length === 0) {
+        userMenu1.style.display = 'none';
+        userMenu2.style.display = 'none';
     }
 
     if (urlParams.has('certificate')) {
