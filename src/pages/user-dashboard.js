@@ -255,7 +255,6 @@ user.me().then((data) => {
 const urlParams = new URLSearchParams(window.location.search);
 
 certificate.getAll().then((data) => {
-    console.log(data)
     if (data && data.items.length >= 5) {
         const addCertificateButton = document.querySelector(`[data-modal-open="add-certificate-popup"]`);
         addCertificateButton.style.display = 'none';

@@ -48,6 +48,11 @@ export default class TableRow {
                     <div># ${item.id}</div>
                 </div>
             `,
+                active: () => `
+                <div class="row-inside">
+                    <div class="txt-row" style="color: ${item.is_active ? 'green' : 'red'}">${item.is_active ? 'YES' : 'NO'}</div>
+                </div>
+            `,
                 name: () => `
                 <div class="row-inside">
                     <div class="txt-row">${item.first_name} ${item.last_name}</div>
