@@ -795,7 +795,7 @@ export function setModals(menu) {
                                     addDocumentButton.style.opacity = "1";
                                     addDocumentUserError.style.display = "none";
 
-                                    isUserActive = false;
+                                    isUserActive = true;
                                 }
                             });
 
