@@ -470,12 +470,12 @@ existingCertificate.addEventListener('click', function (event) {
 })
 nonMedical.addEventListener('click', function (event) {
     trackingNumberWrapper.classList.remove('hidden');
-    if (!applicantIdWrapper.classList.contains('hidden')) {
-        applicantIdWrapper.classList.add('hidden');
+    if (!ffaCertificateNumberWrapper.classList.contains('hidden')) {
+        ffaCertificateNumberWrapper.classList.add('hidden');
     }
 })
 isMedical.addEventListener('click', function (event) {
-    applicantIdWrapper.classList.remove('hidden');
+    ffaCertificateNumberWrapper.classList.remove('hidden');
     if (!trackingNumberWrapper.classList.contains('hidden')) {
         trackingNumberWrapper.classList.add('hidden');
     }
