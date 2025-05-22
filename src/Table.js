@@ -788,6 +788,7 @@ export function setModals(menu) {
                                 if (!isActive) {
                                     addDocumentButton.style.pointerEvents = "none";
                                     addDocumentButton.style.opacity = "0.5";
+                                    addDocumentUserError.style.display = "none";
 
                                     isUserActive = false;
                                 } else {
@@ -812,7 +813,7 @@ export function setModals(menu) {
                                 isReminderEventAttached = true;
 
                                 addDocumentUserErrorLink.addEventListener("click", function() {
-                                    user.sendReminder(selectedUser).then((success) => {
+                                    user.sendReminder(selectedUser, selectedCertificate).then((success) => {
                                         if (success) {
                                             successMessage.innerHTML = 'Payment reminder has been successfully sent!';
                                             successWrapper.classList.remove('hide');

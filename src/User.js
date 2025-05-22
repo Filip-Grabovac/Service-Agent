@@ -540,9 +540,9 @@ export default class User {
         this.showError("Server Error! Please, try again or contact support.");
       });
   }
-    sendReminder(userId) {
+    sendReminder(userId, certificateId) {
         const authToken =  localStorage.getItem('authToken');
-        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${this.branch}/send-user-reminder/` + userId;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${this.branch}/send-user-reminder/` + userId + `/` + certificateId;
 
         // Call the Xano API
         return fetch(url, {
