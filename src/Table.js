@@ -738,6 +738,7 @@ export function setModals(menu) {
                             addDocumentButton.style.opacity = "1";
                             addDocumentUserError.style.display = "none";
                             let selectedUser;
+                            let isUserActive;
 
                             $('#create-document-user').on('select2:select', function (e) {
                                 // $('#create-document-user').off('select2:select');
@@ -787,12 +788,24 @@ export function setModals(menu) {
                                 if (!isActive) {
                                     addDocumentButton.style.pointerEvents = "none";
                                     addDocumentButton.style.opacity = "0.5";
-                                    addDocumentUserError.style.display = "block";
+
+                                    isUserActive = false;
                                 } else {
                                     addDocumentButton.style.pointerEvents = "auto";
                                     addDocumentButton.style.opacity = "1";
                                     addDocumentUserError.style.display = "none";
+
+                                    isUserActive = false;
                                 }
+                            });
+
+                            const certificatesSelect = document.getElementById('certificates_id');
+                            let selectedCertificate;
+                            certificatesSelect.addEventListener("change", function() {
+                                if (!isUserActive) {
+                                    addDocumentUserError.style.display = "block";
+                                }
+                                selectedCertificate = this.value
                             });
 
                             if (!isReminderEventAttached) {
