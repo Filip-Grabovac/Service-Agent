@@ -433,12 +433,12 @@ newCertificate.addEventListener('click', function (event) {
     }
     if (nonMedical.checked) {
         trackingNumberWrapper.classList.remove('hidden');
-        if (!applicantIdWrapper.classList.contains('hidden')) {
-            applicantIdWrapper.classList.add('hidden');
+        if (!ffaCertificateNumberWrapper.classList.contains('hidden')) {
+            ffaCertificateNumberWrapper.classList.add('hidden');
         }
     }
     if (isMedical.checked) {
-        applicantIdWrapper.classList.remove('hidden');
+        ffaCertificateNumberWrapper.classList.remove('hidden');
         if (!trackingNumberWrapper.classList.contains('hidden')) {
             trackingNumberWrapper.classList.add('hidden');
         }
@@ -555,7 +555,7 @@ function setupFormValidation(certificateModal) {
                 if (medicalValue === 'false') {
                     requiredFields = ['iarca_tracking_number'];
                 } else {
-                    requiredFields = ['applicant_id_number'];
+                    requiredFields = ['ffa_certificate_number'];
                 }
             } else {
                 const existingCertificate = entries.find(item => item[0] === 'existing_certificate')?.[1];

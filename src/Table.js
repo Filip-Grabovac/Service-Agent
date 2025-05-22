@@ -975,7 +975,7 @@ export function setModals(menu) {
                             const medicalValue = entries.find(item => item[0] === 'is_medical')?.[1];
 
                             if (medicalValue === 'false') {
-                                formData.delete('applicant_id_number');
+                                formData.delete('ffa_certificate_number');
                             } else {
                                 formData.delete('iarca_tracking_number');
                             }
