@@ -555,7 +555,7 @@ function setupFormValidation(certificateModal) {
                 if (typeof medicalValue === "undefined") {
                     requiredFields = ['iarca_tracking_number'];
                 } else {
-                    if (medicalValue !== 'false') {
+                    if (medicalValue === 'false') {
                         requiredFields = ['iarca_tracking_number'];
                     } else {
                         requiredFields = ['ffa_certificate_number'];
