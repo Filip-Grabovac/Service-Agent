@@ -552,6 +552,7 @@ function setupFormValidation(certificateModal) {
             if (existingValue === 'false') {
                 const medicalValue = entries.find(item => item[0] === 'is_medical')?.[1];
 
+                console.log(medicalValue)
                 if (medicalValue !== 'false') {
                     requiredFields = ['ffa_certificate_number'];
                 } else {
