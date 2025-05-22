@@ -970,7 +970,7 @@ export function setModals(menu) {
 
                         if (existingValue === 'false') {
                             formData.delete('existing_certificate');
-                            formData.delete('ffa_certificate_number');
+                            formData.delete('applicant_id_number');
 
                             const medicalValue = entries.find(item => item[0] === 'is_medical')?.[1];
 
