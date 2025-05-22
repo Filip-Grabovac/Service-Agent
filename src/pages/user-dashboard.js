@@ -552,11 +552,14 @@ function setupFormValidation(certificateModal) {
             if (existingValue === 'false') {
                 const medicalValue = entries.find(item => item[0] === 'is_medical')?.[1];
 
-                console.log(medicalValue)
-                if (medicalValue !== 'false') {
-                    requiredFields = ['ffa_certificate_number'];
-                } else {
+                if (typeof medicalValue === "undefined") {
                     requiredFields = ['iarca_tracking_number'];
+                } else {
+                    if (medicalValue !== 'false') {
+                        requiredFields = ['iarca_tracking_number'];
+                    } else {
+                        requiredFields = ['ffa_certificate_number'];
+                    }
                 }
             } else {
                 const existingCertificate = entries.find(item => item[0] === 'existing_certificate')?.[1];
