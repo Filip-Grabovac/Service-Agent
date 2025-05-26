@@ -242,7 +242,7 @@ export default class User {
         }
 
         if (result.is_verified) {
-          window.location.href = "/registration-4-4";
+          window.location.href = "/registration-4-4?registration=successful";
         }
       })
       .catch((error) => {
