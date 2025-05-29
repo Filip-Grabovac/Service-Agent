@@ -152,8 +152,12 @@ user.me().then((data) => {
         document.querySelector('#edit-user-popup').querySelector('[data-modal-action="close"]').click();
     });
     if (data.is_active) {
-        billingOpen.setAttribute('data-id-user-id', data.id);
-        setBillingLink()
+        if (data.company_id === null) {
+            billingOpen.setAttribute('data-id-user-id', data.id);
+            setBillingLink()
+        } else {
+            billingOpen.style.display = 'none';
+        }
 
         if (data.subscription_end) {
             const expiringSubscriptionBoxes = document.querySelectorAll('.expiring-subscription-text-wrap')
