@@ -4,6 +4,8 @@ const user = new User();
 
 const payBtn = document.getElementById('pay-button');
 
+user.authenticate();
+
 payBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
