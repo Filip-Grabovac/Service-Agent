@@ -672,8 +672,8 @@ export function setModals(menu) {
                                         typeSelect.innerHTML = '';
 
                                         const options = [
-                                            { value: 'true', text: 'Medical' },
-                                            { value: 'false', text: 'Non-Medical' },
+                                            { value: 'false', text: 'non-Medical Certificates' },
+                                            { value: 'true', text: 'Medical Certificates (Part 67)' },
                                         ];
 
                                         options.forEach(opt => {
