@@ -661,26 +661,71 @@ export function setModals(menu) {
                                     element.removeAttribute("disabled");
                                 }
 
-                                modal.querySelector('[name=existing_certificate]').addEventListener('change', (event) => {
-                                    const applicantIdNumber = modal.querySelector('[name=applicant_id_number]');
-                                    const ffaCertificateNumber = modal.querySelector('[name=ffa_certificate_number]');
+                                if (element.getAttribute('name') === 'is_existing') {
+                                    element.setAttribute("data-disabled", true);
+                                    element.setAttribute("disabled", true);
 
-                                    if (event.target.value === 'part_67') {
-                                        ffaCertificateNumber.setAttribute("data-disabled", true);
-                                        ffaCertificateNumber.setAttribute("disabled", true);
-                                        ffaCertificateNumber.value = '';
+                                    if (element.value === 'false') {
+                                        const typeSelect = modal.querySelector('[name=existing_certificate]');
 
-                                        applicantIdNumber.removeAttribute("data-disabled");
-                                        applicantIdNumber.removeAttribute("disabled");
+                                        typeSelect.setAttribute('name', 'is_medical');
+                                        typeSelect.innerHTML = '';
+
+                                        const options = [
+                                            { value: 'true', text: 'Medical' },
+                                            { value: 'false', text: 'Non-Medical' },
+                                        ];
+
+                                        options.forEach(opt => {
+                                            const option = document.createElement('option');
+                                            option.value = opt.value;
+                                            option.textContent = opt.text;
+                                            typeSelect.appendChild(option);
+                                        });
+
+                                        modal.querySelector('[name=is_medical]').addEventListener('change', (event) => {
+                                            const iarcaTrackingNumber = modal.querySelector('[name=iarca_tracking_number]');
+                                            const ffaCertificateNumber = modal.querySelector('[name=ffa_certificate_number]');
+
+                                            if (event.target.value === 'false') {
+                                                ffaCertificateNumber.setAttribute("data-disabled", true);
+                                                ffaCertificateNumber.setAttribute("disabled", true);
+                                                ffaCertificateNumber.value = '';
+
+                                                iarcaTrackingNumber.removeAttribute("data-disabled");
+                                                iarcaTrackingNumber.removeAttribute("disabled");
+                                            } else {
+                                                iarcaTrackingNumber.setAttribute("data-disabled", true);
+                                                iarcaTrackingNumber.setAttribute("disabled", true);
+                                                iarcaTrackingNumber.value = '';
+
+                                                ffaCertificateNumber.removeAttribute("data-disabled");
+                                                ffaCertificateNumber.removeAttribute("disabled");
+                                            }
+                                        })
                                     } else {
-                                        applicantIdNumber.setAttribute("data-disabled", true);
-                                        applicantIdNumber.setAttribute("disabled", true);
-                                        applicantIdNumber.value = '';
+                                        modal.querySelector('[name=existing_certificate]').addEventListener('change', (event) => {
+                                            const applicantIdNumber = modal.querySelector('[name=applicant_id_number]');
+                                            const ffaCertificateNumber = modal.querySelector('[name=ffa_certificate_number]');
 
-                                        ffaCertificateNumber.removeAttribute("data-disabled");
-                                        ffaCertificateNumber.removeAttribute("disabled");
+                                            if (event.target.value === 'part_67') {
+                                                ffaCertificateNumber.setAttribute("data-disabled", true);
+                                                ffaCertificateNumber.setAttribute("disabled", true);
+                                                ffaCertificateNumber.value = '';
+
+                                                applicantIdNumber.removeAttribute("data-disabled");
+                                                applicantIdNumber.removeAttribute("disabled");
+                                            } else {
+                                                applicantIdNumber.setAttribute("data-disabled", true);
+                                                applicantIdNumber.setAttribute("disabled", true);
+                                                applicantIdNumber.value = '';
+
+                                                ffaCertificateNumber.removeAttribute("data-disabled");
+                                                ffaCertificateNumber.removeAttribute("disabled");
+                                            }
+                                        })
                                     }
-                                })
+                                }
                             }
 
                             if (modalName === 'edit-user-popup' && element.getAttribute('name').includes("phone_number")) {
