@@ -668,20 +668,22 @@ export function setModals(menu) {
                                     if (element.value === 'false') {
                                         const typeSelect = modal.querySelector('[name=existing_certificate]');
 
-                                        typeSelect.setAttribute('name', 'is_medical');
-                                        typeSelect.innerHTML = '';
+                                        if (typeSelect) {
+                                            typeSelect.setAttribute('name', 'is_medical');
+                                            typeSelect.innerHTML = '';
 
-                                        const options = [
-                                            { value: 'false', text: 'non-Medical Certificates' },
-                                            { value: 'true', text: 'Medical Certificates (Part 67)' },
-                                        ];
+                                            const options = [
+                                                {value: 'false', text: 'non-Medical Certificates'},
+                                                {value: 'true', text: 'Medical Certificates (Part 67)'},
+                                            ];
 
-                                        options.forEach(opt => {
-                                            const option = document.createElement('option');
-                                            option.value = opt.value;
-                                            option.textContent = opt.text;
-                                            typeSelect.appendChild(option);
-                                        });
+                                            options.forEach(opt => {
+                                                const option = document.createElement('option');
+                                                option.value = opt.value;
+                                                option.textContent = opt.text;
+                                                typeSelect.appendChild(option);
+                                            });
+                                        }
 
                                         modal.querySelector('[name=is_medical]').addEventListener('change', (event) => {
                                             const iarcaTrackingNumber = modal.querySelector('[name=iarca_tracking_number]');
@@ -704,6 +706,28 @@ export function setModals(menu) {
                                             }
                                         })
                                     } else {
+                                        const typeSelect = modal.querySelector('[name=is_medical]');
+
+                                        if (typeSelect) {
+                                            typeSelect.setAttribute('name', 'existing_certificate');
+                                            typeSelect.innerHTML = '';
+
+                                            const options = [
+                                                {value: 'part_61', text: 'Pilot, Flight Instructor, Ground Instructor (Part 61)'},
+                                                {value: 'part_63', text: 'Flight Engineer, Flight Navigator (Part 63)'},
+                                                {value: 'part_65', text: 'ATC Tower Operator, Aircraft Dispatcher, Mechanic, Repairman, Parachute Rigger (Part 65)'},
+                                                {value: 'part_67', text: 'Medical Certificate (Part 67)'},
+                                                {value: 'part_107', text: 'Remote Pilot / UAS (Part 107)'},
+                                                {value: 'other', text: 'Other'},
+                                            ];
+
+                                            options.forEach(opt => {
+                                                const option = document.createElement('option');
+                                                option.value = opt.value;
+                                                option.textContent = opt.text;
+                                                typeSelect.appendChild(option);
+                                            });
+                                        }
                                         modal.querySelector('[name=existing_certificate]').addEventListener('change', (event) => {
                                             const applicantIdNumber = modal.querySelector('[name=applicant_id_number]');
                                             const ffaCertificateNumber = modal.querySelector('[name=ffa_certificate_number]');
