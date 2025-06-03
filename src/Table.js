@@ -653,7 +653,7 @@ export function setModals(menu) {
                             }
 
                             if (modalName === 'edit-airman-popup') {
-                                if (element.value === '') {
+                                if (element.value === '' && element.getAttribute('data-name') !== 'existing_certificate') {
                                     element.setAttribute("data-disabled", true);
                                     element.setAttribute("disabled", true);
                                 } else {
