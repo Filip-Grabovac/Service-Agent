@@ -4,6 +4,8 @@ const user = new User();
 
 const payBtn = document.getElementById('pay-button');
 
+user.authenticate();
+
 payBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
@@ -16,7 +18,7 @@ payBtn.addEventListener('click', function (event) {
 
     user.me().then((data) => {
         let paymentData = {
-            success_url: "https://" + window.location.hostname + "/user-dashboard?registration=successful",
+            success_url: "https://" + window.location.hostname + "/user-dashboard?subscription=successful",
             cancel_url: "https://" + window.location.hostname + "/registration-4-4",
             email: data.email,
             line_items: [

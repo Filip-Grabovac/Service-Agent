@@ -48,6 +48,19 @@ export default class TableRow {
                     <div># ${item.id}</div>
                 </div>
             `,
+                active: () => `
+                <div class="row-inside">
+                    <div class="txt-row" style="color: ${item.is_active ? 'green' : 'red'}">${item.is_active ? 
+                        `<svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.6952 11.3262C5.55319 11.469 5.35954 11.5487 5.15829 11.5487C4.95705 11.5487 4.7634 11.469 4.62139 11.3262L0.333761 7.03783C-0.111254 6.59282 -0.111254 5.87138 0.333761 5.42712L0.870664 4.89022C1.31568 4.44521 2.03636 4.44521 2.48137 4.89022L5.15829 7.56714L12.3917 0.333761C12.8367 -0.111254 13.5581 -0.111254 14.0024 0.333761L14.5393 0.870664C14.9843 1.31568 14.9843 2.03712 14.5393 2.48137L5.6952 11.3262Z" fill="#008000"/>
+                        </svg>` 
+                    : 
+                        `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13 1L1 13M1 1L13 13" stroke="#FF0042" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    `}</div>
+                </div>
+            `,
                 name: () => `
                 <div class="row-inside">
                     <div class="txt-row">${item.first_name} ${item.last_name}</div>

@@ -495,7 +495,7 @@ function getColumns(menu, tab) {
             6: ['id', 'name', 'user', 'price', 'status', 'blank', 'actions'],
         },
         2: {
-            1: ['id', 'name', 'address', 'email', 'blank', 'actions'],
+            1: ['id', 'active', 'name', 'address', 'email', 'blank', 'actions'],
             2: ['id', 'name', 'status', 'actions'],
             3: ['id', 'details', 'make', 'model', 'serial_number', 'status', 'actions'],
             4: ['id', 'ffa_certificate_number', 'applicant_id_number', 'iarca_tracking_number', 'existing_certificate', 'status', 'actions'],
@@ -661,26 +661,95 @@ export function setModals(menu) {
                                     element.removeAttribute("disabled");
                                 }
 
-                                modal.querySelector('[name=existing_certificate]').addEventListener('change', (event) => {
-                                    const applicantIdNumber = modal.querySelector('[name=applicant_id_number]');
-                                    const ffaCertificateNumber = modal.querySelector('[name=ffa_certificate_number]');
+                                if (element.getAttribute('name') === 'is_existing') {
+                                    element.setAttribute("data-disabled", true);
+                                    element.setAttribute("disabled", true);
 
-                                    if (event.target.value === 'part_67') {
-                                        ffaCertificateNumber.setAttribute("data-disabled", true);
-                                        ffaCertificateNumber.setAttribute("disabled", true);
-                                        ffaCertificateNumber.value = '';
+                                    if (element.value === 'false') {
+                                        const typeSelect = modal.querySelector('[name=existing_certificate]');
 
-                                        applicantIdNumber.removeAttribute("data-disabled");
-                                        applicantIdNumber.removeAttribute("disabled");
+                                        if (typeSelect) {
+                                            typeSelect.setAttribute('name', 'is_medical');
+                                            typeSelect.innerHTML = '';
+
+                                            const options = [
+                                                {value: 'false', text: 'non-Medical Certificates'},
+                                                {value: 'true', text: 'Medical Certificates (Part 67)'},
+                                            ];
+
+                                            options.forEach(opt => {
+                                                const option = document.createElement('option');
+                                                option.value = opt.value;
+                                                option.textContent = opt.text;
+                                                typeSelect.appendChild(option);
+                                            });
+                                        }
+
+                                        modal.querySelector('[name=is_medical]').addEventListener('change', (event) => {
+                                            const iarcaTrackingNumber = modal.querySelector('[name=iarca_tracking_number]');
+                                            const ffaCertificateNumber = modal.querySelector('[name=ffa_certificate_number]');
+
+                                            if (event.target.value === 'false') {
+                                                ffaCertificateNumber.setAttribute("data-disabled", true);
+                                                ffaCertificateNumber.setAttribute("disabled", true);
+                                                ffaCertificateNumber.value = '';
+
+                                                iarcaTrackingNumber.removeAttribute("data-disabled");
+                                                iarcaTrackingNumber.removeAttribute("disabled");
+                                            } else {
+                                                iarcaTrackingNumber.setAttribute("data-disabled", true);
+                                                iarcaTrackingNumber.setAttribute("disabled", true);
+                                                iarcaTrackingNumber.value = '';
+
+                                                ffaCertificateNumber.removeAttribute("data-disabled");
+                                                ffaCertificateNumber.removeAttribute("disabled");
+                                            }
+                                        })
                                     } else {
-                                        applicantIdNumber.setAttribute("data-disabled", true);
-                                        applicantIdNumber.setAttribute("disabled", true);
-                                        applicantIdNumber.value = '';
+                                        const typeSelect = modal.querySelector('[name=is_medical]');
 
-                                        ffaCertificateNumber.removeAttribute("data-disabled");
-                                        ffaCertificateNumber.removeAttribute("disabled");
+                                        if (typeSelect) {
+                                            typeSelect.setAttribute('name', 'existing_certificate');
+                                            typeSelect.innerHTML = '';
+
+                                            const options = [
+                                                {value: 'part_61', text: 'Pilot, Flight Instructor, Ground Instructor (Part 61)'},
+                                                {value: 'part_63', text: 'Flight Engineer, Flight Navigator (Part 63)'},
+                                                {value: 'part_65', text: 'ATC Tower Operator, Aircraft Dispatcher, Mechanic, Repairman, Parachute Rigger (Part 65)'},
+                                                {value: 'part_67', text: 'Medical Certificate (Part 67)'},
+                                                {value: 'part_107', text: 'Remote Pilot / UAS (Part 107)'},
+                                                {value: 'other', text: 'Other'},
+                                            ];
+
+                                            options.forEach(opt => {
+                                                const option = document.createElement('option');
+                                                option.value = opt.value;
+                                                option.textContent = opt.text;
+                                                typeSelect.appendChild(option);
+                                            });
+                                        }
+                                        modal.querySelector('[name=existing_certificate]').addEventListener('change', (event) => {
+                                            const applicantIdNumber = modal.querySelector('[name=applicant_id_number]');
+                                            const ffaCertificateNumber = modal.querySelector('[name=ffa_certificate_number]');
+
+                                            if (event.target.value === 'part_67') {
+                                                ffaCertificateNumber.setAttribute("data-disabled", true);
+                                                ffaCertificateNumber.setAttribute("disabled", true);
+                                                ffaCertificateNumber.value = '';
+
+                                                applicantIdNumber.removeAttribute("data-disabled");
+                                                applicantIdNumber.removeAttribute("disabled");
+                                            } else {
+                                                applicantIdNumber.setAttribute("data-disabled", true);
+                                                applicantIdNumber.setAttribute("disabled", true);
+                                                applicantIdNumber.value = '';
+
+                                                ffaCertificateNumber.removeAttribute("data-disabled");
+                                                ffaCertificateNumber.removeAttribute("disabled");
+                                            }
+                                        })
                                     }
-                                })
+                                }
                             }
 
                             if (modalName === 'edit-user-popup' && element.getAttribute('name').includes("phone_number")) {
@@ -738,6 +807,7 @@ export function setModals(menu) {
                             addDocumentButton.style.opacity = "1";
                             addDocumentUserError.style.display = "none";
                             let selectedUser;
+                            let isUserActive;
 
                             $('#create-document-user').on('select2:select', function (e) {
                                 // $('#create-document-user').off('select2:select');
@@ -787,19 +857,32 @@ export function setModals(menu) {
                                 if (!isActive) {
                                     addDocumentButton.style.pointerEvents = "none";
                                     addDocumentButton.style.opacity = "0.5";
-                                    addDocumentUserError.style.display = "block";
+                                    addDocumentUserError.style.display = "none";
+
+                                    isUserActive = false;
                                 } else {
                                     addDocumentButton.style.pointerEvents = "auto";
                                     addDocumentButton.style.opacity = "1";
                                     addDocumentUserError.style.display = "none";
+
+                                    isUserActive = true;
                                 }
+                            });
+
+                            const certificatesSelect = document.getElementById('certificates_id');
+                            let selectedCertificate;
+                            certificatesSelect.addEventListener("change", function() {
+                                if (!isUserActive) {
+                                    addDocumentUserError.style.display = "block";
+                                }
+                                selectedCertificate = this.value
                             });
 
                             if (!isReminderEventAttached) {
                                 isReminderEventAttached = true;
 
                                 addDocumentUserErrorLink.addEventListener("click", function() {
-                                    user.sendReminder(selectedUser).then((success) => {
+                                    user.sendReminder(selectedUser, selectedCertificate).then((success) => {
                                         if (success) {
                                             successMessage.innerHTML = 'Payment reminder has been successfully sent!';
                                             successWrapper.classList.remove('hide');
@@ -970,12 +1053,12 @@ export function setModals(menu) {
 
                         if (existingValue === 'false') {
                             formData.delete('existing_certificate');
-                            formData.delete('ffa_certificate_number');
+                            formData.delete('applicant_id_number');
 
                             const medicalValue = entries.find(item => item[0] === 'is_medical')?.[1];
 
                             if (medicalValue === 'false') {
-                                formData.delete('applicant_id_number');
+                                formData.delete('ffa_certificate_number');
                             } else {
                                 formData.delete('iarca_tracking_number');
                             }

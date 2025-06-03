@@ -152,8 +152,12 @@ user.me().then((data) => {
         document.querySelector('#edit-user-popup').querySelector('[data-modal-action="close"]').click();
     });
     if (data.is_active) {
-        billingOpen.setAttribute('data-id-user-id', data.id);
-        setBillingLink()
+        if (data.company_id === null) {
+            billingOpen.setAttribute('data-id-user-id', data.id);
+            setBillingLink()
+        } else {
+            billingOpen.style.display = 'none';
+        }
 
         if (data.subscription_end) {
             const expiringSubscriptionBoxes = document.querySelectorAll('.expiring-subscription-text-wrap')
@@ -254,17 +258,19 @@ user.me().then((data) => {
 
 const urlParams = new URLSearchParams(window.location.search);
 
-certificate.getAllActive().then((data) => {
-    if (data && data.length === 0) {
-        userMenu1.style.display = 'none';
-        userMenu2.style.display = 'none';
-    }
-
-    if (data && data.length >= 5) {
+certificate.getAll().then((data) => {
+    if (data && data.items.length >= 5) {
         const addCertificateButton = document.querySelector(`[data-modal-open="add-certificate-popup"]`);
         addCertificateButton.style.display = 'none';
 
         loader.style.display = 'none';
+    }
+});
+
+certificate.getAllActive().then((data) => {
+    if (data && data.length === 0) {
+        userMenu1.style.display = 'none';
+        userMenu2.style.display = 'none';
     }
 
     if (urlParams.has('certificate')) {
@@ -433,12 +439,12 @@ newCertificate.addEventListener('click', function (event) {
     }
     if (nonMedical.checked) {
         trackingNumberWrapper.classList.remove('hidden');
-        if (!applicantIdWrapper.classList.contains('hidden')) {
-            applicantIdWrapper.classList.add('hidden');
+        if (!ffaCertificateNumberWrapper.classList.contains('hidden')) {
+            ffaCertificateNumberWrapper.classList.add('hidden');
         }
     }
     if (isMedical.checked) {
-        applicantIdWrapper.classList.remove('hidden');
+        ffaCertificateNumberWrapper.classList.remove('hidden');
         if (!trackingNumberWrapper.classList.contains('hidden')) {
             trackingNumberWrapper.classList.add('hidden');
         }
@@ -470,12 +476,12 @@ existingCertificate.addEventListener('click', function (event) {
 })
 nonMedical.addEventListener('click', function (event) {
     trackingNumberWrapper.classList.remove('hidden');
-    if (!applicantIdWrapper.classList.contains('hidden')) {
-        applicantIdWrapper.classList.add('hidden');
+    if (!ffaCertificateNumberWrapper.classList.contains('hidden')) {
+        ffaCertificateNumberWrapper.classList.add('hidden');
     }
 })
 isMedical.addEventListener('click', function (event) {
-    applicantIdWrapper.classList.remove('hidden');
+    ffaCertificateNumberWrapper.classList.remove('hidden');
     if (!trackingNumberWrapper.classList.contains('hidden')) {
         trackingNumberWrapper.classList.add('hidden');
     }
@@ -552,10 +558,14 @@ function setupFormValidation(certificateModal) {
             if (existingValue === 'false') {
                 const medicalValue = entries.find(item => item[0] === 'is_medical')?.[1];
 
-                if (medicalValue === 'false') {
+                if (typeof medicalValue === "undefined") {
                     requiredFields = ['iarca_tracking_number'];
                 } else {
-                    requiredFields = ['applicant_id_number'];
+                    if (medicalValue === 'false') {
+                        requiredFields = ['iarca_tracking_number'];
+                    } else {
+                        requiredFields = ['ffa_certificate_number'];
+                    }
                 }
             } else {
                 const existingCertificate = entries.find(item => item[0] === 'existing_certificate')?.[1];
