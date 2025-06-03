@@ -683,6 +683,8 @@ export function setModals(menu) {
                                                 option.textContent = opt.text;
                                                 typeSelect.appendChild(option);
                                             });
+
+                                            typeSelect.value = element.value;
                                         }
 
                                         modal.querySelector('[name=is_medical]').addEventListener('change', (event) => {
@@ -727,6 +729,8 @@ export function setModals(menu) {
                                                 option.textContent = opt.text;
                                                 typeSelect.appendChild(option);
                                             });
+
+                                            typeSelect.value = element.value;
                                         }
                                         modal.querySelector('[name=existing_certificate]').addEventListener('change', (event) => {
                                             const applicantIdNumber = modal.querySelector('[name=applicant_id_number]');
