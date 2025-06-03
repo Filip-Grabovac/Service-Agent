@@ -684,7 +684,7 @@ export function setModals(menu) {
                                                 typeSelect.appendChild(option);
                                             });
 
-                                            typeSelect.value = element.value;
+                                            typeSelect.value = fillData['is_medical'];
                                         }
 
                                         modal.querySelector('[name=is_medical]').addEventListener('change', (event) => {
@@ -730,8 +730,9 @@ export function setModals(menu) {
                                                 typeSelect.appendChild(option);
                                             });
 
-                                            typeSelect.value = element.value;
+                                            typeSelect.value = fillData['existing_certificate'];
                                         }
+
                                         modal.querySelector('[name=existing_certificate]').addEventListener('change', (event) => {
                                             const applicantIdNumber = modal.querySelector('[name=applicant_id_number]');
                                             const ffaCertificateNumber = modal.querySelector('[name=ffa_certificate_number]');
