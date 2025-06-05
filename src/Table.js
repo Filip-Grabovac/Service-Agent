@@ -1454,7 +1454,13 @@ function getModals(menu) {
                 method: 'PATCH',
                 files: [],
                 success_message: 'The document has been successfully updated.',
-            }
+            },
+            6: {
+                modal: 'details-document-popup',
+                action: '',
+                method: 'GET',
+                files: []
+            },
         },
         2: {
             1: {
