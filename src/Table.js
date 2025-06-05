@@ -1849,11 +1849,13 @@ function fillDocumentDetails(data, menu, modal) {
     } else {
         statusBadgeColor = 'orange'
     }
+    status.classList.remove('orange', 'blue', 'green')
     status.classList.add(statusBadgeColor)
     Array.from(status.children).forEach(child => {
+        child.classList.remove('orange', 'blue', 'green')
         child.classList.add(statusBadgeColor)
         if (child.id === 'status-badge-text') {
-            child.innerHTML = documentStatus
+            child.innerHTML = documentStatus.replace('_', ' ')
         }
     });
 
