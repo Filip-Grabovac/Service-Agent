@@ -1827,6 +1827,8 @@ function fillDocumentDetails(data, menu, modal) {
     const downloadDocument = document.getElementById('document-download-document');
     const requestShreddingBox = document.getElementById('document-request-shredding-box');
     const requestShredding = document.getElementById('document-request-shredding');
+    const shredBox = document.getElementById('document-shred-box');
+    const shred = document.getElementById('document-shred');
     const deleteDocumentBox = document.getElementById('document-delete-document-box');
     const deleteDocument = document.getElementById('document-delete-document');
     const archiveDocumentBox = document.getElementById('document-archive-document-box');
@@ -1834,6 +1836,7 @@ function fillDocumentDetails(data, menu, modal) {
     const payment = document.getElementById('document-payment');
 
     requestShreddingBox.style.display = 'flex';
+    shredBox.style.display = 'flex';
     deleteDocumentBox.style.display = 'flex';
     archiveDocumentBox.style.display = 'flex';
     payment.style.display = 'flex';
@@ -1969,22 +1972,67 @@ function fillDocumentDetails(data, menu, modal) {
         link.target = '_blank';
         link.click();
     });
-    if (documentStatus !== 'new' && documentStatus !== 'waiting_for_payment') {
-        requestShreddingBox.style.display = 'none';
-    } else {
-        requestShredding.addEventListener('click', function () {
-            modal.classList.add('hide');
+    if (menu === 5 || menu === 6) {
+        if (documentStatus !== 'new' && documentStatus !== 'waiting_for_payment') {
+            requestShreddingBox.style.display = 'none';
+        } else {
+            requestShredding.addEventListener('click', function () {
+                modal.classList.add('hide');
 
-            const closestElement = document.querySelector(
-                `[data-modal-open="request-shred-document-popup"][data-id-documents-id="${data.id}"]`
-            );
+                const closestElement = document.querySelector(
+                    `[data-modal-open="request-shred-document-popup"][data-id-documents-id="${data.id}"]`
+                );
 
-            closestElement.click()
-        })
-    }
-    if (menu !== 6) {
-        deleteDocumentBox.style.display = 'none';
+                closestElement.click()
+            })
+        }
+        if (menu !== 6) {
+            deleteDocumentBox.style.display = 'none';
+        } else {
+            deleteDocument.addEventListener('click', function () {
+                modal.classList.add('hide');
+
+                const closestElement = document.querySelector(
+                    `[data-modal-open="delete-document-popup"][data-id-documents-id="${data.id}"]`
+                );
+
+                closestElement.click()
+            })
+        }
+        if ((documentStatus !== 'delivered' && documentStatus !== 'shredded') || data.archived === true) {
+            archiveDocumentBox.style.display = 'none';
+        } else {
+            archiveDocument.addEventListener('click', function () {
+                modal.classList.add('hide');
+
+                const closestElement = document.querySelector(
+                    `[data-modal-open="archive-document-popup"][data-id-documents-id="${data.id}"]`
+                );
+
+                closestElement.click()
+            })
+        }
+        if (data.payment_link === '' || documentStatus === 'paid' || documentStatus === 'shipped' || documentStatus === 'delivered') {
+            payment.style.display = 'none';
+        } else {
+            payment.addEventListener('click', function () {
+                window.open(data.payment_link, '_blank');
+            })
+        }
     } else {
+        if (documentStatus !== 'shred_requested') {
+            shredBox.style.display = 'none';
+        } else {
+            shred.addEventListener('click', function () {
+                modal.classList.add('hide');
+
+                const closestElement = document.querySelector(
+                    `[data-modal-open="shred-document-popup"][data-id-documents-id="${data.id}"]`
+                );
+
+                closestElement.click()
+            })
+        }
         deleteDocument.addEventListener('click', function () {
             modal.classList.add('hide');
 
@@ -1993,26 +2041,6 @@ function fillDocumentDetails(data, menu, modal) {
             );
 
             closestElement.click()
-        })
-    }
-    if ((documentStatus !== 'delivered' && documentStatus !== 'shredded') || data.archived === true) {
-        archiveDocumentBox.style.display = 'none';
-    } else {
-        archiveDocument.addEventListener('click', function () {
-            modal.classList.add('hide');
-
-            const closestElement = document.querySelector(
-                `[data-modal-open="archive-document-popup"][data-id-documents-id="${data.id}"]`
-            );
-
-            closestElement.click()
-        })
-    }
-    if (data.payment_link === '' || documentStatus === 'paid' || documentStatus === 'shipped' || documentStatus === 'delivered') {
-        payment.style.display = 'none';
-    } else {
-        payment.addEventListener('click', function () {
-            window.open(data.payment_link, '_blank');
         })
     }
 
