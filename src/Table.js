@@ -1973,6 +1973,7 @@ function fillDocumentDetails(data, menu, modal) {
         link.click();
     });
     if (menu === 5 || menu === 6) {
+        shredBox.style.display = 'none';
         if (documentStatus !== 'new' && documentStatus !== 'waiting_for_payment') {
             requestShreddingBox.style.display = 'none';
         } else {
@@ -2020,6 +2021,9 @@ function fillDocumentDetails(data, menu, modal) {
             })
         }
     } else {
+        requestShreddingBox.style.display = 'none';
+        archiveDocumentBox.style.display = 'none';
+        payment.style.display = 'none';
         if (documentStatus !== 'shred_requested') {
             shredBox.style.display = 'none';
         } else {
