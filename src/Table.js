@@ -2012,8 +2012,11 @@ function setPdf(pdfUrl) {
     pdfjsLib.getDocument(pdfUrl).promise.then((pdf) => {
         pdf.getPage(1).then((firstPage) => {
             const containerWidth = pdfContainer.clientWidth;
+            console.log(containerWidth)
             const initialViewport = firstPage.getViewport({ scale: 1 });
+            console.log(initialViewport)
             const scale = containerWidth / initialViewport.width;
+            console.log(scale)
 
             for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                 pdf.getPage(pageNum).then((page) => {
