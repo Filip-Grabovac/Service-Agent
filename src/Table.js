@@ -1855,7 +1855,7 @@ function fillDocumentDetails(data, menu, modal) {
         child.classList.remove('orange', 'blue', 'green')
         child.classList.add(statusBadgeColor)
         if (child.id === 'status-badge-text') {
-            child.innerHTML = documentStatus.replace('_', ' ')
+            child.innerHTML = documentStatus.replaceAll('_', ' ')
         }
     });
 
