@@ -1532,7 +1532,13 @@ function getModals(menu) {
                 method: 'PATCH',
                 files: [],
                 success_message: 'The document has been successfully updated.',
-            }
+            },
+            11: {
+                modal: 'details-document-popup',
+                action: '',
+                method: 'GET',
+                files: []
+            },
         },
         3: {
             1: {
@@ -1548,7 +1554,13 @@ function getModals(menu) {
                 method: 'DELETE',
                 files: [],
                 success_message: 'The document has been successfully deleted.',
-            }
+            },
+            3: {
+                modal: 'details-document-popup',
+                action: '',
+                method: 'GET',
+                files: []
+            },
         },
         4: {
             1: {
