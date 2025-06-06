@@ -1829,6 +1829,10 @@ function fillDocumentDetails(data, menu, modal) {
     const requestShredding = document.getElementById('document-request-shredding');
     const shredBox = document.getElementById('document-shred-box');
     const shred = document.getElementById('document-shred');
+    const editBox = document.getElementById('document-edit-box');
+    const edit = document.getElementById('document-edit');
+    const forwardBox = document.getElementById('document-forward-box');
+    const forward = document.getElementById('document-forward');
     const deleteDocumentBox = document.getElementById('document-delete-document-box');
     const deleteDocument = document.getElementById('document-delete-document');
     const archiveDocumentBox = document.getElementById('document-archive-document-box');
@@ -1974,6 +1978,8 @@ function fillDocumentDetails(data, menu, modal) {
     });
     if (menu === 5 || menu === 6) {
         shredBox.style.display = 'none';
+        editBox.style.display = 'none';
+        forwardBox.style.display = 'none';
         if (documentStatus !== 'new' && documentStatus !== 'waiting_for_payment') {
             requestShreddingBox.style.display = 'none';
         } else {
@@ -2032,6 +2038,32 @@ function fillDocumentDetails(data, menu, modal) {
 
                 const closestElement = document.querySelector(
                     `[data-modal-open="shred-document-popup"][data-id-documents-id="${data.id}"]`
+                );
+
+                closestElement.click()
+            })
+        }
+        if (documentStatus !== 'waiting_for_payment') {
+            editBox.style.display = 'none';
+        } else {
+            edit.addEventListener('click', function () {
+                modal.classList.add('hide');
+
+                const closestElement = document.querySelector(
+                    `[data-modal-open="edit-document-popup"][data-id-documents-id="${data.id}"]`
+                );
+
+                closestElement.click()
+            })
+        }
+        if (documentStatus !== 'paid') {
+            forwardBox.style.display = 'none';
+        } else {
+            forwardBox.addEventListener('click', function () {
+                modal.classList.add('hide');
+
+                const closestElement = document.querySelector(
+                    `[data-modal-open="forward-document-popup"][data-id-documents-id="${data.id}"]`
                 );
 
                 closestElement.click()
