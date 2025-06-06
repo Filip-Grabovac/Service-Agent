@@ -1841,6 +1841,8 @@ function fillDocumentDetails(data, menu, modal) {
 
     requestShreddingBox.style.display = 'flex';
     shredBox.style.display = 'flex';
+    editBox.style.display = 'flex';
+    forwardBox.style.display = 'flex';
     deleteDocumentBox.style.display = 'flex';
     archiveDocumentBox.style.display = 'flex';
     payment.style.display = 'flex';
@@ -2059,7 +2061,7 @@ function fillDocumentDetails(data, menu, modal) {
         if (documentStatus !== 'paid') {
             forwardBox.style.display = 'none';
         } else {
-            forwardBox.addEventListener('click', function () {
+            forward.addEventListener('click', function () {
                 modal.classList.add('hide');
 
                 const closestElement = document.querySelector(
