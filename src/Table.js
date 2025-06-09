@@ -256,9 +256,6 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
                 }
 
                 if (column === 'actions') {
-                    console.log(menu)
-                    console.log(tab)
-                    console.log(item)
                     rowHTML[column].push(tableRow.getActionRow(menu, tab, item));
                 } else {
                     rowHTML[column].push(tableRow.getTableRow(modelName, column, item, statusBadgeColor));

@@ -488,7 +488,7 @@ export default class TableRow {
                             <path d="M9.0003 8.25C10.2429 8.25 11.2503 7.24264 11.2503 6C11.2503 4.75736 10.2429 3.75 9.0003 3.75C7.75766 3.75 6.7503 4.75736 6.7503 6C6.7503 7.24264 7.75766 8.25 9.0003 8.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg></div>
                         ${item._document_status?.status_label === 'waiting_for_payment' ? `
-                            <div onclick="window.open('${item.payment_link + '?client_reference_id=' + item.id + '&prefilled_email=' + item._user.email}', '_blank');" class="actions-svg-wrap pay-btn">Pay now</div>
+                            <div onclick="window.open('${item.payment_link + '?client_reference_id=' + item.id + '&prefilled_email=' + item._user?.email}', '_blank');" class="actions-svg-wrap pay-btn">Pay now</div>
                             <div data-modal-open="request-forward-document-popup" data-id-documents-id="${item.id}" data-fill-5-1=${item.id} class="forvard-doc-scg-wrap no-padd"><img loading="lazy" src="https://cdn.prod.website-files.com/673cc2bec8c34d28fd73175f/67519f8578799b349334867f_Forwarding%20Mail.svg" alt="" class="action-svg bigger"></div>
                             <div data-modal-open="request-shred-document-popup" data-id-documents-id="${item.id}" data-fill-5-1=${item.id} class="shred-doc-svg-wrap no-padd"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 20 19" fill="none" class="action-svg bigger">
                             <path d="M11.5 1.20215V4.30005C11.5 4.72009 11.5 4.93011 11.5817 5.09055C11.6537 5.23167 11.7684 5.3464 11.9095 5.41831C12.0699 5.50005 12.28 5.50005 12.7 5.50005H15.7979M4 10.15V4.6C4 3.33988 4 2.70982 4.24524 2.22852C4.46095 1.80516 4.80516 1.46095 5.22852 1.24524C5.70982 1 6.33988 1 7.6 1H11.5L16 5.5V10.15M13 9.25H7M8.5 6.25H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -563,7 +563,6 @@ export default class TableRow {
             }
         };
 
-        console.log(actionRows[menu]?.[tab])
-        // return actionRows[menu]?.[tab] || 'Unknown Option';
+        return actionRows[menu]?.[tab] || 'Unknown Option';
     }
 }
