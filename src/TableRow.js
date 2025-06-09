@@ -563,6 +563,7 @@ export default class TableRow {
             }
         };
 
-        return actionRows[menu]?.[tab] || 'Unknown Option';
+        console.log(actionRows[menu]?.[tab])
+        // return actionRows[menu]?.[tab] || 'Unknown Option';
     }
 }
