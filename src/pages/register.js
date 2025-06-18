@@ -24,6 +24,7 @@ const referralSource = document.getElementById("referral_source");
 const middleName = document.getElementById("middle_name");
 const addressAdditional = document.getElementById("address_additional");
 const terms = document.getElementById("terms");
+const sms = document.getElementById("sms");
 
 const nameRow1 = document.getElementById("name-row-1");
 const nameRow2 = document.getElementById("name-row-2");
@@ -139,18 +140,30 @@ nextBtn.addEventListener("click", function (event) {
   event.preventDefault(); // Prevent form from submitting
 
   const termsLabel = document.getElementById("terms-label");
-  const termsLabelLink = termsLabel.querySelector("a");
+  const termsLabelLinks = termsLabel.querySelectorAll("a");
   termsLabel.style.color = "#475467";
-  termsLabelLink.style.color = "#475467";
+  termsLabelLinks.forEach(link => {
+    link.style.color = "#475467";
+  });
   if (!terms.checked) {
     termsLabel.style.color = "#ce0003";
-    termsLabelLink.style.color = "#ce0003";
+    termsLabelLinks.forEach(link => {
+      link.style.color = "#ce0003";
+    });
     // errorMessage.innerHTML = 'You must agree to the Terms & Conditions.';
     // errorWrapper.classList.remove('hide');
     //
     // setTimeout(function() {
     //     errorWrapper.classList.add('hide');
     // }, 3000);
+
+    return;
+  }
+
+  const smsLabel = document.getElementById("sms-label");
+  smsLabel.style.color = "#475467";
+  if (!sms.checked) {
+    smsLabel.style.color = "#ce0003";
 
     return;
   }
