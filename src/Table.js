@@ -1059,13 +1059,14 @@ export function setModals(menu) {
                         if (existingValue === 'false') {
                             formData.delete('existing_certificate');
                             formData.delete('applicant_id_number');
+                            formData.delete('ffa_certificate_number');
 
                             const medicalValue = entries.find(item => item[0] === 'is_medical')?.[1];
 
                             if (medicalValue === 'false') {
-                                formData.delete('ffa_certificate_number');
+                                // formData.delete('ffa_certificate_number');
                             } else {
-                                formData.delete('iarca_tracking_number');
+                                // formData.delete('iarca_tracking_number');
                             }
                         } else {
                             formData.delete('is_medical');
