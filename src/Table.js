@@ -691,21 +691,21 @@ export function setModals(menu) {
                                             const iarcaTrackingNumber = modal.querySelector('[name=iarca_tracking_number]');
                                             const ffaCertificateNumber = modal.querySelector('[name=ffa_certificate_number]');
 
-                                            if (event.target.value === 'false') {
-                                                ffaCertificateNumber.setAttribute("data-disabled", true);
-                                                ffaCertificateNumber.setAttribute("disabled", true);
-                                                ffaCertificateNumber.value = '';
-
-                                                iarcaTrackingNumber.removeAttribute("data-disabled");
-                                                iarcaTrackingNumber.removeAttribute("disabled");
-                                            } else {
-                                                iarcaTrackingNumber.setAttribute("data-disabled", true);
-                                                iarcaTrackingNumber.setAttribute("disabled", true);
-                                                iarcaTrackingNumber.value = '';
-
-                                                ffaCertificateNumber.removeAttribute("data-disabled");
-                                                ffaCertificateNumber.removeAttribute("disabled");
-                                            }
+                                            // if (event.target.value === 'false') {
+                                            //     ffaCertificateNumber.setAttribute("data-disabled", true);
+                                            //     ffaCertificateNumber.setAttribute("disabled", true);
+                                            //     ffaCertificateNumber.value = '';
+                                            //
+                                            //     iarcaTrackingNumber.removeAttribute("data-disabled");
+                                            //     iarcaTrackingNumber.removeAttribute("disabled");
+                                            // } else {
+                                            //     iarcaTrackingNumber.setAttribute("data-disabled", true);
+                                            //     iarcaTrackingNumber.setAttribute("disabled", true);
+                                            //     iarcaTrackingNumber.value = '';
+                                            //
+                                            //     ffaCertificateNumber.removeAttribute("data-disabled");
+                                            //     ffaCertificateNumber.removeAttribute("disabled");
+                                            // }
                                         })
                                     } else {
                                         const typeSelect = modal.querySelector('[name=is_medical]');
