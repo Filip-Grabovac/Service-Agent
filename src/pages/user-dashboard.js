@@ -439,15 +439,15 @@ newCertificate.addEventListener('click', function (event) {
     }
     if (nonMedical.checked) {
         trackingNumberWrapper.classList.remove('hidden');
-        if (!ffaCertificateNumberWrapper.classList.contains('hidden')) {
-            ffaCertificateNumberWrapper.classList.add('hidden');
-        }
+        // if (!ffaCertificateNumberWrapper.classList.contains('hidden')) {
+        //     ffaCertificateNumberWrapper.classList.add('hidden');
+        // }
     }
     if (isMedical.checked) {
-        ffaCertificateNumberWrapper.classList.remove('hidden');
-        if (!trackingNumberWrapper.classList.contains('hidden')) {
-            trackingNumberWrapper.classList.add('hidden');
-        }
+        trackingNumberWrapper.classList.remove('hidden');
+        // if (!trackingNumberWrapper.classList.contains('hidden')) {
+        //     trackingNumberWrapper.classList.add('hidden');
+        // }
     }
 })
 existingCertificate.addEventListener('click', function (event) {
@@ -476,15 +476,15 @@ existingCertificate.addEventListener('click', function (event) {
 })
 nonMedical.addEventListener('click', function (event) {
     trackingNumberWrapper.classList.remove('hidden');
-    if (!ffaCertificateNumberWrapper.classList.contains('hidden')) {
-        ffaCertificateNumberWrapper.classList.add('hidden');
-    }
+    // if (!ffaCertificateNumberWrapper.classList.contains('hidden')) {
+    //     ffaCertificateNumberWrapper.classList.add('hidden');
+    // }
 })
 isMedical.addEventListener('click', function (event) {
-    ffaCertificateNumberWrapper.classList.remove('hidden');
-    if (!trackingNumberWrapper.classList.contains('hidden')) {
-        trackingNumberWrapper.classList.add('hidden');
-    }
+    trackingNumberWrapper.classList.remove('hidden');
+    // if (!trackingNumberWrapper.classList.contains('hidden')) {
+    //     trackingNumberWrapper.classList.add('hidden');
+    // }
 })
 airmanExistingCertificate.addEventListener('change', function (event) {
     const selectedValue = this.value;
@@ -564,7 +564,7 @@ function setupFormValidation(certificateModal) {
                     if (medicalValue === 'false') {
                         requiredFields = ['iarca_tracking_number'];
                     } else {
-                        requiredFields = ['ffa_certificate_number'];
+                        requiredFields = ['iarca_tracking_number'];
                     }
                 }
             } else {
