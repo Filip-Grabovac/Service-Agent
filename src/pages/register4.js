@@ -6,6 +6,13 @@ const payBtn = document.getElementById('pay-button');
 
 user.authenticate();
 
+let referral = null;
+rewardful('ready', function() {
+    if (Rewardful.referral) {
+        referral = Rewardful.referral;
+    }
+});
+
 payBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
@@ -26,7 +33,8 @@ payBtn.addEventListener('click', function (event) {
                     price: price,
                     quantity: "1",
                 }
-            ]
+            ],
+            referral: referral
         };
 
         user.initialPayment(paymentData).then(result => {
