@@ -7,14 +7,10 @@ const payBtn = document.getElementById('pay-button');
 user.authenticate();
 
 let referral = null;
-rewardful('ready', function() {
-    if (Rewardful.referral) {
-        referral = Rewardful.referral;
-        console.log(referral);
-    } else {
-        console.log('no referral');
-    }
-});
+if (localStorage.getItem('referral')) {
+    referral = localStorage.getItem('referral');
+}
+console.log(referral);
 
 payBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
