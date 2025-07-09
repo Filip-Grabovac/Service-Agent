@@ -37,12 +37,6 @@ const errorClose = document.getElementById("error-close");
 
 let isCompany;
 
-rewardful('ready', function() {
-  if (Rewardful.referral) {
-    localStorage.setItem('referral', Rewardful.referral)
-  }
-});
-
 errorClose.addEventListener("click", (e) => {
   errorWrapper.classList.add("hide");
 });
