@@ -158,7 +158,7 @@ user.me().then((data) => {
     const hasOneMonthPassed = now - data.created_at >= oneMonthMs;
 
     if (!data.referral_box_hidden && hasOneMonthPassed) {
-        document.querySelector(('.referral-text-wrap')).style.display = 'block';
+        document.querySelector(('.referral-text-wrap')).style.display = 'flex';
 
         document.querySelector(('.referral-close-icon')).addEventListener('click', (e) => {
             document.querySelector(('.referral-text-wrap')).style.display = 'none';
