@@ -170,6 +170,12 @@ user.me().then((data) => {
         });
     }
 
+    if (data.rewardful_token) {
+        document.querySelectorAll('.referral-token').forEach(token => {
+            token.textContent = data.rewardful_token;
+        });
+    }
+
     if (data.is_active) {
         if (data.company_id === null) {
             billingOpen.setAttribute('data-id-user-id', data.id);
