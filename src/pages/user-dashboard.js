@@ -159,6 +159,15 @@ user.me().then((data) => {
 
     if (!data.referral_box_hidden && hasOneMonthPassed) {
         document.querySelector(('.referral-text-wrap')).style.display = 'block';
+
+        document.querySelector(('.referral-close-icon')).addEventListener('click', (e) => {
+            document.querySelector(('.referral-text-wrap')).style.display = 'none';
+
+            const patchData = {
+                referral_box_hidden: true
+            }
+            user.patchUser(data.id, patchData);
+        });
     }
 
     if (data.is_active) {
