@@ -151,8 +151,16 @@ user.me().then((data) => {
     deleteAccount.addEventListener('click', () => {
         document.querySelector('#edit-user-popup').querySelector('[data-modal-action="close"]').click();
     });
-    console.log(data.created_at)
-    console.log(data.referral_box_hidden)
+
+    const oneMonthMs = 30 * 24 * 60 * 60 * 1000;
+    const now = Date.now();
+
+    const hasOneMonthPassed = now - data.created_at >= oneMonthMs;
+
+    if (!data.referral_box_hidden && hasOneMonthPassed) {
+        document.querySelector(('.referral-text-wrap')).style.display = 'block';
+    }
+
     if (data.is_active) {
         if (data.company_id === null) {
             billingOpen.setAttribute('data-id-user-id', data.id);
