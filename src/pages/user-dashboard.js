@@ -699,7 +699,7 @@ user.getUserReferrals().then((data) => {
         row.querySelector('.referral-row-name').textContent = '';
 
         const date = new Date(item.created_at);
-        row.querySelector('.referral-row-date').textContent = date.toString();
+        row.querySelector('.referral-row-date').textContent = date.toISOString().split('T')[0];
 
         if (item.status === 'pending') {
             row.querySelector('.status-box').classList.add('orange');
