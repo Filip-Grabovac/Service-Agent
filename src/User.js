@@ -571,10 +571,15 @@ export default class User {
         const authToken =  localStorage.getItem('authToken');
         let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:gU3Px6rO${this.branch}/send-referral-invite`;
 
-        if (data.email === '') {
-            this.showError('Please, fill in email field!');
+        if (data.email === '' || !isValidEmail(data.email)) {
+            this.showError('Please, enter a valid email address!');
 
             return;
+        }
+
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
         }
 
         // Call the Xano API
