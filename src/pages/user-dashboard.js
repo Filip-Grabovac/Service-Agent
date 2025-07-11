@@ -165,12 +165,13 @@ user.me().then((data) => {
     deleteAccount.addEventListener('click', () => {
         document.querySelector('#edit-user-popup').querySelector('[data-modal-action="close"]').click();
     });
+
     if (open === 'referral') {
-        console.log(open)
-        console.log(gear)
         setTimeout(() => {
-            console.log(gear)
             gear.click();
+
+            const referralTab = document.querySelector('.popup-tabs-menu-item[data-w-tab="Tab 2"]');
+            referralTab.click()
         }, 1000)
     }
 
