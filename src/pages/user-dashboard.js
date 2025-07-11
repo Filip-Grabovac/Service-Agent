@@ -144,6 +144,11 @@ tourSkips.forEach((el, index) => {
     });
 });
 
+const open = localStorage.getItem('open');
+if (open === 'referral') {
+    gearWrapper.click();
+}
+
 referralSendInvite.addEventListener('click', () => {
     const data = {
         email: referralEmail.value
