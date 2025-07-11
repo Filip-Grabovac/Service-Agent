@@ -692,6 +692,33 @@ user.getUserReferrals().then((data) => {
 
     data.forEach((item, index) => {
         const row = templateRow.cloneNode(true);
+        if (item.status === 'pending') {
+            row.classList.add('inactive')
+            row.querySelector('.referral-icon').style.display = 'block';
+        }
+        row.querySelector('.referral-row-name').textContent = '';
+
+        const date = new Date(item.created_at);
+        row.querySelector('.referral-row-date').textContent = date.toString();
+
+        if (item.status === 'pending') {
+            row.querySelector('.status-box').classList.add('orange');
+            row.querySelector('.dot').classList.add('orange');
+            row.querySelector('.badge-text').classList.add('orange');
+            row.querySelector('.badge-text').textContent = 'PENDING';
+            row.querySelector('.referral-row-price').style.display = 'none';
+        } else if (item.status === 'referred') {
+            row.querySelector('.status-box').classList.add('blue');
+            row.querySelector('.dot').classList.add('blue');
+            row.querySelector('.badge-text').classList.add('blue');
+            row.querySelector('.badge-text').textContent = 'REFERRED';
+        } else if (item.status === 'paid') {
+            row.querySelector('.status-box').classList.add('green');
+            row.querySelector('.dot').classList.add('green');
+            row.querySelector('.badge-text').classList.add('green');
+            row.querySelector('.badge-text').textContent = 'PAID';
+            row.querySelector('.referral-row-price').style.color = '#339A44';
+        }
 
         container.appendChild(row);
     });
