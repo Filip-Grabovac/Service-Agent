@@ -10,6 +10,9 @@ import {
 const user = new User();
 const certificate = new Certificate();
 
+let open = '';
+open = localStorage.getItem('open');
+
 const home = document.getElementById('home');
 
 const logout = document.getElementsByClassName('logout');
@@ -144,11 +147,6 @@ tourSkips.forEach((el, index) => {
     });
 });
 
-const open = localStorage.getItem('open');
-if (open === 'referral') {
-    gearWrapper.click();
-}
-
 referralSendInvite.addEventListener('click', () => {
     const data = {
         email: referralEmail.value
@@ -167,6 +165,9 @@ user.me().then((data) => {
     deleteAccount.addEventListener('click', () => {
         document.querySelector('#edit-user-popup').querySelector('[data-modal-action="close"]').click();
     });
+    if (open === 'referral') {
+        gear.click();
+    }
 
     const oneMonthMs = 30 * 24 * 60 * 60 * 1000;
     const now = Date.now();
