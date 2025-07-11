@@ -165,6 +165,7 @@ user.me().then((data) => {
     deleteAccount.addEventListener('click', () => {
         document.querySelector('#edit-user-popup').querySelector('[data-modal-action="close"]').click();
     });
+    console.log(open)
     if (open === 'referral') {
         gear.click();
     }
