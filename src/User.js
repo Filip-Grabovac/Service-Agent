@@ -622,12 +622,14 @@ export default class User {
             });
     }
     getUserReferrals(hash) {
+        const authToken =  localStorage.getItem('authToken');
         let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:gU3Px6rO${this.branch}/referrals`;
 
         // Call the Xano API
         return fetch(url, {
             method: "GET",
             headers: {
+                Authorization: `Bearer ${authToken}`,
                 "Content-Type": "application/json",
                 "X-Data-Source": this.dataSource,
             },
