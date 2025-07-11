@@ -696,7 +696,7 @@ user.getUserReferrals().then((data) => {
             row.classList.add('inactive')
             row.querySelector('.referral-icon').style.display = 'block';
         }
-        row.querySelector('.referral-row-name').textContent = '';
+        row.querySelector('.referral-row-name').textContent = item._user_1.first_name + ' ' + item._user_1.last_name;
 
         const date = new Date(item.created_at);
         row.querySelector('.referral-row-date').textContent = date.toISOString().split('T')[0];
