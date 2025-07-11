@@ -165,9 +165,13 @@ user.me().then((data) => {
     deleteAccount.addEventListener('click', () => {
         document.querySelector('#edit-user-popup').querySelector('[data-modal-action="close"]').click();
     });
-    console.log(open)
     if (open === 'referral') {
-        gear.click();
+        console.log(open)
+        console.log(gear)
+        setTimeout(() => {
+            console.log(gear)
+            gear.click();
+        }, 1000)
     }
 
     const oneMonthMs = 30 * 24 * 60 * 60 * 1000;
