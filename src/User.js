@@ -567,6 +567,34 @@ export default class User {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
+    sendReferralInvite(data) {
+        const authToken =  localStorage.getItem('authToken');
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:gU3Px6rO${this.branch}/send-referral-invite`;
+
+        // Call the Xano API
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+
+                    return false;
+                }
+
+                return true;
+            })
+            .catch((error) => {
+                this.showError('Server Error! Please, try again or contact support.');
+            });
+    }
   callMethod(methodName, ...args) {
     if (typeof this[methodName] === "function") {
       return this[methodName](...args);

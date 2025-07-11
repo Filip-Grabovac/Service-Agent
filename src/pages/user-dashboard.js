@@ -35,6 +35,9 @@ const successWrapper = document.getElementById('success-wrapper');
 const successMessage = document.getElementById('success-message');
 const successClose = document.getElementById('success-close');
 
+const referralSendInvite = document.getElementById('referral-send-invite');
+const referralEmail = document.getElementById('referral-email');
+
 const loader = document.getElementById('loader-user');
 loader.style.display = 'flex';
 setTimeout(() => {
@@ -139,6 +142,13 @@ tourSkips.forEach((el, index) => {
 
         localStorage.removeItem('tourStage');
     });
+});
+
+referralSendInvite.addEventListener('click', () => {
+    const data = {
+        email: referralEmail.value
+    }
+    user.sendReferralInvite(data);
 });
 
 let prepopulatedUserId = null;
