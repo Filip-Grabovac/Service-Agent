@@ -675,3 +675,24 @@ function setBillingLink() {
             });
     }, { once: true });
 }
+
+user.getUserReferrals().then((data) => {
+    if (data.length === 0) {
+        document.querySelector('#referrals-box').style.display = 'none';
+
+        return;
+    }
+
+    document.querySelector('.referral-number').textContent = data.length;
+
+    const container = document.querySelector('.referral-list');
+    const templateRow = container.querySelector('.referral-row');
+
+    container.innerHTML = '';
+
+    data.forEach((item, index) => {
+        const row = templateRow.cloneNode(true);
+
+        container.appendChild(row);
+    });
+})

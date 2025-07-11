@@ -621,6 +621,29 @@ export default class User {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
+    getUserReferrals(hash) {
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:gU3Px6rO${this.branch}/referrals`;
+
+        // Call the Xano API
+        return fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Data-Source": this.dataSource,
+            },
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    return null;
+                }
+
+                return result;
+            })
+            .catch((error) => {
+                return null;
+            });
+    }
   callMethod(methodName, ...args) {
     if (typeof this[methodName] === "function") {
       return this[methodName](...args);
