@@ -166,7 +166,7 @@ user.me().then((data) => {
         document.querySelector('#edit-user-popup').querySelector('[data-modal-action="close"]').click();
     });
 
-    if (open === 'referral') {
+    if (open === 'referral' && data.rewardful_token !== null) {
         localStorage.removeItem('open');
 
         const referralTab = document.querySelector('.popup-tabs-menu-item[data-w-tab="Tab 2"]');
@@ -177,12 +177,17 @@ user.me().then((data) => {
         }, 1000)
     }
 
+    if (data.rewardful_token === null) {
+        const referralTab = document.querySelector('.popup-tabs-menu-item[data-w-tab="Tab 2"]');
+        referralTab.style.display = 'none';
+    }
+
     const oneMonthMs = 30 * 24 * 60 * 60 * 1000;
     const now = Date.now();
 
     const hasOneMonthPassed = now - data.created_at >= oneMonthMs;
 
-    if (!data.referral_box_hidden && hasOneMonthPassed) {
+    if (!data.referral_box_hidden && hasOneMonthPassed && data.rewardful_token !== null) {
         document.querySelector(('.referral-text-wrap')).style.display = 'flex';
 
         document.querySelector(('.referral-close-icon')).addEventListener('click', (e) => {
