@@ -597,6 +597,19 @@ export default class User {
 
                 this.showSuccess('An invitation has been sent to ' + data.email + ' successfully.');
 
+                const referralSendInvite = document.getElementById('referral-send-invite');
+
+                referralSendInvite.classList.add('active');
+                referralSendInvite.querySelector('#referral-icon-normal').style.display = 'none';
+                referralSendInvite.querySelector('#referral-icon-sent').style.display = 'block';
+                referralSendInvite.querySelector('#referral-button-text').textContent = 'Sent';
+                setTimeout(() => {
+                    referralSendInvite.classList.remove('active');
+                    referralSendInvite.querySelector('#referral-icon-normal').style.display = 'block';
+                    referralSendInvite.querySelector('#referral-icon-sent').style.display = 'none';
+                    referralSendInvite.querySelector('#referral-button-text').textContent = 'Send invitation';
+                }, 3000);
+
                 return true;
             })
             .catch((error) => {
