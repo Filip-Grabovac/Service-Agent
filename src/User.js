@@ -573,6 +573,8 @@ export default class User {
 
         if (data.email === '') {
             this.showError('Please, fill in email field!');
+
+            return;
         }
 
         // Call the Xano API
