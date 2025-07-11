@@ -148,7 +148,18 @@ referralSendInvite.addEventListener('click', () => {
     const data = {
         email: referralEmail.value
     }
+    referralEmail.value = '';
     user.sendReferralInvite(data);
+    referralSendInvite.classList.add('active');
+    referralSendInvite.querySelector('#referral-icon-normal').style.display = 'none';
+    referralSendInvite.querySelector('#sent').style.display = 'block';
+    referralSendInvite.querySelector('#referral-button-text').textContent = 'Sent';
+    setTimeout(() => {
+        referralSendInvite.classList.remove('active');
+        referralSendInvite.querySelector('#referral-icon-normal').style.display = 'block';
+        referralSendInvite.querySelector('#sent').style.display = 'none';
+        referralSendInvite.querySelector('#referral-button-text').textContent = 'Send invitation';
+    }, 3000);
 });
 
 let prepopulatedUserId = null;
