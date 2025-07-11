@@ -167,11 +167,11 @@ user.me().then((data) => {
     });
 
     if (open === 'referral') {
+        const referralTab = document.querySelector('.popup-tabs-menu-item[data-w-tab="Tab 2"]');
+        referralTab.click()
+
         setTimeout(() => {
             gear.click();
-
-            const referralTab = document.querySelector('.popup-tabs-menu-item[data-w-tab="Tab 2"]');
-            referralTab.click()
         }, 1000)
     }
 
