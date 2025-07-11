@@ -167,6 +167,8 @@ user.me().then((data) => {
     });
 
     if (open === 'referral') {
+        localStorage.removeItem('open');
+
         const referralTab = document.querySelector('.popup-tabs-menu-item[data-w-tab="Tab 2"]');
         referralTab.click()
 
