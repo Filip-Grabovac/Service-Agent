@@ -38,6 +38,10 @@ const successWrapper = document.getElementById('success-wrapper');
 const successMessage = document.getElementById('success-message');
 const successClose = document.getElementById('success-close');
 
+const errorWrapper = document.getElementById('error-wrapper');
+const errorMessage = document.getElementById('error-message');
+const errorClose = document.getElementById('error-close');
+
 const referralSendInvite = document.getElementById('referral-send-invite');
 const referralEmail = document.getElementById('referral-email');
 
@@ -51,6 +55,9 @@ let showTutorial = false;
 
 successClose.addEventListener('click', (e) => {
     successWrapper.classList.add('hide');
+})
+errorClose.addEventListener('click', (e) => {
+    errorWrapper.classList.add('hide');
 })
 
 user.authenticate();
@@ -165,6 +172,33 @@ user.me().then((data) => {
     deleteAccount.addEventListener('click', () => {
         document.querySelector('#edit-user-popup').querySelector('[data-modal-action="close"]').click();
     });
+
+    const paypalEmailInput = document.querySelector('#paypal-email');
+    const paypalEmailButton = document.querySelector('#save-paypal');
+    paypalEmailInput.value = data.paypal_email;
+    paypalEmailInput.addEventListener('input', (event) => {
+        if (event.target.value !== data.paypal_email) {
+            paypalEmailButton.classList.remove('is-disabled');
+        } else {
+            paypalEmailButton.classList.add('is-disabled');
+        }
+    })
+    paypalEmailButton.addEventListener('click', () => {
+        const value = paypalEmailInput.value.trim();
+        if (value !== '' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+            const patchData = {
+                paypal_email: value
+            }
+            user.patchUser(data.id, patchData);
+        } else {
+            errorMessage.innerHTML = message;
+            errorWrapper.classList.remove("hide");
+
+            setTimeout(() => {
+                errorWrapper.classList.add("hide");
+            }, 3000);
+        }
+    })
 
     if (open === 'referral' && data.rewardful_token !== null) {
         localStorage.removeItem('open');
