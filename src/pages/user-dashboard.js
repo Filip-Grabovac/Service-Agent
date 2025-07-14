@@ -191,7 +191,7 @@ user.me().then((data) => {
             }
             user.patchUser(data.id, patchData);
         } else {
-            errorMessage.innerHTML = message;
+            errorMessage.innerHTML = 'PayPal email must be a valid email address!';
             errorWrapper.classList.remove("hide");
 
             setTimeout(() => {
@@ -240,7 +240,6 @@ user.me().then((data) => {
         });
 
         document.querySelectorAll('[data-share="referral"]').forEach(btn => {
-            console.log(btn)
             btn.addEventListener('click', () => {
                 if (navigator.share) {
                     try {
