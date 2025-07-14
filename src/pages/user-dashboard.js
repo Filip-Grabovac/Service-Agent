@@ -204,6 +204,25 @@ user.me().then((data) => {
         document.querySelectorAll('.referral-token').forEach(token => {
             token.textContent = data.rewardful_token;
         });
+
+        document.querySelectorAll('button[data-share="referral"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (navigator.share) {
+                    try {
+                        navigator.share({
+                            title: 'My Cool Page',
+                            text: 'Check out this amazing page!',
+                            url: 'https://agent.valiair.com/?via=' + data.rewardful_token
+                        });
+                    } catch (err) {
+                        console.error('Error sharing:', err);
+                    }
+                } else {
+                    console.log('Web Share API is not supported in this browser.');
+                }
+            });
+        });
+
     }
 
     if (data.is_active) {
