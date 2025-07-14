@@ -646,6 +646,31 @@ export default class User {
                 return null;
             });
     }
+    updatePaypalEmail(userId, data) {
+        const authToken = localStorage.getItem("authToken");
+        // Call the Xano API
+        fetch(
+            `https://xjwh-2u0a-wlxo.n7d.xano.io/api:gU3Px6rO${this.branch}/paypal_email/`,
+            {
+                method: "PATCH",
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                    "Content-Type": "application/json",
+                    "X-Data-Source": this.dataSource,
+                },
+                body: JSON.stringify(data),
+            }
+        )
+            .then((response) => response.json())
+            .then((result) => {
+                this.showSuccess('Your PayPal email address has been successfully updated.');
+                const paypalEmailButton = document.querySelector('#save-paypal');
+                paypalEmailButton.classList.add('is-disabled');
+            })
+            .catch((error) => {
+                this.showError("Server Error! Please, try again or contact support.");
+            });
+    }
   callMethod(methodName, ...args) {
     if (typeof this[methodName] === "function") {
       return this[methodName](...args);
