@@ -176,8 +176,9 @@ user.me().then((data) => {
     const paypalEmailInput = document.querySelector('#paypal-email');
     const paypalEmailButton = document.querySelector('#save-paypal');
     paypalEmailInput.value = data.paypal_email;
+    let currentPaypalEmail = data.paypal_email;
     paypalEmailInput.addEventListener('input', (event) => {
-        if (event.target.value !== data.paypal_email) {
+        if (event.target.value !== currentPaypalEmail) {
             paypalEmailButton.classList.remove('is-disabled');
         } else {
             paypalEmailButton.classList.add('is-disabled');
@@ -190,6 +191,7 @@ user.me().then((data) => {
                 paypal_email: value
             }
             user.updatePaypalEmail(data.id, patchData);
+            currentPaypalEmail = value;
         } else {
             errorMessage.innerHTML = 'PayPal email must be a valid email address!';
             errorWrapper.classList.remove("hide");
