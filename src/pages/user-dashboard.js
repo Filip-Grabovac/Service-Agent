@@ -205,7 +205,7 @@ user.me().then((data) => {
             token.textContent = data.rewardful_token;
         });
 
-        document.querySelectorAll('button[data-share="referral"]').forEach(btn => {
+        document.querySelectorAll('[data-share="referral"]').forEach(btn => {
             console.log(btn)
             btn.addEventListener('click', () => {
                 if (navigator.share) {
