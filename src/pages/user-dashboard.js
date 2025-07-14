@@ -206,6 +206,7 @@ user.me().then((data) => {
         });
 
         document.querySelectorAll('button[data-share="referral"]').forEach(btn => {
+            console.log(btn)
             btn.addEventListener('click', () => {
                 if (navigator.share) {
                     try {
