@@ -189,7 +189,7 @@ user.me().then((data) => {
             const patchData = {
                 paypal_email: value
             }
-            user.patchUser(data.id, patchData);
+            user.updatePaypalEmail(data.id, patchData);
         } else {
             errorMessage.innerHTML = 'PayPal email must be a valid email address!';
             errorWrapper.classList.remove("hide");
