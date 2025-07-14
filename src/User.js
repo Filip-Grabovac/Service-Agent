@@ -650,7 +650,7 @@ export default class User {
         const authToken = localStorage.getItem("authToken");
         // Call the Xano API
         fetch(
-            `https://xjwh-2u0a-wlxo.n7d.xano.io/api:gU3Px6rO${this.branch}/paypal_email/`,
+            `https://xjwh-2u0a-wlxo.n7d.xano.io/api:gU3Px6rO${this.branch}/paypal_email`,
             {
                 method: "PATCH",
                 headers: {
