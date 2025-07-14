@@ -16,11 +16,12 @@ payBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
     let price;
-    if (currentDomain.includes('webflow.io')) {
-        price = "price_1QfGqbCA20rcDWGhGrIUBQVr";
-    } else {
-        price = "price_1Qrbi9CA20rcDWGhZg72KAVO";
-    }
+    // if (currentDomain.includes('webflow.io')) {
+    //     price = "price_1QfGqbCA20rcDWGhGrIUBQVr";
+    // } else {
+    //     price = "price_1Qrbi9CA20rcDWGhZg72KAVO";
+    // }
+    price = "price_1Qrbi9CA20rcDWGhZg72KAVO";
 
     user.me().then((data) => {
         let paymentData = {
