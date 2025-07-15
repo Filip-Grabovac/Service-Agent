@@ -1038,6 +1038,16 @@ export function setModals(menu) {
                     }
                 }
 
+                if (modalName === 'edit-user-popup') {
+                    const entries = Array.from(formData.entries());
+
+                    const iarcaValue = entries.find(item => item[0] === 'iarca_tracking_number')?.[1];
+
+                    if (iarcaValue === '') {
+                        formData.delete('iarca_tracking_number');
+                    }
+                }
+
                 if (modalName === 'add-certificate-popup') {
                     const entries = Array.from(formData.entries());
 
