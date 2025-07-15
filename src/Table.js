@@ -1038,16 +1038,6 @@ export function setModals(menu) {
                     }
                 }
 
-                if (modalName === 'edit-user-popup') {
-                    const entries = Array.from(formData.entries());
-
-                    const iarcaValue = entries.find(item => item[0] === 'iarca_tracking_number')?.[1];
-
-                    if (iarcaValue === '') {
-                        formData.delete('iarca_tracking_number');
-                    }
-                }
-
                 if (modalName === 'add-certificate-popup') {
                     const entries = Array.from(formData.entries());
 
@@ -1139,7 +1129,7 @@ export function setModals(menu) {
                                 formData.delete('description');
                                 formData.append('description', '');
                             }
-                        } else if (key !== 'middle_name' && key !== 'user_addresses_of_user.address_additional' && key !== 'document_addresses_of_documents.address_additional') {
+                        } else if (key !== 'middle_name' && key !== 'user_addresses_of_user.address_additional' && key !== 'document_addresses_of_documents.address_additional' && (key !== 'iarca_tracking_number' && modalName === 'edit-user-popup')) {
                             if (modalName === 'add-certificate-popup') {
                                 modal.querySelector('[data-error=' + key + ']').style.display = 'block';
 
