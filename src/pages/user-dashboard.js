@@ -10,6 +10,9 @@ import {
 const user = new User();
 const certificate = new Certificate();
 
+let open = '';
+open = localStorage.getItem('open');
+
 const home = document.getElementById('home');
 
 const logout = document.getElementsByClassName('logout');
@@ -35,6 +38,13 @@ const successWrapper = document.getElementById('success-wrapper');
 const successMessage = document.getElementById('success-message');
 const successClose = document.getElementById('success-close');
 
+const errorWrapper = document.getElementById('error-wrapper');
+const errorMessage = document.getElementById('error-message');
+const errorClose = document.getElementById('error-close');
+
+const referralSendInvite = document.getElementById('referral-send-invite');
+const referralEmail = document.getElementById('referral-email');
+
 const loader = document.getElementById('loader-user');
 loader.style.display = 'flex';
 setTimeout(() => {
@@ -45,6 +55,9 @@ let showTutorial = false;
 
 successClose.addEventListener('click', (e) => {
     successWrapper.classList.add('hide');
+})
+errorClose.addEventListener('click', (e) => {
+    errorWrapper.classList.add('hide');
 })
 
 user.authenticate();
@@ -141,6 +154,14 @@ tourSkips.forEach((el, index) => {
     });
 });
 
+referralSendInvite.addEventListener('click', () => {
+    const data = {
+        email: referralEmail.value
+    }
+    referralEmail.value = '';
+    user.sendReferralInvite(data);
+});
+
 let prepopulatedUserId = null;
 user.me().then((data) => {
     prepopulatedUserId = data.prepopulated_users_id;
@@ -151,6 +172,95 @@ user.me().then((data) => {
     deleteAccount.addEventListener('click', () => {
         document.querySelector('#edit-user-popup').querySelector('[data-modal-action="close"]').click();
     });
+
+    const paypalEmailInput = document.querySelector('#paypal-email');
+    const paypalEmailButton = document.querySelector('#save-paypal');
+    paypalEmailInput.value = data.paypal_email;
+    let currentPaypalEmail = data.paypal_email;
+    paypalEmailInput.addEventListener('input', (event) => {
+        if (event.target.value !== currentPaypalEmail) {
+            paypalEmailButton.classList.remove('is-disabled');
+        } else {
+            paypalEmailButton.classList.add('is-disabled');
+        }
+    })
+    paypalEmailButton.addEventListener('click', () => {
+        const value = paypalEmailInput.value.trim();
+        if (value !== '' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+            const patchData = {
+                paypal_email: value
+            }
+            user.updatePaypalEmail(data.id, patchData);
+            currentPaypalEmail = value;
+        } else {
+            errorMessage.innerHTML = 'PayPal email must be a valid email address!';
+            errorWrapper.classList.remove("hide");
+
+            setTimeout(() => {
+                errorWrapper.classList.add("hide");
+            }, 3000);
+        }
+    })
+
+    if (open === 'referral' && data.rewardful_token !== null) {
+        localStorage.removeItem('open');
+
+        const referralTab = document.querySelector('.popup-tabs-menu-item[data-w-tab="Tab 2"]');
+        referralTab.click()
+
+        setTimeout(() => {
+            gear.click();
+        }, 1000)
+    }
+
+    if (data.rewardful_token === null) {
+        const referralTab = document.querySelector('.popup-tabs-menu-item[data-w-tab="Tab 2"]');
+        referralTab.style.display = 'none';
+    }
+
+    const oneMonthMs = 30 * 24 * 60 * 60 * 1000;
+    const now = Date.now();
+
+    const hasOneMonthPassed = now - data.created_at >= oneMonthMs;
+
+    if (!data.referral_box_hidden && hasOneMonthPassed && data.rewardful_token !== null) {
+        document.querySelector(('.referral-text-wrap')).style.display = 'flex';
+
+        document.querySelector(('.referral-close-icon')).addEventListener('click', (e) => {
+            document.querySelector(('.referral-text-wrap')).style.display = 'none';
+
+            const patchData = {
+                referral_box_hidden: true
+            }
+            user.patchUser(data.id, patchData);
+        });
+    }
+
+    if (data.rewardful_token) {
+        document.querySelectorAll('.referral-token').forEach(token => {
+            token.textContent = data.rewardful_token;
+        });
+
+        document.querySelectorAll('[data-share="referral"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (navigator.share) {
+                    try {
+                        navigator.share({
+                            title: 'My Cool Page',
+                            text: 'Check out this amazing page!',
+                            url: 'https://agent.valiair.com/?via=' + data.rewardful_token
+                        });
+                    } catch (err) {
+                        console.error('Error sharing:', err);
+                    }
+                } else {
+                    console.log('Web Share API is not supported in this browser.');
+                }
+            });
+        });
+
+    }
+
     if (data.is_active) {
         if (data.company_id === null) {
             billingOpen.setAttribute('data-id-user-id', data.id);
@@ -620,3 +730,51 @@ function setBillingLink() {
             });
     }, { once: true });
 }
+
+user.getUserReferrals().then((data) => {
+    if (data.length === 0) {
+        document.querySelector('#referrals-box').style.display = 'none';
+
+        return;
+    }
+
+    document.querySelector('.referral-number').textContent = data.length;
+
+    const container = document.querySelector('.referral-list');
+    const templateRow = container.querySelector('.referral-row');
+
+    container.innerHTML = '';
+
+    data.forEach((item, index) => {
+        const row = templateRow.cloneNode(true);
+        if (item.status === 'pending') {
+            row.classList.add('inactive')
+            row.querySelector('.referral-icon').style.display = 'block';
+        }
+        row.querySelector('.referral-row-name').textContent = item._user_1.first_name + ' ' + item._user_1.last_name;
+
+        const date = new Date(item.created_at);
+        row.querySelector('.referral-row-date').textContent = date.toISOString().split('T')[0];
+
+        if (item.status === 'pending') {
+            row.querySelector('.status-box').classList.add('orange');
+            row.querySelector('.dot').classList.add('orange');
+            row.querySelector('.badge-text').classList.add('orange');
+            row.querySelector('.badge-text').textContent = 'PENDING';
+            row.querySelector('.referral-row-price').style.display = 'none';
+        } else if (item.status === 'referred') {
+            row.querySelector('.status-box').classList.add('blue');
+            row.querySelector('.dot').classList.add('blue');
+            row.querySelector('.badge-text').classList.add('blue');
+            row.querySelector('.badge-text').textContent = 'REFERRED';
+        } else if (item.status === 'paid') {
+            row.querySelector('.status-box').classList.add('green');
+            row.querySelector('.dot').classList.add('green');
+            row.querySelector('.badge-text').classList.add('green');
+            row.querySelector('.badge-text').textContent = 'PAID';
+            row.querySelector('.referral-row-price').style.color = '#339A44';
+        }
+
+        container.appendChild(row);
+    });
+})

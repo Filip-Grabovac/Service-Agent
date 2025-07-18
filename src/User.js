@@ -567,6 +567,110 @@ export default class User {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
+    sendReferralInvite(data) {
+        const authToken =  localStorage.getItem('authToken');
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:gU3Px6rO${this.branch}/send-referral-invite`;
+
+        if (data.email === '' || !isValidEmail(data.email)) {
+            this.showError('Please, enter a valid email address!');
+
+            return;
+        }
+
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Call the Xano API
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+
+                    return false;
+                }
+
+                this.showSuccess('An invitation has been sent to ' + data.email + ' successfully.');
+
+                const referralSendInvite = document.getElementById('referral-send-invite');
+
+                referralSendInvite.classList.add('active');
+                referralSendInvite.querySelector('#referral-icon-normal').style.display = 'none';
+                referralSendInvite.querySelector('#referral-icon-sent').style.display = 'block';
+                referralSendInvite.querySelector('#referral-button-text').textContent = 'Sent';
+                setTimeout(() => {
+                    referralSendInvite.classList.remove('active');
+                    referralSendInvite.querySelector('#referral-icon-normal').style.display = 'block';
+                    referralSendInvite.querySelector('#referral-icon-sent').style.display = 'none';
+                    referralSendInvite.querySelector('#referral-button-text').textContent = 'Send invitation';
+                }, 3000);
+
+                return true;
+            })
+            .catch((error) => {
+                this.showError('Server Error! Please, try again or contact support.');
+            });
+    }
+    getUserReferrals(hash) {
+        const authToken =  localStorage.getItem('authToken');
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:gU3Px6rO${this.branch}/referrals`;
+
+        // Call the Xano API
+        return fetch(url, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+                "Content-Type": "application/json",
+                "X-Data-Source": this.dataSource,
+            },
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    return null;
+                }
+
+                return result;
+            })
+            .catch((error) => {
+                return null;
+            });
+    }
+    updatePaypalEmail(userId, data) {
+        const authToken = localStorage.getItem("authToken");
+        // Call the Xano API
+        fetch(
+            `https://xjwh-2u0a-wlxo.n7d.xano.io/api:gU3Px6rO${this.branch}/paypal_email`,
+            {
+                method: "PATCH",
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                    "Content-Type": "application/json",
+                    "X-Data-Source": this.dataSource,
+                },
+                body: JSON.stringify(data),
+            }
+        )
+            .then((response) => response.json())
+            .then((result) => {
+                this.showSuccess('Your PayPal email address has been successfully updated.');
+                const paypalEmailButton = document.querySelector('#save-paypal');
+                paypalEmailButton.classList.add('is-disabled');
+            })
+            .catch((error) => {
+                this.showError("Server Error! Please, try again or contact support.");
+            });
+    }
   callMethod(methodName, ...args) {
     if (typeof this[methodName] === "function") {
       return this[methodName](...args);

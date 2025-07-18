@@ -6,12 +6,18 @@ const payBtn = document.getElementById('pay-button');
 
 user.authenticate();
 
+let referral = null;
+if (localStorage.getItem('referral')) {
+    referral = localStorage.getItem('referral');
+}
+
 payBtn.addEventListener('click', function (event) {
     event.preventDefault(); // Prevent form from submitting
 
     let price;
     if (currentDomain.includes('webflow.io')) {
         price = "price_1QfGqbCA20rcDWGhGrIUBQVr";
+        referral = null;
     } else {
         price = "price_1Qrbi9CA20rcDWGhZg72KAVO";
     }
@@ -26,7 +32,8 @@ payBtn.addEventListener('click', function (event) {
                     price: price,
                     quantity: "1",
                 }
-            ]
+            ],
+            referral: referral
         };
 
         user.initialPayment(paymentData).then(result => {
