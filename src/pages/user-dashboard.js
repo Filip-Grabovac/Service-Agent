@@ -18,6 +18,7 @@ const home = document.getElementById('home');
 const logout = document.getElementsByClassName('logout');
 const gearWrapper = document.getElementById('gear-wrapper');
 const gear = document.getElementById('gear');
+const helpWrapper = document.getElementById('help-wrapper');
 const deleteAccount = document.getElementById('delete-account');
 const billingOpen = document.getElementById('billing-open');
 const tour1Next = document.getElementById('tour-1-next');
@@ -93,6 +94,13 @@ userMenu1.click()
 gearWrapper.addEventListener('click', function (event) {
     event.stopImmediatePropagation();
     event.preventDefault();
+})
+
+helpWrapper.addEventListener('click', function (event) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+
+    window.open('https://www.valiair.com/agent-support', '_blank');
 })
 
 tour1Next.addEventListener('click', function (event) {
