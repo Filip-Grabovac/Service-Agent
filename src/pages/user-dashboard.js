@@ -170,6 +170,10 @@ referralSendInvite.addEventListener('click', () => {
     user.sendReferralInvite(data);
 });
 
+document.querySelector('#edit-user-popup').querySelector('[data-modal-action=close]').addEventListener('click', () => {
+    document.querySelector('.popup-tabs-menu-item[data-w-tab="Tab 1"]').click();
+});
+
 let prepopulatedUserId = null;
 user.me().then((data) => {
     prepopulatedUserId = data.prepopulated_users_id;
