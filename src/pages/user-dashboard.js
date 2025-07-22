@@ -233,6 +233,15 @@ user.me().then((data) => {
 
     if (!data.referral_box_hidden && hasOneMonthPassed && data.rewardful_token !== null && data.user_slots_available === 0) {
         document.querySelector(('.referral-text-wrap')).style.display = 'flex';
+        document.querySelector(('#referral-box-email')).textContent = data.paypal_email;
+        document.querySelector(('#referral-box-change-email')).addEventListener('click', () => {
+            const referralTab = document.querySelector('.popup-tabs-menu-item[data-w-tab="Tab 2"]');
+            referralTab.click()
+
+            setTimeout(() => {
+                gear.click();
+            }, 1000)
+        });
 
         document.querySelector(('.referral-close-icon')).addEventListener('click', (e) => {
             document.querySelector(('.referral-text-wrap')).style.display = 'none';
