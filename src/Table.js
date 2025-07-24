@@ -1941,7 +1941,7 @@ function fillDocumentDetails(data, menu, modal) {
     document.body.appendChild(hiddenInput);
 
     const iti = window.intlTelInput(hiddenInput, {
-        initialCountry: data.phone_country,
+        initialCountry: data._user.phone_country,
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
     });
 
@@ -1951,7 +1951,7 @@ function fillDocumentDetails(data, menu, modal) {
     }
 
     shippingName.innerHTML = data._user.first_name + ' ' + data._user.last_name;
-    shippingPhone.innerHTML = "+" + iti.getSelectedCountryData().dialCode + data.phone_number;
+    shippingPhone.innerHTML = "+" + iti.getSelectedCountryData().dialCode + data._user.phone_number;
     shippingEmail.innerHTML = data._user.email;
     if (data._document_addresses_of_documents) {
         shippingAddress.innerHTML = data._document_addresses_of_documents.street + ' ' + data._document_addresses_of_documents.number;
