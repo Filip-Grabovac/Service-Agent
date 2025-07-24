@@ -1936,8 +1936,22 @@ function fillDocumentDetails(data, menu, modal) {
         shreddedAtBox.style.display = 'none';
     }
 
+    const hiddenInput = document.createElement("input");
+    hiddenInput.style.display = "none";
+    document.body.appendChild(hiddenInput);
+
+    const iti = window.intlTelInput(hiddenInput, {
+        initialCountry: data.phone_country,
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+    });
+
+    const itiWrapper = hiddenInput.closest('.iti');
+    if (itiWrapper) {
+        itiWrapper.classList.add("hidden-iti");
+    }
+
     shippingName.innerHTML = data._user.first_name + ' ' + data._user.last_name;
-    shippingPhone.innerHTML = data._user.phone;
+    shippingPhone.innerHTML = "+" + iti.getSelectedCountryData().dialCode + data.phone_number;
     shippingEmail.innerHTML = data._user.email;
     if (data._document_addresses_of_documents) {
         shippingAddress.innerHTML = data._document_addresses_of_documents.street + ' ' + data._document_addresses_of_documents.number;
