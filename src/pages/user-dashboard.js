@@ -244,7 +244,7 @@ user.me().then((data) => {
 
             setTimeout(() => {
                 gear.click();
-            }, 100)
+            }, 200)
         });
 
         document.querySelector(('.referral-close-icon')).addEventListener('click', (e) => {
