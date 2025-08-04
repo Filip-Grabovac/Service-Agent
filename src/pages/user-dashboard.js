@@ -230,12 +230,7 @@ user.me().then((data) => {
         referralTab.style.display = 'none';
     }
 
-    const oneMonthMs = 30 * 24 * 60 * 60 * 1000;
-    const now = Date.now();
-
-    const hasOneMonthPassed = now - data.created_at >= oneMonthMs;
-
-    if (!data.referral_box_hidden && hasOneMonthPassed && data.rewardful_token !== null && data.user_slots_available === 0) {
+    if (!data.referral_box_hidden && data.rewardful_token !== null && data.user_slots_available === 0) {
         document.querySelector(('.referral-text-wrap')).style.display = 'flex';
         document.querySelector(('#referral-box-email')).textContent = data.paypal_email;
         document.querySelector(('#referral-box-change-email')).addEventListener('click', () => {
