@@ -921,6 +921,8 @@ export function setModals(menu) {
                     const afterRegisterSection = document.querySelector(`#after-register-section`);
                     const certificatesTable = document.getElementById('certificate-tables');
 
+                    console.log(certificatesTable)
+                    console.log(afterRegisterSection.hasAttribute('data-show'))
                     if (afterRegisterSection.hasAttribute('data-show')) {
                         afterRegisterSection.classList.remove('hide');
                     } else {
