@@ -916,6 +916,8 @@ export function setModals(menu) {
             button.addEventListener("click", function (e) {
                 e.preventDefault()
 
+                console.log(button)
+                console.log(modalName)
                 modal.classList.add('hide');
                 if (modalName === 'add-certificate-popup') {
                     const afterRegisterSection = document.querySelector(`#after-register-section`);
