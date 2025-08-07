@@ -527,7 +527,6 @@ export function setModals(menu) {
 
     Object.entries(modals).forEach(([key, item]) => {
         const modal = document.getElementById(item.modal);
-        modalName = item.modal;
         const openButtons = document.querySelectorAll(`[data-modal-open="${item.modal}"]`);
         const closeButtons = modal.querySelectorAll('[data-modal-action="close"]');
         const submitButton = modal.querySelectorAll('[data-modal-action="submit"]')[0];
@@ -917,10 +916,11 @@ export function setModals(menu) {
             button.addEventListener("click", function (e) {
                 e.preventDefault()
 
-                console.log(button)
-                console.log(modalName)
-                console.log(modal)
                 modal.classList.add('hide');
+                if (modal.hasAttribute('id') && modal.getAttribute('id') === 'add-certificate-popup') {
+                    const certificatesTable = document.getElementById('certificate-tables');
+                    certificatesTable.classList.remove('hide');
+                }
                 if (modalName === 'add-certificate-popup') {
                     const afterRegisterSection = document.querySelector(`#after-register-section`);
                     const certificatesTable = document.getElementById('certificate-tables');
