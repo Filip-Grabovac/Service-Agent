@@ -527,7 +527,7 @@ export function setModals(menu) {
 
     Object.entries(modals).forEach(([key, item]) => {
         const modal = document.getElementById(item.modal);
-        const modalName = item.modal;
+        modalName = item.modal;
         const openButtons = document.querySelectorAll(`[data-modal-open="${item.modal}"]`);
         const closeButtons = modal.querySelectorAll('[data-modal-action="close"]');
         const submitButton = modal.querySelectorAll('[data-modal-action="submit"]')[0];
