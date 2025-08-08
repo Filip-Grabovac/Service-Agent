@@ -917,6 +917,10 @@ export function setModals(menu) {
                 e.preventDefault()
 
                 modal.classList.add('hide');
+                if (modal.hasAttribute('id') && modal.getAttribute('id') === 'add-certificate-popup') {
+                    const certificatesTable = document.getElementById('certificate-tables');
+                    certificatesTable.classList.remove('hide');
+                }
                 if (modalName === 'add-certificate-popup') {
                     const afterRegisterSection = document.querySelector(`#after-register-section`);
                     const certificatesTable = document.getElementById('certificate-tables');
@@ -1799,8 +1803,12 @@ function fillDocumentDetails(data, menu, modal) {
     const status = document.getElementById('document-status');
 
     const shippingName = document.getElementById('document-shipping-name');
+    const shippingPhone = document.getElementById('document-shipping-phone');
+    const shippingEmail = document.getElementById('document-shipping-email');
     const shippingAddress = document.getElementById('document-shipping-address');
     const shippingCity = document.getElementById('document-shipping-city');
+    const shippingCountry = document.getElementById('document-shipping-country');
+    const shippingAdditional = document.getElementById('document-shipping-additional');
     const shippingAddressBox = document.getElementById('document-shipping-address-box');
 
     const assignedAt = document.getElementById('document-assigned-at');
@@ -1849,6 +1857,8 @@ function fillDocumentDetails(data, menu, modal) {
     payment.style.display = 'flex';
     shippingAddress.innerHTML = '...'
     shippingCity.innerHTML = '...'
+    shippingCountry.innerHTML = '...'
+    shippingAdditional.innerHTML = '...'
     assignedAt.innerHTML = '...'
     deliveryRequestedAt.innerHTML = '...'
     paidAt.innerHTML = '...'
@@ -1930,10 +1940,34 @@ function fillDocumentDetails(data, menu, modal) {
         shreddedAtBox.style.display = 'none';
     }
 
+    const hiddenInput = document.createElement("input");
+    hiddenInput.style.display = "none";
+    document.body.appendChild(hiddenInput);
+
+    const iti = window.intlTelInput(hiddenInput, {
+        initialCountry: data._user.phone_country,
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+    });
+
+    const itiWrapper = hiddenInput.closest('.iti');
+    if (itiWrapper) {
+        itiWrapper.classList.add("hidden-iti");
+    }
+
     shippingName.innerHTML = data._user.first_name + ' ' + data._user.last_name;
+    shippingPhone.innerHTML = "+" + iti.getSelectedCountryData().dialCode + data._user.phone_number;
+    shippingEmail.innerHTML = data._user.email;
     if (data._document_addresses_of_documents) {
         shippingAddress.innerHTML = data._document_addresses_of_documents.street + ' ' + data._document_addresses_of_documents.number;
-        shippingCity.innerHTML = data._document_addresses_of_documents.zip + ' ' + data._document_addresses_of_documents.country;
+        shippingCity.innerHTML = data._document_addresses_of_documents.zip + ' ' + data._document_addresses_of_documents.city;
+        shippingCountry.innerHTML = data._document_addresses_of_documents.state + ' ' + data._document_addresses_of_documents.country;
+        if (data._document_addresses_of_documents.address_additional) {
+            shippingAdditional.innerHTML = data._document_addresses_of_documents.address_additional
+            shippingAdditional.style.display = 'block';
+        } else {
+            shippingAdditional.style.display = 'none';
+        }
+
         shippingAddressBox.style.display = 'flex';
     } else {
         shippingAddressBox.style.display = 'none';

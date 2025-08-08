@@ -18,6 +18,7 @@ const home = document.getElementById('home');
 const logout = document.getElementsByClassName('logout');
 const gearWrapper = document.getElementById('gear-wrapper');
 const gear = document.getElementById('gear');
+const helpWrapper = document.getElementById('help-wrapper');
 const deleteAccount = document.getElementById('delete-account');
 const billingOpen = document.getElementById('billing-open');
 const tour1Next = document.getElementById('tour-1-next');
@@ -95,6 +96,13 @@ gearWrapper.addEventListener('click', function (event) {
     event.preventDefault();
 })
 
+helpWrapper.addEventListener('click', function (event) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+
+    window.open('https://www.valiair.com/agent-support', '_blank');
+})
+
 tour1Next.addEventListener('click', function (event) {
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -162,6 +170,10 @@ referralSendInvite.addEventListener('click', () => {
     user.sendReferralInvite(data);
 });
 
+document.querySelector('#edit-user-popup').querySelector('[data-modal-action=close]').addEventListener('click', () => {
+    document.querySelector('.popup-tabs-menu-item[data-w-tab="Tab 1"]').click();
+});
+
 let prepopulatedUserId = null;
 user.me().then((data) => {
     prepopulatedUserId = data.prepopulated_users_id;
@@ -218,13 +230,17 @@ user.me().then((data) => {
         referralTab.style.display = 'none';
     }
 
-    const oneMonthMs = 30 * 24 * 60 * 60 * 1000;
-    const now = Date.now();
-
-    const hasOneMonthPassed = now - data.created_at >= oneMonthMs;
-
-    if (!data.referral_box_hidden && hasOneMonthPassed && data.rewardful_token !== null && data.user_slots_available === 0) {
+    if (!data.referral_box_hidden && data.rewardful_token !== null && data.user_slots_available === 0) {
         document.querySelector(('.referral-text-wrap')).style.display = 'flex';
+        document.querySelector(('#referral-box-email')).textContent = data.paypal_email;
+        document.querySelector(('#referral-box-change-email')).addEventListener('click', () => {
+            const referralTab = document.querySelector('.popup-tabs-menu-item[data-w-tab="Tab 2"]');
+            referralTab.click()
+
+            setTimeout(() => {
+                gear.click();
+            }, 100)
+        });
 
         document.querySelector(('.referral-close-icon')).addEventListener('click', (e) => {
             document.querySelector(('.referral-text-wrap')).style.display = 'none';

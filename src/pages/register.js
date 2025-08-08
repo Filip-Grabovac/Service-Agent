@@ -507,3 +507,7 @@ function populateCountries() {
     }
   });
 }
+
+if (localStorage.getItem('referral')) {
+  document.querySelector('#referral_source').value = 'Referral';
+}
