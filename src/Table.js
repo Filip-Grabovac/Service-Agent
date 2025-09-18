@@ -537,22 +537,9 @@ export function setModals(menu) {
             button.addEventListener("click", function (e) {
                 e.preventDefault()
 
-                const changeDocumentAddress = modal.querySelector('#change-document-address');
-
-                if (changeDocumentAddress) {
-                    changeDocumentAddress.addEventListener('click', function () {
-                        modal.classList.add('hide');
-
-                        const closestElement = button.parentElement.querySelector(
-                            `[data-modal-open="edit-document-address-popup"]`
-                        );
-
-                        closestElement.click()
-                    })
-                }
-
                 method = item.method;
                 modalName = item.modal
+
                 let idAttribute = Array.from(button.attributes).find(attr => attr.name.startsWith('data-id-'));
                 if (idAttribute) {
                     let idAttributeName = idAttribute.name
@@ -565,6 +552,11 @@ export function setModals(menu) {
                         let parts = item.action.split("/");
                         parts[parts.length - 1] = idAttribute.value;
                         url = parts.join("/");
+                    }
+
+
+                    if (modalName === 'request-forward-document-popup') {
+                        loadShippingRates(idAttribute.value);
                     }
                 } else {
                     url = item.action
@@ -2498,4 +2490,13 @@ export function getTabCount() {
 
         return sum;
     }
+}
+
+function loadShippingRates(documentId) {
+    documentFile.getShippingRates(documentId).then((response) => {
+        console.log(response)
+
+        document.querySelector('.delivery-loading').style.display = 'none';
+        document.querySelector('.delivery-quote-wrapper').style.display = 'flex';
+    });
 }
