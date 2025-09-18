@@ -2493,10 +2493,36 @@ export function getTabCount() {
 }
 
 function loadShippingRates(documentId) {
-    documentFile.getShippingRates(documentId).then((response) => {
-        console.log(response)
+    documentFile.getShippingRates(documentId).then((data) => {
+        const offers = data?.response?.offerList ?? [];
+
+        const quoteWrapper = document.querySelector('.delivery-quote-wrapper');
+        const quoteTemplate = document.querySelector('.delivery-quote');
+        quoteWrapper.innerHTML = '';
+        offers.forEach((offer, i) => {
+            console.log(i, offer);
+            const item = quoteTemplate.cloneNode(true);
+
+            item.setAttribute('data-product-transaction-id', offer.productTransactionId)
+            item.setAttribute('data-offer-id', offer.offerId)
+
+            item.querySelector('.delivery-quote-price').textContent = '$' + offer.totalOfferPrice.value;
+            // item.querySelector('.delivery-quote-days').textContent = '$' + offer.totalOfferPrice.value;
+
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.delivery-quote.active').forEach(q => q.classList.remove('active'));
+                document.querySelectorAll('.delivery-quote-selector.active').forEach(s => s.classList.remove('active'));
+
+                item.classList.add('active');
+
+                let selector = item.querySelector('.delivery-quote-selector');
+                if (selector) selector.classList.add('active');
+            }, { passive: true });
+
+            quoteWrapper.appendChild(item);
+        });
 
         document.querySelector('.delivery-loading').style.display = 'none';
-        document.querySelector('.delivery-quote-wrapper').style.display = 'flex';
+        quoteWrapper.style.display = 'flex';
     });
 }
