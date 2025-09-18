@@ -2508,7 +2508,7 @@ function loadShippingRates(documentId) {
             item.setAttribute('data-offer-id', offer.offerId)
 
             item.querySelector('.delivery-quote-price').textContent = '$' + offer.totalOfferPrice.value;
-            // item.querySelector('.delivery-quote-days').textContent = '$' + offer.totalOfferPrice.value;
+            item.querySelector('.delivery-quote-days').textContent = 'Estimated delivery: ' + offer.offeredProductList[0].shopRQShipment.timeInTransit.estimatedDeliveryDate;
 
             item.addEventListener('click', () => {
                 document.querySelectorAll('.delivery-quote.active').forEach(q => q.classList.remove('active'));
