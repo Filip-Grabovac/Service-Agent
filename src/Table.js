@@ -2501,6 +2501,7 @@ function loadShippingRates(documentId) {
         quoteWrapper.innerHTML = '';
         offers.forEach((offer, i) => {
             console.log(i, offer);
+            console.log(JSON.stringify(offer));
             const item = quoteTemplate.cloneNode(true);
 
             item.setAttribute('data-product-transaction-id', offer.productTransactionId)
