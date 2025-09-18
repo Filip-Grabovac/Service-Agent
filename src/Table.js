@@ -613,7 +613,7 @@ export function setModals(menu) {
                                         fullAddress = fullAddress + ', ' + address.address_additional
                                     }
 
-                                    element.value = fullAddress
+                                    element.add(new Option(fullAddress, fullAddress, true, true), 0);
                                 }
                             }
 
