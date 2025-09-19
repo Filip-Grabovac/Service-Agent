@@ -2492,6 +2492,21 @@ export function getTabCount() {
     }
 }
 
+function shippingRatesLogic(documentId) {
+    const addressSelect = document.querySelector('#document_user_address');
+    const addressWrapper = document.querySelector('.delivery-address-wrapper');
+    const addressSelectWrapper = document.querySelector('#delivery-address-select-wrapper');
+    addressWrapper.after(addressSelectWrapper);
+
+    addressSelect.addEventListener('change', function () {
+        const value = this.value;
+
+        if (value === 'other') {
+            addressWrapper.style.display = 'block';
+        }
+    });
+}
+
 function loadShippingRates(documentId) {
     documentFile.getShippingRates(documentId).then((data) => {
         const offers = data?.response?.offerList ?? [];
@@ -2500,8 +2515,6 @@ function loadShippingRates(documentId) {
         const quoteTemplate = document.querySelector('.delivery-quote');
         quoteWrapper.innerHTML = '';
         offers.forEach((offer, i) => {
-            console.log(i, offer);
-            console.log(JSON.stringify(offer));
             const item = quoteTemplate.cloneNode(true);
 
             item.setAttribute('data-product-transaction-id', offer.productTransactionId)
