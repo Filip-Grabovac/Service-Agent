@@ -1585,7 +1585,7 @@ function getModals(menu) {
             2: {
                 modal: 'request-forward-document-popup',
                 action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/document_addresses/{document_addresses_id}`,
-                method: 'PATCH',
+                method: 'PUT',
                 files: [],
                 success_message: 'The document address has been successfully updated.',
             },
