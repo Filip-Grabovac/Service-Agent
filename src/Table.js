@@ -2515,6 +2515,15 @@ function shippingRatesLogic(documentId) {
     const addressButton = document.querySelector('.button-delivery-address');
     const deliveryLoading = document.querySelector('.delivery-loading');
 
+    deliveryLoading.style.display = 'flex';
+    payButton.classList.add('is-disabled');
+    addressSelect.classList.add('is-disabled');
+    waitingAddress.style.display = 'none';
+    payButton.style.display = 'flex';
+    addressButton.style.display = 'none';
+    addressWrapper.style.display = 'none';
+    addressSelect.selectedIndex = 0;
+
     if (addressCompanyWrapper.querySelector('input').value === '') {
         addressCompanyWrapper.style.display = 'none';
     } else {
