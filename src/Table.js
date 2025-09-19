@@ -2538,6 +2538,8 @@ function shippingRatesLogic(documentId) {
         waitingAddress.style.display = 'none';
         payButton.style.display = 'flex';
         addressButton.style.display = 'none';
+        addressWrapper.style.display = 'none';
+        addressSelect.selectedIndex = 0;
         loadShippingRates(documentId);
     });
 }
