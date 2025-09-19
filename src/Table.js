@@ -779,6 +779,10 @@ export function setModals(menu) {
                             address = fillData?._user?._user_addresses_of_user;
                         }
 
+                        modal.querySelector('[name=title]').value = fillData?.title;
+                        modal.querySelector('[name=title]').setAttribute('disabled', true);
+                        modal.querySelector('[name=title]').setAttribute('data-disabled', true);
+
                         populateDeliveryAddress(address)
                     }
                 }
@@ -2554,6 +2558,9 @@ function shippingRatesLogic(documentId) {
 function loadShippingRates(documentId) {
     documentFile.getShippingRates(documentId).then((data) => {
         const offers = data?.response?.offerList ?? [];
+
+        document.querySelectorAll('.delivery-quote.active').forEach(q => q.classList.remove('active'));
+        document.querySelectorAll('.delivery-quote-selector.active').forEach(s => s.classList.remove('active'));
 
         const quoteWrapper = document.querySelector('.delivery-quote-wrapper');
         const quoteTemplate = document.querySelector('.delivery-quote');
