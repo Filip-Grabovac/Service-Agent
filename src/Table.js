@@ -767,20 +767,20 @@ export function setModals(menu) {
                     if (modalName === 'details-document-popup') {
                         fillDocumentDetails(fillData, menu, modal);
                     }
-                }
 
-                if (modalName === 'request-forward-document-popup') {
-                    url = url.replace(/([?#].*)?$/, '');
+                    if (modalName === 'request-forward-document-popup') {
+                        url = url.replace(/([?#].*)?$/, '');
 
-                    url = url.replace(/[^/]*$/, '') + fillData?._document_addresses_of_documents?.id;
+                        url = url.replace(/[^/]*$/, '') + fillData?._document_addresses_of_documents?.id;
 
-                    let address = fillData?._document_addresses_of_documents;
+                        let address = fillData?._document_addresses_of_documents;
 
-                    if (!address) {
-                        address = fillData?._user?._user_addresses_of_user;
+                        if (!address) {
+                            address = fillData?._user?._user_addresses_of_user;
+                        }
+
+                        populateDeliveryAddress(address)
                     }
-
-                    populateDeliveryAddress(address)
                 }
 
                 modal.classList.remove('hide');
