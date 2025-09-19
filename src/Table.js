@@ -2498,6 +2498,11 @@ function shippingRatesLogic(documentId) {
     const addressSelect = document.querySelector('#document_user_address');
     const addressWrapper = document.querySelector('.delivery-address-wrapper');
     const addressSelectWrapper = document.querySelector('#delivery-address-select-wrapper');
+    const quoteWrapper = document.querySelector('.delivery-quote-wrapper');
+    const waitingAddress = document.querySelector('.delivery-waiting-address');
+    const payButton = document.querySelector('.button-delivery-pay');
+    const addressButton = document.querySelector('.button-delivery-address');
+
     addressSelectWrapper.after(addressWrapper);
 
     addressSelect.addEventListener('change', function () {
@@ -2505,6 +2510,10 @@ function shippingRatesLogic(documentId) {
 
         if (value === 'other') {
             addressWrapper.style.display = 'block';
+            waitingAddress.style.display = 'block';
+            addressButton.style.display = 'block';
+            quoteWrapper.style.display = 'none';
+            payButton.style.display = 'none';
         }
     });
 }
