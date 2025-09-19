@@ -1260,7 +1260,7 @@ export function setModals(menu) {
                         authUserData = data;
                     });
 
-                    if (form) {
+                    if (form && modalName !== 'request-forward-document-popup') {
                         form.reset();
 
                         dropZones.forEach(dropZone => {
@@ -2536,6 +2536,7 @@ function shippingRatesLogic(documentId) {
     addressButton.addEventListener('click', function () {
         deliveryLoading.style.display = 'flex';
         payButton.classList.add('is-disabled');
+        addressSelect.classList.add('is-disabled');
         waitingAddress.style.display = 'none';
         payButton.style.display = 'flex';
         addressButton.style.display = 'none';
@@ -2577,6 +2578,7 @@ function loadShippingRates(documentId) {
 
         document.querySelector('.delivery-loading').style.display = 'none';
         document.querySelector('.button-delivery-pay').classList.remove('is-disabled');
+        document.querySelector('#document_user_address').classList.remove('is-disabled');
         quoteWrapper.style.display = 'flex';
     });
 }
