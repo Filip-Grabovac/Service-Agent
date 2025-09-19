@@ -556,7 +556,7 @@ export function setModals(menu) {
 
 
                     if (modalName === 'request-forward-document-popup') {
-                        loadShippingRates(idAttribute.value);
+                        shippingRatesLogic(idAttribute.value);
                     }
                 } else {
                     url = item.action
@@ -2493,6 +2493,8 @@ export function getTabCount() {
 }
 
 function shippingRatesLogic(documentId) {
+    loadShippingRates(documentId);
+
     const addressSelect = document.querySelector('#document_user_address');
     const addressWrapper = document.querySelector('.delivery-address-wrapper');
     const addressSelectWrapper = document.querySelector('#delivery-address-select-wrapper');
