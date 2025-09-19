@@ -1584,10 +1584,10 @@ function getModals(menu) {
             },
             2: {
                 modal: 'request-forward-document-popup',
-                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/document_addresses/{document_addresses_id}`,
                 method: 'PATCH',
                 files: [],
-                success_message: 'The forwarding has been successfully requested.',
+                success_message: 'The document address has been successfully updated.',
             },
             3: {
                 modal: 'request-shred-document-popup',
@@ -2540,6 +2540,25 @@ function shippingRatesLogic(documentId) {
         addressButton.style.display = 'none';
         addressWrapper.style.display = 'none';
         addressSelect.selectedIndex = 0;
+
+
+        // const formData = new FormData(addressWrapper.querySelector('form'));
+        // console.log(formData)
+
+
+        // formData.forEach((value, key) => {
+        //     jsonObject[key] = value;
+        // });
+        //
+        // requestData.body = JSON.stringify(jsonObject);
+        //
+        // requestData.headers = {
+        //     'Authorization': `Bearer ${authToken}`,
+        //     'Content-Type': 'application/json',
+        //     'X-Data-Source': dataSource,
+        // }
+        // fetch()
+        //https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/document_addresses/{document_addresses_id}
         loadShippingRates(documentId);
     });
 }
