@@ -554,7 +554,6 @@ export function setModals(menu) {
                         url = parts.join("/");
                     }
 
-
                     if (modalName === 'request-forward-document-popup') {
                         shippingRatesLogic(idAttribute.value);
                     }
@@ -768,6 +767,12 @@ export function setModals(menu) {
                     if (modalName === 'details-document-popup') {
                         fillDocumentDetails(fillData, menu, modal);
                     }
+                }
+
+                if (modalName === 'request-forward-document-popup') {
+                    url = url.replace(/([?#].*)?$/, '');
+
+                    url = url.replace(/[^/]*$/, '') + fillData._document_addresses_of_documents?.id;
                 }
 
                 modal.classList.remove('hide');
@@ -1223,7 +1228,9 @@ export function setModals(menu) {
                         user.logOut()
                     }
 
-                    modal.classList.add('hide');
+                    if (modalName !== 'request-forward-document-popup') {
+                        modal.classList.add('hide');
+                    }
 
                     item.files = [];
 
@@ -2527,24 +2534,6 @@ function shippingRatesLogic(documentId) {
         addressWrapper.style.display = 'none';
         addressSelect.selectedIndex = 0;
 
-
-        // const formData = new FormData(addressWrapper.querySelector('form'));
-        // console.log(formData)
-
-
-        // formData.forEach((value, key) => {
-        //     jsonObject[key] = value;
-        // });
-        //
-        // requestData.body = JSON.stringify(jsonObject);
-        //
-        // requestData.headers = {
-        //     'Authorization': `Bearer ${authToken}`,
-        //     'Content-Type': 'application/json',
-        //     'X-Data-Source': dataSource,
-        // }
-        // fetch()
-        //https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/document_addresses/{document_addresses_id}
         loadShippingRates(documentId);
     });
 }
@@ -2582,4 +2571,14 @@ function loadShippingRates(documentId) {
         document.querySelector('.button-delivery-pay').classList.remove('is-disabled');
         quoteWrapper.style.display = 'flex';
     });
+}
+
+function populateDeliveryAddress(address) {
+    let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
+
+    if (address.address_additional) {
+        fullAddress = fullAddress + ', ' + address.address_additional
+    }
+
+    element.add(new Option(fullAddress, fullAddress, true, true), 0);
 }
