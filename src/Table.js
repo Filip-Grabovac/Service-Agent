@@ -2498,7 +2498,7 @@ function shippingRatesLogic(documentId) {
     const addressSelect = document.querySelector('#document_user_address');
     const addressWrapper = document.querySelector('.delivery-address-wrapper');
     const addressSelectWrapper = document.querySelector('#delivery-address-select-wrapper');
-    addressWrapper.after(addressSelectWrapper);
+    addressSelectWrapper.after(addressWrapper);
 
     addressSelect.addEventListener('change', function () {
         const value = this.value;
