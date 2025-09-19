@@ -772,7 +772,15 @@ export function setModals(menu) {
                 if (modalName === 'request-forward-document-popup') {
                     url = url.replace(/([?#].*)?$/, '');
 
-                    url = url.replace(/[^/]*$/, '') + fillData._document_addresses_of_documents?.id;
+                    url = url.replace(/[^/]*$/, '') + fillData?._document_addresses_of_documents?.id;
+
+                    let address = fillData?._document_addresses_of_documents;
+
+                    if (!address) {
+                        address = fillData?._user?._user_addresses_of_user;
+                    }
+
+                    populateDeliveryAddress(address)
                 }
 
                 modal.classList.remove('hide');
@@ -2574,11 +2582,13 @@ function loadShippingRates(documentId) {
 }
 
 function populateDeliveryAddress(address) {
+    const addressSelect = document.querySelector('#document_user_address');
+
     let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
 
     if (address.address_additional) {
         fullAddress = fullAddress + ', ' + address.address_additional
     }
 
-    element.add(new Option(fullAddress, fullAddress, true, true), 0);
+    addressSelect.add(new Option(fullAddress, fullAddress, true, true), 0);
 }
