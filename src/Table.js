@@ -2522,6 +2522,7 @@ function shippingRatesLogic(documentId) {
     payButton.style.display = 'flex';
     addressButton.style.display = 'none';
     addressWrapper.style.display = 'none';
+    quoteWrapper.style.display = 'none';
     addressSelect.selectedIndex = 0;
 
     if (addressCompanyWrapper.querySelector('input').value === '') {
