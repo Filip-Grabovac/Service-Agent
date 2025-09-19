@@ -2597,6 +2597,8 @@ function loadShippingRates(documentId) {
             quoteWrapper.appendChild(item);
         });
 
+        offers.querySelector('.delivery-quote').click();
+
         document.querySelector('.delivery-loading').style.display = 'none';
         document.querySelector('.button-delivery-pay').classList.remove('is-disabled');
         document.querySelector('#document_user_address').classList.remove('is-disabled');
