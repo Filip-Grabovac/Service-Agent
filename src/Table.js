@@ -2504,6 +2504,7 @@ function shippingRatesLogic(documentId) {
     const waitingAddress = document.querySelector('.delivery-waiting-address');
     const payButton = document.querySelector('.button-delivery-pay');
     const addressButton = document.querySelector('.button-delivery-address');
+    const deliveryLoading = document.querySelector('.delivery-loading');
 
     if (addressCompanyWrapper.querySelector('input').value === '') {
         addressCompanyWrapper.style.display = 'none';
@@ -2522,7 +2523,19 @@ function shippingRatesLogic(documentId) {
             addressButton.style.display = 'flex';
             quoteWrapper.style.display = 'none';
             payButton.style.display = 'none';
+        } else {
+            addressWrapper.style.display = 'none';
+            waitingAddress.style.display = 'none';
+            addressButton.style.display = 'none';
+            quoteWrapper.style.display = 'flex';
+            payButton.style.display = 'flex';
         }
+    });
+
+    addressButton.addEventListener('click', function () {
+        deliveryLoading.style.display = 'flex';
+        payButton.classList.add('is-disabled');
+        loadShippingRates(documentId);
     });
 }
 
@@ -2556,6 +2569,7 @@ function loadShippingRates(documentId) {
         });
 
         document.querySelector('.delivery-loading').style.display = 'none';
+        document.querySelector('.button-delivery-pay').classList.remove('is-disabled');
         quoteWrapper.style.display = 'flex';
     });
 }
