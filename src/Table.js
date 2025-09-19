@@ -1240,6 +1240,10 @@ export function setModals(menu) {
                         modal.classList.add('hide');
                     }
 
+                    if (modalName === 'request-forward-document-popup') {
+                        populateDeliveryAddress(data);
+                    }
+
                     item.files = [];
 
                     if (modalName === 'add-document-popup') {
@@ -2585,6 +2589,14 @@ function loadShippingRates(documentId) {
 
 function populateDeliveryAddress(address) {
     const addressSelect = document.querySelector('#document_user_address');
+
+    const options = [...addressSelect.options];
+
+    for (const opt of options) {
+        if (opt.value !== 'other') {
+            opt.remove();
+        }
+    }
 
     let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
 
