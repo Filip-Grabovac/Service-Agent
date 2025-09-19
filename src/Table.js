@@ -2514,6 +2514,7 @@ function shippingRatesLogic(documentId) {
     const payButton = document.querySelector('.button-delivery-pay');
     const addressButton = document.querySelector('.button-delivery-address');
     const deliveryLoading = document.querySelector('.delivery-loading');
+    const terms = document.querySelector('input[name="terms"]');
 
     deliveryLoading.style.display = 'flex';
     payButton.classList.add('is-disabled');
@@ -2563,6 +2564,14 @@ function shippingRatesLogic(documentId) {
 
         loadShippingRates(documentId);
     });
+
+    terms.addEventListener('change', (e) => {
+        if (e.currentTarget.checked) {
+            payButton.classList.remove('is-disabled');
+        } else {
+            payButton.classList.add('is-disabled');
+        }
+    });
 }
 
 function loadShippingRates(documentId) {
@@ -2600,7 +2609,9 @@ function loadShippingRates(documentId) {
         quoteWrapper.querySelector('.delivery-quote').click();
 
         document.querySelector('.delivery-loading').style.display = 'none';
-        document.querySelector('.button-delivery-pay').classList.remove('is-disabled');
+        if (document.querySelector('input[name="terms"]').checked) {
+            document.querySelector('.button-delivery-pay').classList.remove('is-disabled');
+        }
         document.querySelector('#document_user_address').classList.remove('is-disabled');
         quoteWrapper.style.display = 'flex';
     });
