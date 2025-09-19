@@ -987,9 +987,7 @@ export function setModals(menu) {
                 method: method
             }
 
-            if (modalName === 'request-forward-document-popup') {
-                formData.append('document_status_id', 2)
-            } else if (modalName === 'request-shred-document-popup') {
+            if (modalName === 'request-shred-document-popup') {
                 formData.append('document_status_id', 7)
             }  else if (modalName === 'shred-document-popup') {
                 formData.append('document_status_id', 8)
@@ -1020,18 +1018,6 @@ export function setModals(menu) {
 
                 if (modalName === 'edit-user-popup') {
                     formData.append('phone_country', iti.getSelectedCountryData().iso2);
-                }
-
-                if (modalName === 'request-forward-document-popup') {
-                    formData.delete('shipping_type');
-                    const selectedShippingType = document.querySelector('input[name="shipping_type"]:checked');
-                    if (selectedShippingType) {
-                        const selectedValue = selectedShippingType.getAttribute("data-choice-value");
-
-                        formData.append('shipping_type', selectedValue);
-                    } else {
-                        formData.append('shipping_type', '');
-                    }
                 }
 
                 if (modalName === 'add-certificate-popup') {
