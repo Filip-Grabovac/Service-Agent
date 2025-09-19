@@ -2535,6 +2535,9 @@ function shippingRatesLogic(documentId) {
     addressButton.addEventListener('click', function () {
         deliveryLoading.style.display = 'flex';
         payButton.classList.add('is-disabled');
+        waitingAddress.style.display = 'none';
+        payButton.style.display = 'flex';
+        addressButton.style.display = 'none';
         loadShippingRates(documentId);
     });
 }
