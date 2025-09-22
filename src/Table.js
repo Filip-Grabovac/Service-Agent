@@ -2565,6 +2565,18 @@ function shippingRatesLogic(documentId) {
             payButton.classList.add('is-disabled');
         }
     });
+
+    payButton.addEventListener('click', () => {
+        const offer = document.querySelector('.delivery-quote.active');
+
+        documentFile.generatePaymentLink(
+            documentId,
+            offer.getAttribute('data-product-transaction-id'),
+            offer.getAttribute('data-offer-id')
+        ).then((data) => {
+            window.open(data.url + '?client_reference_id=' + documentId + '&prefilled_email=' + authUserData.email);
+        })
+    })
 }
 
 function loadShippingRates(documentId) {

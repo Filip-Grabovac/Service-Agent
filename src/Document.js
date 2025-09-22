@@ -175,6 +175,38 @@ export default class Document {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
+    generatePaymentLink(documentId, productTransactionId, offerId) {
+        const authToken =  localStorage.getItem('authToken');
+
+        let data = {
+            'product_transaction_id': productTransactionId,
+            'offer_id': offerId
+        }
+
+        // Call the Xano API
+        return fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${this.branch}/generate-payment-link/${documentId}`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json',
+                'X-Data-Source': this.dataSource,
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    this.showError('Server Error! Please, try again or contact support.');
+
+                    return;
+                }
+
+                return result
+            })
+            .catch((error) => {
+                this.showError('Server Error! Please, try again or contact support.');
+            });
+    }
     callMethod(methodName, ...args) {
         if (typeof this[methodName] === 'function') {
             return this[methodName](...args);
