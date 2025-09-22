@@ -2567,6 +2567,7 @@ function shippingRatesLogic(documentId) {
     });
 
     payButton.addEventListener('click', () => {
+        loader.style.display = 'flex';
         const offer = document.querySelector('.delivery-quote.active');
 
         documentFile.generatePaymentLink(
@@ -2574,7 +2575,8 @@ function shippingRatesLogic(documentId) {
             offer.getAttribute('data-product-transaction-id'),
             offer.getAttribute('data-offer-id')
         ).then((data) => {
-            window.open(data.url + '?client_reference_id=' + documentId + '&prefilled_email=' + authUserData.email);
+            loader.style.display = 'none';
+            window.location.href = data.url + '?client_reference_id=' + documentId + '&prefilled_email=' + authUserData.email;
         })
     })
 }
