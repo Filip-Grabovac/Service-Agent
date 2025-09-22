@@ -575,14 +575,6 @@ export function setModals(menu) {
                         fillData = Array.from(allData[tab[0]][tab[1]]).find(item => item.id.toString().match(fillAttribute.value))
                     }
 
-                    let changeDocumentAddress = modal.querySelector('#change-document-address');
-                    if (changeDocumentAddress) {
-                        changeDocumentAddress.style.display = 'flex';
-                        if (!fillData._document_addresses_of_documents) {
-                            changeDocumentAddress.style.display = 'none';
-                        }
-                    }
-
                     if (form) {
                         let elementsWithName = form.querySelectorAll('[name]');
 
@@ -2566,7 +2558,7 @@ function shippingRatesLogic(documentId) {
     });
 
     terms.addEventListener('change', (e) => {
-        if (e.currentTarget.checked) {
+        if (e.currentTarget.checked && deliveryLoading.style.display !== 'flex') {
             payButton.classList.remove('is-disabled');
         } else {
             payButton.classList.add('is-disabled');
