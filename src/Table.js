@@ -2517,6 +2517,7 @@ function shippingRatesLogic(documentId) {
     addressWrapper.style.display = 'none';
     quoteWrapper.style.display = 'none';
     addressSelect.selectedIndex = 0;
+    terms.checked = false;
 
     if (addressCompanyWrapper.querySelector('input').value === '') {
         addressCompanyWrapper.style.display = 'none';
