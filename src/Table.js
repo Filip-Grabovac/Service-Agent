@@ -1986,7 +1986,7 @@ function fillDocumentDetails(data, menu, modal) {
     }
     if (data.wwex_price) {
         hideData = false;
-        price.innerHTML = data.wwex_price + ' $';
+        price.innerHTML = (data.wwex_price / 100) + ' $';
         priceBox.style.display = 'flex';
     } else {
         priceBox.style.display = 'none';
