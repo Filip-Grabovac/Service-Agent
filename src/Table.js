@@ -224,7 +224,7 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
             }
             status = item._document_status?.status_label;
             if (status) {
-                if (status === 'paid' || status === 'delivered') {
+                if (status === 'delivered') {
                     statusBadgeColor = 'green'
                 } else if (status === 'shipped') {
                     statusBadgeColor = 'blue'
@@ -462,11 +462,11 @@ function paginationClick() {
 export function getTabTitle(menu, tab) {
     const tabTitles = {
         1: {
-            1: 'All Requests',
+            1: 'All Documents',
             2: 'Forwarding Requests',
             3: 'Forwarding Pending',
-            4: 'Payment Received',
-            5: 'All Sent',
+            4: 'Shipping Requested',
+            5: 'Shipped',
             6: 'Shred Requests',
         },
         2: {
@@ -1867,7 +1867,7 @@ function fillDocumentDetails(data, menu, modal) {
 
     let statusBadgeColor = ''
     const documentStatus = data._document_status.status_label;
-    if (documentStatus === 'paid' || documentStatus === 'delivered') {
+    if (documentStatus === 'shipping_requested' || documentStatus === 'delivered') {
         statusBadgeColor = 'green'
     } else if (documentStatus === 'shipped') {
         statusBadgeColor = 'blue'

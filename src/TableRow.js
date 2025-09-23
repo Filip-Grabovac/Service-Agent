@@ -20,14 +20,19 @@ export default class TableRow {
                     <div class="txt-row">${item._user?.first_name} ${item._user?.last_name}</div>
                 </div>
             `,
-                price: () => `
-                <div class="row-inside">
-                    <div class="grey-box">
-                        <div class="dot"></div>
-                        <div>${item._choosed_shipping_tariffs?.price ? item._choosed_shipping_tariffs.price + '$' : 'TBA'}</div>
-                    </div>
-                </div>
-            `,
+                price: () => {
+                    const p = item?._choosed_shipping_tariffs?.price;
+                    return `
+                        <div class="row-inside">
+                          ${p != null ? `
+                            <div class="grey-box">
+                              <div class="dot"></div>
+                              <div>${p}$</div>
+                            </div>
+                          ` : ``}
+                        </div>
+                    `;
+                },
                 status: () => `
                 <div class="row-inside">
                     <div class="status-box ${statusBadgeColor}">
