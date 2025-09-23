@@ -590,23 +590,23 @@ export function setModals(menu) {
                                 oldEmail = fillData[element.getAttribute('name')];
                             }
 
-                            if (element.getAttribute('name').includes("document_user_address")) {
-                                let address = fillData?._document_addresses_of_documents;
-
-                                if (!address) {
-                                    address = fillData?._user?._user_addresses_of_user;
-                                }
-
-                                if (address) {
-                                    let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
-
-                                    if (address.address_additional) {
-                                        fullAddress = fullAddress + ', ' + address.address_additional
-                                    }
-
-                                    element.add(new Option(fullAddress, fullAddress, true, true), 0);
-                                }
-                            }
+                            // if (element.getAttribute('name').includes("document_user_address")) {
+                            //     let address = fillData?._document_addresses_of_documents;
+                            //
+                            //     if (!address) {
+                            //         address = fillData?._user?._user_addresses_of_user;
+                            //     }
+                            //
+                            //     if (address) {
+                            //         let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
+                            //
+                            //         if (address.address_additional) {
+                            //             fullAddress = fullAddress + ', ' + address.address_additional
+                            //         }
+                            //
+                            //         element.add(new Option(fullAddress, fullAddress, true, true), 0);
+                            //     }
+                            // }
 
                             if (element.getAttribute('name').includes("choosed_shipping_tariff")) {
                                 let tariff = fillData?._choosed_shipping_tariffs;
