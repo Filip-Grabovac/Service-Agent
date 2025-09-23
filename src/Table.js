@@ -2493,6 +2493,18 @@ export function getTabCount() {
     }
 }
 
+function bindReplace(el, type, handler, options) {
+    if (!el) return;
+    if (!el._evtMap) el._evtMap = {};
+    const key = type;
+    if (el._evtMap[key]) {
+        el.removeEventListener(type, el._evtMap[key], el._evtMap[key]._opts || false);
+    }
+    handler._opts = options || false;
+    el.addEventListener(type, handler, handler._opts);
+    el._evtMap[key] = handler;
+}
+
 function shippingRatesLogic(documentId) {
     loadShippingRates(documentId);
 
@@ -2527,9 +2539,8 @@ function shippingRatesLogic(documentId) {
 
     addressSelectWrapper.after(addressWrapper);
 
-    addressSelect.addEventListener('change', function () {
+    const onAddressSelectChange = function () {
         const value = this.value;
-
         if (value === 'other') {
             addressWrapper.style.display = 'block';
             waitingAddress.style.display = 'flex';
@@ -2543,9 +2554,10 @@ function shippingRatesLogic(documentId) {
             quoteWrapper.style.display = 'flex';
             payButton.style.display = 'flex';
         }
-    });
+    };
+    bindReplace(addressSelect, 'change', onAddressSelectChange);
 
-    addressButton.addEventListener('click', function () {
+    const onAddressButtonClick = function () {
         deliveryLoading.style.display = 'flex';
         payButton.classList.add('is-disabled');
         addressSelect.classList.add('is-disabled');
@@ -2556,20 +2568,21 @@ function shippingRatesLogic(documentId) {
         addressSelect.selectedIndex = 0;
 
         loadShippingRates(documentId);
-    });
+    };
+    bindReplace(addressButton, 'click', onAddressButtonClick);
 
-    terms.addEventListener('change', (e) => {
+    const onTermsChange = function (e) {
         if (e.currentTarget.checked && deliveryLoading.style.display !== 'flex') {
             payButton.classList.remove('is-disabled');
         } else {
             payButton.classList.add('is-disabled');
         }
-    });
+    };
+    bindReplace(terms, 'change', onTermsChange);
 
-    payButton.addEventListener('click', () => {
+    const onPayButtonClick = function () {
         loader.style.display = 'flex';
         const offer = document.querySelector('.delivery-quote.active');
-
         documentFile.generatePaymentLink(
             documentId,
             offer.getAttribute('data-product-transaction-id'),
@@ -2577,8 +2590,9 @@ function shippingRatesLogic(documentId) {
         ).then((data) => {
             loader.style.display = 'none';
             window.location.href = data.url + '?client_reference_id=' + documentId + '&prefilled_email=' + authUserData.email;
-        })
-    })
+        });
+    };
+    bindReplace(payButton, 'click', onPayButtonClick);
 }
 
 function loadShippingRates(documentId) {
@@ -2591,29 +2605,30 @@ function loadShippingRates(documentId) {
         const quoteWrapper = document.querySelector('.delivery-quote-wrapper');
         const quoteTemplate = document.querySelector('.delivery-quote');
         quoteWrapper.innerHTML = '';
-        offers.forEach((offer, i) => {
+
+        offers.forEach((offer) => {
             const item = quoteTemplate.cloneNode(true);
 
-            item.setAttribute('data-product-transaction-id', offer.productTransactionId)
-            item.setAttribute('data-offer-id', offer.offerId)
+            item.setAttribute('data-product-transaction-id', offer.productTransactionId);
+            item.setAttribute('data-offer-id', offer.offerId);
 
             item.querySelector('.delivery-quote-price').textContent = '$' + offer.totalOfferPrice.value;
-            item.querySelector('.delivery-quote-days').textContent = 'Estimated delivery: ' + offer.offeredProductList[0].shopRQShipment.timeInTransit.estimatedDeliveryDate;
+            item.querySelector('.delivery-quote-days').textContent =
+                'Estimated delivery: ' + offer.offeredProductList[0].shopRQShipment.timeInTransit.estimatedDeliveryDate;
 
-            item.addEventListener('click', () => {
+            bindReplace(item, 'click', () => {
                 document.querySelectorAll('.delivery-quote.active').forEach(q => q.classList.remove('active'));
                 document.querySelectorAll('.delivery-quote-selector.active').forEach(s => s.classList.remove('active'));
-
                 item.classList.add('active');
-
-                let selector = item.querySelector('.delivery-quote-selector');
+                const selector = item.querySelector('.delivery-quote-selector');
                 if (selector) selector.classList.add('active');
             }, { passive: true });
 
             quoteWrapper.appendChild(item);
         });
 
-        quoteWrapper.querySelector('.delivery-quote').click();
+        const first = quoteWrapper.querySelector('.delivery-quote');
+        if (first) first.click();
 
         document.querySelector('.delivery-loading').style.display = 'none';
         if (document.querySelector('input[name="terms"]').checked) {
@@ -2626,20 +2641,14 @@ function loadShippingRates(documentId) {
 
 function populateDeliveryAddress(address) {
     const addressSelect = document.querySelector('#document_user_address');
-
     const options = [...addressSelect.options];
-
     for (const opt of options) {
-        if (opt.value !== 'other') {
-            opt.remove();
-        }
+        if (opt.value !== 'other') opt.remove();
     }
 
     let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
-
     if (address.address_additional) {
-        fullAddress = fullAddress + ', ' + address.address_additional
+        fullAddress = fullAddress + ', ' + address.address_additional;
     }
-
     addressSelect.add(new Option(fullAddress, fullAddress, true, true), 0);
 }
