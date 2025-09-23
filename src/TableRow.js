@@ -21,13 +21,13 @@ export default class TableRow {
                 </div>
             `,
                 price: () => {
-                    const p = item?._choosed_shipping_tariffs?.price;
+                    const p = item?.wwex_price;
                     return `
                         <div class="row-inside">
                           ${p != null ? `
                             <div class="grey-box">
                               <div class="dot"></div>
-                              <div>${p}$</div>
+                              <div>${p / 100}$</div>
                             </div>
                           ` : ``}
                         </div>
