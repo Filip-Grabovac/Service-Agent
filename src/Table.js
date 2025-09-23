@@ -1984,9 +1984,9 @@ function fillDocumentDetails(data, menu, modal) {
     } else {
         shippingTypeBox.style.display = 'none';
     }
-    if (data._choosed_shipping_tariffs) {
+    if (data.wwex_price) {
         hideData = false;
-        price.innerHTML = data._choosed_shipping_tariffs.price + ' $';
+        price.innerHTML = data.wwex_price + ' $';
         priceBox.style.display = 'flex';
     } else {
         priceBox.style.display = 'none';
