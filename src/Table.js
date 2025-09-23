@@ -1867,7 +1867,7 @@ function fillDocumentDetails(data, menu, modal) {
 
     let statusBadgeColor = ''
     const documentStatus = data._document_status.status_label;
-    if (documentStatus === 'shipping_requested' || documentStatus === 'delivered') {
+    if (documentStatus === 'delivered') {
         statusBadgeColor = 'green'
     } else if (documentStatus === 'shipped') {
         statusBadgeColor = 'blue'
