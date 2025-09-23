@@ -21,18 +21,18 @@ export default class TableRow {
                 </div>
             `,
                 price: () => {
-                    const p = item?.wwex_price;
-                    return `
-                        <div class="row-inside">
-                          ${p != null ? `
-                            <div class="grey-box">
-                              <div class="dot"></div>
-                              <div>${p / 100}$</div>
-                            </div>
-                          ` : ``}
+                const p = item?.wwex_price;
+                return `
+                    <div class="row-inside">
+                      ${p != null ? `
+                        <div class="grey-box">
+                          <div class="dot"></div>
+                          <div>${p / 100}$</div>
                         </div>
-                    `;
-                },
+                      ` : ``}
+                    </div>
+                `;
+            },
                 status: () => `
                 <div class="row-inside">
                     <div class="status-box ${statusBadgeColor}">
@@ -170,14 +170,19 @@ export default class TableRow {
                     <div class="txt-row">${item.description}</div>
                 </div>
             `,
-                price: () => `
-                <div class="row-inside">
-                    <div class="grey-box">
-                        <div class="dot"></div>
-                        <div>${item._choosed_shipping_tariffs?.price ? item._choosed_shipping_tariffs.price + '$' : 'TBA'}</div>
+                price: () => {
+                    const p = item?.wwex_price;
+                    return `
+                    <div class="row-inside">
+                      ${p != null ? `
+                        <div class="grey-box">
+                          <div class="dot"></div>
+                          <div>${p / 100}$</div>
+                        </div>
+                      ` : ``}
                     </div>
-                </div>
-            `,
+                `;
+            },
                 status: () => `
                 <div class="row-inside">
                     <div class="status-box ${statusBadgeColor}">
