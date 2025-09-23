@@ -1947,10 +1947,20 @@ function fillDocumentDetails(data, menu, modal) {
         itiWrapper.classList.add("hidden-iti");
     }
 
-    shippingName.innerHTML = data._user.first_name + ' ' + data._user.last_name;
-    shippingPhone.innerHTML = "+" + iti.getSelectedCountryData().dialCode + data._user.phone_number;
-    shippingEmail.innerHTML = data._user.email;
     if (data._document_addresses_of_documents) {
+        let name;
+        if (data._document_addresses_of_documents.last_name) {
+            name = data._document_addresses_of_documents.first_name;
+            if (data._document_addresses_of_documents.middle_name) {
+                name = name + ' ' + data._document_addresses_of_documents.middle_name;
+            }
+            name = name + ' ' + data._document_addresses_of_documents.last_name;
+        } else {
+            name = data._document_addresses_of_documents.company_name;
+        }
+        shippingName.innerHTML = name;
+        shippingPhone.innerHTML = "+" + iti.getSelectedCountryData().dialCode + data._user.phone_number;
+        shippingEmail.innerHTML = data._user.email;
         shippingAddress.innerHTML = data._document_addresses_of_documents.street + ' ' + data._document_addresses_of_documents.number;
         shippingCity.innerHTML = data._document_addresses_of_documents.zip + ' ' + data._document_addresses_of_documents.city;
         shippingCountry.innerHTML = data._document_addresses_of_documents.state + ' ' + data._document_addresses_of_documents.country;
