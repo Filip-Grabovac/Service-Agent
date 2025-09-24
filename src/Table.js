@@ -2609,6 +2609,10 @@ function loadShippingRates(documentId) {
     documentFile.getShippingRates(documentId).then((data) => {
         const offers = data?.response?.offerList ?? [];
 
+        if (offers.length === 0) {
+            return;
+        }
+
         document.querySelectorAll('.delivery-quote.active').forEach(q => q.classList.remove('active'));
         document.querySelectorAll('.delivery-quote-selector.active').forEach(s => s.classList.remove('active'));
 
