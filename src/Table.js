@@ -2674,9 +2674,3 @@ function populateDeliveryAddress(address) {
     }
     addressSelect.add(new Option(fullAddress, fullAddress, true, true), 0);
 }
-
-function generateShippingLabel(documentId) {
-    documentFile.generateShippingLabelLink(documentId).then((data) => {
-        window.open(data.url, '_blank')
-    })
-}

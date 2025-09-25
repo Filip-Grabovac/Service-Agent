@@ -1,3 +1,6 @@
+import Document from './Document.js';
+const documentFile = new Document();
+
 export default class TableRow {
     getTableRow(menuName, column, item, statusBadgeColor = null) {
         const generators = {
@@ -579,4 +582,11 @@ export default class TableRow {
 
         return actionRows[menu]?.[tab] || 'Unknown Option';
     }
+}
+
+
+function generateShippingLabel(documentId) {
+    documentFile.generateShippingLabelLink(documentId).then((data) => {
+        window.open(data.url, '_blank')
+    })
 }
