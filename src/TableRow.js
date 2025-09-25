@@ -586,7 +586,9 @@ export default class TableRow {
 
 
 function generateShippingLabel(documentId) {
+    document.querySelector('.loader').style.display = 'flex';
     documentFile.generateShippingLabelLink(documentId).then((data) => {
+        document.querySelector('.loader').style.display = 'none';
         window.open(data.url, '_blank')
     })
 }
