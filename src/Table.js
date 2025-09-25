@@ -2534,6 +2534,7 @@ function shippingRatesLogic(documentId) {
     payButton.classList.add('is-disabled');
     addressSelect.classList.add('is-disabled');
     waitingAddress.style.display = 'none';
+    waitingAddress.textContent = 'Please confirm your address first';
     payButton.style.display = 'flex';
     addressButton.style.display = 'none';
     addressWrapper.style.display = 'none';
@@ -2554,6 +2555,7 @@ function shippingRatesLogic(documentId) {
         if (value === 'other') {
             addressWrapper.style.display = 'block';
             waitingAddress.style.display = 'flex';
+            waitingAddress.textContent = 'Please confirm your address first';
             addressButton.style.display = 'flex';
             quoteWrapper.style.display = 'none';
             payButton.style.display = 'none';
@@ -2610,6 +2612,10 @@ function loadShippingRates(documentId) {
         const offers = data?.response?.offerList ?? [];
 
         if (offers.length === 0) {
+            document.querySelector('#document_user_address').classList.remove('is-disabled');
+            document.querySelector('.delivery-waiting-address').style.display = 'flex';
+            document.querySelector('.delivery-waiting-address').textContent = 'Unable to retrieve rates. Please try different address or contact support.';
+
             return;
         }
 
