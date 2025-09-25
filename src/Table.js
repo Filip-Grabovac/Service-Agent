@@ -2615,6 +2615,7 @@ function loadShippingRates(documentId) {
             document.querySelector('#document_user_address').classList.remove('is-disabled');
             document.querySelector('.delivery-waiting-address').style.display = 'flex';
             document.querySelector('.delivery-waiting-address').textContent = 'Unable to retrieve rates. Please try different address or contact support.';
+            document.querySelector('.delivery-loading').style.display = 'none';
 
             return;
         }
