@@ -537,6 +537,14 @@ export function setModals(menu) {
             button.addEventListener("click", function (e) {
                 e.preventDefault()
 
+                if (button.hasAttribute('data-action') && button.getAttribute('data-action') === 'generate-shiping-label-link') {
+                    const documentId = button.getAttribute('data-id-documents-id');
+
+                    documentFile.generateShippingLabelLink(documentId).then((data) => {
+                        window.open(data.url, '_blank')
+                    })
+                }
+
                 method = item.method;
                 modalName = item.modal
 
@@ -2674,11 +2682,3 @@ function populateDeliveryAddress(address) {
     }
     addressSelect.add(new Option(fullAddress, fullAddress, true, true), 0);
 }
-
-document.querySelector('[data-action="generate-shiping-label-link"]').addEventListener('click', (e) => {
-    const documentId = e.getAttribute('data-id-documents-id');
-
-    documentFile.generateShippingLabelLink(documentId).then((data) => {
-        window.open(data.url, '_blank')
-    })
-})
