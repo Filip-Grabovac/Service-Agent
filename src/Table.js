@@ -2525,6 +2525,7 @@ function shippingRatesLogic(documentId) {
     const addressSelectWrapper = document.querySelector('#delivery-address-select-wrapper');
     const quoteWrapper = document.querySelector('.delivery-quote-wrapper');
     const waitingAddress = document.querySelector('.delivery-waiting-address');
+    const waitingAddressText = document.querySelector('.delivery-waiting-address-text');
     const payButton = document.querySelector('.button-delivery-pay');
     const addressButton = document.querySelector('.button-delivery-address');
     const deliveryLoading = document.querySelector('.delivery-loading');
@@ -2534,7 +2535,7 @@ function shippingRatesLogic(documentId) {
     payButton.classList.add('is-disabled');
     addressSelect.classList.add('is-disabled');
     waitingAddress.style.display = 'none';
-    waitingAddress.textContent = 'Please confirm your address first';
+    waitingAddressText.textContent = 'Please confirm your address first';
     payButton.style.display = 'flex';
     addressButton.style.display = 'none';
     addressWrapper.style.display = 'none';
@@ -2555,7 +2556,7 @@ function shippingRatesLogic(documentId) {
         if (value === 'other') {
             addressWrapper.style.display = 'block';
             waitingAddress.style.display = 'flex';
-            waitingAddress.textContent = 'Please confirm your address first';
+            waitingAddressText.textContent = 'Please confirm your address first';
             addressButton.style.display = 'flex';
             quoteWrapper.style.display = 'none';
             payButton.style.display = 'none';
@@ -2614,7 +2615,7 @@ function loadShippingRates(documentId) {
         if (offers.length === 0) {
             document.querySelector('#document_user_address').classList.remove('is-disabled');
             document.querySelector('.delivery-waiting-address').style.display = 'flex';
-            document.querySelector('.delivery-waiting-address').textContent = 'Unable to retrieve rates. Please try different address or contact support.';
+            document.querySelector('.delivery-waiting-address-text').textContent = 'Unable to retrieve rates. Please try different address or contact support.';
             document.querySelector('.delivery-loading').style.display = 'none';
 
             return;
