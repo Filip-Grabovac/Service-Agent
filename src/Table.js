@@ -2674,3 +2674,11 @@ function populateDeliveryAddress(address) {
     }
     addressSelect.add(new Option(fullAddress, fullAddress, true, true), 0);
 }
+
+document.querySelector('[data-action="generate-shiping-label-link"]').addEventListener('click', (e) => {
+    const documentId = e.getAttribute('data-id-documents-id');
+
+    documentFile.generateShippingLabelLink(documentId).then((data) => {
+        window.open(data.url, '_blank')
+    })
+})
