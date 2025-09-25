@@ -2634,9 +2634,17 @@ function loadShippingRates(documentId) {
             item.setAttribute('data-product-transaction-id', offer.productTransactionId);
             item.setAttribute('data-offer-id', offer.offerId);
 
+            const date = new Date(offer.offeredProductList[0].shopRQShipment.timeInTransit.estimatedDeliveryDate);
+            const formatted = date.toLocaleDateString('en-US', {
+                weekday: 'long',
+                month: 'short',
+                day: '2-digit',
+                year: 'numeric'
+            });
+
             item.querySelector('.delivery-quote-price').textContent = '$' + offer.totalOfferPrice.value;
             item.querySelector('.delivery-quote-days').textContent =
-                'Estimated delivery: ' + offer.offeredProductList[0].shopRQShipment.timeInTransit.estimatedDeliveryDate;
+                'Arrives: ' + formatted;
 
             bindReplace(item, 'click', () => {
                 document.querySelectorAll('.delivery-quote.active').forEach(q => q.classList.remove('active'));
