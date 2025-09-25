@@ -537,14 +537,6 @@ export function setModals(menu) {
             button.addEventListener("click", function (e) {
                 e.preventDefault()
 
-                if (button.hasAttribute('data-action') && button.getAttribute('data-action') === 'generate-shiping-label-link') {
-                    const documentId = button.getAttribute('data-id-documents-id');
-
-                    documentFile.generateShippingLabelLink(documentId).then((data) => {
-                        window.open(data.url, '_blank')
-                    })
-                }
-
                 method = item.method;
                 modalName = item.modal
 
@@ -2681,4 +2673,10 @@ function populateDeliveryAddress(address) {
         fullAddress = fullAddress + ', ' + address.address_additional;
     }
     addressSelect.add(new Option(fullAddress, fullAddress, true, true), 0);
+}
+
+function generateShippingLabel(documentId) {
+    documentFile.generateShippingLabelLink(documentId).then((data) => {
+        window.open(data.url, '_blank')
+    })
 }
