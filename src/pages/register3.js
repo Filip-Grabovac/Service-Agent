@@ -14,6 +14,11 @@ const loader = document.getElementById('loader');
 
 const regCodeText = document.getElementById('reg-code-text');
 
+let referral = null;
+if (localStorage.getItem('referral')) {
+    referral = localStorage.getItem('referral');
+}
+
 user.authenticate();
 
 let userEmail = '';
@@ -55,7 +60,36 @@ nextBtn.addEventListener('click', function (event) {
 
     localStorage.removeItem('registerData');
 
-    user.confirmCode(data);
+    user.confirmCode(data).then((result) => {
+        if (!result.is_verified) {
+            return;
+        }
+
+        let price;
+        if (currentDomain.includes('webflow.io')) {
+            price = "price_1QfGqbCA20rcDWGhGrIUBQVr";
+            referral = null;
+        } else {
+            price = "price_1Qrbi9CA20rcDWGhZg72KAVO";
+        }
+
+        let paymentData = {
+            success_url: "https://" + window.location.hostname + "/user-dashboard?subscription=successful",
+            cancel_url: "https://" + window.location.hostname + "/registration-4-4",
+            email: userEmail,
+            line_items: [
+                {
+                    price: price,
+                    quantity: "1",
+                }
+            ],
+            referral: referral
+        };
+
+        user.initialPayment(paymentData).then(result => {
+            window.location.href = result.url
+        });
+    });
 });
 
 function validateData(code) {
