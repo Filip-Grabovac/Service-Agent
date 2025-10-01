@@ -1010,7 +1010,6 @@ export function setModals(menu) {
                 formData.append('archived', true)
             }
 
-            console.log(form)
             if (typeof form !== 'undefined') {
                 const checkboxes = form.querySelectorAll('input[type="checkbox"]');
                 checkboxes.forEach(checkbox => {
@@ -1116,6 +1115,7 @@ export function setModals(menu) {
                     }
 
                     if (!value.trim()) {
+                        console.log(value)
                         if (key === 'description') {
                             if (modalName === 'add-document-popup') {
                                 formData.delete('description');
@@ -1125,6 +1125,7 @@ export function setModals(menu) {
                                 formData.append('description', '');
                             }
                         } else if (key !== 'middle_name' && key !== 'user_addresses_of_user.address_additional' && key !== 'document_addresses_of_documents.address_additional' && (key !== 'iarca_tracking_number' && modalName === 'edit-user-popup')) {
+                            console.log('in')
                             if (modalName === 'add-certificate-popup') {
                                 modal.querySelector('[data-error=' + key + ']').style.display = 'block';
 
