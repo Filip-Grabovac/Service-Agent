@@ -1115,7 +1115,8 @@ export function setModals(menu) {
                     }
 
                     if (!value.trim()) {
-                        console.log(value)
+                        console.log(key)
+                        console.log(key !== 'middle_name' && key !== 'user_addresses_of_user.address_additional' && key !== 'document_addresses_of_documents.address_additional' && (key !== 'iarca_tracking_number' && modalName === 'edit-user-popup'))
                         if (key === 'description') {
                             if (modalName === 'add-document-popup') {
                                 formData.delete('description');
