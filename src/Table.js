@@ -23,6 +23,8 @@ let hasActiveCertificate;
 let hasAnyActiveNonMedicalCertificate;
 let isReminderEventAttached = false;
 
+let isAddressGood = null;
+
 let iti = null;
 
 let emailChanged = false;
@@ -1084,7 +1086,6 @@ export function setModals(menu) {
 
                 let hasErrors = false;
                 const entries = Array.from(formData.entries());
-                console.log(entries)
                 for (const [key, value] of entries) {
                     if (key.includes('.')) {
                         let modifiedKey = key.split('.').pop();
@@ -1115,14 +1116,6 @@ export function setModals(menu) {
                     }
 
                     if (!value.trim()) {
-                        console.log(key)
-                        // console.log(key !== 'middle_name')
-                        // console.log(key !== 'user_addresses_of_user.address_additional')
-                        // console.log(key !== 'document_addresses_of_documents.address_additional')
-                        console.log(key !== 'iarca_tracking_number')
-                        console.log(modalName === 'edit-user-popup')
-                        console.log((key !== 'iarca_tracking_number' && modalName === 'edit-user-popup'))
-                        console.log(key !== 'middle_name' && key !== 'user_addresses_of_user.address_additional' && key !== 'document_addresses_of_documents.address_additional' && (key !== 'iarca_tracking_number' && modalName === 'edit-user-popup'))
                         if (key === 'description') {
                             if (modalName === 'add-document-popup') {
                                 formData.delete('description');
@@ -1138,6 +1131,7 @@ export function setModals(menu) {
                                 || key === 'user_addresses_of_user.address_additional'
                                 || key === 'document_addresses_of_documents.address_additional'
                                 || (key === 'iarca_tracking_number' && modalName === 'edit-user-popup')
+                                || (key === 'document_addresses_of_documents.company_name' && document.querySelector('#company-wrapper')?.style.display === 'none')
                             ) {
                                 continue;
                             }
@@ -1153,6 +1147,8 @@ export function setModals(menu) {
                                 setTimeout(function () {
                                     errorWrapper.classList.add('hide');
                                 }, 3000);
+
+                                isAddressGood = false;
 
                                 return;
                             }
@@ -1180,6 +1176,8 @@ export function setModals(menu) {
                         return;
                     }
                 }
+
+                isAddressGood = true;
 
                 if (hasErrors) {
                     return;
@@ -2595,17 +2593,29 @@ function shippingRatesLogic(documentId) {
     };
     bindReplace(addressSelect, 'change', onAddressSelectChange);
 
-    const onAddressButtonClick = function () {
-        deliveryLoading.style.display = 'flex';
-        payButton.classList.add('is-disabled');
-        addressSelect.classList.add('is-disabled');
-        waitingAddress.style.display = 'none';
-        payButton.style.display = 'flex';
-        addressButton.style.display = 'none';
-        addressWrapper.style.display = 'none';
-        addressSelect.selectedIndex = 0;
 
-        loadShippingRates(documentId);
+    const onAddressButtonClick = function () {
+        const checkInterval = setInterval(() => {
+            if (isAddressGood === true) {
+                clearInterval(checkInterval);
+
+                deliveryLoading.style.display = 'flex';
+                payButton.classList.add('is-disabled');
+                addressSelect.classList.add('is-disabled');
+                waitingAddress.style.display = 'none';
+                payButton.style.display = 'flex';
+                addressButton.style.display = 'none';
+                addressWrapper.style.display = 'none';
+                addressSelect.selectedIndex = 0;
+
+                loadShippingRates(documentId);
+
+                isAddressGood = null;
+            } else if (isAddressGood === false) {
+                clearInterval(checkInterval);
+                isAddressGood = null;
+            }
+        }, 200);
     };
     bindReplace(addressButton, 'click', onAddressButtonClick);
 
