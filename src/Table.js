@@ -224,10 +224,12 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
             }
             status = item._document_status?.status_label;
             if (status) {
-                if (status === 'delivered') {
+                if (status === 'shredded' || status === 'shipped') {
                     statusBadgeColor = 'green'
-                } else if (status === 'shipped') {
+                } else if (status === 'new') {
                     statusBadgeColor = 'blue'
+                } else if (status === 'shipping_requested') {
+                    statusBadgeColor = 'yellow'
                 } else {
                     statusBadgeColor = 'orange'
                 }
@@ -1213,7 +1215,9 @@ export function setModals(menu) {
                 }
             }
 
-            loader.style.display = 'flex'
+            if (modalName !== 'request-forward-document-popup') {
+                loader.style.display = 'flex'
+            }
 
             fetch(url, requestData)
                 .then((response) => {
@@ -1867,10 +1871,12 @@ function fillDocumentDetails(data, menu, modal) {
 
     let statusBadgeColor = ''
     const documentStatus = data._document_status.status_label;
-    if (documentStatus === 'delivered') {
+    if (documentStatus === 'shredded' || documentStatus === 'shipped') {
         statusBadgeColor = 'green'
-    } else if (documentStatus === 'shipped') {
+    } else if (documentStatus === 'new') {
         statusBadgeColor = 'blue'
+    } else if (documentStatus === 'shipping_requested') {
+        statusBadgeColor = 'yellow'
     } else {
         statusBadgeColor = 'orange'
     }
