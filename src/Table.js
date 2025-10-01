@@ -1010,6 +1010,7 @@ export function setModals(menu) {
                 formData.append('archived', true)
             }
 
+            console.log(form)
             if (typeof form !== 'undefined') {
                 const checkboxes = form.querySelectorAll('input[type="checkbox"]');
                 checkboxes.forEach(checkbox => {
@@ -1084,6 +1085,7 @@ export function setModals(menu) {
 
                 let hasErrors = false;
                 const entries = Array.from(formData.entries());
+                console.log(entries)
                 for (const [key, value] of entries) {
                     if (key.includes('.')) {
                         let modifiedKey = key.split('.').pop();
