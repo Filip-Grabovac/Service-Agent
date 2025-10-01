@@ -1131,8 +1131,17 @@ export function setModals(menu) {
                                 formData.delete('description');
                                 formData.append('description', '');
                             }
-                        } else if (key !== 'middle_name' && key !== 'user_addresses_of_user.address_additional' && key !== 'document_addresses_of_documents.address_additional' && (key !== 'iarca_tracking_number' && modalName === 'edit-user-popup')) {
-                            console.log('in')
+                        } else {
+                            if (
+                                key === 'middle_name'
+                                || key === 'document_addresses_of_documents.middle_name'
+                                || key === 'user_addresses_of_user.address_additional'
+                                || key === 'document_addresses_of_documents.address_additional'
+                                || (key === 'iarca_tracking_number' && modalName === 'edit-user-popup')
+                            ) {
+                                continue;
+                            }
+
                             if (modalName === 'add-certificate-popup') {
                                 modal.querySelector('[data-error=' + key + ']').style.display = 'block';
 
