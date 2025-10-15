@@ -2711,9 +2711,20 @@ function populateDeliveryAddress(address) {
         if (opt.value !== 'other') opt.remove();
     }
 
+    if (address.updated) {
+        console.log(authUserData)
+        // let fullUserAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
+        // if (address.address_additional) {
+        //     fullUserAddress = fullUserAddress + ', ' + address.address_additional;
+        // }
+        // addressSelect.add(new Option(fullUserAddress, 'user_address'), 1);
+    }
+
     let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
     if (address.address_additional) {
         fullAddress = fullAddress + ', ' + address.address_additional;
     }
-    addressSelect.add(new Option(fullAddress, fullAddress, true, true), 0);
+    addressSelect.add(new Option(fullAddress, 'document_address', true, true), 0);
+
+
 }
