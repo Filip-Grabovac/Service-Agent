@@ -2591,6 +2591,12 @@ function shippingRatesLogic(documentId) {
             quoteWrapper.style.display = 'flex';
             payButton.style.display = 'flex';
         }
+
+        if (value === 'document_address') {
+            loadShippingRates(documentId);
+        } else if (value === 'user_address') {
+            loadShippingRates(documentId, 'user');
+        }
     };
     bindReplace(addressSelect, 'change', onAddressSelectChange);
 
