@@ -2588,8 +2588,11 @@ function shippingRatesLogic(documentId) {
             waitingAddress.style.display = 'none';
             wrongAddress.style.display = 'none';
             addressButton.style.display = 'none';
-            quoteWrapper.style.display = 'flex';
+            quoteWrapper.style.display = 'none';
             payButton.style.display = 'flex';
+            deliveryLoading.style.display = 'flex';
+            payButton.classList.add('is-disabled');
+            addressSelect.classList.add('is-disabled');
         }
 
         if (value === 'document_address') {
