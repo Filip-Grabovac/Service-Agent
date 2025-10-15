@@ -2548,7 +2548,7 @@ function shippingRatesLogic(documentId) {
     const addressSelectWrapper = document.querySelector('#delivery-address-select-wrapper');
     const quoteWrapper = document.querySelector('.delivery-quote-wrapper');
     const waitingAddress = document.querySelector('.delivery-waiting-address');
-    const waitingAddressText = document.querySelector('.delivery-waiting-address-text');
+    const wrongAddress = document.querySelector('.delivery-wrong-address');
     const payButton = document.querySelector('.button-delivery-pay');
     const addressButton = document.querySelector('.button-delivery-address');
     const deliveryLoading = document.querySelector('.delivery-loading');
@@ -2558,7 +2558,7 @@ function shippingRatesLogic(documentId) {
     payButton.classList.add('is-disabled');
     addressSelect.classList.add('is-disabled');
     waitingAddress.style.display = 'none';
-    waitingAddressText.textContent = 'Please confirm your address first';
+    wrongAddress.style.display = 'none';
     payButton.style.display = 'flex';
     addressButton.style.display = 'none';
     addressWrapper.style.display = 'none';
@@ -2579,13 +2579,14 @@ function shippingRatesLogic(documentId) {
         if (value === 'other') {
             addressWrapper.style.display = 'block';
             waitingAddress.style.display = 'flex';
-            waitingAddressText.textContent = 'Please confirm your address first';
+            wrongAddress.style.display = 'none';
             addressButton.style.display = 'flex';
             quoteWrapper.style.display = 'none';
             payButton.style.display = 'none';
         } else {
             addressWrapper.style.display = 'none';
             waitingAddress.style.display = 'none';
+            wrongAddress.style.display = 'none';
             addressButton.style.display = 'none';
             quoteWrapper.style.display = 'flex';
             payButton.style.display = 'flex';
@@ -2649,8 +2650,7 @@ function loadShippingRates(documentId) {
 
         if (offers.length === 0) {
             document.querySelector('#document_user_address').classList.remove('is-disabled');
-            document.querySelector('.delivery-waiting-address').style.display = 'flex';
-            document.querySelector('.delivery-waiting-address-text').textContent = 'Unable to retrieve rates. Please try different address or contact support.';
+            document.querySelector('.delivery-wrong-address').style.display = 'flex';
             document.querySelector('.delivery-loading').style.display = 'none';
 
             return;
