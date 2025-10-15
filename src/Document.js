@@ -149,11 +149,11 @@ export default class Document {
                 this.showError('Server Error! Please, try again or contact support.');
             });
     }
-    getShippingRates(documentId) {
+    getShippingRates(documentId, addressType) {
         const authToken =  localStorage.getItem('authToken');
 
         // Call the Xano API
-        return fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${this.branch}/get-shipping-rates/${documentId}`, {
+        return fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${this.branch}/get-shipping-rates/${documentId}/${addressType}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${authToken}`,

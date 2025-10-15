@@ -2644,8 +2644,8 @@ function shippingRatesLogic(documentId) {
     bindReplace(payButton, 'click', onPayButtonClick);
 }
 
-function loadShippingRates(documentId) {
-    documentFile.getShippingRates(documentId).then((data) => {
+function loadShippingRates(documentId, addressType = 'document') {
+    documentFile.getShippingRates(documentId, addressType).then((data) => {
         const offers = data?.response?.offerList ?? [];
 
         if (offers.length === 0) {
