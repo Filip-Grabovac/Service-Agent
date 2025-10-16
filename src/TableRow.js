@@ -593,5 +593,34 @@ function generateShippingLabel(documentId) {
     })
 }
 
+function generateShippingLabel(documentId) {
+    const loader = document.querySelector('.loader');
+    loader.style.display = 'flex';
+
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    documentFile.generateShippingLabelLink(documentId).then((data) => {
+        loader.style.display = 'none';
+
+        if (!data || !data.url) {
+            return;
+        }
+
+        if (isMobile) {
+            const a = document.createElement('a');
+            a.href = data.url;
+            a.download = '';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        } else {
+            window.open(data.url, '_blank');
+        }
+    }).catch(() => {
+        loader.style.display = 'none';
+    });
+}
+
+
 window.generateShippingLabel = generateShippingLabel;
 
