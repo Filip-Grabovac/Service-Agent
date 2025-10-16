@@ -584,15 +584,6 @@ export default class TableRow {
     }
 }
 
-
-function generateShippingLabel(documentId) {
-    document.querySelector('.loader').style.display = 'flex';
-    documentFile.generateShippingLabelLink(documentId).then((data) => {
-        document.querySelector('.loader').style.display = 'none';
-        window.open(data.url)
-    })
-}
-
 function generateShippingLabel(documentId) {
     const loader = document.querySelector('.loader');
     loader.style.display = 'flex';
