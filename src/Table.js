@@ -2731,6 +2731,6 @@ function populateDeliveryAddress(address) {
         if (authUserData._user_addresses_of_user.address_additional) {
             fullUserAddress = fullUserAddress + ', ' + authUserData._user_addresses_of_user.address_additional;
         }
-        addressSelect.add(new Option(fullUserAddress, 'user_address', true, true), 0);
+        addressSelect.add(new Option(fullUserAddress, 'user_address'), 0);
     }
 }
