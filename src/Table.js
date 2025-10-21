@@ -1856,6 +1856,8 @@ function fillDocumentDetails(data, menu, modal) {
     const edit = document.getElementById('document-edit');
     const forwardBox = document.getElementById('document-forward-box');
     const forward = document.getElementById('document-forward');
+    const downloadLabelBox = document.getElementById('download-label-box');
+    const downloadLabel = document.getElementById('download-label');
     const deleteDocumentBox = document.getElementById('document-delete-document-box');
     const deleteDocument = document.getElementById('document-delete-document');
     const archiveDocumentBox = document.getElementById('document-archive-document-box');
@@ -1866,6 +1868,7 @@ function fillDocumentDetails(data, menu, modal) {
     shredBox.style.display = 'flex';
     editBox.style.display = 'flex';
     forwardBox.style.display = 'flex';
+    downloadLabelBox.style.display = 'flex';
     deleteDocumentBox.style.display = 'flex';
     archiveDocumentBox.style.display = 'flex';
     payment.style.display = 'flex';
@@ -2043,6 +2046,7 @@ function fillDocumentDetails(data, menu, modal) {
         shredBox.style.display = 'none';
         editBox.style.display = 'none';
         forwardBox.style.display = 'none';
+        downloadLabelBox.style.display = 'none';
         if (documentStatus !== 'new' && documentStatus !== 'waiting_for_payment') {
             requestShreddingBox.style.display = 'none';
         } else {
@@ -2132,6 +2136,15 @@ function fillDocumentDetails(data, menu, modal) {
                 closestElement.click()
             })
         }
+        if (documentStatus !== 'shipping_requested') {
+            downloadLabelBox.style.display = 'none';
+        } else {
+            downloadLabel.addEventListener('click', function () {
+                modal.classList.add('hide');
+
+                generateShippingLabel();
+            })
+        }
         deleteDocument.addEventListener('click', function () {
             modal.classList.add('hide');
 
@@ -2144,6 +2157,34 @@ function fillDocumentDetails(data, menu, modal) {
     }
 
     setPdf(data._files_of_documents.file.url)
+}
+
+function generateShippingLabel(documentId) {
+    const loader = document.querySelector('.loader');
+    loader.style.display = 'flex';
+
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    documentFile.generateShippingLabelLink(documentId).then((data) => {
+        loader.style.display = 'none';
+
+        if (!data || !data.url) {
+            return;
+        }
+
+        if (isMobile) {
+            const a = document.createElement('a');
+            a.href = data.url;
+            a.download = '';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        } else {
+            window.open(data.url, '_blank');
+        }
+    }).catch(() => {
+        loader.style.display = 'none';
+    });
 }
 
 function setPdf(pdfUrl) {
