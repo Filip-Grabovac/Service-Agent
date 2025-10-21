@@ -2720,19 +2720,17 @@ function populateDeliveryAddress(address) {
         if (opt.value !== 'other') opt.remove();
     }
 
-    if (address.updated) {
-        let fullUserAddress = authUserData._user_addresses_of_user.street + ' ' + authUserData._user_addresses_of_user.number + ', ' + authUserData._user_addresses_of_user.zip + ' ' + authUserData._user_addresses_of_user.city + ' - ' + authUserData._user_addresses_of_user.country;
-        if (authUserData._user_addresses_of_user.address_additional) {
-            fullUserAddress = fullUserAddress + ', ' + authUserData._user_addresses_of_user.address_additional;
-        }
-        addressSelect.add(new Option(fullUserAddress, 'user_address'), 0);
-    }
-
     let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
     if (address.address_additional) {
         fullAddress = fullAddress + ', ' + address.address_additional;
     }
     addressSelect.add(new Option(fullAddress, 'document_address', true, true), 0);
 
-
+    if (address.updated) {
+        let fullUserAddress = authUserData._user_addresses_of_user.street + ' ' + authUserData._user_addresses_of_user.number + ', ' + authUserData._user_addresses_of_user.zip + ' ' + authUserData._user_addresses_of_user.city + ' - ' + authUserData._user_addresses_of_user.country;
+        if (authUserData._user_addresses_of_user.address_additional) {
+            fullUserAddress = fullUserAddress + ', ' + authUserData._user_addresses_of_user.address_additional;
+        }
+        addressSelect.add(new Option(fullUserAddress, 'user_address', true, true), 0);
+    }
 }
