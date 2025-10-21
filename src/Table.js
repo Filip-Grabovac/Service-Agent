@@ -471,7 +471,7 @@ export function getTabTitle(menu, tab) {
             3: 'Forwarding Pending',
             4: 'Shipping Requested',
             5: 'Shipped',
-            6: 'Shred Requests',
+            6: 'Shredding Requested',
         },
         2: {
             1: 'All Users',
