@@ -304,6 +304,13 @@ export default class TableRow {
                         ${item._document_status?.status_label === 'paid' ? `
                             <div data-modal-open="forward-document-popup" data-id-documents-id="${item.id}" data-fill-1-1=${item.id} class="forvard-doc-scg-wrap no-padd"><img loading="lazy" src="https://cdn.prod.website-files.com/673cc2bec8c34d28fd73175f/67519f8578799b349334867f_Forwarding%20Mail.svg" alt="" class="action-svg bigger"></div>
                         ` : ''}
+                        ${item._document_status?.status_label === 'shipping_requested' ? `
+                            <div onclick="generateShippingLabel('${item.id}')" data-id-documents-id="${item.id}" class="actions-svg-wrap pay-btn">
+                                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.25 11.75V12.65C16.25 13.9101 16.25 14.5402 16.0048 15.0215C15.789 15.4448 15.4448 15.789 15.0215 16.0048C14.5402 16.25 13.9101 16.25 12.65 16.25H6.35C5.08988 16.25 4.45982 16.25 3.97852 16.0048C3.55516 15.789 3.21095 15.4448 2.99524 15.0215C2.75 14.5402 2.75 13.9101 2.75 12.65V11.75M13.25 8L9.5 11.75M9.5 11.75L5.75 8M9.5 11.75V2.75" stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        ` : ''}
                         ${item._document_status?.status_label === 'shred_requested' ? `
                             <div data-modal-open="shred-document-popup" data-id-documents-id="${item.id}" class="shred-doc-svg-wrap no-padd"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 20 19" fill="none" class="action-svg bigger">
                                 <path d="M11.5 1.20215V4.30005C11.5 4.72009 11.5 4.93011 11.5817 5.09055C11.6537 5.23167 11.7684 5.3464 11.9095 5.41831C12.0699 5.50005 12.28 5.50005 12.7 5.50005H15.7979M4 10.15V4.6C4 3.33988 4 2.70982 4.24524 2.22852C4.46095 1.80516 4.80516 1.46095 5.22852 1.24524C5.70982 1 6.33988 1 7.6 1H11.5L16 5.5V10.15M13 9.25H7M8.5 6.25H7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -355,6 +362,9 @@ export default class TableRow {
                             <path d="M16.25 11.75V12.65C16.25 13.9101 16.25 14.5402 16.0048 15.0215C15.789 15.4448 15.4448 15.789 15.0215 16.0048C14.5402 16.25 13.9101 16.25 12.65 16.25H6.35C5.08988 16.25 4.45982 16.25 3.97852 16.0048C3.55516 15.789 3.21095 15.4448 2.99524 15.0215C2.75 14.5402 2.75 13.9101 2.75 12.65V11.75M13.25 8L9.5 11.75M9.5 11.75L5.75 8M9.5 11.75V2.75" stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
+                        <div data-modal-open="delete-document-popup" data-id-documents-id="${item.id}" data-fill-1-1=${item.id} class="delete-doc-svg-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewbox="0 0 16 18" fill="none" class="action-svg">
+                            <path d="M11 4.5V3.9C11 3.05992 11 2.63988 10.8365 2.31901C10.6927 2.03677 10.4632 1.8073 10.181 1.66349C9.86012 1.5 9.44008 1.5 8.6 1.5H7.4C6.55992 1.5 6.13988 1.5 5.81901 1.66349C5.53677 1.8073 5.3073 2.03677 5.16349 2.31901C5 2.63988 5 3.05992 5 3.9V4.5M6.5 8.625V12.375M9.5 8.625V12.375M1.25 4.5H14.75M13.25 4.5V12.9C13.25 14.1601 13.25 14.7902 13.0048 15.2715C12.789 15.6948 12.4448 16.039 12.0215 16.2548C11.5402 16.5 10.9101 16.5 9.65 16.5H6.35C5.08988 16.5 4.45982 16.5 3.97852 16.2548C3.55516 16.039 3.21095 15.6948 2.99524 15.2715C2.75 14.7902 2.75 14.1601 2.75 12.9V4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg></div>
                     </div>
                 `,
                 5: `
