@@ -2142,7 +2142,7 @@ function fillDocumentDetails(data, menu, modal) {
             downloadLabel.addEventListener('click', function () {
                 modal.classList.add('hide');
 
-                generateShippingLabel(id);
+                generateShippingLabel(data.id);
             })
         }
         deleteDocument.addEventListener('click', function () {
