@@ -1195,8 +1195,10 @@ export function setModals(menu) {
                 Object.keys(item.files).forEach((fileName) => {
                     const fileArray = item.files[fileName];
                     fileArray.forEach((file, key) => {
-                        console.log(file[0])
-                        formData.append(fileName, file[0]);
+                        const newFileName = file[0].name.replace(/\s+/g, '-');
+                        const renamedFile = new File([file[0]], newFileName, { type: file.type });
+                        console.log(renamedFile)
+                        formData.append(fileName, renamedFile);
                     });
                 });
 
