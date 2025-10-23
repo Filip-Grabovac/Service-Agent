@@ -1197,7 +1197,6 @@ export function setModals(menu) {
                     fileArray.forEach((file, key) => {
                         const newFileName = file[0].name.replace(/\s+/g, '-');
                         const renamedFile = new File([file[0]], newFileName, { type: file.type });
-                        console.log(renamedFile)
                         formData.append(fileName, renamedFile);
                     });
                 });
