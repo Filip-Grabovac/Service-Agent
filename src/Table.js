@@ -2099,7 +2099,7 @@ function fillDocumentDetails(data, menu, modal) {
         requestShreddingBox.style.display = 'none';
         archiveDocumentBox.style.display = 'none';
         payment.style.display = 'none';
-        if (documentStatus !== 'shred_requested' && documentStatus !== 'waiting_for_payment') {
+        if (documentStatus !== 'shredding_requested' && documentStatus !== 'waiting_for_payment') {
             shredBox.style.display = 'none';
         } else {
             shred.addEventListener('click', function () {
