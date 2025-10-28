@@ -2012,9 +2012,9 @@ function fillDocumentDetails(data, menu, modal) {
     } else {
         shippingTypeBox.style.display = 'none';
     }
-    if (data.wwex_price) {
+    if (data.shipping_price) {
         hideData = false;
-        price.innerHTML = (data.wwex_price / 100) + ' $';
+        price.innerHTML = (data.shipping_price / 100) + ' $';
         priceBox.style.display = 'flex';
     } else {
         priceBox.style.display = 'none';

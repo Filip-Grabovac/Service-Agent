@@ -24,7 +24,7 @@ export default class TableRow {
                 </div>
             `,
                 price: () => {
-                const p = item?.wwex_price;
+                const p = item?.shipping_price;
                 return `
                     <div class="row-inside">
                       ${p != null ? `
@@ -174,7 +174,7 @@ export default class TableRow {
                 </div>
             `,
                 price: () => {
-                    const p = item?.wwex_price;
+                    const p = item?.shipping_price;
                     return `
                     <div class="row-inside">
                       ${p != null ? `
