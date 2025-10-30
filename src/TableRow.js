@@ -24,16 +24,16 @@ export default class TableRow {
                 </div>
             `,
                 price: () => {
-                let p = item?.shipping_price / 100;
+                let p = item?.shipping_price;
                 if (p === null && item._choosed_shipping_tariffs?.price) {
-                    p = item._choosed_shipping_tariffs.price;
+                    p = item._choosed_shipping_tariffs.price * 100;
                 }
                 return `
                     <div class="row-inside">
                       ${p != null ? `
                         <div class="grey-box">
                           <div class="dot"></div>
-                          <div>${p}$</div>
+                          <div>${p / 100}$</div>
                         </div>
                       ` : ``}
                     </div>
@@ -177,16 +177,16 @@ export default class TableRow {
                 </div>
             `,
                 price: () => {
-                    let p = item?.shipping_price / 100;
+                    let p = item?.shipping_price;
                     if (p === null && item._choosed_shipping_tariffs?.price) {
-                        p = item._choosed_shipping_tariffs.price;
+                        p = item._choosed_shipping_tariffs.price * 100;
                     }
                     return `
                     <div class="row-inside">
                       ${p != null ? `
                         <div class="grey-box">
                           <div class="dot"></div>
-                          <div>${p}$</div>
+                          <div>${p / 100}$</div>
                         </div>
                       ` : ``}
                     </div>
