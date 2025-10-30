@@ -24,7 +24,10 @@ export default class TableRow {
                 </div>
             `,
                 price: () => {
-                const p = item?.shipping_price;
+                let p = item?.shipping_price;
+                if (p === null && item._choosed_shipping_tariffs?.price) {
+                    p = item._choosed_shipping_tariffs.price;
+                }
                 return `
                     <div class="row-inside">
                       ${p != null ? `
@@ -174,7 +177,10 @@ export default class TableRow {
                 </div>
             `,
                 price: () => {
-                    const p = item?.shipping_price;
+                    let p = item?.shipping_price;
+                    if (p === null && item._choosed_shipping_tariffs?.price) {
+                        p = item._choosed_shipping_tariffs.price;
+                    }
                     return `
                     <div class="row-inside">
                       ${p != null ? `
