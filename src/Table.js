@@ -23,6 +23,8 @@ let hasActiveCertificate;
 let hasAnyActiveNonMedicalCertificate;
 let isReminderEventAttached = false;
 
+let isAddressGood = null;
+
 let iti = null;
 
 let emailChanged = false;
@@ -224,10 +226,12 @@ export function fillTable(menu, tab, statusIds = null, page = 1) {
             }
             status = item._document_status?.status_label;
             if (status) {
-                if (status === 'paid' || status === 'delivered') {
+                if (status === 'shredded' || status === 'shipped') {
                     statusBadgeColor = 'green'
-                } else if (status === 'shipped') {
+                } else if (status === 'new') {
                     statusBadgeColor = 'blue'
+                } else if (status === 'shipping_requested') {
+                    statusBadgeColor = 'yellow'
                 } else {
                     statusBadgeColor = 'orange'
                 }
@@ -462,12 +466,12 @@ function paginationClick() {
 export function getTabTitle(menu, tab) {
     const tabTitles = {
         1: {
-            1: 'All Requests',
+            1: 'All Documents',
             2: 'Forwarding Requests',
             3: 'Forwarding Pending',
-            4: 'Payment Received',
-            5: 'All Sent',
-            6: 'Shred Requests',
+            4: 'Shipping Requested',
+            5: 'Shipped',
+            6: 'Shredding Requested',
         },
         2: {
             1: 'All Users',
@@ -537,22 +541,9 @@ export function setModals(menu) {
             button.addEventListener("click", function (e) {
                 e.preventDefault()
 
-                const changeDocumentAddress = modal.querySelector('#change-document-address');
-
-                if (changeDocumentAddress) {
-                    changeDocumentAddress.addEventListener('click', function () {
-                        modal.classList.add('hide');
-
-                        const closestElement = button.parentElement.querySelector(
-                            `[data-modal-open="edit-document-address-popup"]`
-                        );
-
-                        closestElement.click()
-                    })
-                }
-
                 method = item.method;
                 modalName = item.modal
+
                 let idAttribute = Array.from(button.attributes).find(attr => attr.name.startsWith('data-id-'));
                 if (idAttribute) {
                     let idAttributeName = idAttribute.name
@@ -565,6 +556,10 @@ export function setModals(menu) {
                         let parts = item.action.split("/");
                         parts[parts.length - 1] = idAttribute.value;
                         url = parts.join("/");
+                    }
+
+                    if (modalName === 'request-forward-document-popup') {
+                        shippingRatesLogic(idAttribute.value);
                     }
                 } else {
                     url = item.action
@@ -584,14 +579,6 @@ export function setModals(menu) {
                         fillData = Array.from(allData[tab[0]][tab[1]]).find(item => item.id.toString().match(fillAttribute.value))
                     }
 
-                    let changeDocumentAddress = modal.querySelector('#change-document-address');
-                    if (changeDocumentAddress) {
-                        changeDocumentAddress.style.display = 'flex';
-                        if (!fillData._document_addresses_of_documents) {
-                            changeDocumentAddress.style.display = 'none';
-                        }
-                    }
-
                     if (form) {
                         let elementsWithName = form.querySelectorAll('[name]');
 
@@ -607,23 +594,23 @@ export function setModals(menu) {
                                 oldEmail = fillData[element.getAttribute('name')];
                             }
 
-                            if (element.getAttribute('name').includes("document_user_address")) {
-                                let address = fillData?._document_addresses_of_documents;
-
-                                if (!address) {
-                                    address = fillData?._user?._user_addresses_of_user;
-                                }
-
-                                if (address) {
-                                    let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
-
-                                    if (address.address_additional) {
-                                        fullAddress = fullAddress + ', ' + address.address_additional
-                                    }
-
-                                    element.value = fullAddress
-                                }
-                            }
+                            // if (element.getAttribute('name').includes("document_user_address")) {
+                            //     let address = fillData?._document_addresses_of_documents;
+                            //
+                            //     if (!address) {
+                            //         address = fillData?._user?._user_addresses_of_user;
+                            //     }
+                            //
+                            //     if (address) {
+                            //         let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
+                            //
+                            //         if (address.address_additional) {
+                            //             fullAddress = fullAddress + ', ' + address.address_additional
+                            //         }
+                            //
+                            //         element.add(new Option(fullAddress, fullAddress, true, true), 0);
+                            //     }
+                            // }
 
                             if (element.getAttribute('name').includes("choosed_shipping_tariff")) {
                                 let tariff = fillData?._choosed_shipping_tariffs;
@@ -775,6 +762,24 @@ export function setModals(menu) {
 
                     if (modalName === 'details-document-popup') {
                         fillDocumentDetails(fillData, menu, modal);
+                    }
+
+                    if (modalName === 'request-forward-document-popup') {
+                        url = url.replace(/([?#].*)?$/, '');
+
+                        url = url.replace(/[^/]*$/, '') + fillData?._document_addresses_of_documents?.id;
+
+                        let address = fillData?._document_addresses_of_documents;
+
+                        if (!address) {
+                            address = fillData?._user?._user_addresses_of_user;
+                        }
+
+                        modal.querySelector('[name=title]').value = fillData?.title;
+                        modal.querySelector('[name=title]').setAttribute('disabled', true);
+                        modal.querySelector('[name=title]').setAttribute('data-disabled', true);
+
+                        populateDeliveryAddress(address)
                     }
                 }
 
@@ -995,9 +1000,7 @@ export function setModals(menu) {
                 method: method
             }
 
-            if (modalName === 'request-forward-document-popup') {
-                formData.append('document_status_id', 2)
-            } else if (modalName === 'request-shred-document-popup') {
+            if (modalName === 'request-shred-document-popup') {
                 formData.append('document_status_id', 7)
             }  else if (modalName === 'shred-document-popup') {
                 formData.append('document_status_id', 8)
@@ -1028,18 +1031,6 @@ export function setModals(menu) {
 
                 if (modalName === 'edit-user-popup') {
                     formData.append('phone_country', iti.getSelectedCountryData().iso2);
-                }
-
-                if (modalName === 'request-forward-document-popup') {
-                    formData.delete('shipping_type');
-                    const selectedShippingType = document.querySelector('input[name="shipping_type"]:checked');
-                    if (selectedShippingType) {
-                        const selectedValue = selectedShippingType.getAttribute("data-choice-value");
-
-                        formData.append('shipping_type', selectedValue);
-                    } else {
-                        formData.append('shipping_type', '');
-                    }
                 }
 
                 if (modalName === 'add-certificate-popup') {
@@ -1133,7 +1124,18 @@ export function setModals(menu) {
                                 formData.delete('description');
                                 formData.append('description', '');
                             }
-                        } else if (key !== 'middle_name' && key !== 'user_addresses_of_user.address_additional' && key !== 'document_addresses_of_documents.address_additional' && (key !== 'iarca_tracking_number' && modalName === 'edit-user-popup')) {
+                        } else {
+                            if (
+                                key === 'middle_name'
+                                || key === 'document_addresses_of_documents.middle_name'
+                                || key === 'user_addresses_of_user.address_additional'
+                                || key === 'document_addresses_of_documents.address_additional'
+                                || (key === 'iarca_tracking_number' && modalName === 'edit-user-popup')
+                                || (key === 'document_addresses_of_documents.company_name' && document.querySelector('#company-wrapper')?.style.display === 'none')
+                            ) {
+                                continue;
+                            }
+
                             if (modalName === 'add-certificate-popup') {
                                 modal.querySelector('[data-error=' + key + ']').style.display = 'block';
 
@@ -1145,6 +1147,8 @@ export function setModals(menu) {
                                 setTimeout(function () {
                                     errorWrapper.classList.add('hide');
                                 }, 3000);
+
+                                isAddressGood = false;
 
                                 return;
                             }
@@ -1173,6 +1177,8 @@ export function setModals(menu) {
                     }
                 }
 
+                isAddressGood = true;
+
                 if (hasErrors) {
                     return;
                 }
@@ -1189,7 +1195,9 @@ export function setModals(menu) {
                 Object.keys(item.files).forEach((fileName) => {
                     const fileArray = item.files[fileName];
                     fileArray.forEach((file, key) => {
-                        formData.append(fileName, file[0]);
+                        const newFileName = file[0].name.replace(/\s+/g, '-');
+                        const renamedFile = new File([file[0]], newFileName, { type: file.type });
+                        formData.append(fileName, renamedFile);
                     });
                 });
 
@@ -1226,7 +1234,9 @@ export function setModals(menu) {
                 }
             }
 
-            loader.style.display = 'flex'
+            if (modalName !== 'request-forward-document-popup') {
+                loader.style.display = 'flex'
+            }
 
             fetch(url, requestData)
                 .then((response) => {
@@ -1245,7 +1255,13 @@ export function setModals(menu) {
                         user.logOut()
                     }
 
-                    modal.classList.add('hide');
+                    if (modalName !== 'request-forward-document-popup') {
+                        modal.classList.add('hide');
+                    }
+
+                    if (modalName === 'request-forward-document-popup') {
+                        populateDeliveryAddress(data);
+                    }
 
                     item.files = [];
 
@@ -1267,7 +1283,7 @@ export function setModals(menu) {
                         authUserData = data;
                     });
 
-                    if (form) {
+                    if (form && modalName !== 'request-forward-document-popup') {
                         form.reset();
 
                         dropZones.forEach(dropZone => {
@@ -1592,10 +1608,10 @@ function getModals(menu) {
             },
             2: {
                 modal: 'request-forward-document-popup',
-                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/documents/{documents_id}`,
-                method: 'PATCH',
+                action: `https://xjwh-2u0a-wlxo.n7d.xano.io/api:jeVaMFJ2${branch}/document_addresses/{document_addresses_id}`,
+                method: 'PUT',
                 files: [],
-                success_message: 'The forwarding has been successfully requested.',
+                success_message: 'The document address has been successfully updated.',
             },
             3: {
                 modal: 'request-shred-document-popup',
@@ -1842,6 +1858,8 @@ function fillDocumentDetails(data, menu, modal) {
     const edit = document.getElementById('document-edit');
     const forwardBox = document.getElementById('document-forward-box');
     const forward = document.getElementById('document-forward');
+    const downloadLabelBox = document.getElementById('download-label-box');
+    const downloadLabel = document.getElementById('download-label');
     const deleteDocumentBox = document.getElementById('document-delete-document-box');
     const deleteDocument = document.getElementById('document-delete-document');
     const archiveDocumentBox = document.getElementById('document-archive-document-box');
@@ -1852,6 +1870,7 @@ function fillDocumentDetails(data, menu, modal) {
     shredBox.style.display = 'flex';
     editBox.style.display = 'flex';
     forwardBox.style.display = 'flex';
+    downloadLabelBox.style.display = 'flex';
     deleteDocumentBox.style.display = 'flex';
     archiveDocumentBox.style.display = 'flex';
     payment.style.display = 'flex';
@@ -1874,17 +1893,19 @@ function fillDocumentDetails(data, menu, modal) {
 
     let statusBadgeColor = ''
     const documentStatus = data._document_status.status_label;
-    if (documentStatus === 'paid' || documentStatus === 'delivered') {
+    if (documentStatus === 'shredded' || documentStatus === 'shipped') {
         statusBadgeColor = 'green'
-    } else if (documentStatus === 'shipped') {
+    } else if (documentStatus === 'new') {
         statusBadgeColor = 'blue'
+    } else if (documentStatus === 'shipping_requested') {
+        statusBadgeColor = 'yellow'
     } else {
         statusBadgeColor = 'orange'
     }
-    status.classList.remove('orange', 'blue', 'green')
+    status.classList.remove('orange', 'blue', 'green', 'yellow')
     status.classList.add(statusBadgeColor)
     Array.from(status.children).forEach(child => {
-        child.classList.remove('orange', 'blue', 'green')
+        child.classList.remove('orange', 'blue', 'green', 'yellow')
         child.classList.add(statusBadgeColor)
         if (child.id === 'status-badge-text') {
             child.innerHTML = documentStatus.replaceAll('_', ' ')
@@ -1954,10 +1975,20 @@ function fillDocumentDetails(data, menu, modal) {
         itiWrapper.classList.add("hidden-iti");
     }
 
-    shippingName.innerHTML = data._user.first_name + ' ' + data._user.last_name;
-    shippingPhone.innerHTML = "+" + iti.getSelectedCountryData().dialCode + data._user.phone_number;
-    shippingEmail.innerHTML = data._user.email;
     if (data._document_addresses_of_documents) {
+        let name;
+        if (data._document_addresses_of_documents.last_name) {
+            name = data._document_addresses_of_documents.first_name;
+            if (data._document_addresses_of_documents.middle_name) {
+                name = name + ' ' + data._document_addresses_of_documents.middle_name;
+            }
+            name = name + ' ' + data._document_addresses_of_documents.last_name;
+        } else {
+            name = data._document_addresses_of_documents.company_name;
+        }
+        shippingName.innerHTML = name;
+        shippingPhone.innerHTML = "+" + iti.getSelectedCountryData().dialCode + data._user.phone_number;
+        shippingEmail.innerHTML = data._user.email;
         shippingAddress.innerHTML = data._document_addresses_of_documents.street + ' ' + data._document_addresses_of_documents.number;
         shippingCity.innerHTML = data._document_addresses_of_documents.zip + ' ' + data._document_addresses_of_documents.city;
         shippingCountry.innerHTML = data._document_addresses_of_documents.state + ' ' + data._document_addresses_of_documents.country;
@@ -1981,16 +2012,16 @@ function fillDocumentDetails(data, menu, modal) {
     } else {
         shippingTypeBox.style.display = 'none';
     }
-    if (data._choosed_shipping_tariffs) {
+    if (data.shipping_price) {
         hideData = false;
-        price.innerHTML = data._choosed_shipping_tariffs.price + ' $';
+        price.innerHTML = (data.shipping_price / 100) + ' $';
         priceBox.style.display = 'flex';
     } else {
         priceBox.style.display = 'none';
     }
     if (data.tracking_code) {
         hideData = false;
-        trackingNumber.innerHTML = data.tracking_code;
+        trackingNumber.innerHTML = 'UPS';
         trackingNumber.parentElement.parentElement.href = data.tracking_code;
         trackingNumberBox.style.display = 'flex';
     } else {
@@ -2017,6 +2048,7 @@ function fillDocumentDetails(data, menu, modal) {
         shredBox.style.display = 'none';
         editBox.style.display = 'none';
         forwardBox.style.display = 'none';
+        downloadLabelBox.style.display = 'none';
         if (documentStatus !== 'new' && documentStatus !== 'waiting_for_payment') {
             requestShreddingBox.style.display = 'none';
         } else {
@@ -2067,7 +2099,7 @@ function fillDocumentDetails(data, menu, modal) {
         requestShreddingBox.style.display = 'none';
         archiveDocumentBox.style.display = 'none';
         payment.style.display = 'none';
-        if (documentStatus !== 'shred_requested' && documentStatus !== 'waiting_for_payment') {
+        if (documentStatus !== 'shredding_requested' && documentStatus !== 'waiting_for_payment') {
             shredBox.style.display = 'none';
         } else {
             shred.addEventListener('click', function () {
@@ -2106,6 +2138,15 @@ function fillDocumentDetails(data, menu, modal) {
                 closestElement.click()
             })
         }
+        if (documentStatus !== 'shipping_requested') {
+            downloadLabelBox.style.display = 'none';
+        } else {
+            downloadLabel.addEventListener('click', function () {
+                modal.classList.add('hide');
+
+                generateShippingLabel(data.id);
+            })
+        }
         deleteDocument.addEventListener('click', function () {
             modal.classList.add('hide');
 
@@ -2118,6 +2159,34 @@ function fillDocumentDetails(data, menu, modal) {
     }
 
     setPdf(data._files_of_documents.file.url)
+}
+
+function generateShippingLabel(documentId) {
+    const loader = document.querySelector('.loader');
+    loader.style.display = 'flex';
+
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    documentFile.generateShippingLabelLink(documentId).then((data) => {
+        loader.style.display = 'none';
+
+        if (!data || !data.url) {
+            return;
+        }
+
+        if (isMobile) {
+            const a = document.createElement('a');
+            a.href = data.url;
+            a.download = '';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        } else {
+            window.open(data.url, '_blank');
+        }
+    }).catch(() => {
+        loader.style.display = 'none';
+    });
 }
 
 function setPdf(pdfUrl) {
@@ -2500,5 +2569,214 @@ export function getTabCount() {
         });
 
         return sum;
+    }
+}
+
+function bindReplace(el, type, handler, options) {
+    if (!el) return;
+    if (!el._evtMap) el._evtMap = {};
+    const key = type;
+    if (el._evtMap[key]) {
+        el.removeEventListener(type, el._evtMap[key], el._evtMap[key]._opts || false);
+    }
+    handler._opts = options || false;
+    el.addEventListener(type, handler, handler._opts);
+    el._evtMap[key] = handler;
+}
+
+function shippingRatesLogic(documentId) {
+    loadShippingRates(documentId);
+
+    const addressSelect = document.querySelector('#document_user_address');
+    const addressPersonalWrapper = document.querySelector('#personal-wrapper');
+    const addressCompanyWrapper = document.querySelector('#company-wrapper');
+    const addressWrapper = document.querySelector('.delivery-address-wrapper');
+    const addressSelectWrapper = document.querySelector('#delivery-address-select-wrapper');
+    const quoteWrapper = document.querySelector('.delivery-quote-wrapper');
+    const waitingAddress = document.querySelector('.delivery-waiting-address');
+    const wrongAddress = document.querySelector('.delivery-wrong-address');
+    const payButton = document.querySelector('.button-delivery-pay');
+    const addressButton = document.querySelector('.button-delivery-address');
+    const deliveryLoading = document.querySelector('.delivery-loading');
+    const terms = document.querySelector('input[name="terms"]');
+
+    deliveryLoading.style.display = 'flex';
+    payButton.classList.add('is-disabled');
+    addressSelect.classList.add('is-disabled');
+    waitingAddress.style.display = 'none';
+    wrongAddress.style.display = 'none';
+    payButton.style.display = 'flex';
+    addressButton.style.display = 'none';
+    addressWrapper.style.display = 'none';
+    quoteWrapper.style.display = 'none';
+    addressSelect.selectedIndex = 0;
+    terms.checked = false;
+
+    if (addressCompanyWrapper.querySelector('input').value === '') {
+        addressCompanyWrapper.style.display = 'none';
+    } else {
+        addressPersonalWrapper.style.display = 'none';
+    }
+
+    addressSelectWrapper.after(addressWrapper);
+
+    const onAddressSelectChange = function () {
+        const value = this.value;
+        if (value === 'other') {
+            addressWrapper.style.display = 'block';
+            waitingAddress.style.display = 'flex';
+            wrongAddress.style.display = 'none';
+            addressButton.style.display = 'flex';
+            quoteWrapper.style.display = 'none';
+            payButton.style.display = 'none';
+        } else {
+            addressWrapper.style.display = 'none';
+            waitingAddress.style.display = 'none';
+            wrongAddress.style.display = 'none';
+            addressButton.style.display = 'none';
+            quoteWrapper.style.display = 'none';
+            payButton.style.display = 'flex';
+            deliveryLoading.style.display = 'flex';
+            payButton.classList.add('is-disabled');
+            addressSelect.classList.add('is-disabled');
+        }
+
+        if (value === 'document_address') {
+            loadShippingRates(documentId);
+        } else if (value === 'user_address') {
+            loadShippingRates(documentId, 'user');
+        }
+    };
+    bindReplace(addressSelect, 'change', onAddressSelectChange);
+
+
+    const onAddressButtonClick = function () {
+        const checkInterval = setInterval(() => {
+            if (isAddressGood === true) {
+                clearInterval(checkInterval);
+
+                deliveryLoading.style.display = 'flex';
+                payButton.classList.add('is-disabled');
+                addressSelect.classList.add('is-disabled');
+                waitingAddress.style.display = 'none';
+                payButton.style.display = 'flex';
+                addressButton.style.display = 'none';
+                addressWrapper.style.display = 'none';
+                addressSelect.selectedIndex = 0;
+
+                loadShippingRates(documentId);
+
+                isAddressGood = null;
+            } else if (isAddressGood === false) {
+                clearInterval(checkInterval);
+                isAddressGood = null;
+            }
+        }, 200);
+    };
+    bindReplace(addressButton, 'click', onAddressButtonClick);
+
+    const onTermsChange = function (e) {
+        if (e.currentTarget.checked && deliveryLoading.style.display !== 'flex') {
+            payButton.classList.remove('is-disabled');
+        } else {
+            payButton.classList.add('is-disabled');
+        }
+    };
+    bindReplace(terms, 'change', onTermsChange);
+
+    const onPayButtonClick = function () {
+        loader.style.display = 'flex';
+        const offer = document.querySelector('.delivery-quote.active');
+        documentFile.generatePaymentLink(
+            documentId,
+            offer.getAttribute('data-product-transaction-id'),
+            offer.getAttribute('data-offer-id')
+        ).then((data) => {
+            loader.style.display = 'none';
+            window.location.href = data.url + '?client_reference_id=' + documentId + '&prefilled_email=' + authUserData.email;
+        });
+    };
+    bindReplace(payButton, 'click', onPayButtonClick);
+}
+
+function loadShippingRates(documentId, addressType = 'document') {
+    documentFile.getShippingRates(documentId, addressType).then((data) => {
+        const offers = data?.response?.offerList ?? [];
+
+        if (offers.length === 0) {
+            document.querySelector('#document_user_address').classList.remove('is-disabled');
+            document.querySelector('.delivery-wrong-address').style.display = 'flex';
+            document.querySelector('.delivery-loading').style.display = 'none';
+
+            return;
+        }
+
+        document.querySelectorAll('.delivery-quote.active').forEach(q => q.classList.remove('active'));
+        document.querySelectorAll('.delivery-quote-selector.active').forEach(s => s.classList.remove('active'));
+
+        const quoteWrapper = document.querySelector('.delivery-quote-wrapper');
+        const quoteTemplate = document.querySelector('.delivery-quote');
+        quoteWrapper.innerHTML = '';
+
+        offers.forEach((offer) => {
+            const item = quoteTemplate.cloneNode(true);
+
+            item.setAttribute('data-product-transaction-id', offer.productTransactionId);
+            item.setAttribute('data-offer-id', offer.offerId);
+
+            const date = new Date(offer.offeredProductList[0].shopRQShipment.timeInTransit.estimatedDeliveryDate);
+            const formatted = date.toLocaleDateString('en-US', {
+                weekday: 'long',
+                month: 'short',
+                day: '2-digit',
+                year: 'numeric'
+            });
+
+            item.querySelector('.delivery-quote-price').textContent = '$' + offer.totalOfferPrice.value;
+            item.querySelector('.delivery-quote-days').textContent =
+                'Arrives: ' + formatted;
+
+            bindReplace(item, 'click', () => {
+                document.querySelectorAll('.delivery-quote.active').forEach(q => q.classList.remove('active'));
+                document.querySelectorAll('.delivery-quote-selector.active').forEach(s => s.classList.remove('active'));
+                item.classList.add('active');
+                const selector = item.querySelector('.delivery-quote-selector');
+                if (selector) selector.classList.add('active');
+            }, { passive: true });
+
+            quoteWrapper.appendChild(item);
+        });
+
+        const first = quoteWrapper.querySelector('.delivery-quote');
+        if (first) first.click();
+
+        document.querySelector('.delivery-loading').style.display = 'none';
+        if (document.querySelector('input[name="terms"]').checked) {
+            document.querySelector('.button-delivery-pay').classList.remove('is-disabled');
+        }
+        document.querySelector('#document_user_address').classList.remove('is-disabled');
+        quoteWrapper.style.display = 'flex';
+    });
+}
+
+function populateDeliveryAddress(address) {
+    const addressSelect = document.querySelector('#document_user_address');
+    const options = [...addressSelect.options];
+    for (const opt of options) {
+        if (opt.value !== 'other') opt.remove();
+    }
+
+    let fullAddress = address.street + ' ' + address.number + ', ' + address.zip + ' ' + address.city + ' - ' + address.country;
+    if (address.address_additional) {
+        fullAddress = fullAddress + ', ' + address.address_additional;
+    }
+    addressSelect.add(new Option(fullAddress, 'document_address', true, true), 0);
+
+    if (address.updated) {
+        let fullUserAddress = authUserData._user_addresses_of_user.street + ' ' + authUserData._user_addresses_of_user.number + ', ' + authUserData._user_addresses_of_user.zip + ' ' + authUserData._user_addresses_of_user.city + ' - ' + authUserData._user_addresses_of_user.country;
+        if (authUserData._user_addresses_of_user.address_additional) {
+            fullUserAddress = fullUserAddress + ', ' + authUserData._user_addresses_of_user.address_additional;
+        }
+        addressSelect.add(new Option(fullUserAddress, 'user_address'), 0);
     }
 }

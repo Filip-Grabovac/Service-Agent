@@ -214,7 +214,7 @@ export default class User {
   }
   confirmCode(data) {
     // Call the Xano API
-    fetch(
+    return fetch(
       `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${this.branch}/register/confirm-email`,
       {
         method: "POST",
@@ -241,9 +241,7 @@ export default class User {
           return;
         }
 
-        if (result.is_verified) {
-          window.location.href = "/registration-4-4?registration=successful";
-        }
+        return result;
       })
       .catch((error) => {
         this.showError("Server Error! Please, try again or contact support.");

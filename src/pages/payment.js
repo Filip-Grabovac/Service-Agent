@@ -36,9 +36,11 @@ fetch(`https://xjwh-2u0a-wlxo.n7d.xano.io/api:UQuTJ3vx${branch}/sessions/` + ses
             const icon = document.getElementById('payment-icon');
 
             heading.innerText = 'Payment Failed';
-            description.innerText = 'Your payment failed. Please try again later or contact support.';
+            description.innerText = 'Your payment failed. Please contact support.';
             icon.setAttribute('src', 'https://cdn.prod.website-files.com/673cc2bec8c34d28fd73175f/6777b770202d5aa733d194c2_payment-failed-icon.svg');
         }
+        document.querySelector('.loader-user').style.display = 'none';
+        document.querySelector('.section_payment').style.display = 'flex';
     })
     .catch((error) => {
         errorMessage.innerHTML = 'Server Error! Please, try again or contact support.';
