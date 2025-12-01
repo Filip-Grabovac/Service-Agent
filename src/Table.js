@@ -2715,9 +2715,23 @@ function loadShippingRates(documentId, addressType = 'document') {
         const quoteTemplate = document.querySelector('.delivery-quote');
         quoteWrapper.innerHTML = '';
 
+        offers.sort((a, b) => {
+            const aDate = new Date(a.offeredProductList[0].shopRQShipment.timeInTransit.estimatedDeliveryDate);
+            const bDate = new Date(b.offeredProductList[0].shopRQShipment.timeInTransit.estimatedDeliveryDate);
+
+            const aTime = a.offeredProductList[0].shopRQShipment.timeInTransit.deliveryBy.slice(0, 5);
+            const bTime = b.offeredProductList[0].shopRQShipment.timeInTransit.deliveryBy.slice(0, 5);
+
+            const [aH, aM] = aTime.split(":").map(Number);
+            const [bH, bM] = bTime.split(":").map(Number);
+
+            aDate.setHours(aH, aM, 0, 0);
+            bDate.setHours(bH, bM, 0, 0);
+
+            return aDate - bDate;
+        });
+
         offers.forEach((offer) => {
-            console.log(offer)
-            console.log(JSON.stringify(offer))
             const item = quoteTemplate.cloneNode(true);
 
             item.setAttribute('data-product-transaction-id', offer.productTransactionId);
