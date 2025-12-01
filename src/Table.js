@@ -2716,6 +2716,7 @@ function loadShippingRates(documentId, addressType = 'document') {
         quoteWrapper.innerHTML = '';
 
         offers.forEach((offer) => {
+            console.log(offer)
             const item = quoteTemplate.cloneNode(true);
 
             item.setAttribute('data-product-transaction-id', offer.productTransactionId);
