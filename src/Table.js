@@ -2730,10 +2730,12 @@ function loadShippingRates(documentId, addressType = 'document') {
                 day: '2-digit',
                 year: 'numeric'
             });
+            const time = offer.offeredProductList[0].shopRQShipment.timeInTransit.estimatedDeliveryDate.slice(0, 5);
 
+            item.querySelector('.delivery-quote-service').textContent = offer.offeredProductList[0].shopRQShipment.timeInTransit.serviceDescription;;
             item.querySelector('.delivery-quote-price').textContent = '$' + offer.totalOfferPrice.value;
             item.querySelector('.delivery-quote-days').textContent =
-                'Arrives: ' + formatted;
+                'Arrives: ' + formatted + ' until ' + time;
 
             bindReplace(item, 'click', () => {
                 document.querySelectorAll('.delivery-quote.active').forEach(q => q.classList.remove('active'));
