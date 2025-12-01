@@ -2717,6 +2717,7 @@ function loadShippingRates(documentId, addressType = 'document') {
 
         offers.forEach((offer) => {
             console.log(offer)
+            console.log(JSON.stringify(offer))
             const item = quoteTemplate.cloneNode(true);
 
             item.setAttribute('data-product-transaction-id', offer.productTransactionId);
