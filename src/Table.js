@@ -2138,7 +2138,7 @@ function fillDocumentDetails(data, menu, modal) {
                 closestElement.click()
             })
         }
-        if (documentStatus !== 'shipping_requested') {
+        if (documentStatus !== 'shipping_requested' && documentStatus !== 'shipped') {
             downloadLabelBox.style.display = 'none';
         } else {
             downloadLabel.addEventListener('click', function () {
