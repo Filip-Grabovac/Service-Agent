@@ -2746,8 +2746,8 @@ function loadShippingRates(documentId, addressType = 'document') {
             });
             const time = offer.offeredProductList[0].shopRQShipment.timeInTransit.deliveryBy.slice(0, 5);
 
-            item.querySelector('.delivery-quote-service').textContent = offer.offeredProductList[0].shopRQShipment.timeInTransit.serviceDescription;;
-            item.querySelector('.delivery-quote-price').textContent = '$' + offer.totalOfferPrice.value;
+            item.querySelector('.delivery-quote-service').textContent = offer.offeredProductList[0].shopRQShipment.timeInTransit.serviceDescription;
+            item.querySelector('.delivery-quote-price').textContent = '$' + Number(offer.totalOfferPrice.value).toFixed(2);
             item.querySelector('.delivery-quote-days').textContent =
                 'Arrives: ' + formatted + ' until ' + time;
 
