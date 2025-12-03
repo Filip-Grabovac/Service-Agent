@@ -1992,7 +1992,11 @@ function fillDocumentDetails(data, menu, modal) {
 
         let address = data._document_addresses_of_documents;
         if (data.address_type === 'user') {
-            address = data._user._user_addresses_of_user_3;
+            if (data._user._user_addresses_of_user_3) {
+                address = data._user._user_addresses_of_user_3;
+            } else if (data._user._user_addresses_of_user) {
+                address = data._user._user_addresses_of_user;
+            }
         }
         shippingAddress.innerHTML = address.street + ' ' + address.number;
         shippingCity.innerHTML = address.zip + ' ' + data._document_addresses_of_documents.city;
