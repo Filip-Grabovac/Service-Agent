@@ -1989,11 +1989,16 @@ function fillDocumentDetails(data, menu, modal) {
         shippingName.innerHTML = name;
         shippingPhone.innerHTML = "+" + iti.getSelectedCountryData().dialCode + data._user.phone_number;
         shippingEmail.innerHTML = data._user.email;
-        shippingAddress.innerHTML = data._document_addresses_of_documents.street + ' ' + data._document_addresses_of_documents.number;
-        shippingCity.innerHTML = data._document_addresses_of_documents.zip + ' ' + data._document_addresses_of_documents.city;
-        shippingCountry.innerHTML = data._document_addresses_of_documents.state + ' ' + data._document_addresses_of_documents.country;
-        if (data._document_addresses_of_documents.address_additional) {
-            shippingAdditional.innerHTML = data._document_addresses_of_documents.address_additional
+
+        let address = data._document_addresses_of_documents;
+        if (data.address_type === 'user') {
+            address = data._user._user_addresses_of_user_3;
+        }
+        shippingAddress.innerHTML = address.street + ' ' + address.number;
+        shippingCity.innerHTML = address.zip + ' ' + data._document_addresses_of_documents.city;
+        shippingCountry.innerHTML = address.state + ' ' + address.country;
+        if (address.address_additional) {
+            shippingAdditional.innerHTML = address.address_additional
             shippingAdditional.style.display = 'block';
         } else {
             shippingAdditional.style.display = 'none';
