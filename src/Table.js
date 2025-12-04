@@ -2150,11 +2150,16 @@ function fillDocumentDetails(data, menu, modal) {
         if (documentStatus !== 'shipping_requested' && documentStatus !== 'shipped') {
             downloadLabelBox.style.display = 'none';
         } else {
-            downloadLabel.addEventListener('click', function () {
+            const handlerKey = "__downloadLabelClickHandler";
+            if (downloadLabel[handlerKey]) {
+                downloadLabel.removeEventListener("click", downloadLabel[handlerKey]);
+            }
+            const newHandler = function () {
                 modal.classList.add('hide');
-
                 generateShippingLabel(data.id);
-            })
+            };
+            downloadLabel[handlerKey] = newHandler;
+            downloadLabel.addEventListener("click", newHandler);
         }
         deleteDocument.addEventListener('click', function () {
             modal.classList.add('hide');
