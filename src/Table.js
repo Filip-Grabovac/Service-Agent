@@ -2675,7 +2675,9 @@ function shippingRatesLogic(documentId) {
                 addressWrapper.style.display = 'none';
                 addressSelect.selectedIndex = 0;
 
-                loadShippingRates(documentId);
+                setTimeout(() => {
+                    loadShippingRates(documentId);
+                }, 1000)
 
                 isAddressGood = null;
             } else if (isAddressGood === false) {
