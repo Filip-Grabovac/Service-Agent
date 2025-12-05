@@ -1989,11 +1989,20 @@ function fillDocumentDetails(data, menu, modal) {
         shippingName.innerHTML = name;
         shippingPhone.innerHTML = "+" + iti.getSelectedCountryData().dialCode + data._user.phone_number;
         shippingEmail.innerHTML = data._user.email;
-        shippingAddress.innerHTML = data._document_addresses_of_documents.street + ' ' + data._document_addresses_of_documents.number;
-        shippingCity.innerHTML = data._document_addresses_of_documents.zip + ' ' + data._document_addresses_of_documents.city;
-        shippingCountry.innerHTML = data._document_addresses_of_documents.state + ' ' + data._document_addresses_of_documents.country;
-        if (data._document_addresses_of_documents.address_additional) {
-            shippingAdditional.innerHTML = data._document_addresses_of_documents.address_additional
+
+        let address = data._document_addresses_of_documents;
+        if (data.address_type === 'user') {
+            if (data._user._user_addresses_of_user_3) {
+                address = data._user._user_addresses_of_user_3;
+            } else if (data._user._user_addresses_of_user) {
+                address = data._user._user_addresses_of_user;
+            }
+        }
+        shippingAddress.innerHTML = address.street + ' ' + address.number;
+        shippingCity.innerHTML = address.zip + ' ' + data._document_addresses_of_documents.city;
+        shippingCountry.innerHTML = address.state + ' ' + address.country;
+        if (address.address_additional) {
+            shippingAdditional.innerHTML = address.address_additional
             shippingAdditional.style.display = 'block';
         } else {
             shippingAdditional.style.display = 'none';
@@ -2138,14 +2147,19 @@ function fillDocumentDetails(data, menu, modal) {
                 closestElement.click()
             })
         }
-        if (documentStatus !== 'shipping_requested') {
+        if (documentStatus !== 'shipping_requested' && documentStatus !== 'shipped') {
             downloadLabelBox.style.display = 'none';
         } else {
-            downloadLabel.addEventListener('click', function () {
+            const handlerKey = "__downloadLabelClickHandler";
+            if (downloadLabel[handlerKey]) {
+                downloadLabel.removeEventListener("click", downloadLabel[handlerKey]);
+            }
+            const newHandler = function () {
                 modal.classList.add('hide');
-
                 generateShippingLabel(data.id);
-            })
+            };
+            downloadLabel[handlerKey] = newHandler;
+            downloadLabel.addEventListener("click", newHandler);
         }
         deleteDocument.addEventListener('click', function () {
             modal.classList.add('hide');
@@ -2664,7 +2678,9 @@ function shippingRatesLogic(documentId) {
                 addressWrapper.style.display = 'none';
                 addressSelect.selectedIndex = 0;
 
-                loadShippingRates(documentId);
+                setTimeout(() => {
+                    loadShippingRates(documentId);
+                }, 1000)
 
                 isAddressGood = null;
             } else if (isAddressGood === false) {
@@ -2718,6 +2734,22 @@ function loadShippingRates(documentId, addressType = 'document') {
         const quoteTemplate = document.querySelector('.delivery-quote');
         quoteWrapper.innerHTML = '';
 
+        offers.sort((a, b) => {
+            const aDate = new Date(a.offeredProductList[0].shopRQShipment.timeInTransit.estimatedDeliveryDate);
+            const bDate = new Date(b.offeredProductList[0].shopRQShipment.timeInTransit.estimatedDeliveryDate);
+
+            const aTime = a.offeredProductList[0].shopRQShipment.timeInTransit.deliveryBy.slice(0, 5);
+            const bTime = b.offeredProductList[0].shopRQShipment.timeInTransit.deliveryBy.slice(0, 5);
+
+            const [aH, aM] = aTime.split(":").map(Number);
+            const [bH, bM] = bTime.split(":").map(Number);
+
+            aDate.setHours(aH, aM, 0, 0);
+            bDate.setHours(bH, bM, 0, 0);
+
+            return aDate - bDate;
+        });
+
         offers.forEach((offer) => {
             const item = quoteTemplate.cloneNode(true);
 
@@ -2731,10 +2763,12 @@ function loadShippingRates(documentId, addressType = 'document') {
                 day: '2-digit',
                 year: 'numeric'
             });
+            const time = offer.offeredProductList[0].shopRQShipment.timeInTransit.deliveryBy.slice(0, 5);
 
-            item.querySelector('.delivery-quote-price').textContent = '$' + offer.totalOfferPrice.value;
+            item.querySelector('.delivery-quote-service').textContent = offer.offeredProductList[0].shopRQShipment.timeInTransit.serviceDescription;
+            item.querySelector('.delivery-quote-price').textContent = '$' + Number(offer.totalOfferPrice.value).toFixed(2);
             item.querySelector('.delivery-quote-days').textContent =
-                'Arrives: ' + formatted;
+                'Arrives: ' + formatted + ' until ' + time;
 
             bindReplace(item, 'click', () => {
                 document.querySelectorAll('.delivery-quote.active').forEach(q => q.classList.remove('active'));
