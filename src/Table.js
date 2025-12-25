@@ -2203,11 +2203,26 @@ function generateShippingLabel(documentId) {
     });
 }
 
+let currentPdfTask = null;
+
 function setPdf(pdfUrl) {
     const pdfContainer = document.getElementById('pdf-container');
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
-    pdfjsLib.getDocument(pdfUrl).promise.then((pdf) => {
+    pdfContainer.innerHTML = '';
+
+    if (currentPdfTask) {
+        try {
+            currentPdfTask.destroy();
+        } catch (e) {}
+        currentPdfTask = null;
+    }
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+    currentPdfTask = pdfjsLib.getDocument(pdfUrl);
+
+    currentPdfTask.promise.then((pdf) => {
         pdf.getPage(1).then((firstPage) => {
             const containerWidth = pdfContainer.clientWidth - 38;
             const initialViewport = firstPage.getViewport({ scale: 1 });
@@ -2220,29 +2235,22 @@ function setPdf(pdfUrl) {
 
                     const canvas = document.createElement('canvas');
                     const context = canvas.getContext('2d');
+
                     pageContainer.appendChild(canvas);
                     pdfContainer.appendChild(pageContainer);
 
-                    const viewport = page.getViewport({ scale: scale });
+                    const viewport = page.getViewport({ scale });
                     canvas.width = viewport.width;
                     canvas.height = viewport.height;
 
-                    const renderContext = {
+                    page.render({
                         canvasContext: context,
                         viewport: viewport,
-                    };
-
-                    page.render(renderContext);
-                }).catch((error) => {
-                    console.error(`Error while rendering page ${pageNum}:`, error);
-                });
+                    });
+                }).catch(() => {});
             }
-        }).catch((error) => {
-            console.error('Error while loading first page:', error);
         });
-    }).catch((error) => {
-        console.error('Error while loading PDF:', error);
-    });
+    }).catch(() => {});
 }
 
 const countriesText = `
