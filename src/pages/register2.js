@@ -33,7 +33,7 @@ nextBtn.addEventListener('click', function (event) {
     if (validateData(passwordData) === 1) {
         loader.style.display = 'none';
 
-        errorMessage.innerHTML = 'Please, fill in all fields. Passwords must match.';
+        errorMessage.innerHTML = 'Password must be at least 8 characters long and contain at least one letter and one number. Passwords must match.';
         errorWrapper.classList.remove('hide');
 
         setTimeout(function() {
@@ -51,13 +51,23 @@ nextBtn.addEventListener('click', function (event) {
 function validateData(passwordData) {
     let hasErrors = 0;
 
-    Object.entries(passwordData).forEach(([key, value]) => {
-        if (value.length === 0) {
+    Object.values(passwordData).forEach(value => {
+        if (!value || value.length === 0) {
             hasErrors = 1;
         }
     });
 
     if (passwordData.password !== passwordData.confirmPassword) {
+        hasErrors = 1;
+    }
+
+    const password = passwordData.password;
+
+    const minLength = password.length >= 8;
+    const hasLetter = /[a-zA-Z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+
+    if (!minLength || !hasLetter || !hasNumber) {
         hasErrors = 1;
     }
 
