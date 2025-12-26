@@ -256,9 +256,16 @@ function validateData(dataForValidation) {
   return hasErrors;
 }
 
-function isValidEmail(email) {
+async function isValidEmail(email) {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailPattern.test(email);
+
+  if (!emailPattern.test(email)) {
+    return false;
+  }
+
+  const result = await user.checkEmail(email);
+
+  return !result.email_taken;
 }
 
 let countriesFunctionsRun = false;

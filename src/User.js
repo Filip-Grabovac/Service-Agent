@@ -644,6 +644,29 @@ export default class User {
                 return null;
             });
     }
+    checkEmail(email) {
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${this.branch}/check-email`;
+
+        // Call the Xano API
+        return fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Data-Source": this.dataSource,
+            },
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code) {
+                    return null;
+                }
+
+                return result;
+            })
+            .catch((error) => {
+                return null;
+            });
+    }
     updatePaypalEmail(userId, data) {
         const authToken = localStorage.getItem("authToken");
         // Call the Xano API
