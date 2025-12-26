@@ -645,7 +645,7 @@ export default class User {
             });
     }
     checkEmail(email) {
-        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${this.branch}/check-email`;
+        let url = `https://xjwh-2u0a-wlxo.n7d.xano.io/api:wGjIQByJ${this.branch}/check-email/${email}`;
 
         // Call the Xano API
         return fetch(url, {
