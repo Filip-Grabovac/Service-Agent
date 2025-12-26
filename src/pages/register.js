@@ -136,7 +136,7 @@ function capitalizeWords(str) {
   return str;
 }
 
-nextBtn.addEventListener("click", function (event) {
+nextBtn.addEventListener("click", async function (event) {
   event.preventDefault(); // Prevent form from submitting
 
   const termsLabel = document.getElementById("terms-label");
@@ -208,14 +208,8 @@ nextBtn.addEventListener("click", function (event) {
     registerData.date_of_birth = dateOfBirthInput.value;
   }
 
-  if (validateData(dataForValidation) === 1) {
-    // errorMessage.innerHTML = 'Please, fill in all fields.';
-    // errorWrapper.classList.remove('hide');
-    //
-    // setTimeout(function() {
-    //     errorWrapper.classList.add('hide');
-    // }, 3000);
-
+  const hasErrors = await validateData(dataForValidation);
+  if (hasErrors === 1) {
     return;
   }
 
@@ -224,37 +218,37 @@ nextBtn.addEventListener("click", function (event) {
   window.location.href = "/registration-2-4";
 });
 
-function validateData(dataForValidation) {
+async function validateData(dataForValidation) {
   let hasErrors = 0;
 
-  Object.entries(dataForValidation).forEach(([key, element]) => {
-    let errorElement = element.parentElement.querySelector(
-      ".register-input-error"
-    );
-
-    if (!errorElement) {
-      errorElement = element.parentElement.parentElement.querySelector(
-        ".register-input-error"
-      );
-    }
+  for (const [key, element] of Object.entries(dataForValidation)) {
+    let errorElement = element.parentElement.querySelector(".register-input-error")
+        || element.parentElement.parentElement.querySelector(".register-input-error");
 
     element.style.borderColor = "#d3d6da";
     errorElement.style.display = "none";
+
     if (element.value.length === 0) {
       errorElement.style.display = "block";
       element.style.borderColor = "#ce0003";
       hasErrors = 1;
+      continue;
     }
 
-    if (key === "email" && !isValidEmail(element.value)) {
-      errorElement.style.display = "block";
-      element.style.borderColor = "#ce0003";
-      hasErrors = 1;
+    if (key === "email") {
+      const validEmail = await isValidEmail(element.value);
+
+      if (!validEmail) {
+        errorElement.style.display = "block";
+        element.style.borderColor = "#ce0003";
+        hasErrors = 1;
+      }
     }
-  });
+  }
 
   return hasErrors;
 }
+
 
 async function isValidEmail(email) {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
