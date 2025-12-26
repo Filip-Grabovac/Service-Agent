@@ -238,7 +238,8 @@ async function validateData(dataForValidation) {
     if (key === "email") {
       const validEmail = await isValidEmail(element.value);
 
-      if (!validEmail) {
+      if (!validEmail.status) {
+        errorElement.textContent = validEmail.error;
         errorElement.style.display = "block";
         element.style.borderColor = "#ce0003";
         hasErrors = 1;
@@ -254,12 +255,24 @@ async function isValidEmail(email) {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!emailPattern.test(email)) {
-    return false;
+    return {
+      status: false,
+      error: 'E-mail can not be blank.'
+    };
   }
 
   const result = await user.checkEmail(email);
 
-  return !result.email_taken;
+  if (result.email_taken) {
+    return {
+      status: false,
+      error: 'E-mail is already taken.'
+    };
+  }
+
+  return {
+    status: true,
+  };
 }
 
 let countriesFunctionsRun = false;
